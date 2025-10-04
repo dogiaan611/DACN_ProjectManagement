@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./src/output.css">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+        <div class="w-full max-w-md mx-auto flex flex-col items-center mt-24 px-5">
+            <h2 class="text-xl font-medium ">Help you manage your project.</h2>
+            <h1 class="mb-4 text-2xl font-medium text-gray-300">Log in to your account</h1>
+            <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+                <i class="fa-brands fa-google w-6 h-6 ml-2 flex content-center text-yellow-500"></i>
+                <span class="flex-1 text-center text-gray-700 font-medium">Continue with Google</span>
+            </button>
+            <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+                <i class="fa-brands fa-facebook w-6 h-6 ml-2 flex content-center text-blue-500"></i>
+                <span class="flex-1 text-center text-gray-700 font-medium">Continue with Facebook</span>
+            </button>
+            <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+                <i class="fa-brands fa-github w-6 h-6 ml-2 content-center text-black"></i>
+                <span class="flex-1 text-center text-gray-700 font-medium">Continue with Github</span>
+            </button>
+            <form action="" class="w-full mt-6">
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-gray-500 mb-1" for="email">Email</label>
+                    <input class="w-full border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-black" type="text" id="email" name="email">
+                    <p id="email-msg" class="text-red-500 text-xs mt-1"></p>
+                    <p class="text-gray-400 text-xs mt-1">Use your email to get easy access to your account.</p>
+                </div>
+                <button id="continue-btn" class="w-full bg-black text-white py-2 rounded mt-2 hover:bg-gray-700 transition cursor-pointer">Continue
+                </button>
+            </form>
+        </div>
+</body>
+<script>
+    //lấy các phần tử cần thao tác
+    const emailInput = document.getElementById('email');
+    const continueButton = document.getElementById('continue-btn');
+    let emailError = document.getElementById('email-msg');
+    //Lắng nghe sự kiện click btn
+    continueButton.addEventListener('click', function(e){
+        e.preventDefault(); // Ngăn form submit
+        if(emailInput.value.trim() === '') {
+            emailError.textContent = 'Email is required.';
+            return;
+        }
+        //kiểm tra input nhập mã có tồn tại chưa
+        if(!document.getElementById('code')) {
+            //Tạo label
+            const codeLabel = document.createElement('label');
+            codeLabel.className = 'block text-xs font-semibold text-gray-500 mb-1';
+            codeLabel.htmlFor = 'code';
+            codeLabel.innerText = 'Code';
+            //Tạo input mới
+            const codeInput = document.createElement('input');
+            codeInput.type = 'text';
+            codeInput.id = 'code';
+            codeInput.name = 'code';
+            codeInput.placeholder = 'Enter the code sent to your email';
+            codeInput.autocomplete = 'off';
+            codeInput.className = 'w-full border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-black mb-3';
+            //Thêm ô input mới vào sau email
+            emailInput.parentNode.insertAdjacentElement('afterend', codeLabel);
+            codeLabel.insertAdjacentElement('afterend', codeInput);
+        }
+    });
+</script>
+</html>
