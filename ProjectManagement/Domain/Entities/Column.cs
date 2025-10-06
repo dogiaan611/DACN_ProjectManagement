@@ -1,0 +1,22 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using ProjectManagement.Domain.Entities;
+
+public class Column
+{
+    [Key]
+    public int ColumnId { get; set; }
+
+    [ForeignKey("Board")]
+    public int BoardId { get; set; }
+    public Board Board { get; set; }
+
+    [Required, MaxLength(100)]
+    public string Name { get; set; }
+
+    public int Position { get; set; } = 0;
+    public int? WipLimit { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    public ICollection<Task> Tasks { get; set; }
+}
