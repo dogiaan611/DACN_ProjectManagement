@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj": {}
+    "D:\\Lp trình\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj": {}
   },
   "projects": {
-    "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj": {
+    "D:\\Lp trình\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj",
+        "projectUniqueName": "D:\\Lp trình\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj",
         "projectName": "ProjectManagement",
-        "projectPath": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj",
-        "packagesPath": "C:\\Users\\Quy\\.nuget\\packages\\",
-        "outputPath": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\obj\\",
+        "projectPath": "D:\\Lp trình\\DACN_ProjectManagement\\ProjectManagement\\ProjectManagement.csproj",
+        "packagesPath": "C:\\Users\\dogia\\.nuget\\packages\\",
+        "outputPath": "D:\\Lp trình\\DACN_ProjectManagement\\ProjectManagement\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Quy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dogia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,12 +44,28 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.21.0, )"
@@ -78,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
