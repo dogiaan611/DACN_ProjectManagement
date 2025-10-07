@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ProjectManagement.Domain.Entities;
 public enum SprintStatus { Planned, Active, Closed }
 
 public class Sprint

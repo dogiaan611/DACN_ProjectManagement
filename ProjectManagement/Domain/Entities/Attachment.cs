@@ -1,4 +1,4 @@
-using ProjectManagement.Domain.Entities;
+using ProjectManagement.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,8 +15,8 @@ public class Attachment
     public string FilePath { get; set; }
 
     [ForeignKey("UploadedBy")]
-    public int? UploadedById { get; set; }
-    public User? UploadedBy { get; set; }
+    public string? UploadedById { get; set; }
+    public ApplicationUser? UploadedBy { get; set; }
 
     public DateTime UploadedAt { get; set; } = DateTime.Now;
 }

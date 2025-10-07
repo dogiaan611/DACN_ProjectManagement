@@ -1,5 +1,4 @@
-using Azure;
-using ProjectManagement.Domain.Entities;
+using ProjectManagement.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,8 +17,8 @@ public class Project
     public ProjectType Type { get; set; } = ProjectType.Kanban;
 
     [ForeignKey("CreatedBy")]
-    public int CreatedById { get; set; }
-    public User CreatedBy { get; set; }
+    public string CreatedById { get; set; }
+    public ApplicationUser CreatedBy { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 

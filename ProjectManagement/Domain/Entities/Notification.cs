@@ -1,4 +1,4 @@
-using ProjectManagement.Domain.Entities;
+using ProjectManagement.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,8 +8,8 @@ public class Notification
     public int NotificationId { get; set; }
 
     [ForeignKey("User")]
-    public int UserId { get; set; }
-    public User User { get; set; }
+    public string UserId { get; set; }
+    public ApplicationUser User { get; set; }
 
     [ForeignKey("Project")]
     public int? ProjectId { get; set; }

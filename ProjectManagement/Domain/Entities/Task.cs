@@ -1,4 +1,4 @@
-using ProjectManagement.Domain.Entities;
+using ProjectManagement.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
@@ -19,12 +19,12 @@ public class Task
     public string Description { get; set; }
 
     [ForeignKey("CreatedBy")]
-    public int CreatedById { get; set; }
-    public User CreatedBy { get; set; }
+    public string CreatedById { get; set; }
+    public ApplicationUser CreatedBy { get; set; }
 
     [ForeignKey("Assignee")]
-    public int? AssigneeId { get; set; }
-    public User Assignee { get; set; }
+    public string? AssigneeId { get; set; }
+    public ApplicationUser? Assignee { get; set; }
 
     public bool IsLocked { get; set; } = false;
     public TaskPriority Priority { get; set; } = TaskPriority.Medium;

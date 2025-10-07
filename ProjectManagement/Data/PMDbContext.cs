@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Domain.Entities;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ProjectManagement.Domain.Identity;
 
 namespace ProjectManagement.Data
 {
-    public class PMDbContext : DbContext
+    public class PMDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public PMDbContext(DbContextOptions<PMDbContext> options) : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public DbSet<Board> Boards { get; set; }
@@ -52,7 +53,7 @@ namespace ProjectManagement.Data
             // User ↔ Project
             modelBuilder.Entity<Project>()
                 .HasOne(p => p.CreatedBy)
-                .WithMany(u => u.CreatedProjects)
+                .WithMany()
                 .HasForeignKey(p => p.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -65,7 +66,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<ProjectMember>()
                 .HasOne(pm => pm.User)
-                .WithMany(u => u.ProjectMemberships)
+                .WithMany()
                 .HasForeignKey(pm => pm.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -100,14 +101,14 @@ namespace ProjectManagement.Data
             // Task ↔ CreatedBy
             modelBuilder.Entity<Task>()
                 .HasOne(t => t.CreatedBy)
-                .WithMany(u => u.CreatedTasks)
+                .WithMany()
                 .HasForeignKey(t => t.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Task ↔ Assignee
             modelBuilder.Entity<Task>()
                 .HasOne(t => t.Assignee)
-                .WithMany(u => u.AssignedTasks)
+                .WithMany()
                 .HasForeignKey(t => t.AssigneeId)
                 .OnDelete(DeleteBehavior.SetNull);
 
@@ -147,7 +148,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<TaskUserTag>()
                 .HasOne(tut => tut.User)
-                .WithMany(u => u.TaskUserTags)
+                .WithMany()
                 .HasForeignKey(tut => tut.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -166,7 +167,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.User)
-                .WithMany(u => u.Comments)
+                .WithMany()
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -192,7 +193,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<Attachment>()
                 .HasOne(a => a.UploadedBy)
-                .WithMany(u => u.UploadedAttachments)
+                .WithMany()
                 .HasForeignKey(a => a.UploadedById)
                 .OnDelete(DeleteBehavior.SetNull);
 
@@ -212,14 +213,14 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<TaskWatcher>()
                 .HasOne(tw => tw.User)
-                .WithMany(u => u.WatchedTasks)
+                .WithMany()
                 .HasForeignKey(tw => tw.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Notifications
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)
-                .WithMany(u => u.Notifications)
+                .WithMany()
                 .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -244,7 +245,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<ActivityLog>()
                 .HasOne(a => a.User)
-                .WithMany(u => u.ActivityLogs)
+                .WithMany()
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
         }
