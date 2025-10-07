@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,6 +35,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-07T17:32:28.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAcwC4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-07T17:17:30.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -39,7 +73,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Domain\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
@@ -47,12 +81,11 @@
               "RelativeToolTip": "Domain\\Entities\\User.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T15:32:45.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T15:32:45.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "PMDbContext.cs",
               "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Data\\PMDbContext.cs",
               "RelativeDocumentMoniker": "Data\\PMDbContext.cs",
@@ -60,8 +93,7 @@
               "RelativeToolTip": "Data\\PMDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T15:32:35.365Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T15:32:35.365Z"
             }
           ]
         }
