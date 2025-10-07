@@ -17,3 +17,4 @@ Files created:
 - `wwwroot/index.html` : demo page served by the ASP.NET Core app
 
 Program.cs updated to serve static files from wwwroot.
+//npx @tailwindcss/cli -i ./src/main.css -o ./src/output.css --watch
