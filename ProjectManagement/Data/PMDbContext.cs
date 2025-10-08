@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Domain.Identity;
+using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Data
 {
@@ -27,12 +28,13 @@ namespace ProjectManagement.Data
         public DbSet<TaskWatcher> TaskWatchers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<RegistrationCode> RegistrationCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // ------------------ Composite Keys ------------------
+            // Keys
             modelBuilder.Entity<ProjectMember>()
                 .HasKey(pm => new { pm.ProjectId, pm.UserId });
 
@@ -48,8 +50,7 @@ namespace ProjectManagement.Data
             modelBuilder.Entity<TaskWatcher>()
                 .HasKey(tw => new { tw.TaskId, tw.UserId });
 
-            // ------------------ Relationships ------------------
-
+            // Relationships
             // User ↔ Project
             modelBuilder.Entity<Project>()
                 .HasOne(p => p.CreatedBy)
@@ -248,6 +249,10 @@ namespace ProjectManagement.Data
                 .WithMany()
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            // RegistrationCode
+            modelBuilder.Entity<RegistrationCode>()
+                .HasIndex(r => new { r.Email, r.IsUsed, r.ExpiresAtUtc });
         }
     }
 }
