@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\loginPage.html"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\registerPage.html",
+      "PackagePath": "staticwebassets\\registerPage.html"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProjectManagement.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },

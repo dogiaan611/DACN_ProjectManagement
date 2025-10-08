@@ -1,5 +1,0 @@
-wwwroot\css\input.css
-wwwroot\css\site.css
-wwwroot\index.html
-wwwroot\loginPage.html
-wwwroot\registerPage.html
