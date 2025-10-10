@@ -1,0 +1,7 @@
+wwwroot\css\input.css
+wwwroot\css\site.css
+wwwroot\index.html
+wwwroot\js\login.js
+wwwroot\js\register.js
+wwwroot\loginPage.html
+wwwroot\registerPage.html

@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using ProjectManagement.Data;
 using ProjectManagement.Domain.Identity;
 using System.Text;
+using ProjectManagement.Options;
+using ProjectManagement.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +62,10 @@ builder.Services.AddAuthorization();
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// SMTP & Notification
+builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
+builder.Services.AddScoped<INotificationService, EmailNotificationService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 

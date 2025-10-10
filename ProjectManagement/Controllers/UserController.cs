@@ -11,6 +11,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Security.Cryptography;
+using ProjectManagement.Services;
 
 namespace ProjectManagement.Controllers
 {
@@ -25,19 +26,22 @@ namespace ProjectManagement.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _config;
         private readonly PMDbContext _db;
+        private readonly INotificationService _notificationService;
 
         public UserController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration config,
-            PMDbContext db)
+            PMDbContext db,
+            INotificationService notificationService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
             _db = db;
+            _notificationService = notificationService;
         }
 
         public record RegisterDto(string Email, string Password, string? Name, string Otp);
@@ -142,9 +146,9 @@ namespace ProjectManagement.Controllers
             _db.RegistrationCodes.Add(reg);
             await _db.SaveChangesAsync();
 
-            // TODO: tích hợp dịch vụ email thực tế để gửi code
+            await _notificationService.SendOtpAsync(normalized, code, ttlMinutes);
 
-            return Ok(new { message = "Đã tạo mã đăng ký và tạm lưu. Tích hợp gửi email sau.", ttlMinutes });
+            return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
         }
 
 
