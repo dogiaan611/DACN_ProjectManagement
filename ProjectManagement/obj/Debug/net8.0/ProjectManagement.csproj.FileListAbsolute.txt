@@ -292,7 +292,6 @@ D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebass
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ProjectManagement.props
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ProjectManagement.props
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.pack.json
-D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectM.83DF0853.Up2Date
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\ProjectManagement.dll
