@@ -1,41 +1,3 @@
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.Development.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\package.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.staticwebassets.runtime.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.staticwebassets.endpoints.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.exe
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.deps.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.runtimeconfig.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.pdb
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.OpenApi.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.csproj.AssemblyReference.cache
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.GeneratedMSBuildEditorConfig.editorconfig
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.AssemblyInfoInputs.cache
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.AssemblyInfo.cs
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.csproj.CoreCompileInputs.cache
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.MvcApplicationPartsAssemblyInfo.cs
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.MvcApplicationPartsAssemblyInfo.cache
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\scopedcss\bundle\ProjectManagement.styles.css
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.development.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.ProjectManagement.Microsoft.AspNetCore.StaticWebAssets.props
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.ProjectManagement.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.build.ProjectManagement.props
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ProjectManagement.props
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ProjectManagement.props
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.pack.json
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectM.83DF0853.Up2Date
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\ProjectManagement.dll
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.pdb
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.genruntimeconfig.cache
-d:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ref\ProjectManagement.dll
-D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\package-lock.json
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.Development.json
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.json
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\package-lock.json
@@ -186,6 +148,17 @@ D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Lp trình\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.Development.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\appsettings.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\package-lock.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\package.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.staticwebassets.runtime.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.staticwebassets.endpoints.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.exe
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.deps.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.runtimeconfig.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\ProjectManagement.pdb
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Azure.Core.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Azure.Identity.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Humanizer.dll
@@ -216,9 +189,13 @@ D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.Id
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.OpenApi.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\System.CodeDom.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\System.Composition.AttributedModel.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\System.Composition.Convention.dll
@@ -297,4 +274,28 @@ D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\runtimes\win
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.csproj.AssemblyReference.cache
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.GeneratedMSBuildEditorConfig.editorconfig
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.AssemblyInfoInputs.cache
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.AssemblyInfo.cs
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.csproj.CoreCompileInputs.cache
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.MvcApplicationPartsAssemblyInfo.cs
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.MvcApplicationPartsAssemblyInfo.cache
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.sourcelink.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\scopedcss\bundle\ProjectManagement.styles.css
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.development.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.ProjectManagement.Microsoft.AspNetCore.StaticWebAssets.props
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.ProjectManagement.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.build.ProjectManagement.props
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ProjectManagement.props
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ProjectManagement.props
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.pack.json
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectM.83DF0853.Up2Date
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\ProjectManagement.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.pdb
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.genruntimeconfig.cache
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ref\ProjectManagement.dll

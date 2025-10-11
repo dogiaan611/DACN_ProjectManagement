@@ -147,6 +147,7 @@ namespace ProjectManagement.Controllers
             await _db.SaveChangesAsync();
 
             await _notificationService.SendOtpAsync(normalized, code, ttlMinutes);
+            await _notificationService.SendEmailAsync(normalized, "Mã đăng ký tài khoản", $"Mã của bạn là: {code}. Hiệu lực {ttlMinutes} phút.");
 
             return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
         }
