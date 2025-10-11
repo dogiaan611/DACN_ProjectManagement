@@ -21,6 +21,10 @@ namespace ProjectManagement.Domain.Entities
         public DateTime ExpiresAtUtc { get; set; }
 
         public bool IsUsed { get; set; } = false;
+        public string? TempUsername { get; set; }
+
+        public string? TempName { get; set; }
+        public string? TempPassword { get; set; }
     }
 }
 

@@ -85,7 +85,7 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.UserController",
-    "Method": "Register",
+    "Method": "RegisterRequestOtp",
     "RelativePath": "user/register",
     "HttpMethod": "POST",
     "IsController": true,
@@ -93,7 +93,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "ProjectManagement.Controllers.UserController\u002BRegisterDto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BRegisterRequestDto",
         "IsRequired": true
       }
     ],
@@ -101,15 +101,15 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.UserController",
-    "Method": "SendRegisterCode",
-    "RelativePath": "user/register/code",
+    "Method": "RegisterWithOtp",
+    "RelativePath": "user/register/otp",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BRegisterOTPDto",
         "IsRequired": true
       }
     ],

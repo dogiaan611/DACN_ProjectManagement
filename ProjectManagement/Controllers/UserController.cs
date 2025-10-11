@@ -44,7 +44,8 @@ namespace ProjectManagement.Controllers
             _notificationService = notificationService;
         }
 
-        public record RegisterDto(string Email, string Password, string? Name, string Otp);
+        public record RegisterRequestDto(string Name, string Email, string Password);
+        public record RegisterOTPDto(string Otp);
         public record LoginDto(string Email, string Password);
         public record UpdateProfileDto(string? Name, string? AvatarUrl, string? PhoneNumber);
         public record SetRoleDto(string Role);
@@ -52,83 +53,29 @@ namespace ProjectManagement.Controllers
         /// Đăng ký tài khoản mới
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+        public async Task<IActionResult> RegisterRequestOtp([FromBody] RegisterRequestDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
-            {
-                return BadRequest("Email và mật khẩu là bắt buộc");
-            }
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password) || string.IsNullOrWhiteSpace(dto.Name))
+                return BadRequest("Name, email và mật khẩu là bắt buộc");
 
-            // Kiểm tra OTP hợp lệ
-            var otpNow = DateTime.UtcNow;
-            var otp = await _db.RegistrationCodes
-                .Where(r => r.Email == dto.Email && !r.IsUsed && r.ExpiresAtUtc >= otpNow)
-                .OrderByDescending(r => r.Id)
-                .FirstOrDefaultAsync();
-            if (otp == null || !string.Equals(otp.Code, dto.Otp?.Trim(), StringComparison.Ordinal))
-            {
-                return BadRequest("Mã đăng ký không hợp lệ hoặc đã hết hạn");
-            }
+            var normalizedEmail = dto.Email.Trim().ToLowerInvariant();
 
-            var user = new ApplicationUser
-            {
-                UserName = dto.Email,
-                Email = dto.Email,
-                EmailConfirmed = true,
-                Name = dto.Name ?? string.Empty
-            };
+            // Check if email or username already exists
+            if (await _userManager.FindByEmailAsync(normalizedEmail) != null)
+                return BadRequest("Email đã tồn tại");
+            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name))
+                return BadRequest("Name đã tồn tại");
 
-            // Mặc định gán role cấp hệ thống là Member
-            var roleEnum = SystemRole.Member;
-            user.SystemRole = roleEnum;
-
-            var createResult = await _userManager.CreateAsync(user, dto.Password);
-            if (!createResult.Succeeded)
-            {
-                return BadRequest(createResult.Errors);
-            }
-
-            var roleName = "member";
-            if (!await _roleManager.RoleExistsAsync(roleName))
-            {
-               var createRole = await _roleManager.CreateAsync(new IdentityRole(roleName));
-               if (!createRole.Succeeded)
-               {
-                   return BadRequest(createRole.Errors);
-               }
-            }
-            if (!await _userManager.IsInRoleAsync(user, roleName))
-            {
-               await _userManager.AddToRoleAsync(user, roleName);
-            }
-
-            // Đánh dấu dùng xong OTP
-            otp.IsUsed = true;
-            await _db.SaveChangesAsync();
-
-            return Ok(new { message = "Đăng ký thành công" });
-        }
-
-        /// Gửi mã OTP đến email để đăng ký 2 bước
-        [HttpPost("register/code")]
-        [AllowAnonymous]
-        public async Task<IActionResult> SendRegisterCode([FromBody] string email)
-        {
-            if (string.IsNullOrWhiteSpace(email)) return BadRequest("Email không hợp lệ");
-            var normalized = email.Trim().ToLowerInvariant();
-
-            // Chặn gửi quá thường xuyên: 1 mã còn hiệu lực thì không tạo mới
+            // Prevent frequent OTP requests
             var now = DateTime.UtcNow;
             var existingActive = await _db.RegistrationCodes
-                .Where(r => r.Email == normalized && !r.IsUsed && r.ExpiresAtUtc > now)
+                .Where(r => r.Email == normalizedEmail && !r.IsUsed && r.ExpiresAtUtc > now)
                 .OrderByDescending(r => r.Id)
                 .FirstOrDefaultAsync();
             if (existingActive != null)
-            {
                 return Ok(new { message = "Đã gửi mã, vui lòng kiểm tra email (mã còn hiệu lực)." });
-            }
 
-            // Tạo OTP 6 số
+            // Generate OTP
             var rng = RandomNumberGenerator.Create();
             var bytes = new byte[4];
             rng.GetBytes(bytes);
@@ -137,19 +84,75 @@ namespace ProjectManagement.Controllers
             var ttlMinutes = 10;
             var reg = new RegistrationCode
             {
-                Email = normalized,
+                Email = normalizedEmail,
                 Code = code,
                 CreatedAtUtc = now,
                 ExpiresAtUtc = now.AddMinutes(ttlMinutes),
-                IsUsed = false
+                IsUsed = false,
+                TempUsername = dto.Email,
+                TempPassword = dto.Password,
+                TempName = dto.Name
             };
             _db.RegistrationCodes.Add(reg);
             await _db.SaveChangesAsync();
 
-            await _notificationService.SendOtpAsync(normalized, code, ttlMinutes);
-            await _notificationService.SendEmailAsync(normalized, "Mã đăng ký tài khoản", $"Mã của bạn là: {code}. Hiệu lực {ttlMinutes} phút.");
+            await _notificationService.SendOtpAsync(normalizedEmail, code, ttlMinutes);
+            await _notificationService.SendEmailAsync(normalizedEmail, "Mã đăng ký tài khoản", $"Mã của bạn là: {code}. Hiệu lực {ttlMinutes} phút.");
 
             return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
+        }
+
+        /// Gửi mã OTP đến email để đăng ký 2 bước
+        [HttpPost("register/otp")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterWithOtp([FromBody] RegisterOTPDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Otp))
+                return BadRequest("Mã OTP là bắt buộc");
+
+            var otpNow = DateTime.UtcNow;
+            var otp = await _db.RegistrationCodes
+                .Where(r => !r.IsUsed && r.ExpiresAtUtc >= otpNow && r.Code == dto.Otp.Trim())
+                .OrderByDescending(r => r.Id)
+                .FirstOrDefaultAsync();
+
+            if (otp == null)
+                return BadRequest("Mã đăng ký không hợp lệ hoặc đã hết hạn");
+
+            // Check if email or username already exists
+            if (await _userManager.FindByEmailAsync(otp.Email) != null)
+                return BadRequest("Email đã tồn tại");
+            if (await _userManager.Users.AnyAsync(u => u.UserName == otp.TempUsername))
+                return BadRequest("Username đã tồn tại");
+
+            var user = new ApplicationUser
+            {
+                UserName = otp.TempUsername!,
+                Email = otp.Email,
+                EmailConfirmed = true,
+                Name = otp.TempName!
+            };
+
+            user.SystemRole = SystemRole.Member;
+
+            var createResult = await _userManager.CreateAsync(user, otp.TempPassword!);
+            if (!createResult.Succeeded)
+                return BadRequest(createResult.Errors);
+
+            var roleName = "member";
+            if (!await _roleManager.RoleExistsAsync(roleName))
+            {
+                var createRole = await _roleManager.CreateAsync(new IdentityRole(roleName));
+                if (!createRole.Succeeded)
+                    return BadRequest(createRole.Errors);
+            }
+            if (!await _userManager.IsInRoleAsync(user, roleName))
+                await _userManager.AddToRoleAsync(user, roleName);
+
+            otp.IsUsed = true;
+            await _db.SaveChangesAsync();
+
+            return Ok(new { message = "Đăng ký thành công" });
         }
 
 
