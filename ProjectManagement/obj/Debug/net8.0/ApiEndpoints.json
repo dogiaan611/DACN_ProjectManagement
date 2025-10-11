@@ -16,6 +16,38 @@
     ]
   },
   {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "SendEmail",
+    "RelativePath": "notification/email/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.NotificationController\u002BSendEmailDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "SendOtp",
+    "RelativePath": "notification/otp/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.NotificationController\u002BSendOtpDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ProjectManagement.Controllers.UserController",
     "Method": "DeleteMe",
     "RelativePath": "user/delete",

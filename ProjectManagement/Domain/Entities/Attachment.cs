@@ -9,10 +9,10 @@ public class Attachment
 
     [ForeignKey("Task")]
     public int TaskId { get; set; }
-    public Task Task { get; set; }
+    public ProjectTask Task { get; set; }
 
     [Required, MaxLength(255)]
-    public string FilePath { get; set; }
+    public string FilePath { get; set; } = string.Empty;
 
     [ForeignKey("UploadedBy")]
     public string? UploadedById { get; set; }

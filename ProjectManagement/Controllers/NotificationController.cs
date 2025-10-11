@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Services;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagement.Controllers
 {

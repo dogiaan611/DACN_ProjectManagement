@@ -8,7 +8,7 @@ public class Subtask
 
     [ForeignKey("Task")]
     public int TaskId { get; set; }
-    public Task Task { get; set; }
+    public ProjectTask Task { get; set; }
 
     [Required, MaxLength(200)]
     public string Title { get; set; }

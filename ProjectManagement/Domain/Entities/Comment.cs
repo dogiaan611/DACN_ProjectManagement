@@ -9,7 +9,7 @@ public class Comment
 
     [ForeignKey("Task")]
     public int TaskId { get; set; }
-    public Task Task { get; set; }
+    public ProjectTask Task { get; set; }
 
     [ForeignKey("User")]
     public string UserId { get; set; }
@@ -20,5 +20,5 @@ public class Comment
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    public ICollection<CommentMention> Mentions { get; set; }
+    public ICollection<CommentMention> Mentions { get; set; } = new List<CommentMention>();
 }

@@ -9,17 +9,17 @@ public class ActivityLog
 
     [ForeignKey("Task")]
     public int TaskId { get; set; }
-    public Task Task { get; set; }
+    public ProjectTask Task { get; set; }
 
     [ForeignKey("User")]
     public string? UserId { get; set; }
     public ApplicationUser? User { get; set; }
 
     [Required, MaxLength(100)]
-    public string Action { get; set; }
+    public string Action { get; set; } = string.Empty;
 
-    public string OldValue { get; set; }
-    public string NewValue { get; set; }
+    public string OldValue { get; set; } = string.Empty;
+    public string NewValue { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

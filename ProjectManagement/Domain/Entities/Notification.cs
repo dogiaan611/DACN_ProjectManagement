@@ -17,13 +17,13 @@ public class Notification
 
     [ForeignKey("Task")]
     public int? TaskId { get; set; }
-    public Task Task { get; set; }
+    public ProjectTask Task { get; set; }
 
     [Required, MaxLength(50)]
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
     [Required]
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 
     public bool IsRead { get; set; } = false;
 

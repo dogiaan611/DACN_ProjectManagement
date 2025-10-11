@@ -17,7 +17,7 @@ namespace ProjectManagement.Data
         public DbSet<Board> Boards { get; set; }
         public DbSet<Column> Columns { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ProjectTask> PojectTasks { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TaskTag> TaskTags { get; set; }
         public DbSet<TaskUserTag> TaskUserTags { get; set; }
@@ -92,31 +92,31 @@ namespace ProjectManagement.Data
                 .HasForeignKey(s => s.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Task ↔ Column
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ Column
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Column)
-                .WithMany(c => c.Tasks)
+                .WithMany(c => c.ProjectTasks)
                 .HasForeignKey(t => t.ColumnId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Task ↔ CreatedBy
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ CreatedBy
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.CreatedBy)
                 .WithMany()
                 .HasForeignKey(t => t.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Task ↔ Assignee
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ Assignee
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Assignee)
                 .WithMany()
                 .HasForeignKey(t => t.AssigneeId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            // Task ↔ Sprint
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ Sprint
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Sprint)
-                .WithMany(s => s.Tasks)
+                .WithMany(s => s.ProjectTasks)
                 .HasForeignKey(t => t.SprintId)
                 .OnDelete(DeleteBehavior.SetNull);
 

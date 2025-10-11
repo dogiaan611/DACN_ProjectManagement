@@ -17,5 +17,5 @@ public class Column
     public int? WipLimit { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    public ICollection<Task> Tasks { get; set; }
+    public virtual ICollection<ProjectTask> ProjectTasks { get; set; }
 }

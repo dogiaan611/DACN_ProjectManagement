@@ -5,7 +5,7 @@ using System.Net.Mail;
 
 public enum TaskPriority { Low, Medium, High, Critical }
 
-public class Task
+public class ProjectTask
 {
     [Key]
     public int TaskId { get; set; }
@@ -39,11 +39,11 @@ public class Task
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-    public ICollection<Comment> Comments { get; set; }
-    public ICollection<Attachment> Attachments { get; set; }
-    public ICollection<Subtask> Subtasks { get; set; }
-    public ICollection<TaskWatcher> Watchers { get; set; }
-    public ICollection<TaskTag> TaskTags { get; set; }
-    public ICollection<TaskUserTag> TaskUserTags { get; set; }
-    public ICollection<ActivityLog> ActivityLogs { get; set; }
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
+    public ICollection<Subtask> Subtasks { get; set; } = new List<Subtask>();
+    public ICollection<TaskWatcher> Watchers { get; set; } = new List<TaskWatcher>();
+    public ICollection<TaskTag> TaskTags { get; set; } = new List<TaskTag>();
+    public ICollection<TaskUserTag> TaskUserTags { get; set; } = new List<TaskUserTag>();
+    public ICollection<ActivityLog> ActivityLogs { get; set; } = new List<ActivityLog>();
 }
