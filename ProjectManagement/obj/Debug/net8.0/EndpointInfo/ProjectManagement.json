@@ -88,17 +88,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequestDto"
+                "$ref": "#/components/schemas/RequestOtpDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequestDto"
+                "$ref": "#/components/schemas/RequestOtpDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterRequestDto"
+                "$ref": "#/components/schemas/RequestOtpDto"
               }
             }
           }
@@ -193,17 +193,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProfileDto"
+                "$ref": "#/components/schemas/UpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProfileDto"
+                "$ref": "#/components/schemas/UpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProfileDto"
+                "$ref": "#/components/schemas/UpdateDto"
               }
             }
           }
@@ -281,22 +281,22 @@
           "otp": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RegisterRequestDto": {
-        "type": "object",
-        "properties": {
+          },
           "name": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "password": {
             "type": "string",
             "nullable": true
-          },
-          "password": {
+          }
+        },
+        "additionalProperties": false
+      },
+      "RequestOtpDto": {
+        "type": "object",
+        "properties": {
+          "email": {
             "type": "string",
             "nullable": true
           }
@@ -349,7 +349,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateProfileDto": {
+      "UpdateDto": {
         "type": "object",
         "properties": {
           "name": {

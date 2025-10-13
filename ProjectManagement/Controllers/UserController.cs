@@ -48,7 +48,7 @@ namespace ProjectManagement.Controllers
         public record RequestOtpDto(string Email); // DTO mới cho yêu cầu OTP ban đầu
         public record RegisterOTPDto(string Otp, string Name, string Password); // DTO cập nhật cho xác nhận OTP và đăng ký cuối cùng
         public record LoginDto(string Email, string Password);
-        public record UpdateProfileDto(string? Name, string? AvatarUrl, string? PhoneNumber);
+        public record UpdateDto(string? Name, string? AvatarUrl, string? PhoneNumber);
         public record SetRoleDto(string Role);
 
         /// Đăng ký tài khoản mới
@@ -193,7 +193,7 @@ namespace ProjectManagement.Controllers
         /// Cập nhật hồ sơ người dùng hiện tại
         [HttpPut("update")]
         [Authorize]
-        public async Task<IActionResult> UpdateMe([FromBody] UpdateProfileDto dto)
+        public async Task<IActionResult> UpdateMe([FromBody] UpdateDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId!);

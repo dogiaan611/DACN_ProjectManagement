@@ -93,7 +93,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "ProjectManagement.Controllers.UserController\u002BRegisterRequestDto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BRequestOtpDto",
         "IsRequired": true
       }
     ],
@@ -125,7 +125,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "ProjectManagement.Controllers.UserController\u002BUpdateProfileDto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BUpdateDto",
         "IsRequired": true
       }
     ],
