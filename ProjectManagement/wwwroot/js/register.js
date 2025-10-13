@@ -18,43 +18,6 @@
     });
 
 
-    // Xem trước ảnh upload
-    const fileInput = document.getElementById('file-upload');
-    const avatarPreview = document.getElementById('avatarPreview');
-    const fileError = document.getElementById('file-error');
-
-    fileInput.addEventListener('change', function(e) { //thêm sự kiện change khi chọn file hoặc hủy chọn 
-        const file = e.target.files && e.target.files[0]; // lấy file đầu tiên được chọn
-        fileError.textContent = ''; 
-        if (!file) return;
-        // Kiểm tra kiểu file có phải image ko 
-        if (!file.type.startsWith('image/')) {
-            fileError.textContent = 'Please select an image file.';
-            fileInput.value = '';
-            return;
-        }
-        // Kiểm tra kích thước file
-        const maxSize = 2 * 1024 * 1024; // 2MB
-        if (file.size > maxSize) {
-            fileError.textContent = 'Image is too large (max 2MB).';
-            fileInput.value = '';
-            return;
-        }
-        // Tạo url trỏ tới file
-        const url = URL.createObjectURL(file);
-        // tạo thẻ img gán src là url và add vào id avatarpreview 
-        avatarPreview.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Avatar preview';
-        img.className = 'w-full h-full object-cover';
-        avatarPreview.appendChild(img);
-
-        // giải phóng bộ nhớ khi ảnh load xong
-        img.onload = () => URL.revokeObjectURL(url);
-    });
-
-
     //chức năng đăng kýký
     const emailInput = document.getElementById('email');
     const nameInput = document.getElementById('name');

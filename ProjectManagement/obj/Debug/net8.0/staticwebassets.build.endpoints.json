@@ -99,7 +99,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "17625"
+          "Value": "23440"
         },
         {
           "Name": "Content-Type",
@@ -107,22 +107,22 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2d9hMF+CRUoAK1ymXI4LxtqKxIGasFHqwcbBHuGMdc4=\""
+          "Value": "\"DMJK9pVOL1w+UBPaU6dHio0yz/4MOsD3MZYRcQxtLb4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 17:52:30 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:17 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-2d9hMF+CRUoAK1ymXI4LxtqKxIGasFHqwcbBHuGMdc4="
+          "Value": "sha256-DMJK9pVOL1w+UBPaU6dHio0yz/4MOsD3MZYRcQxtLb4="
         }
       ]
     },
     {
-      "Route": "css/site.hepxh46d8s.css",
+      "Route": "css/site.oxh58wp3mz.css",
       "AssetFile": "css/site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -136,7 +136,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "17625"
+          "Value": "23440"
         },
         {
           "Name": "Content-Type",
@@ -144,25 +144,3551 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"2d9hMF+CRUoAK1ymXI4LxtqKxIGasFHqwcbBHuGMdc4=\""
+          "Value": "\"DMJK9pVOL1w+UBPaU6dHio0yz/4MOsD3MZYRcQxtLb4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 17:52:30 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:17 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "hepxh46d8s"
+          "Value": "oxh58wp3mz"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-2d9hMF+CRUoAK1ymXI4LxtqKxIGasFHqwcbBHuGMdc4="
+          "Value": "sha256-DMJK9pVOL1w+UBPaU6dHio0yz/4MOsD3MZYRcQxtLb4="
         },
         {
           "Name": "label",
           "Value": "css/site.css"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Ai/DrawKit Vector Illustration Project Manager.ai",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Ai/DrawKit Vector Illustration Project Manager.ai",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "781899"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/postscript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"njSOOQvaD6PkOBDWo6/lVQPPJ14xj9wJIVLFIQ0OvMI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-njSOOQvaD6PkOBDWo6/lVQPPJ14xj9wJIVLFIQ0OvMI="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Ai/DrawKit Vector Illustration Project Manager.yc5djn4q27.ai",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Ai/DrawKit Vector Illustration Project Manager.ai",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "781899"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/postscript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"njSOOQvaD6PkOBDWo6/lVQPPJ14xj9wJIVLFIQ0OvMI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yc5djn4q27"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-njSOOQvaD6PkOBDWo6/lVQPPJ14xj9wJIVLFIQ0OvMI="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Ai/DrawKit Vector Illustration Project Manager.ai"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/DrawKit Vector Illustration Project Manager",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/DrawKit Vector Illustration Project Manager",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "886549"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zYC0K7dE6kbZAuIVWJazWkrmacPZYDBGDl7niKpbGMQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-zYC0K7dE6kbZAuIVWJazWkrmacPZYDBGDl7niKpbGMQ="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/DrawKit Vector Illustration Project Manager.nrlobci5ak",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/DrawKit Vector Illustration Project Manager",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "886549"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"zYC0K7dE6kbZAuIVWJazWkrmacPZYDBGDl7niKpbGMQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nrlobci5ak"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zYC0K7dE6kbZAuIVWJazWkrmacPZYDBGDl7niKpbGMQ="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/DrawKit Vector Illustration Project Manager"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/Step-by-Step Change Colours.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/Step-by-Step Change Colours.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "186513"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jWHcKWk6/2tK/UChlSZsiap9t5I7WsCoB4MeSfk6ITs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jWHcKWk6/2tK/UChlSZsiap9t5I7WsCoB4MeSfk6ITs="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/Step-by-Step Change Colours.xn7vtf9zta.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/Step-by-Step Change Colours.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "186513"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jWHcKWk6/2tK/UChlSZsiap9t5I7WsCoB4MeSfk6ITs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xn7vtf9zta"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jWHcKWk6/2tK/UChlSZsiap9t5I7WsCoB4MeSfk6ITs="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/Figma/Step-by-Step Change Colours.png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (1).9yb1gmvi4d.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (1).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "382545"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wYqAvbAQSe9OX8y1veeVfkqL4biohdb16/7NIezFWeE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9yb1gmvi4d"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wYqAvbAQSe9OX8y1veeVfkqL4biohdb16/7NIezFWeE="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (1).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (1).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (1).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "382545"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wYqAvbAQSe9OX8y1veeVfkqL4biohdb16/7NIezFWeE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wYqAvbAQSe9OX8y1veeVfkqL4biohdb16/7NIezFWeE="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (10).h87hnwarwk.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (10).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "290286"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H2rK68DxkgT5uJ1Cl5hHus6JHsLIofAjulywPwSoeKc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h87hnwarwk"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-H2rK68DxkgT5uJ1Cl5hHus6JHsLIofAjulywPwSoeKc="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (10).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (10).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (10).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "290286"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H2rK68DxkgT5uJ1Cl5hHus6JHsLIofAjulywPwSoeKc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-H2rK68DxkgT5uJ1Cl5hHus6JHsLIofAjulywPwSoeKc="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (11).htt7lynuyx.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (11).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49036"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tX81e6razXwQNlaJNQbe1ulJOiE4XsIB1mNh4cm+KR0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "htt7lynuyx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tX81e6razXwQNlaJNQbe1ulJOiE4XsIB1mNh4cm+KR0="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (11).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (11).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (11).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49036"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tX81e6razXwQNlaJNQbe1ulJOiE4XsIB1mNh4cm+KR0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tX81e6razXwQNlaJNQbe1ulJOiE4XsIB1mNh4cm+KR0="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (12).asokg1uvqf.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (12).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72394"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hvG4ABCogFa68elV/vieuOkJ5zL48dGKmT4jTJtqvMs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "asokg1uvqf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hvG4ABCogFa68elV/vieuOkJ5zL48dGKmT4jTJtqvMs="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (12).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (12).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (12).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72394"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hvG4ABCogFa68elV/vieuOkJ5zL48dGKmT4jTJtqvMs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hvG4ABCogFa68elV/vieuOkJ5zL48dGKmT4jTJtqvMs="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (13).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (13).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IVNsn6vOwUNBL21uJoWo4ukzzBD2FLElfk9KRmmHE7M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IVNsn6vOwUNBL21uJoWo4ukzzBD2FLElfk9KRmmHE7M="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (13).tp0a5vb21q.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (13).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87520"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IVNsn6vOwUNBL21uJoWo4ukzzBD2FLElfk9KRmmHE7M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tp0a5vb21q"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IVNsn6vOwUNBL21uJoWo4ukzzBD2FLElfk9KRmmHE7M="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (13).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (14).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (14).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63206"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xu6H++yAevPlP111bBqnjvUfYfvYXDcEMKN2Jlg9ZKE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xu6H++yAevPlP111bBqnjvUfYfvYXDcEMKN2Jlg9ZKE="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (14).ufoms8bqtw.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (14).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "63206"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xu6H++yAevPlP111bBqnjvUfYfvYXDcEMKN2Jlg9ZKE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ufoms8bqtw"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xu6H++yAevPlP111bBqnjvUfYfvYXDcEMKN2Jlg9ZKE="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (14).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (15).f9tokj46xi.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (15).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41347"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyqHu+eAndgYBYAFZ6lRIK8bddbuV3b+/v3GzkxrqvY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f9tokj46xi"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IyqHu+eAndgYBYAFZ6lRIK8bddbuV3b+/v3GzkxrqvY="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (15).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (15).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (15).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "41347"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IyqHu+eAndgYBYAFZ6lRIK8bddbuV3b+/v3GzkxrqvY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IyqHu+eAndgYBYAFZ6lRIK8bddbuV3b+/v3GzkxrqvY="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (16).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (16).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72320"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T0m/WZrgYppHq2KCsjpb00fxx0vbAo/Oau6S+4/Fx7A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-T0m/WZrgYppHq2KCsjpb00fxx0vbAo/Oau6S+4/Fx7A="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (16).zf5nmusgae.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (16).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72320"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T0m/WZrgYppHq2KCsjpb00fxx0vbAo/Oau6S+4/Fx7A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zf5nmusgae"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-T0m/WZrgYppHq2KCsjpb00fxx0vbAo/Oau6S+4/Fx7A="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (16).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (17).ftj34cige4.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (17).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39796"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7ST2qedN6DfXwQDc9XXlsxb8rG50FuhizUo1HhRYW4k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ftj34cige4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7ST2qedN6DfXwQDc9XXlsxb8rG50FuhizUo1HhRYW4k="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (17).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (17).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (17).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "39796"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7ST2qedN6DfXwQDc9XXlsxb8rG50FuhizUo1HhRYW4k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7ST2qedN6DfXwQDc9XXlsxb8rG50FuhizUo1HhRYW4k="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (18).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (18).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "89200"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"29i7P1NqwWEV5iRVX1Cq92Qx/pi2A0zR9hLap9z2gIc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-29i7P1NqwWEV5iRVX1Cq92Qx/pi2A0zR9hLap9z2gIc="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (18).rc5fchu7xs.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (18).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "89200"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"29i7P1NqwWEV5iRVX1Cq92Qx/pi2A0zR9hLap9z2gIc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rc5fchu7xs"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-29i7P1NqwWEV5iRVX1Cq92Qx/pi2A0zR9hLap9z2gIc="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (18).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (19).bmp2e5hd6m.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (19).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "74403"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M0D16y3sRGp0h+cwWhsc7xtCIhfXYlNFQL3RgJvhUHU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bmp2e5hd6m"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-M0D16y3sRGp0h+cwWhsc7xtCIhfXYlNFQL3RgJvhUHU="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (19).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (19).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (19).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "74403"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M0D16y3sRGp0h+cwWhsc7xtCIhfXYlNFQL3RgJvhUHU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-M0D16y3sRGp0h+cwWhsc7xtCIhfXYlNFQL3RgJvhUHU="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (2).atw8iaim56.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (2).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "311914"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4k3s+EFedWXDwsCvj7hdT/xr6xZtx+//83uN7+RQhMQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "atw8iaim56"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4k3s+EFedWXDwsCvj7hdT/xr6xZtx+//83uN7+RQhMQ="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (2).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (2).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (2).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "311914"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4k3s+EFedWXDwsCvj7hdT/xr6xZtx+//83uN7+RQhMQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4k3s+EFedWXDwsCvj7hdT/xr6xZtx+//83uN7+RQhMQ="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "36462"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H2RSyKs2cG6h1TYR/CIEMXLtG6RCTVRiECtq8AQdCnM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-H2RSyKs2cG6h1TYR/CIEMXLtG6RCTVRiECtq8AQdCnM="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).x8a8mczcuf.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "36462"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"H2RSyKs2cG6h1TYR/CIEMXLtG6RCTVRiECtq8AQdCnM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x8a8mczcuf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-H2RSyKs2cG6h1TYR/CIEMXLtG6RCTVRiECtq8AQdCnM="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (3).hpdzo98792.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (3).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "296664"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JUwtzsV7KfMetkHNorqLjI0/VL98PJYR+LFsf5d6nzA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hpdzo98792"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JUwtzsV7KfMetkHNorqLjI0/VL98PJYR+LFsf5d6nzA="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (3).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (3).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (3).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "296664"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JUwtzsV7KfMetkHNorqLjI0/VL98PJYR+LFsf5d6nzA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JUwtzsV7KfMetkHNorqLjI0/VL98PJYR+LFsf5d6nzA="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (4).973rm723vc.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (4).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "276306"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9XqJb55iBW19+20INTIuk8UmdfiNkcUGX6aH4jUNdAg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "973rm723vc"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9XqJb55iBW19+20INTIuk8UmdfiNkcUGX6aH4jUNdAg="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (4).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (4).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (4).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "276306"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9XqJb55iBW19+20INTIuk8UmdfiNkcUGX6aH4jUNdAg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9XqJb55iBW19+20INTIuk8UmdfiNkcUGX6aH4jUNdAg="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (5).dc620ok1cx.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (5).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300207"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y5PD5Ur6j2fFGzFqz/9Om47dxBoWn/TSMD+NTzRXL8U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dc620ok1cx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y5PD5Ur6j2fFGzFqz/9Om47dxBoWn/TSMD+NTzRXL8U="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (5).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (5).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (5).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "300207"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y5PD5Ur6j2fFGzFqz/9Om47dxBoWn/TSMD+NTzRXL8U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y5PD5Ur6j2fFGzFqz/9Om47dxBoWn/TSMD+NTzRXL8U="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (6).1taj8y8qvx.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (6).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "303441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"i3LN6/nuCfSLti+K5zE51Ih4YMEN4qzU6OXSCAGludU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1taj8y8qvx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-i3LN6/nuCfSLti+K5zE51Ih4YMEN4qzU6OXSCAGludU="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (6).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (6).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (6).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "303441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"i3LN6/nuCfSLti+K5zE51Ih4YMEN4qzU6OXSCAGludU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-i3LN6/nuCfSLti+K5zE51Ih4YMEN4qzU6OXSCAGludU="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (7).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (7).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "377463"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NidMoy1TwwppdC+HJr38QI50Kh2emnyYqIDmyUMoTrg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-NidMoy1TwwppdC+HJr38QI50Kh2emnyYqIDmyUMoTrg="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (7).qbtj8tfef1.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (7).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "377463"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NidMoy1TwwppdC+HJr38QI50Kh2emnyYqIDmyUMoTrg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qbtj8tfef1"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NidMoy1TwwppdC+HJr38QI50Kh2emnyYqIDmyUMoTrg="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (7).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (8).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (8).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "467527"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nN9GyxPiXMxueNkX0wEWrZbmTGGg+g2pf2isDtChqhw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nN9GyxPiXMxueNkX0wEWrZbmTGGg+g2pf2isDtChqhw="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (8).s8euwv0t6k.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (8).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "467527"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nN9GyxPiXMxueNkX0wEWrZbmTGGg+g2pf2isDtChqhw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "s8euwv0t6k"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nN9GyxPiXMxueNkX0wEWrZbmTGGg+g2pf2isDtChqhw="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (8).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (9).png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (9).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "344709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TVxSs/k96MCDgkD9OA0wZZuoLvhK5WL2E/oFLBwFnpk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TVxSs/k96MCDgkD9OA0wZZuoLvhK5WL2E/oFLBwFnpk="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (9).zoft3b42es.png",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (9).png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "344709"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TVxSs/k96MCDgkD9OA0wZZuoLvhK5WL2E/oFLBwFnpk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zoft3b42es"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TVxSs/k96MCDgkD9OA0wZZuoLvhK5WL2E/oFLBwFnpk="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (9).png"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (1).lt7yq3br7s.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (1).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49599"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GRKA5OumJ8Usnd9Ig1WA7vZot5W1jhtggi+RP1Kxk4k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lt7yq3br7s"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GRKA5OumJ8Usnd9Ig1WA7vZot5W1jhtggi+RP1Kxk4k="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (1).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (1).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (1).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "49599"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GRKA5OumJ8Usnd9Ig1WA7vZot5W1jhtggi+RP1Kxk4k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GRKA5OumJ8Usnd9Ig1WA7vZot5W1jhtggi+RP1Kxk4k="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (10).l1yq3g13zv.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (10).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J95c5tZQAW/dbI1L1YZKNDirGd97bW+/DQSzUF/uNWk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l1yq3g13zv"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J95c5tZQAW/dbI1L1YZKNDirGd97bW+/DQSzUF/uNWk="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (10).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (10).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (10).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J95c5tZQAW/dbI1L1YZKNDirGd97bW+/DQSzUF/uNWk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J95c5tZQAW/dbI1L1YZKNDirGd97bW+/DQSzUF/uNWk="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (11).p5vlp6yzp8.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (11).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2607"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"A/4jomNFStLV5Gsc7I3SfZwcy6tGw91lhW5RtNII34Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p5vlp6yzp8"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-A/4jomNFStLV5Gsc7I3SfZwcy6tGw91lhW5RtNII34Q="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (11).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (11).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (11).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2607"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"A/4jomNFStLV5Gsc7I3SfZwcy6tGw91lhW5RtNII34Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-A/4jomNFStLV5Gsc7I3SfZwcy6tGw91lhW5RtNII34Q="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (12).3cdmenoz1i.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (12).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Uiv+Qo3TNPNP3wbuxKjii0l0z8J2yR5AUZ0+e+blX8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3cdmenoz1i"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Uiv+Qo3TNPNP3wbuxKjii0l0z8J2yR5AUZ0+e+blX8="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (12).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (12).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (12).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Uiv+Qo3TNPNP3wbuxKjii0l0z8J2yR5AUZ0+e+blX8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Uiv+Qo3TNPNP3wbuxKjii0l0z8J2yR5AUZ0+e+blX8="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (13).d1hadu2p2f.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (13).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1858"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wTn00a2A5A1Mgo43xafMm21THupE7uDssmby+AUVwhw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d1hadu2p2f"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wTn00a2A5A1Mgo43xafMm21THupE7uDssmby+AUVwhw="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (13).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (13).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (13).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1858"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wTn00a2A5A1Mgo43xafMm21THupE7uDssmby+AUVwhw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wTn00a2A5A1Mgo43xafMm21THupE7uDssmby+AUVwhw="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (14).kyqnhv5q23.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (14).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1379"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PEUKUEkXutIXJi4KN94hZ/kYe55sCVnlUa5wELdXbl4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kyqnhv5q23"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PEUKUEkXutIXJi4KN94hZ/kYe55sCVnlUa5wELdXbl4="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (14).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (14).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (14).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1379"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PEUKUEkXutIXJi4KN94hZ/kYe55sCVnlUa5wELdXbl4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PEUKUEkXutIXJi4KN94hZ/kYe55sCVnlUa5wELdXbl4="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (15).nntxb94tlh.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (15).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nbxbzqBH30OH4y+pppk49DBJEMUvJJXoIDGHMVBEzkk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nntxb94tlh"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nbxbzqBH30OH4y+pppk49DBJEMUvJJXoIDGHMVBEzkk="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (15).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (15).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (15).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1060"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nbxbzqBH30OH4y+pppk49DBJEMUvJJXoIDGHMVBEzkk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nbxbzqBH30OH4y+pppk49DBJEMUvJJXoIDGHMVBEzkk="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (16).dmlru4vaio.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (16).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2588"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"y3t9cUcU2WyX0EEeoP/ARxW6tif0mOnEnL0jMoDHqoA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dmlru4vaio"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-y3t9cUcU2WyX0EEeoP/ARxW6tif0mOnEnL0jMoDHqoA="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (16).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (16).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (16).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2588"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"y3t9cUcU2WyX0EEeoP/ARxW6tif0mOnEnL0jMoDHqoA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-y3t9cUcU2WyX0EEeoP/ARxW6tif0mOnEnL0jMoDHqoA="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (17).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (17).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eG+wWVzX30dXji+O+Hk2BlXqveLEdoAUYTd91CIi36g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eG+wWVzX30dXji+O+Hk2BlXqveLEdoAUYTd91CIi36g="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (17).weumol6hxf.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (17).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eG+wWVzX30dXji+O+Hk2BlXqveLEdoAUYTd91CIi36g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "weumol6hxf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eG+wWVzX30dXji+O+Hk2BlXqveLEdoAUYTd91CIi36g="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (17).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (18).gpdw7yfjox.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (18).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6015"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nBP/cMGRI+qT12i5Ml7DYRabXoPSUz4Ccrts6cg2DEY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gpdw7yfjox"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nBP/cMGRI+qT12i5Ml7DYRabXoPSUz4Ccrts6cg2DEY="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (18).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (18).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (18).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6015"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nBP/cMGRI+qT12i5Ml7DYRabXoPSUz4Ccrts6cg2DEY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nBP/cMGRI+qT12i5Ml7DYRabXoPSUz4Ccrts6cg2DEY="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (19).ghmt5p6kwt.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (19).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6229"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FKDKF8WRuwFZyI9tD76UVN3YclrashonjNTpcYwYhXc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ghmt5p6kwt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-FKDKF8WRuwFZyI9tD76UVN3YclrashonjNTpcYwYhXc="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (19).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (19).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (19).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6229"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FKDKF8WRuwFZyI9tD76UVN3YclrashonjNTpcYwYhXc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FKDKF8WRuwFZyI9tD76UVN3YclrashonjNTpcYwYhXc="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (2).m7u20fzngi.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (2).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32708"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jm4vxgyZ6+DWsqGZOYuFzAl70GWKNg2jeFKtCiKVZio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m7u20fzngi"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jm4vxgyZ6+DWsqGZOYuFzAl70GWKNg2jeFKtCiKVZio="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (2).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (2).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (2).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32708"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jm4vxgyZ6+DWsqGZOYuFzAl70GWKNg2jeFKtCiKVZio=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jm4vxgyZ6+DWsqGZOYuFzAl70GWKNg2jeFKtCiKVZio="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (20).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (20).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DhiJDlQTJBSyPdgBzs/2TadwIvx73nuRfawzHjUdrvs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-DhiJDlQTJBSyPdgBzs/2TadwIvx73nuRfawzHjUdrvs="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (20).u17hena63g.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (20).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1210"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DhiJDlQTJBSyPdgBzs/2TadwIvx73nuRfawzHjUdrvs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "u17hena63g"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DhiJDlQTJBSyPdgBzs/2TadwIvx73nuRfawzHjUdrvs="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (20).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (3).k6te3mg8eb.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (3).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34147"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PIaeMsBL2RkzztUFUWob1/SC0CojGri8ewF6GKz253c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "k6te3mg8eb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PIaeMsBL2RkzztUFUWob1/SC0CojGri8ewF6GKz253c="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (3).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (3).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (3).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34147"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PIaeMsBL2RkzztUFUWob1/SC0CojGri8ewF6GKz253c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PIaeMsBL2RkzztUFUWob1/SC0CojGri8ewF6GKz253c="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (4).3npvl5441s.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (4).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21829"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ccPzxnGzrdq0oJ1DSjQ50dtxpHam34jC7PMrJPM5fm0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3npvl5441s"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ccPzxnGzrdq0oJ1DSjQ50dtxpHam34jC7PMrJPM5fm0="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (4).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (4).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (4).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21829"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ccPzxnGzrdq0oJ1DSjQ50dtxpHam34jC7PMrJPM5fm0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ccPzxnGzrdq0oJ1DSjQ50dtxpHam34jC7PMrJPM5fm0="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).08zh9jpvew.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cA5STxuksTvEs6w9DAWoeTVCHuBNt7YsGwYcl6G5FAs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "08zh9jpvew"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cA5STxuksTvEs6w9DAWoeTVCHuBNt7YsGwYcl6G5FAs="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30400"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cA5STxuksTvEs6w9DAWoeTVCHuBNt7YsGwYcl6G5FAs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cA5STxuksTvEs6w9DAWoeTVCHuBNt7YsGwYcl6G5FAs="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (6).esn6lq4cmk.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (6).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7toAGiU9MRVX6FiVtpPx2Z8hgd6ONzOi8hNRrxP6sAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "esn6lq4cmk"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7toAGiU9MRVX6FiVtpPx2Z8hgd6ONzOi8hNRrxP6sAE="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (6).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (6).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (6).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24324"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7toAGiU9MRVX6FiVtpPx2Z8hgd6ONzOi8hNRrxP6sAE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7toAGiU9MRVX6FiVtpPx2Z8hgd6ONzOi8hNRrxP6sAE="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (7).quhuqf9uoi.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (7).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35013"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HkQdlcrn7TDxCZk2vOYsDk48j3oy+0XQjmc8ZHVebk4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "quhuqf9uoi"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-HkQdlcrn7TDxCZk2vOYsDk48j3oy+0XQjmc8ZHVebk4="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (7).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (7).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (7).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35013"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HkQdlcrn7TDxCZk2vOYsDk48j3oy+0XQjmc8ZHVebk4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-HkQdlcrn7TDxCZk2vOYsDk48j3oy+0XQjmc8ZHVebk4="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (8).6i0x31fxj1.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (8).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40027"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Msihn6ZwpnewSWdU/YcEINwqek64Ln6wNI7F91b/sa0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6i0x31fxj1"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Msihn6ZwpnewSWdU/YcEINwqek64Ln6wNI7F91b/sa0="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (8).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (8).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (8).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40027"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Msihn6ZwpnewSWdU/YcEINwqek64Ln6wNI7F91b/sa0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Msihn6ZwpnewSWdU/YcEINwqek64Ln6wNI7F91b/sa0="
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (9).9q936xn05n.svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (9).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25698"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/1GJKtlXW/D55ZItqVoiqP/HOaVDw6cwrgTbOl40KIc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9q936xn05n"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/1GJKtlXW/D55ZItqVoiqP/HOaVDw6cwrgTbOl40KIc="
+        },
+        {
+          "Name": "label",
+          "Value": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (9).svg"
+        }
+      ]
+    },
+    {
+      "Route": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (9).svg",
+      "AssetFile": "icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (9).svg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25698"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/svg+xml"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/1GJKtlXW/D55ZItqVoiqP/HOaVDw6cwrgTbOl40KIc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 13 Oct 2025 10:54:26 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/1GJKtlXW/D55ZItqVoiqP/HOaVDw6cwrgTbOl40KIc="
         }
       ]
     },
@@ -193,7 +3719,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 04 Oct 2025 13:27:10 GMT"
+          "Value": "Mon, 13 Oct 2025 10:48:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -230,7 +3756,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 04 Oct 2025 13:27:10 GMT"
+          "Value": "Mon, 13 Oct 2025 10:48:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -275,7 +3801,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 12:03:11 GMT"
+          "Value": "Mon, 13 Oct 2025 10:48:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -312,7 +3838,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 12:03:11 GMT"
+          "Value": "Mon, 13 Oct 2025 10:48:03 GMT"
         }
       ],
       "EndpointProperties": [
@@ -345,7 +3871,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9224"
+          "Value": "9071"
         },
         {
           "Name": "Content-Type",
@@ -353,22 +3879,22 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"63YwK6p7mEz00iMR4Aaa6D+Ppl3iNhDR9tospnzO5fE=\""
+          "Value": "\"HltbgAwB6IdAubEegvIj2CesqYUG1/X3+vtvAts9HO0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 18:01:12 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:49 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-63YwK6p7mEz00iMR4Aaa6D+Ppl3iNhDR9tospnzO5fE="
+          "Value": "sha256-HltbgAwB6IdAubEegvIj2CesqYUG1/X3+vtvAts9HO0="
         }
       ]
     },
     {
-      "Route": "js/register.pzd5nbrq43.js",
+      "Route": "js/register.m6z8ns1ieg.js",
       "AssetFile": "js/register.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -382,7 +3908,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9224"
+          "Value": "9071"
         },
         {
           "Name": "Content-Type",
@@ -390,21 +3916,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"63YwK6p7mEz00iMR4Aaa6D+Ppl3iNhDR9tospnzO5fE=\""
+          "Value": "\"HltbgAwB6IdAubEegvIj2CesqYUG1/X3+vtvAts9HO0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 18:01:12 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:49 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pzd5nbrq43"
+          "Value": "m6z8ns1ieg"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-63YwK6p7mEz00iMR4Aaa6D+Ppl3iNhDR9tospnzO5fE="
+          "Value": "sha256-HltbgAwB6IdAubEegvIj2CesqYUG1/X3+vtvAts9HO0="
         },
         {
           "Name": "label",
@@ -495,7 +4021,7 @@
       ]
     },
     {
-      "Route": "registerPage.ez4fownx57.html",
+      "Route": "registerPage.18tyl0x53y.html",
       "AssetFile": "registerPage.html",
       "Selectors": [],
       "ResponseHeaders": [
@@ -509,7 +4035,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4943"
+          "Value": "5002"
         },
         {
           "Name": "Content-Type",
@@ -517,21 +4043,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BvHnihgINHnAcYMSb6a59r03968BvHfWg9/Y9mbZ428=\""
+          "Value": "\"j7IpSSqKJsjvmwHZ6BxHLataDT/6iSXZ6gte1gPNb4A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 17:59:36 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:12 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "ez4fownx57"
+          "Value": "18tyl0x53y"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-BvHnihgINHnAcYMSb6a59r03968BvHfWg9/Y9mbZ428="
+          "Value": "sha256-j7IpSSqKJsjvmwHZ6BxHLataDT/6iSXZ6gte1gPNb4A="
         },
         {
           "Name": "label",
@@ -554,7 +4080,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4943"
+          "Value": "5002"
         },
         {
           "Name": "Content-Type",
@@ -562,17 +4088,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"BvHnihgINHnAcYMSb6a59r03968BvHfWg9/Y9mbZ428=\""
+          "Value": "\"j7IpSSqKJsjvmwHZ6BxHLataDT/6iSXZ6gte1gPNb4A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 11 Oct 2025 17:59:36 GMT"
+          "Value": "Mon, 13 Oct 2025 10:52:12 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-BvHnihgINHnAcYMSb6a59r03968BvHfWg9/Y9mbZ428="
+          "Value": "sha256-j7IpSSqKJsjvmwHZ6BxHLataDT/6iSXZ6gte1gPNb4A="
         }
       ]
     }
