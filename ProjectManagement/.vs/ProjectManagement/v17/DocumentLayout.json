@@ -1,17 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\",
+  "WorkspaceRootPath": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\registerpage.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\registerpage.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\lp tr\u00ECnh\\dacn_projectmanagement\\projectmanagement\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -35,41 +39,52 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "registerPage.html",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\registerPage.html",
+              "RelativeDocumentMoniker": "wwwroot\\registerPage.html",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\registerPage.html",
+              "RelativeToolTip": "wwwroot\\registerPage.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-13T13:36:35.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAM8AAAAAAAAAAAAAADIAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAALUAAAAAAAAAAAAqwDIAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T13:11:32.427Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "User.cs",
-              "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Domain\\Entities\\User.cs",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Domain\\Entities\\User.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\User.cs",
-              "ToolTip": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\Domain\\Entities\\User.cs",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Domain\\Entities\\User.cs",
               "RelativeToolTip": "Domain\\Entities\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T13:11:25.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T13:11:25.259Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.Development.json",
-              "DocumentMoniker": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
-              "ToolTip": "D:\\Lp tr\u00ECnh\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
               "RelativeToolTip": "appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-13T12:57:39.757Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T12:57:39.757Z"
             }
           ]
         },

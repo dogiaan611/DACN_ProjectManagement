@@ -1,10 +1,9 @@
 wwwroot\css\input.css
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
-wwwroot\index.html
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Figma\Step-by-Step Change Colours.png
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Figma\DrawKit Vector Illustration Project Manager
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Ai\DrawKit Vector Illustration Project Manager.ai
 wwwroot\css\site.css
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Ai\DrawKit Vector Illustration Project Manager.ai
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Figma\DrawKit Vector Illustration Project Manager
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\Figma\Step-by-Step Change Colours.png
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (10).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (11).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (12).png
@@ -44,6 +43,7 @@ wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustra
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (7).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (8).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (9).svg
+wwwroot\index.html
 wwwroot\js\login.js
 wwwroot\js\register.js
 wwwroot\loginPage.html
