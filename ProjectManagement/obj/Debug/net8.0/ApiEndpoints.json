@@ -48,6 +48,174 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "AddMember",
+    "RelativePath": "projects/add/members",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BAddMemberDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "Create",
+    "RelativePath": "projects/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BCreateProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "Delete",
+    "RelativePath": "projects/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "RemoveMember",
+    "RelativePath": "projects/delete/members",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "ListMine",
+    "RelativePath": "projects/read",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "GetById",
+    "RelativePath": "projects/readProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "Update",
+    "RelativePath": "projects/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BUpdateProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "UpdateMemberRole",
+    "RelativePath": "projects/update/members",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "ChangeOwner",
+    "RelativePath": "projects/update/owner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BChangeOwnerDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ProjectManagement.Controllers.UserController",
     "Method": "DeleteMe",
     "RelativePath": "user/delete",
@@ -93,7 +261,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "ProjectManagement.Controllers.UserController\u002BRegisterRequestDto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BRequestOtpDto",
         "IsRequired": true
       }
     ],
@@ -125,7 +293,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "ProjectManagement.Controllers.UserController\u002BUpdateProfileDto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BUpdateDto",
         "IsRequired": true
       }
     ],

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamFlow</title>
+    <link rel="stylesheet" href="./src/output.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+    <div class="contents">
+        <div>
+            <div class="sticky top-0 z-[100] transition-transform duration-300 ease-in-out">
+                <nav class="p-[15px] relative top-0 left-0 right-0 z-[100] bg-[#fffffe] border-b border-gray-100 shadow">
+                    <div class="lg:px-6 w-full mx-auto h-auto grid [grid-template-columns:1fr_auto_1fr] items-center justify-between bg-[#fffffe]">
+                        <div class="justify-self-start">
+                            <a class="no-underline flex items-center pr-0" href="#"><i class="fas fa-code"></i></a>
+                        </div>
+                        <div class="xl:flex xl:flex-row xl:items-center [display:none] [grid-column:2] gap-1 justify-center items-center">
+                            <a href="#" class="no-underline text-[#094067] py-[5px] px-[10px] transition-colors duration-[15ms] ease-in-out justify-center 
+                            items-center content-center justify-items-center flex flex-row gap-2 rounded whitespace-nowrap shrink-0 hover:bg-gray-200">TeamFlow</a>
+                            <a href="#" class="no-underline text-[#094067] py-[5px] px-[10px] transition-colors duration-[15ms] ease-in-out justify-center 
+                            items-center content-center justify-items-center flex flex-row gap-2 rounded whitespace-nowrap shrink-0 hover:bg-gray-200">Task</a>
+                            <a href="#" class="no-underline text-[#094067] py-[5px] px-[10px] transition-colors duration-[15ms] ease-in-out justify-center 
+                            items-center content-center justify-items-center flex flex-row gap-2 rounded whitespace-nowrap shrink-0 hover:bg-gray-200">Project</a>
+                            <a href="#" class="no-underline text-[#094067] py-[5px] px-[10px] transition-colors duration-[15ms] ease-in-out justify-center 
+                            items-center content-center justify-items-center flex flex-row gap-2 rounded whitespace-nowrap shrink-0 hover:bg-gray-200">More</a>
+                        </div>
+                        <div class="[grid-column:3] flex gap-4 items-center justify-self-end">
+                            <span class="md:flex md:gap-3 md:items-center [display:none]">
+                                <a href="registerPage.html" class="no-underline text-[#094067] py-[5px] px-[10px] transition-colors duration-[15ms] ease-in-out
+                                justify-center items-center content-center justify-items-center flex flex-row gap-2 rounded whitespace-nowrap shrink-0 hover:bg-gray-200 hover:text-black">Sign Up</a>
+                            </span>
+                            <span class="flex">
+                                <a href="loginPage.html" class="no-underline text-[#fffffe] bg-blue-600 hover:bg-[#3da9fc] border-0 rounded-lg min-h-9 py-1 px-3.5
+                                inline-flex items-center min-w-full h-auto justify-center">Sign In</a>
+                            </span>
+                            <div class="flex md:[display:none]">
+                                <button type="button" aria-label="Toggle meny" class="border-0 [background:0] cursor-pointer p-[11px] m-[-11px] flex items-center justify-center">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <main class="p-0 mx-0 my-auto w-full min-h-full h-auto ">
+                <div class="md:pb-0 pt-0 pb-8 gap-8 overflow-x-clip">
+                    <div class="relative mb-8 w-full mx-auto my-0 max-w-7xl flex flex-col gap-16">
+                        <section class="md:my-0 md:mx-auto md:gap-8 gap-4 [margin:16px_auto_0] flex flex-col items-center max-w-full w-full">
+                            <header class="sm:min-w-[450px] sm:max-w-7xl md:order-1 order-2 flex flex-col gap-2 max-w-full items-center mt-5">
+                                <h1 class="text-[#094067] sm:text-6xl md:text-7xl m-0 p-0 font-bold  text-balance text-7xl text-center">Work faster with your team</h1>
+                                <h2 class="text-[#5f6c7b] sm:text-2xl text-2xl m-0 text-center text-balance">Collaborate in real time, track progress, and boost productivity without complexity.</h2>
+                                <div class=" mt-6 flex flex-wrap flex-row gap-2 max-w-full mx-auto [@media(min-width:440px)]:w-max [@media(min-width:600px)]:mx-0 md:flex-row md:gap-4">
+                                    <a href="registerPage.html" class="bg-blue-600 text-[#fffffe] px-5 py-2.5 inline-flex items-center justify-center whitespace-nowrap h-auto no-underline min-w-full md:min-w-0 rounded-md">Sign In For Free</a>
+                                    <a href="#" class="bg-blue-600 text-[#fffffe] px-5 py-2.5 inline-flex items-center justify-center whitespace-nowrap h-auto no-underline min-w-full md:min-w-0 rounded-md">Create Project</a>
+                                </div>
+                            </header>
+                            <div class="md:order-2 order-none relative w-full">
+                                <div class="md:w-full md:max-w-full sm:w-[95%] relative max-w-[600px] w-full mx-auto overflow-hidden">
+                                    <object data="./src/icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/SVG/DrawKit Vector Illustration Project Manager (5).svg" type="image/svg+xml" class="h-[80%]"></object>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+</html>

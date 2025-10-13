@@ -45,27 +45,26 @@ namespace ProjectManagement.Controllers
         }
 
         public record RegisterRequestDto(string Name, string Email, string Password);
-        public record RegisterOTPDto(string Otp);
+        public record RequestOtpDto(string Email); // DTO mới cho yêu cầu OTP ban đầu
+        public record RegisterOTPDto(string Otp, string Name, string Password); // DTO cập nhật cho xác nhận OTP và đăng ký cuối cùng
         public record LoginDto(string Email, string Password);
-        public record UpdateProfileDto(string? Name, string? AvatarUrl, string? PhoneNumber);
+        public record UpdateDto(string? Name, string? AvatarUrl, string? PhoneNumber);
         public record SetRoleDto(string Role);
 
         /// Đăng ký tài khoản mới
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterRequestOtp([FromBody] RegisterRequestDto dto)
+        public async Task<IActionResult> RegisterRequestOtp([FromBody] RequestOtpDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password) || string.IsNullOrWhiteSpace(dto.Name))
-                return BadRequest("Name, email và mật khẩu là bắt buộc");
+            if (string.IsNullOrWhiteSpace(dto.Email))
+                return BadRequest("Email là bắt buộc");
 
             var normalizedEmail = dto.Email.Trim().ToLowerInvariant();
 
-            // Check if email or username already exists
+            // Check if email already exists
             if (await _userManager.FindByEmailAsync(normalizedEmail) != null)
                 return BadRequest("Email đã tồn tại");
-            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name))
-                return BadRequest("Name đã tồn tại");
-
+            
             // Prevent frequent OTP requests
             var now = DateTime.UtcNow;
             var existingActive = await _db.RegistrationCodes
@@ -89,15 +88,14 @@ namespace ProjectManagement.Controllers
                 CreatedAtUtc = now,
                 ExpiresAtUtc = now.AddMinutes(ttlMinutes),
                 IsUsed = false,
-                TempUsername = dto.Email,
-                TempPassword = dto.Password,
-                TempName = dto.Name
+                TempUsername = dto.Email, // Username là email đăng ký
+                TempPassword = null, // Password có thể nhập sausau
+                TempName = null // Name có thể nhập sausau
             };
             _db.RegistrationCodes.Add(reg);
             await _db.SaveChangesAsync();
 
             await _notificationService.SendOtpAsync(normalizedEmail, code, ttlMinutes);
-            await _notificationService.SendEmailAsync(normalizedEmail, "Mã đăng ký tài khoản", $"Mã của bạn là: {code}. Hiệu lực {ttlMinutes} phút.");
 
             return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
         }
@@ -107,35 +105,35 @@ namespace ProjectManagement.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RegisterWithOtp([FromBody] RegisterOTPDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Otp))
-                return BadRequest("Mã OTP là bắt buộc");
+            if (string.IsNullOrWhiteSpace(dto.Otp) || string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest("Mã OTP, tên và mật khẩu là bắt buộc");
 
             var otpNow = DateTime.UtcNow;
-            var otp = await _db.RegistrationCodes
+            var otpRecord = await _db.RegistrationCodes
                 .Where(r => !r.IsUsed && r.ExpiresAtUtc >= otpNow && r.Code == dto.Otp.Trim())
                 .OrderByDescending(r => r.Id)
                 .FirstOrDefaultAsync();
 
-            if (otp == null)
+            if (otpRecord == null)
                 return BadRequest("Mã đăng ký không hợp lệ hoặc đã hết hạn");
 
-            // Check if email or username already exists
-            if (await _userManager.FindByEmailAsync(otp.Email) != null)
+            // kiểm tra email đã tồn tại chưa
+            if (await _userManager.FindByEmailAsync(otpRecord.Email) != null)
                 return BadRequest("Email đã tồn tại");
-            if (await _userManager.Users.AnyAsync(u => u.UserName == otp.TempUsername))
-                return BadRequest("Username đã tồn tại");
+            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name)) // kiểm tra tên tồn tại chưa 
+                return BadRequest("Name đã tồn tại");
 
             var user = new ApplicationUser
             {
-                UserName = otp.TempUsername!,
-                Email = otp.Email,
+                UserName = otpRecord.Email, // Sử dụng email làm UserName
+                Email = otpRecord.Email,
                 EmailConfirmed = true,
-                Name = otp.TempName!
+                Name = dto.Name // Sử dụng Name từ DTO
             };
 
             user.SystemRole = SystemRole.Member;
 
-            var createResult = await _userManager.CreateAsync(user, otp.TempPassword!);
+            var createResult = await _userManager.CreateAsync(user, dto.Password!); // Sử dụng Password từ DTO
             if (!createResult.Succeeded)
                 return BadRequest(createResult.Errors);
 
@@ -149,7 +147,7 @@ namespace ProjectManagement.Controllers
             if (!await _userManager.IsInRoleAsync(user, roleName))
                 await _userManager.AddToRoleAsync(user, roleName);
 
-            otp.IsUsed = true;
+            otpRecord.IsUsed = true;
             await _db.SaveChangesAsync();
 
             return Ok(new { message = "Đăng ký thành công" });
@@ -195,7 +193,7 @@ namespace ProjectManagement.Controllers
         /// Cập nhật hồ sơ người dùng hiện tại
         [HttpPut("update")]
         [Authorize]
-        public async Task<IActionResult> UpdateMe([FromBody] UpdateProfileDto dto)
+        public async Task<IActionResult> UpdateMe([FromBody] UpdateDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId!);
