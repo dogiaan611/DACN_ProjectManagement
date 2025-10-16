@@ -1,24 +1,16 @@
 {
   "Files": [
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\sidebar.html",
+      "PackagePath": "staticwebassets\\components\\sidebar.html"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\css\\input.css",
       "PackagePath": "staticwebassets\\css\\input.css"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
-    },
-    {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Ai\\DrawKit Vector Illustration Project Manager.ai",
-      "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Ai\\DrawKit Vector Illustration Project Manager.ai"
-    },
-    {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Figma\\DrawKit Vector Illustration Project Manager",
-      "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Figma"
-    },
-    {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Figma\\Step-by-Step Change Colours.png",
-      "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\Figma\\Step-by-Step Change Colours.png"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\PNG\\DrawKit Vector Illustration Project Manager (1).png",
@@ -181,16 +173,32 @@
       "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\SVG\\DrawKit Vector Illustration Project Manager (9).svg"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\SVG\\flow-svgrepo-com.svg",
+      "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\SVG\\flow-svgrepo-com.svg"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth.js",
+      "PackagePath": "staticwebassets\\js\\auth.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\login.js",
       "PackagePath": "staticwebassets\\js\\login.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-modal.js",
+      "PackagePath": "staticwebassets\\js\\project-modal.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\register.js",
       "PackagePath": "staticwebassets\\js\\register.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar.js",
+      "PackagePath": "staticwebassets\\js\\sidebar.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\loginPage.html",

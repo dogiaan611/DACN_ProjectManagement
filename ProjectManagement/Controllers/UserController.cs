@@ -44,6 +44,25 @@ namespace ProjectManagement.Controllers
             _notificationService = notificationService;
         }
 
+        /// Tìm kiếm người dùng theo email (phần đầu vào: q)
+        [HttpGet("search")]
+        [Authorize]
+        public async Task<IActionResult> SearchByEmail([FromQuery] string q, [FromQuery] int limit = 5)
+        {
+            if (string.IsNullOrWhiteSpace(q)) return Ok(Array.Empty<object>());
+
+            var term = q.Trim().ToLowerInvariant();
+
+            var users = await _userManager.Users
+                .Where(u => u.Email != null && u.Email.ToLower().Contains(term))
+                .OrderBy(u => u.Email)
+                .Take(Math.Clamp(limit, 1, 20))
+                .Select(u => new { u.Id, u.Email, u.Name, u.AvatarUrl })
+                .ToListAsync();
+
+            return Ok(users);
+        }
+
         public record RegisterRequestDto(string Name, string Email, string Password);
         public record RequestOtpDto(string Email); // DTO mới cho yêu cầu OTP ban đầu
         public record RegisterOTPDto(string Otp, string Name, string Password); // DTO cập nhật cho xác nhận OTP và đăng ký cuối cùng
@@ -64,7 +83,7 @@ namespace ProjectManagement.Controllers
             // Check if email already exists
             if (await _userManager.FindByEmailAsync(normalizedEmail) != null)
                 return BadRequest("Email đã tồn tại");
-            
+
             // Prevent frequent OTP requests
             var now = DateTime.UtcNow;
             var existingActive = await _db.RegistrationCodes
@@ -120,7 +139,7 @@ namespace ProjectManagement.Controllers
             // kiểm tra email đã tồn tại chưa
             if (await _userManager.FindByEmailAsync(otpRecord.Email) != null)
                 return BadRequest("Email đã tồn tại");
-            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name)) // kiểm tra tên tồn tại chưa 
+            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name)) // kiểm tra tên tồn tại chưa
                 return BadRequest("Name đã tồn tại");
 
             var user = new ApplicationUser

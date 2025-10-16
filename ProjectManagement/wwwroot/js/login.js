@@ -47,6 +47,17 @@
                 const data = await response.json();
 
                 if(response.ok){
+                    // Save JWT
+                    try {
+                        if (data && data.access_token) {
+                            // dynamic import in browser environments not supported everywhere; use eval-safe fallback
+                            (function(){
+                                try {
+                                    localStorage.setItem('pm_jwt', data.access_token);
+                                } catch {}
+                            })();
+                        }
+                    } catch {}
                     const loadingModal = document.getElementById('loadingModal');
                     loadingModal.classList.remove('hidden');
                     loadingModal.classList.add('flex');
@@ -55,7 +66,7 @@
                     setTimeout(()=>{
                         loadingModal.classList.remove('flex');
                         loadingModal.classList.add('hidden');
-                        window.location.href='/swagger/index.html';
+                        window.location.href='/index.html';
                     },2000)
                 }else{
                     //xu ly loi

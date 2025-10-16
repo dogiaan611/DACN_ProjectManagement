@@ -76,7 +76,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Thêm thành viên vào project (chỉ owner). Chặn thêm trùng.
-        [HttpPost("add/members")]
+        [HttpPost("{projectId:int}/add/members")]
         public async Task<IActionResult> AddMember([FromRoute] int projectId, [FromBody] AddMemberDto dto)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -108,7 +108,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Cập nhật vai trò thành viên (chỉ owner). Không cho đổi role của owner hiện tại.
-        [HttpPut("update/members")]
+        [HttpPut("{projectId:int}/update/members/{userId}")]
         public async Task<IActionResult> UpdateMemberRole([FromRoute] int projectId, [FromRoute] string userId, [FromBody] ProjectRole role)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -128,7 +128,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Xóa thành viên khỏi project (chỉ owner). Không thể xóa owner.
-        [HttpDelete("delete/members")]
+        [HttpDelete("{projectId:int}/delete/members/{userId}")]
         public async Task<IActionResult> RemoveMember([FromRoute] int projectId, [FromRoute] string userId)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -147,7 +147,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Chuyển quyền owner sang thành viên khác (chỉ owner).
-        [HttpPost("update/owner")]
+        [HttpPost("{projectId:int}/update/owner")]
         public async Task<IActionResult> ChangeOwner([FromRoute] int projectId, [FromBody] ChangeOwnerDto dto)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -201,7 +201,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Lấy chi tiết project (khi là member) và danh sách members.
-        [HttpGet("readProject")]
+        [HttpGet("{projectId:int}/readProject")]
         public async Task<IActionResult> GetById([FromRoute] int projectId)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -222,7 +222,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Cập nhật tên/mô tả project (owner hoặc ProjectAdmin).
-        [HttpPut("update")]
+        [HttpPut("{projectId:int}/update")]
         public async Task<IActionResult> Update([FromRoute] int projectId, [FromBody] UpdateProjectDto dto)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -243,7 +243,7 @@ namespace ProjectManagement.Controllers
         }
 
         /// Xóa project (chỉ owner).
-        [HttpDelete("Delete")]
+        [HttpDelete("{projectId:int}/Delete")]
         public async Task<IActionResult> Delete([FromRoute] int projectId)
         {
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
