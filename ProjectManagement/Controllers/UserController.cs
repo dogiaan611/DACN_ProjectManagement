@@ -209,7 +209,62 @@ namespace ProjectManagement.Controllers
         }
 
 
-        /// Cập nhật hồ sơ người dùng hiện tại
+        /// Upload ảnh đại diện
+        [HttpPost("upload-avatar")]
+        [Authorize]
+        public async Task<IActionResult> UploadAvatar(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("Không có file được chọn");
+
+            // Kiểm tra loại file
+            var allowedTypes = new[] { "image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp" };
+            if (!allowedTypes.Contains(file.ContentType.ToLower()))
+                return BadRequest("Chỉ cho phép file ảnh (JPG, PNG, GIF, WebP)");
+
+            // Kiểm tra kích thước file (tối đa 5MB)
+            if (file.Length > 5 * 1024 * 1024)
+                return BadRequest("File quá lớn. Kích thước tối đa là 5MB");
+
+            try
+            {
+                // Tạo thư mục uploads nếu chưa có
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "avatars");
+                if (!Directory.Exists(uploadsPath))
+                    Directory.CreateDirectory(uploadsPath);
+
+                // Tạo tên file duy nhất
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var fileExtension = Path.GetExtension(file.FileName);
+                var fileName = $"avatar_{userId}_{DateTime.UtcNow:yyyyMMddHHmmss}{fileExtension}";
+                var filePath = Path.Combine(uploadsPath, fileName);
+
+                // Lưu file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                // Cập nhật AvatarUrl trong database
+                var user = await _userManager.FindByIdAsync(userId!);
+                if (user != null)
+                {
+                    user.AvatarUrl = $"/uploads/avatars/{fileName}";
+                    await _userManager.UpdateAsync(user);
+                }
+
+                return Ok(new {
+                    message = "Upload ảnh thành công",
+                    avatarUrl = $"/uploads/avatars/{fileName}"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Lỗi khi upload file: {ex.Message}");
+            }
+        }
+
+        // Cập nhật hồ sơ người dùng hiện tại
         [HttpPut("update")]
         [Authorize]
         public async Task<IActionResult> UpdateMe([FromBody] UpdateDto dto)

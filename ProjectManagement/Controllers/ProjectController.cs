@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Linq;
 using System.Threading.Tasks;
+using ProjectManagement.Domain.Entities;
 
 /// Controller quản lý dự án: tạo/xem/sửa/xóa project và quản lý thành viên (thêm, đổi vai trò, xóa, chuyển owner).
 namespace ProjectManagement.Controllers
@@ -36,7 +37,7 @@ namespace ProjectManagement.Controllers
             _logger = logger;
         }
 
-        public record CreateProjectDto(string Name, string? Description);
+        public record CreateProjectDto(string Name, string? Description, ProjectType Type = ProjectType.Kanban);
         public record UpdateProjectDto(string? Name, string? Description);
         public record AddMemberDto(string UserId, ProjectRole Role);
         public record ChangeOwnerDto(string NewOwnerId);
@@ -55,6 +56,7 @@ namespace ProjectManagement.Controllers
             {
                 Name = dto.Name.Trim(),
                 Description = dto.Description?.Trim() ?? string.Empty,
+                Type = dto.Type,
                 CreatedById = currentUserId,
                 CreatedAt = DateTime.UtcNow
             };
@@ -72,7 +74,7 @@ namespace ProjectManagement.Controllers
             _db.ProjectMembers.Add(ownerMember);
             await _db.SaveChangesAsync();
 
-            return Ok(new { project.ProjectId, project.Name });
+            return Ok(new { project.ProjectId, project.Name, project.Type });
         }
 
         /// Thêm thành viên vào project (chỉ owner). Chặn thêm trùng.
@@ -192,6 +194,7 @@ namespace ProjectManagement.Controllers
                         p.ProjectId,
                         p.Name,
                         p.Description,
+                        p.Type,
                         pm.Role,
                         pm.IsOwner
                     })
@@ -218,7 +221,7 @@ namespace ProjectManagement.Controllers
                 .Select(pm => new { pm.UserId, pm.Role, pm.IsOwner })
                 .ToListAsync();
 
-            return Ok(new { project.ProjectId, project.Name, project.Description, project.CreatedById, project.CreatedAt, Members = members });
+            return Ok(new { project.ProjectId, project.Name, project.Description, project.Type, project.CreatedById, project.CreatedAt, Members = members });
         }
 
         /// Cập nhật tên/mô tả project (owner hoặc ProjectAdmin).

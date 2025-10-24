@@ -143,18 +143,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     e.preventDefault();
     const name = nameInput.value.trim();
     const description = (descInput.value || "").trim();
+    const projectTypeValue = document.querySelector('input[name="project-type"]:checked')?.value || 'Kanban';
+
+    // Convert string to enum value (Kanban = 0, Scrum = 1)
+    const projectType = projectTypeValue === 'Scrum' ? 1 : 0;
+
     if (!name) {
       nameInput.focus();
       return;
     }
     try {
-      const created = await createProject({ name, description });
+      const created = await createProject({ name, description, type: projectType });
       const projectId = created?.projectId ?? created?.ProjectId;
       const members = Array.from(selectedUsers.values());
       for (const m of members) {
         await addMember(projectId, m.id);
       }
       closeModal();
+      // Refresh sidebar để hiển thị project mới
+      if (typeof window.refreshProjectSidebar === 'function') {
+        window.refreshProjectSidebar();
+      }
       // Optionally reload or show toast
     } catch (err) {
       console.error(err);

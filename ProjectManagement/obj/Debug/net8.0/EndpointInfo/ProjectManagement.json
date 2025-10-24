@@ -98,7 +98,7 @@
         }
       }
     },
-    "/projects/add/members": {
+    "/projects/{projectId}/add/members": {
       "post": {
         "tags": [
           "Project"
@@ -140,7 +140,7 @@
         }
       }
     },
-    "/projects/update/members": {
+    "/projects/{projectId}/update/members/{userId}": {
       "put": {
         "tags": [
           "Project"
@@ -190,7 +190,7 @@
         }
       }
     },
-    "/projects/delete/members": {
+    "/projects/{projectId}/delete/members/{userId}": {
       "delete": {
         "tags": [
           "Project"
@@ -221,7 +221,7 @@
         }
       }
     },
-    "/projects/update/owner": {
+    "/projects/{projectId}/update/owner": {
       "post": {
         "tags": [
           "Project"
@@ -275,7 +275,7 @@
         }
       }
     },
-    "/projects/readProject": {
+    "/projects/{projectId}/readProject": {
       "get": {
         "tags": [
           "Project"
@@ -298,7 +298,7 @@
         }
       }
     },
-    "/projects/update": {
+    "/projects/{projectId}/update": {
       "put": {
         "tags": [
           "Project"
@@ -340,7 +340,7 @@
         }
       }
     },
-    "/projects/Delete": {
+    "/projects/{projectId}/Delete": {
       "delete": {
         "tags": [
           "Project"
@@ -367,6 +367,36 @@
       "get": {
         "tags": [
           "ProjectManagement"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/search": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -473,6 +503,38 @@
         "tags": [
           "User"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/upload-avatar": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -590,6 +652,9 @@
           "description": {
             "type": "string",
             "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ProjectType"
           }
         },
         "additionalProperties": false
@@ -613,6 +678,14 @@
           0,
           1,
           2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProjectType": {
+        "enum": [
+          0,
+          1
         ],
         "type": "integer",
         "format": "int32"

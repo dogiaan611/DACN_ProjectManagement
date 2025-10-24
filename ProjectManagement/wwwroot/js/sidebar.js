@@ -40,6 +40,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         favouriteBookmarkItems.classList.toggle("hidden");
       });
     }
+
+    // Khởi tạo project sidebar sau khi sidebar được inject
+    setTimeout(() => {
+      if (typeof window.projectSidebar !== 'undefined') {
+        window.projectSidebar.reinit();
+      }
+    }, 100);
   } catch (error) {
     console.error("Không thể tải sidebar:", error);
   }

@@ -50,7 +50,7 @@
   {
     "ContainingType": "ProjectManagement.Controllers.ProjectController",
     "Method": "AddMember",
-    "RelativePath": "projects/add/members",
+    "RelativePath": "projects/{projectId}/add/members",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -58,11 +58,132 @@
       {
         "Name": "projectId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "dto",
         "Type": "ProjectManagement.Controllers.ProjectController\u002BAddMemberDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "Delete",
+    "RelativePath": "projects/{projectId}/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "RemoveMember",
+    "RelativePath": "projects/{projectId}/delete/members/{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "GetById",
+    "RelativePath": "projects/{projectId}/readProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "Update",
+    "RelativePath": "projects/{projectId}/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BUpdateProjectDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "UpdateMemberRole",
+    "RelativePath": "projects/{projectId}/update/members/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ProjectController",
+    "Method": "ChangeOwner",
+    "RelativePath": "projects/{projectId}/update/owner",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ProjectController\u002BChangeOwnerDto",
         "IsRequired": true
       }
     ],
@@ -86,133 +207,12 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "Delete",
-    "RelativePath": "projects/Delete",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "RemoveMember",
-    "RelativePath": "projects/delete/members",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
     "Method": "ListMine",
     "RelativePath": "projects/read",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "GetById",
-    "RelativePath": "projects/readProject",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "Update",
-    "RelativePath": "projects/update",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "dto",
-        "Type": "ProjectManagement.Controllers.ProjectController\u002BUpdateProjectDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "UpdateMemberRole",
-    "RelativePath": "projects/update/members",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "role",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ProjectManagement.Controllers.ProjectController",
-    "Method": "ChangeOwner",
-    "RelativePath": "projects/update/owner",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "projectId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "dto",
-        "Type": "ProjectManagement.Controllers.ProjectController\u002BChangeOwnerDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -285,6 +285,27 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.UserController",
+    "Method": "SearchByEmail",
+    "RelativePath": "user/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "q",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.UserController",
     "Method": "UpdateMe",
     "RelativePath": "user/update",
     "HttpMethod": "PUT",
@@ -311,6 +332,22 @@
         "Name": "dto",
         "Type": "ProjectManagement.Controllers.UserController\u002BSetRoleDto",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.UserController",
+    "Method": "UploadAvatar",
+    "RelativePath": "user/upload-avatar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
