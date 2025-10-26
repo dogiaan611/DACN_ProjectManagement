@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodbye | Account Deleted</title>
+    <link rel="stylesheet" href="./css/site.css">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon.ico">
+    <!-- Icons -->
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="h-full bg-gray-50 text-gray-800">
+    <main class="min-h-full grid place-items-center px-6 py-12">
+        <section class="w-full max-w-xl">
+            <div class="text-center">
+                <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-600">
+                    <i data-lucide="user-x" class="h-8 w-8"></i>
+                </div>
+                <h1 class="text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">Tài khoản đã bị xóa</h1>
+                <p class="mt-3 text-sm text-gray-600 sm:text-base">Rất tiếc phải nói lời tạm biệt. Hồ sơ và dữ liệu liên quan đến tài khoản này đã được xóa vĩnh viễn theo yêu cầu của bạn.</p>
+            </div>
+
+            <div class="mt-8 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+                <div class="px-6 py-5 sm:px-8">
+                    <div class="flex items-start gap-3">
+                        <div class="mt-0.5">
+                            <i data-lucide="shield-check" class="h-5 w-5 text-emerald-600"></i>
+                        </div>
+                        <div class="text-sm leading-6 text-gray-700">
+                            <p>Vì lý do bảo mật, bạn đã được đăng xuất khỏi tất cả thiết bị. Một email xác nhận (nếu có) đã được gửi tới hộp thư của bạn.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-start gap-3">
+                        <div class="mt-0.5">
+                            <i data-lucide="clock" class="h-5 w-5 text-blue-600"></i>
+                        </div>
+                        <div class="text-sm leading-6 text-gray-700">
+                            <p>Một số nội dung có thể được lưu trữ thêm tối đa 7 ngày trong các bản ghi hệ thống theo chính sách bảo mật.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t bg-gray-50 px-6 py-4 sm:px-8">
+                    <div class="flex flex-col-reverse items-center justify-between gap-3 sm:flex-row">
+                        <a href="/" class="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm ring-1 ring-gray-900/5 transition hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900/50">
+                            <i data-lucide="home" class="h-4 w-4"></i>
+                            Về trang chủ
+                        </a>
+                        <div class="flex items-center gap-3 text-xs text-gray-500">
+                            <a href="/registerPage.html" class="inline-flex items-center gap-1 hover:text-gray-700">
+                                <i data-lucide="user-plus" class="h-4 w-4"></i>
+                                Tạo tài khoản mới
+                            </a>
+                            <span aria-hidden="true">•</span>
+                            <a href="/loginPage.html" class="inline-flex items-center gap-1 hover:text-gray-700">
+                                <i data-lucide="log-in" class="h-4 w-4"></i>
+                                Đăng nhập
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <figure class="mt-10 hidden justify-center sm:flex">
+                <img src="./icon/0042-product-project-managers-illustrations/DrawKit Vector Illustration Project Manager/PNG/DrawKit Vector Illustration Project Manager (20).png" alt="Goodbye illustration" class="h-40 w-auto select-none" draggable="false" />
+            </figure>
+
+            <p class="mt-10 text-center text-xs text-gray-500">
+                Nếu đây là nhầm lẫn, vui lòng liên hệ hỗ trợ để được trợ giúp.
+            </p>
+        </section>
+    </main>
+
+    <script>
+      // Render lucide icons
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.lucide && typeof lucide.createIcons === 'function') {
+          lucide.createIcons();
+        }
+      });
+    </script>
+</body>
+</html>

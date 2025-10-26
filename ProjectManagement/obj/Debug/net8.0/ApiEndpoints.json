@@ -222,7 +222,13 @@
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BConfirmEmailDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

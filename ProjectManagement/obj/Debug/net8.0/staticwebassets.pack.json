@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\goodbye.html",
+      "PackagePath": "staticwebassets\\goodbye.html"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\PNG\\DrawKit Vector Illustration Project Manager (1).png",
       "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\PNG\\DrawKit Vector Illustration Project Manager (1).png"
     },
@@ -231,6 +235,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\.gitkeep",
       "PackagePath": "staticwebassets\\uploads\\avatars\\.gitkeep"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132027.jpg",

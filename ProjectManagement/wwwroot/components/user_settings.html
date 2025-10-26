@@ -22,7 +22,7 @@
             </div>
             <div class="space-y-1">
                 <label class="block text-sm font-medium text-gray-700">Phone</label>
-                <input id="us-phone" type="text" class="w-full rounded-xl border border-gray-300 px-2 py-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="(+84) 0123 456 789" />
+                <input id="us-phone" type="text" class="w-full rounded-xl border border-gray-300 px-2 py-1 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 text-gray-600" placeholder="(+84) 0123 456 789" />
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 <label class="block text-[14px] text-gray-700 font-medium">Email</label>
                 <div id="us-email" class="text-gray-500 text-xs"></div>
             </div>
-            <div role="button" id="us-password-btn" tabindex="0" aria-label="Change password" class="flex items-center text-sm justify-center border rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Change Email</div>
+            <button id="us-email-btn" tabindex="0" aria-label="Change email" class="flex items-center text-sm justify-center border rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Change Email</button>
         </div>
 
         <div class="flex justify-between items-center">
@@ -46,7 +46,13 @@
             <div role="button" id="us-password-btn" tabindex="0" aria-label="Change password" class="flex items-center text-sm justify-center border rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Change password</div>
         </div>
 
-
+        <div class="flex justify-between items-center">
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">2-step verification</label>
+                <div id="us-verify" class="text-gray-500 text-xs">Add an additional layer of security to your account during login..</div>
+            </div>
+            <div role="button" id="us-verification" tabindex="0" aria-label="Change password" class="flex items-center text-sm justify-center border rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Add verification</div>
+        </div>
     </div>
     <!-- support section -->
     <div class="mt-8 grid grid-cols-1 gap-4">
@@ -56,9 +62,9 @@
         <div class="flex items-center justify-between">
             <div class="space-y-2">
                 <label class="text-[14px] text-red-400 font-normal">Delete my account</label>
-                <div id="us-email" class="text-gray-500 text-xs">Permanently delete the account and remove access from all projects.</div>
+                <div class="text-gray-500 text-xs">Permanently delete the account and remove access from all projects.</div>
             </div>
-            <div role="button" id="us-password-btn" tabindex="0" aria-label="Change password" class="flex items-center text-sm justify-center border text-red-500 rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Delete account</div>
+            <div role="button" id="us-delete-btn" tabindex="0" aria-label="Delete account" class="flex items-center text-sm justify-center border text-red-500 rounded-lg px-3 py-2 font-medium cursor-pointer transition-colors duration-150 hover:bg-gray-100">Delete account</div>
         </div>
     </div>
     <!-- User id section -->
@@ -74,7 +80,7 @@
     </div>
 
 
-    <div class="flex items-center justify-between pt-6">
+    <!-- <div class="flex items-center justify-between pt-6">
         <button data-close-settings class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50">Close</button>
         <div class="flex items-center gap-3">
             <div id="auto-save-status" class="text-sm text-gray-500 hidden">
@@ -83,9 +89,83 @@
                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                     </svg>
                 </span>
-            </div>
+            </div> -->
             <!-- <button id="us-save" class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">Save changes</button> -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 </section>
-<script src="/js/user-settings-autosave.js?v=1"></script>
+
+<!-- modal change password -->
+ <div id="modal-backdrop" class="fixed inset-0 z-[80] hidden bg-black/30"></div>
+ <div id="password-modal" class="fixed inset-0 flex items-center hidden justify-center bg-black/40 z-[100] overflow-y-auto">
+    <form class="mx-auto w-[350px] max-w-[400px] rounded-2xl bg-white shadow-2xl p-5" role="dialog" aria-modal="true" id="modal-outer">
+            <div class="flex flex-row justify-end mb-1 w-full">
+                <button id="close-btn" type="button" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-md" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                </button>
+            </div>
+            <div class="flex items-center justify-center flex-col gap-3 mb-3">
+                <div class="mt-3 w-10 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rectangle-ellipsis-icon lucide-rectangle-ellipsis"><rect width="20" height="12" x="2" y="6" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+                </div>
+                <h2 class="font-medium text-[17px] text-gray-700">Change Password</h2>
+                <p class="text-gray-400 text-sm text-center">Use a password at least 15 letters long, or at least 8 characters long for a better security.</p>
+            </div>
+            <div class="flex flex-col py-1 gap-2">
+                <label for="current password" class="text-xs text-start text-gray-500">Enter your current password</label>
+                <div class="relative w-full">
+                    <input id="current-password" type="password" placeholder="Current password" class="border border-gray-200 bg-gray-100 px-[10px] py-1.5 rounded-lg text-base text-gray-500 placeholder-gray-300 placeholder:text-sm w-full focus:ring-blue-400 focus:outline-none focus:ring-2">
+                    <button id="delete-field" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-blue-500 cursor-pointer hover:text-blue-800">
+                        <i id="evelopeIcon" class="far fa-envelope mr-1"></i></button>
+                </div>
+            </div>
+            <div class="flex flex-col py-1 gap-2">
+                <label for="new password" class="text-xs text-start text-gray-500">Enter your new password</label>
+                <div class="relative w-full">
+                    <input id="new-password" type="password" placeholder="New password" class="border border-gray-200 bg-gray-100 px-[10px] py-1.5 rounded-lg text-base text-gray-500 placeholder-gray-300 placeholder:text-sm w-full focus:ring-blue-400 focus:outline-none focus:ring-2">
+                    <button id="delete-field" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-blue-500 cursor-pointer hover:text-blue-800">
+                        <i id="evelopeIcon" class="far fa-envelope mr-1"></i></button>
+                </div>
+            </div>
+            <div class="flex flex-col py-1 gap-2">
+                <label for="new password" class="text-xs text-start text-gray-500">Confirm your new password</label>
+                <div class="relative w-full">
+                    <input id="confirm-password" type="password" placeholder="Confirm your new password" class="border border-gray-200 bg-gray-100 px-[10px] py-1.5 rounded-lg text-base text-gray-500 placeholder-gray-300 placeholder:text-sm w-full focus:ring-blue-400 focus:outline-none focus:ring-2">
+                    <button id="delete-field" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-blue-500 cursor-pointer hover:text-blue-800">
+                        <i id="evelopeIcon" class="far fa-envelope mr-1"></i></button>
+                </div>
+            </div>
+            <div class="flex flex-col py-3 gap-2">
+                <button type="submit" class="w-full border-0 rounded bg-blue-400 hover:bg-blue-600 flex items-center justify-center px-5 py-1 text-white">Change Password</button>
+            </div>
+    </form>
+ </div>
+
+ <!-- delete account modal -->
+<div id="modal-account-backdrop" class="fixed inset-0 z-[80]  hidden  bg-black/30"></div>
+<div id="delete-account-modal" class="fixed inset-0 flex items-center hidden  justify-center bg-black/40 z-[100] overflow-y-auto">
+    <form class="mx-auto w-[420px] max-w-[450px] rounded-2xl bg-white shadow-2xl p-5" role="dialog" aria-modal="true" id="modal-dl-outer">
+        <div class="flex items-center justify-center flex-col gap-3 mb-3">
+            <div class="mt-3 text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
+            </div>
+            <h2 class="font-medium text-[17px] text-gray-700 text-center">Delete your entire account permanently?</h2>
+            <p class="text-gray-400 text-sm text-center">This action cannot be undone. Your entire account will be permanently deleted and you will be removed from all shared workspaces. Additionally, the following workspaces you own will be permanently deleted.</p>
+        </div>
+        <div class="flex flex-col py-1 gap-2">
+            <label for="current email" class="text-sm text-start font-normal text-gray-600">Please type your current Email to confirm.</label>
+            <div class="relative w-full">
+                <input id="current-email" type="email" placeholder="Current email" class="border border-gray-200 bg-gray-100 px-[10px] py-1.5 rounded-lg text-base text-gray-500 placeholder-gray-300 placeholder:text-sm w-full focus:ring-blue-400 focus:outline-none focus:ring-2">
+            </div>
+        </div>
+        <div class="flex flex-col py-3 gap-2">
+            <button type="submit" id="confirm-btn" style="background-color: #E56458;" class="w-full border-0 rounded hover:bg-blue-600 flex items-center justify-center px-5 py-1 text-white">Permanently delete account</button>
+        </div>
+        <div id="error-content" class="text-xs text-red-500"></div>
+        <div class="flex flex-col py-1">
+            <div role="button" id="cancel-btn" class="w-full border-0 rounded hover:bg-gray-300 flex items-center justify-center px-5 py-1 text-gray-400">Cancel</div>
+        </div>
+    </form>
+
+</div>
+<!-- Scripts are loaded globally from index; do not include here because this component is injected dynamically. -->

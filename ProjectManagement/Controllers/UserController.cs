@@ -289,14 +289,28 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Cập nhật hồ sơ thành công" });
         }
 
-        /// Xóa tài khoản của chính người dùng hiện tại.
+        /// Xóa tài khoản của chính người dùng hiện tại, có xác nhận email từ frontend.
+        public record ConfirmEmailDto(string Email);
+
         [HttpDelete("delete")]
         [Authorize]
-        public async Task<IActionResult> DeleteMe()
+        public async Task<IActionResult> DeleteMe([FromBody] ConfirmEmailDto dto)
         {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Email))
+                return BadRequest("Email xác nhận là bắt buộc");
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId!);
             if (user == null) return NotFound();
+
+            // So khớp email nhập từ frontend với email tài khoản hiện tại (không phân biệt hoa thường, cắt khoảng trắng)
+            var normalizedInput = dto.Email.Trim().ToLowerInvariant();
+            var normalizedUserEmail = (user.Email ?? string.Empty).Trim().ToLowerInvariant();
+            if (!string.Equals(normalizedInput, normalizedUserEmail, StringComparison.Ordinal))
+            {
+                return BadRequest("Email xác nhận không khớp với email tài khoản");
+            }
+
             var result = await _userManager.DeleteAsync(user);
             if (!result.Succeeded) return BadRequest(result.Errors);
             return Ok(new { message = "Xóa tài khoản thành công" });
