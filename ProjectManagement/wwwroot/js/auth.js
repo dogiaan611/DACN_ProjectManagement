@@ -1,4 +1,4 @@
-// Simple JWT auth helpers for the frontend
+﻿﻿// Simple JWT auth helpers for the frontend
 const AUTH_STORAGE_KEY = "pm_jwt";
 
 export function saveToken(token) {
@@ -14,12 +14,17 @@ export function clearToken() {
 }
 
 export async function authFetch(input, init = {}) {
-  const token = getToken();
-  const headers = new Headers(init.headers || {});
-  if (token) headers.set("Authorization", `Bearer ${token}`);
-  headers.set("Accept", headers.get("Accept") || "application/json");
-  const merged = { ...init, headers };
-  return fetch(input, merged);
+    const token = getToken();
+    const headers = new Headers(init.headers || {});
+    if (token) headers.set("Authorization", `Bearer ${token}`);
+    headers.set("Accept", headers.get("Accept") || "application/json");
+
+    // Chỉ đặt Content-Type: application/json nếu body không phải là FormData
+    if (init.body && !(init.body instanceof FormData) && !headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
+    }
+    const merged = { ...init, headers };
+    return fetch(input, merged);
 }
 
 export async function requireAuth() {
@@ -32,5 +37,3 @@ export async function requireAuth() {
     return false;
   }
 }
-
-

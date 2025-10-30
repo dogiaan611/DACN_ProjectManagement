@@ -215,10 +215,19 @@ namespace ProjectManagement.Controllers
 
             var project = await _db.Projects.FirstOrDefaultAsync(p => p.ProjectId == projectId);
             if (project == null) return NotFound();
-
+            //join bảng để lấy user name và avt
             var members = await _db.ProjectMembers
                 .Where(pm => pm.ProjectId == projectId)
-                .Select(pm => new { pm.UserId, pm.Role, pm.IsOwner })
+                .Join(_db.Users,
+                    pm => pm.UserId,
+                    u => u.Id,
+                    (pm, u) => new {
+                        pm.UserId,
+                        u.Name,
+                        u.AvatarUrl,
+                        pm.Role,
+                        pm.IsOwner
+                    })
                 .ToListAsync();
 
             return Ok(new { project.ProjectId, project.Name, project.Description, project.Type, project.CreatedById, project.CreatedAt, Members = members });

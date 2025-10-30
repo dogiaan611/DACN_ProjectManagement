@@ -69,6 +69,9 @@ namespace ProjectManagement.Controllers
         public record LoginDto(string Email, string Password);
         public record UpdateDto(string? Name, string? AvatarUrl, string? PhoneNumber);
         public record SetRoleDto(string Role);
+        //dto thay đổi password
+        public record ChangePasswordDto(string CurrentPassword, string NewPassword);
+
 
         /// Đăng ký tài khoản mới
         [HttpPost("register")]
@@ -288,6 +291,29 @@ namespace ProjectManagement.Controllers
             if (!result.Succeeded) return BadRequest(result.Errors);
             return Ok(new { message = "Cập nhật hồ sơ thành công" });
         }
+
+        //đổi mật khẩu
+        [Authorize]
+        [HttpPut("update-password")]
+        public async Task<IActionResult> UpdatePassword([FromBody] ChangePasswordDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId!);
+            if (user == null) return NotFound();
+
+            // Dùng phương thức của UserManager để đổi mật khẩu an toàn
+            var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { 
+                    errors = result.Errors.Select(e => e.Description) 
+                });
+            }
+
+            return Ok(new { message = "Đổi mật khẩu thành công" });
+        }
+
 
         /// Xóa tài khoản của chính người dùng hiện tại, có xác nhận email từ frontend.
         public record ConfirmEmailDto(string Email);

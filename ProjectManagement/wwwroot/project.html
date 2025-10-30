@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="./css/site.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="/js/auth.js"></script>
+</head>
+<body>
+    <div class="flex h-screen items-stretch">
+        <!-- Sidebar sẽ được load vào đây -->
+        <div id="sidebar-container" class="h-full shrink-0"></div>
+
+        <!-- Nội dung chính của trang chi tiết project -->
+        <main id="project-detail-container" class="flex-1 p-6 overflow-y-auto ml-64">
+            <!-- Header: Tên và mô tả project -->
+            <header class="mb-8 flex flex-row items-center justify-between border-b pb-2">
+                <div class="flex flex-col">
+                    <h1 id="project-name" class="text-2xl font-medium text-gray-900">Đang tải...</h1>
+                </div>
+                <div class="flex flex-row gap-2 items-center justify-center">
+                    <div id="member-list" class="space-y-3 gap-1 flex flex-row items-center justify-center">
+                        <!-- Danh sách thành viên sẽ được chèn vào đây -->
+                    </div>
+                    <div role="button" id="add-member-btn" class="inline-flex items-center gap-2 rounded-xl text-blue-400 px-4 py-2 shadow border-blue-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" x2="19" y1="8" y2="14" /><line x1="22" x2="16" y1="11" y2="11" /></svg>
+                        Invite
+                    </div>
+                </div>
+            </header>
+
+            <!-- Khu vực nội dung chính của project (Kanban/Scrum) -->
+            <section id="project-content" class="mt-10">
+                <h2 class="text-2xl font-semibold text-gray-800">Bảng công việc</h2>
+                <div class="mt-4 p-6 bg-gray-100 rounded-xl border border-dashed">
+                    <p class="text-center text-gray-500">Nội dung Kanban/Scrum sẽ được hiển thị ở đây.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+    <!-- modal invite members -->
+    <!-- Modal: Create Project -->
+        <div id="invite-backdrop" class="fixed inset-0 z-40 hidden bg-black/40"></div>
+        <div id="invite-modal" class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto">
+            <div class="min-h-full w-full p-4" id="modal-outer">
+                <div class="mx-auto w-full max-w-lg rounded-2xl bg-white shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
+                    <div class="p-6">
+                        <h2 id="invite-modal-title" class="text-lg font-medium text-gray-900">Invite members to project</h2>
+                        <form id="invite-member-form" class="mt-6 space-y-5">
+                            <div>
+                                <label for="member-search" class="block text-sm font-medium text-gray-700">Add members by email</label>
+                                <div class="relative">
+                                    <input id="member-search" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="Search by email..." />
+                                    <div id="member-suggestions" class="absolute z-10 mt-1 hidden w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow">
+                                        <!-- suggestions injected here -->
+                                    </div>
+                                </div>
+                                <div id="selected-members" class="mt-3 flex flex-wrap gap-2"></div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <button type="button" id="cancel-invite-btn" class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-gray-700 hover:bg-gray-50">Cancel</button>
+                                <button type="submit" class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Send invites</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Tải các script cần thiết -->
+    <script type="module" src="/js/sidebar.js"></script>
+    <script type="module" src="/js/project-sidebar.js"></script>
+    <script src="/js/auth.js"></script> <!-- Đảm bảo authFetch có sẵn -->
+    <script type="module" src="/js/project-add-members.js"></script>
+    <!-- Script chính cho trang này -->
+    <script type="module" src="/js/project-detail.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,6 @@
-class UserSettingsAutoSave {
+import { authFetch } from './auth.js';
+
+export class UserSettingsAutoSave {
     constructor() {
         this.debounceTimer = null;
         this.isSaving = false;
@@ -35,22 +37,6 @@ class UserSettingsAutoSave {
                 console.log('Events bound for:', selector);
             }
         });
-
-        // Lắng nghe thay đổi avatar
-        const avatarUpload = document.getElementById('avatar-upload-file');
-        const avatarTrigger = document.getElementById('avatar-upload-trigger');
-
-        if (avatarUpload) {
-            avatarUpload.addEventListener('change', (e) => {
-                this.handleAvatarChange(e);
-            });
-        }
-
-        if (avatarTrigger) {
-            avatarTrigger.addEventListener('click', () => {
-                avatarUpload?.click();
-            });
-        }
     }
 
     saveOriginalData() {
@@ -79,18 +65,6 @@ class UserSettingsAutoSave {
         if (this.hasUnsavedChanges) {
             clearTimeout(this.debounceTimer);
             console.log('Blur save triggered');
-            this.autoSave();
-        }
-    }
-
-    handleAvatarChange(event) {
-        const file = event.target.files[0];
-        if (file) {
-            this.hasUnsavedChanges = true;
-            this.showAutoSaveIndicator();
-
-            // Auto save avatar ngay lập tức
-            this.autoSaveAvatar(file);
         }
     }
 
@@ -102,15 +76,10 @@ class UserSettingsAutoSave {
 
         try {
             const data = this.collectFormData();
-            const token = localStorage.getItem('pm_jwt') || '';
-            const response = await fetch('/user/update', {
+            const response = await authFetch('/user/update', {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
                 body: JSON.stringify({
-                    name: data.name,
+                    name: data.name, // Make sure backend DTO matches
                     phoneNumber: data.phone
                 })
             });
@@ -151,13 +120,9 @@ class UserSettingsAutoSave {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            const token = localStorage.getItem('pm_jwt') || '';
 
-            const response = await fetch('/user/upload-avatar', {
+            const response = await authFetch('/user/upload-avatar', {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
                 body: formData
             });
 
@@ -286,16 +251,8 @@ class UserSettingsAutoSave {
     }
 }
 
-// Khởi tạo auto save khi DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Chỉ khởi tạo nếu đang ở trang user settings
-    if (document.querySelector('[data-settings-root]')) {
-        window.userSettingsAutoSave = new UserSettingsAutoSave();
-    }
-});
-
 // Method để khởi tạo auto save cho modal
-window.initUserSettingsAutoSave = function() {
+export function initUserSettingsAutoSave() {
     if (window.userSettingsAutoSave) {
         // Cleanup existing instance
         window.userSettingsAutoSave = null;
@@ -323,6 +280,3 @@ window.initUserSettingsAutoSave = function() {
 
     initAutoSave();
 };
-
-// Export cho việc sử dụng từ bên ngoài
-window.UserSettingsAutoSave = UserSettingsAutoSave;

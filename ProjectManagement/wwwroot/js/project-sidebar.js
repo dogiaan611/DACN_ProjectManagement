@@ -1,36 +1,24 @@
+import { authFetch } from './auth.js';
+
 // Quản lý hiển thị projects trong sidebar
-class ProjectSidebar {
+export class ProjectSidebar {
   constructor() {
     this.projectsContainer = null;
-    this.init();
   }
 
   init() {
-    // Đợi sidebar được load xong
-    const checkSidebar = () => {
-      this.projectsContainer = document.getElementById('recent-project')?.querySelector('.flex.flex-col.gap-\\[1px\\]');
-      if (this.projectsContainer) {
-        this.loadProjects();
-      } else {
-        setTimeout(checkSidebar, 100);
-      }
-    };
-    checkSidebar();
-  }
-
-  // Method để khởi tạo lại nếu cần
-  reinit() {
-    this.projectsContainer = null;
-    this.init();
+    // Container sẽ được đảm bảo tồn tại khi phương thức này được gọi từ bên ngoài
+    this.projectsContainer = document.getElementById('recent-project')?.querySelector('.flex.flex-col.gap-\\[1px\\]');
+    if (!this.projectsContainer) {
+      console.error("Project sidebar container not found. Make sure sidebar.html is loaded and contains the correct element.");
+      return;
+    }
+    this.loadProjects();
   }
 
   async loadProjects() {
     try {
-      const token = localStorage.getItem('pm_jwt') || '';
-      const headers = new Headers({ "Accept": "application/json" });
-      if (token) headers.set("Authorization", `Bearer ${token}`);
-
-      const response = await fetch('/projects/read', { headers });
+      const response = await authFetch('/projects/read');
       if (!response.ok) throw new Error('Failed to load projects');
 
       const projects = await response.json();
@@ -62,8 +50,9 @@ class ProjectSidebar {
 
   createProjectElement(project) {
     const div = document.createElement('div');
+    div.role = 'button';
     div.className = 'flex items-center justify-between px-5 py-2 hover:bg-gray-100 rounded transition-colors duration-200 cursor-pointer group';
-    const typeIcon = project.type === 'Scrum'
+    const typeIcon = project.type === 1 // 1 là Scrum, 0 là Kanban
       ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-pie-icon lucide-chart-pie"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/></svg>'
       : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list-icon lucide-clipboard-list"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>';
 
@@ -94,10 +83,10 @@ class ProjectSidebar {
   }
 
   openProject(project) {
-    // TODO: Implement navigation to project detail page
-    console.log('Opening project:', project);
-    // Có thể redirect đến trang chi tiết project
-    // window.location.href = `/project/${project.projectId}`;
+    // API có thể trả về 'id' hoặc 'projectId'. Cần xử lý cả hai trường hợp.
+    const projectId = project.id ?? project.projectId;
+    console.log('Opening project:', project, 'with ID:', projectId);
+    window.location.href = `/project.html?id=${projectId}`;
   }
 
   // Method để refresh sidebar sau khi tạo project mới
@@ -106,12 +95,5 @@ class ProjectSidebar {
   }
 }
 
-// Khởi tạo global instance
+// Khởi tạo một instance toàn cục để các module khác có thể truy cập (ví dụ: project-modal)
 window.projectSidebar = new ProjectSidebar();
-
-// Export để sử dụng trong các file khác
-window.refreshProjectSidebar = () => {
-  if (window.projectSidebar) {
-    window.projectSidebar.refresh();
-  }
-};

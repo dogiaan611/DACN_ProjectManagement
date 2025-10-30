@@ -160,9 +160,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         await addMember(projectId, m.id);
       }
       closeModal();
-      // Refresh sidebar để hiển thị project mới
-      if (typeof window.refreshProjectSidebar === 'function') {
-        window.refreshProjectSidebar();
+      // Refresh sidebar to show the new project
+      if (window.projectSidebar && typeof window.projectSidebar.refresh === 'function') {
+        window.projectSidebar.refresh();
       }
       // Optionally reload or show toast
     } catch (err) {
@@ -171,5 +171,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 });
-
-

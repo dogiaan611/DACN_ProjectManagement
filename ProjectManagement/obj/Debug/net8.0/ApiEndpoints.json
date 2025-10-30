@@ -328,6 +328,22 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.UserController",
+    "Method": "UpdatePassword",
+    "RelativePath": "user/update-password",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.UserController\u002BChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.UserController",
     "Method": "SetMyRole",
     "RelativePath": "user/update/role",
     "HttpMethod": "POST",
