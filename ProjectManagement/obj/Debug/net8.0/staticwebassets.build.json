@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EHhgcBG7Bq6KOw3iv5HymxfjkxAbe6Io3zAJZqLWDK0=",
+  "Hash": "JicAIxyejM3LNW/mxwTGPvfN59pNtXp+w4IpVWPMI5A=",
   "Source": "ProjectManagement",
   "BasePath": "_content/ProjectManagement",
   "Mode": "Default",
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d7u4iempci",
-      "Integrity": "F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg=",
+      "Fingerprint": "bjf67qilqg",
+      "Integrity": "JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\components\\sidebar.html"
@@ -1039,8 +1039,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "10izhk8pv9",
-      "Integrity": "H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw=",
+      "Fingerprint": "9ulufvtwtl",
+      "Integrity": "7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\auth.js"
@@ -1081,8 +1081,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "xnnic8yz6e",
-      "Integrity": "syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM=",
+      "Fingerprint": "6ijonw02q6",
+      "Integrity": "QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\project-add-members.js"
@@ -1102,8 +1102,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "vq6eommtfw",
-      "Integrity": "p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw=",
+      "Fingerprint": "bj6qu7y3z7",
+      "Integrity": "l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\project-detail.js"
@@ -1249,8 +1249,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "vkh9bz2249",
-      "Integrity": "P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM=",
+      "Fingerprint": "z1mj6hcfoi",
+      "Integrity": "ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\settings-profile.js"
@@ -1291,8 +1291,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "dpoodlucge",
-      "Integrity": "7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw=",
+      "Fingerprint": "kjax4q3lig",
+      "Integrity": "oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\user-settings-autosave.js"
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "esxx58paut",
-      "Integrity": "soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA=",
+      "Fingerprint": "p2ktpoj3nh",
+      "Integrity": "4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\project.html"
@@ -1802,6 +1802,27 @@
       "OriginalItemSpec": "wwwroot\\uploads\\avatars\\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030144727.jpg"
     },
     {
+      "Identity": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg",
+      "SourceId": "ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/ProjectManagement",
+      "RelativePath": "uploads/avatars/avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "lzpyrjaes8",
+      "Integrity": "Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg"
+    },
+    {
       "Identity": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_fb7f9712-10f8-47e9-acd7-6e29b84b0860_20251026174721.jpg",
       "SourceId": "ProjectManagement",
       "SourceType": "Discovered",
@@ -1907,7 +1928,7 @@
       ]
     },
     {
-      "Route": "components/sidebar.d7u4iempci.html",
+      "Route": "components/sidebar.bjf67qilqg.html",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\sidebar.html",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1917,7 +1938,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7285"
+          "Value": "7296"
         },
         {
           "Name": "Content-Type",
@@ -1925,11 +1946,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg=\""
+          "Value": "\"JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 03:14:47 GMT"
+          "Value": "Thu, 30 Oct 2025 15:30:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1939,7 +1960,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d7u4iempci"
+          "Value": "bjf67qilqg"
         },
         {
           "Name": "label",
@@ -1947,7 +1968,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg="
+          "Value": "sha256-JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8="
         }
       ]
     },
@@ -1962,7 +1983,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7285"
+          "Value": "7296"
         },
         {
           "Name": "Content-Type",
@@ -1970,11 +1991,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg=\""
+          "Value": "\"JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 03:14:47 GMT"
+          "Value": "Thu, 30 Oct 2025 15:30:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1984,7 +2005,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg="
+          "Value": "sha256-JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8="
         }
       ]
     },
@@ -5761,7 +5782,7 @@
       ]
     },
     {
-      "Route": "js/auth.10izhk8pv9.js",
+      "Route": "js/auth.9ulufvtwtl.js",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5771,7 +5792,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1118"
+          "Value": "1254"
         },
         {
           "Name": "Content-Type",
@@ -5779,11 +5800,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw=\""
+          "Value": "\"7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:54:44 GMT"
+          "Value": "Thu, 30 Oct 2025 15:20:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5793,7 +5814,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "10izhk8pv9"
+          "Value": "9ulufvtwtl"
         },
         {
           "Name": "label",
@@ -5801,7 +5822,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw="
+          "Value": "sha256-7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM="
         }
       ]
     },
@@ -5816,7 +5837,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1118"
+          "Value": "1254"
         },
         {
           "Name": "Content-Type",
@@ -5824,11 +5845,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw=\""
+          "Value": "\"7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:54:44 GMT"
+          "Value": "Thu, 30 Oct 2025 15:20:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5838,7 +5859,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw="
+          "Value": "sha256-7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM="
         }
       ]
     },
@@ -5925,6 +5946,51 @@
       ]
     },
     {
+      "Route": "js/project-add-members.6ijonw02q6.js",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9542"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 31 Oct 2025 04:49:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6ijonw02q6"
+        },
+        {
+          "Name": "label",
+          "Value": "js/project-add-members.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A="
+        }
+      ]
+    },
+    {
       "Route": "js/project-add-members.js",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
       "Selectors": [],
@@ -5935,7 +6001,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6769"
+          "Value": "9542"
         },
         {
           "Name": "Content-Type",
@@ -5943,11 +6009,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM=\""
+          "Value": "\"QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:46:53 GMT"
+          "Value": "Fri, 31 Oct 2025 04:49:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5957,13 +6023,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM="
+          "Value": "sha256-QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A="
         }
       ]
     },
     {
-      "Route": "js/project-add-members.xnnic8yz6e.js",
-      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
+      "Route": "js/project-detail.bj6qu7y3z7.js",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5972,7 +6038,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "6769"
+          "Value": "7413"
         },
         {
           "Name": "Content-Type",
@@ -5980,11 +6046,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM=\""
+          "Value": "\"l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:46:53 GMT"
+          "Value": "Fri, 31 Oct 2025 04:21:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5994,15 +6060,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "xnnic8yz6e"
+          "Value": "bj6qu7y3z7"
         },
         {
           "Name": "label",
-          "Value": "js/project-add-members.js"
+          "Value": "js/project-detail.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM="
+          "Value": "sha256-l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks="
         }
       ]
     },
@@ -6017,7 +6083,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3179"
+          "Value": "7413"
         },
         {
           "Name": "Content-Type",
@@ -6025,11 +6091,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw=\""
+          "Value": "\"l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:38:05 GMT"
+          "Value": "Fri, 31 Oct 2025 04:21:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6039,52 +6105,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw="
-        }
-      ]
-    },
-    {
-      "Route": "js/project-detail.vq6eommtfw.js",
-      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3179"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:38:05 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "vq6eommtfw"
-        },
-        {
-          "Name": "label",
-          "Value": "js/project-detail.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw="
+          "Value": "sha256-l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks="
         }
       ]
     },
@@ -6591,7 +6612,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3477"
+          "Value": "4225"
         },
         {
           "Name": "Content-Type",
@@ -6599,11 +6620,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM=\""
+          "Value": "\"ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 15:11:04 GMT"
+          "Value": "Thu, 30 Oct 2025 15:27:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6613,12 +6634,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM="
+          "Value": "sha256-ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0="
         }
       ]
     },
     {
-      "Route": "js/settings-profile.vkh9bz2249.js",
+      "Route": "js/settings-profile.z1mj6hcfoi.js",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-profile.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -6628,7 +6649,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3477"
+          "Value": "4225"
         },
         {
           "Name": "Content-Type",
@@ -6636,11 +6657,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM=\""
+          "Value": "\"ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 15:11:04 GMT"
+          "Value": "Thu, 30 Oct 2025 15:27:12 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6650,7 +6671,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "vkh9bz2249"
+          "Value": "z1mj6hcfoi"
         },
         {
           "Name": "label",
@@ -6658,7 +6679,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM="
+          "Value": "sha256-ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0="
         }
       ]
     },
@@ -6745,51 +6766,6 @@
       ]
     },
     {
-      "Route": "js/user-settings-autosave.dpoodlucge.js",
-      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11414"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:53:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "dpoodlucge"
-        },
-        {
-          "Name": "label",
-          "Value": "js/user-settings-autosave.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw="
-        }
-      ]
-    },
-    {
       "Route": "js/user-settings-autosave.js",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
       "Selectors": [],
@@ -6800,7 +6776,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11414"
+          "Value": "10584"
         },
         {
           "Name": "Content-Type",
@@ -6808,11 +6784,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw=\""
+          "Value": "\"oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:53:42 GMT"
+          "Value": "Thu, 30 Oct 2025 15:15:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6822,7 +6798,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw="
+          "Value": "sha256-oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/user-settings-autosave.kjax4q3lig.js",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "10584"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 30 Oct 2025 15:15:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kjax4q3lig"
+        },
+        {
+          "Name": "label",
+          "Value": "js/user-settings-autosave.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ="
         }
       ]
     },
@@ -6909,51 +6930,6 @@
       ]
     },
     {
-      "Route": "project.esxx58paut.html",
-      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5376"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/html"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:38:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "esxx58paut"
-        },
-        {
-          "Name": "label",
-          "Value": "project.html"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA="
-        }
-      ]
-    },
-    {
       "Route": "project.html",
       "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
       "Selectors": [],
@@ -6964,7 +6940,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5376"
+          "Value": "9661"
         },
         {
           "Name": "Content-Type",
@@ -6972,11 +6948,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA=\""
+          "Value": "\"4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 30 Oct 2025 14:38:09 GMT"
+          "Value": "Fri, 31 Oct 2025 04:47:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6986,7 +6962,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA="
+          "Value": "sha256-4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE="
+        }
+      ]
+    },
+    {
+      "Route": "project.p2ktpoj3nh.html",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9661"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 31 Oct 2025 04:47:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p2ktpoj3nh"
+        },
+        {
+          "Name": "label",
+          "Value": "project.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE="
         }
       ]
     },
@@ -8791,6 +8812,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Zhi8kvdl3qXDmptSgyL8ZBCPL9rnk59es9EldzFiZl4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "187354"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 30 Oct 2025 15:20:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/avatars/avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.lzpyrjaes8.jpg",
+      "AssetFile": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "187354"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 30 Oct 2025 15:20:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "lzpyrjaes8"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/avatars/avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo="
         }
       ]
     },

@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>d7u4iempci</Fingerprint>
-      <Integrity>F6S2cQVMxieglonBQsKtpb8+JtDQPsnF0ci87Umedzg=</Integrity>
+      <Fingerprint>bjf67qilqg</Fingerprint>
+      <Integrity>JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\components\sidebar.html'))</OriginalItemSpec>
@@ -876,8 +876,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>10izhk8pv9</Fingerprint>
-      <Integrity>H3mOBzCUsrqNNTfFSFOlsg3x76CbTQrgjU1ajnircOw=</Integrity>
+      <Fingerprint>9ulufvtwtl</Fingerprint>
+      <Integrity>7xpSFvZz8qXrHRazYBAizKvDRzG2DxM7Wr2pqY5sNfM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\auth.js'))</OriginalItemSpec>
@@ -912,8 +912,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xnnic8yz6e</Fingerprint>
-      <Integrity>syuJuNvzdh2CAs9GmEr0L93ClKYixnv9A+Prm112DzM=</Integrity>
+      <Fingerprint>6ijonw02q6</Fingerprint>
+      <Integrity>QhCuTVDqAbTNboRsbNgj/4qMIVsRFuky3orV/2PDD/A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project-add-members.js'))</OriginalItemSpec>
@@ -930,8 +930,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vq6eommtfw</Fingerprint>
-      <Integrity>p+ki8Ym/rskkr4uhuS00KgnP+lYRTChsVVkuyfxIwPw=</Integrity>
+      <Fingerprint>bj6qu7y3z7</Fingerprint>
+      <Integrity>l91nar+j/Zw+WtM3GJPKlUWfUMwuUfsneXzpfJOG2Ks=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project-detail.js'))</OriginalItemSpec>
@@ -1056,8 +1056,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>vkh9bz2249</Fingerprint>
-      <Integrity>P7g3iKGizrF7Aab8fYY2Oi3tGvYJbTfnO2hO34qZNSM=</Integrity>
+      <Fingerprint>z1mj6hcfoi</Fingerprint>
+      <Integrity>ZyDnBbhF3JZGwAnmwkK4mamT2JYyvPrp7G7rfCMsqb0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\settings-profile.js'))</OriginalItemSpec>
@@ -1092,8 +1092,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>dpoodlucge</Fingerprint>
-      <Integrity>7+u6uG64Ef+3/WE30k+e16bEh+R8E5mBhzf1CZemCAw=</Integrity>
+      <Fingerprint>kjax4q3lig</Fingerprint>
+      <Integrity>oE9dKk1cLocQO4WxHuAtFhCDTJBCOmeC14kx8V+UMvQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\user-settings-autosave.js'))</OriginalItemSpec>
@@ -1128,8 +1128,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>esxx58paut</Fingerprint>
-      <Integrity>soFpCMsZv2aN0EMrN9h4D+ihQTl6sSZkAuemFLB8cuA=</Integrity>
+      <Fingerprint>p2ktpoj3nh</Fingerprint>
+      <Integrity>4RM5ebRdZGAZFyqzQAu2+kvHrstZSp8vUeH4imOObmE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\project.html'))</OriginalItemSpec>
@@ -1529,6 +1529,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030144727.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjectManagement</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjectManagement</BasePath>
+      <RelativePath>uploads/avatars/avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>lzpyrjaes8</Fingerprint>
+      <Integrity>Ef9wi5Fu9Ks0hTEZvwnZx924fJy2fbu5HDvtOV04efo=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_fb7f9712-10f8-47e9-acd7-6e29b84b0860_20251026174721.jpg'))">
       <SourceType>Package</SourceType>

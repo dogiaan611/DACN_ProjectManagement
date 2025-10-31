@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -210,8 +210,8 @@ namespace ProjectManagement.Controllers
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
-            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
-            if (!isMember) return Forbid();
+            var currentUserMembership = await _db.ProjectMembers.FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            if (currentUserMembership == null) return Forbid();
 
             var project = await _db.Projects.FirstOrDefaultAsync(p => p.ProjectId == projectId);
             if (project == null) return NotFound();
@@ -224,13 +224,25 @@ namespace ProjectManagement.Controllers
                     (pm, u) => new {
                         pm.UserId,
                         u.Name,
+                        u.Email,
                         u.AvatarUrl,
                         pm.Role,
                         pm.IsOwner
                     })
                 .ToListAsync();
 
-            return Ok(new { project.ProjectId, project.Name, project.Description, project.Type, project.CreatedById, project.CreatedAt, Members = members });
+            return Ok(new
+            {
+                project.ProjectId,
+                project.Name,
+                project.Description,
+                project.Type,
+                project.CreatedById,
+                project.CreatedAt,
+                Members = members,
+                IsCurrentUserOwner = currentUserMembership.IsOwner,
+                CurrentUserId = currentUserId
+            });
         }
 
         /// Cập nhật tên/mô tả project (owner hoặc ProjectAdmin).

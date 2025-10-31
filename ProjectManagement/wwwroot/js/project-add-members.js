@@ -18,12 +18,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Nếu không có projectId, không cần chạy script này
     if (!projectId) return;
 
-    function open() {
+    async function open() {
         if(!inviteModal || !inviteBackdrop) return;
         inviteModal.classList.remove('hidden');
         inviteModal.classList.add('flex');
         inviteBackdrop.classList.remove('hidden');
         searchInput?.focus();
+        try {
+            const res = await authFetch(`/projects/${projectId}/readProject`);
+            if(!res.ok) {
+                throw new Error('Không thể tải thông tin project hoặc bạn không có quyền truy cập.');
+            }
+            const data = await res.json();
+            console.log(data.members);
+            // Hiển thị thông tin member hiện tại bên trong modal
+            const currMemberList = document.getElementById('current-members-list'); // Sử dụng ID mới bên trong modal
+            if (!currMemberList) return; // Dừng lại nếu không tìm thấy element
+
+            currMemberList.innerHTML = `<h2 class="text-lg font-medium text-gray-700">Project Members</h2>`;
+
+        if (data.members && data.members.length > 0) {
+            data.members.forEach(member => {
+                const memberEl = document.createElement('div');
+                memberEl.className = `
+                    flex flex-row items-center justify-between p-2 rounded-xl
+                    hover:bg-gray-50 transition cursor-pointer
+                `;
+
+                const avatarInitial = member.name ? member.name.charAt(0).toUpperCase() : '?';
+                const avatarHtml = member.avatarUrl
+                    ? `<img src="${member.avatarUrl}" alt="${member.name}" class="w-10 h-10 rounded-full object-cover border border-gray-200">`
+                    : `<div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-semibold">${avatarInitial}</div>`;
+
+                const roleText = member.isOwner
+                    ? 'Owner'
+                    : (member.role === 0 ? 'Admin' : 'Member');
+
+                memberEl.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        ${avatarHtml}
+                        <div>
+                            <p class="font-medium text-gray-800">${member.name || 'Người dùng'}</p>
+                            <p class="text-sm text-gray-500">${member.email || 'Không có email'}</p>
+                        </div>
+                    </div>
+                    <span class="text-xs px-2 py-1 rounded-full ${
+                        member.isOwner
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : member.role === 0
+                            ? 'bg-blue-100 text-blue-700'
+                            : 'bg-gray-100 text-gray-600'
+                    }">${roleText}</span>
+                `;
+
+                currMemberList.appendChild(memberEl);
+            });
+        } else {
+            currMemberList.innerHTML += `
+                <p class="text-center text-gray-500 mt-3">Chưa có thành viên nào.</p>
+            `;
+        }
+
+        }catch (error){
+            console.error('Lỗi khi tải chi tiết project:', error);
+
+        }
     }
 
     function close() {
@@ -87,8 +146,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             for (const u of data) {
                 const item = document.createElement("button");
                 item.type = "button";
-                item.className = "flex w-full items-center justify-between px-3 py-2 text-left hover:bg-gray-50";
-                item.innerHTML = `<div><div class="text-sm text-gray-900">${u.email ?? "(no email)"}</div><div class="text-xs text-gray-500">${u.name ?? "Unnamed"}</div></div>`;
+                item.className = "flex w-full items-center justify-between px-3 py-1 text-left hover:bg-gray-50";
+                item.innerHTML = `<div><div class="text-sm text-gray-900">${u.email ?? "(no email)"}</div></div>`;
                 item.addEventListener("click", () => {
                     if (u.id && !selectedUsers.has(u.id)) {
                         selectedUsers.set(u.id, { id: u.id, email: u.email, name: u.name });
@@ -147,4 +206,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.reload(); // Tải lại trang để cập nhật danh sách thành viên
         }
     });
+
+    
 })
