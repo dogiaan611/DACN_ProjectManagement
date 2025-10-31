@@ -298,4 +298,3 @@ D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\Proje
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.pdb
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.genruntimeconfig.cache
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ref\ProjectManagement.dll
-D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

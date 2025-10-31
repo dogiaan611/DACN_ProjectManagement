@@ -17,7 +17,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 523,
+          "DockedWidth": 923,
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "wwwroot\\project.html",
               "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
               "RelativeToolTip": "wwwroot\\project.html",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEcAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAC8AAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-10-31T03:52:57.83Z",
               "EditorCaption": ""
@@ -44,7 +44,7 @@
           ]
         },
         {
-          "DockedWidth": 1445,
+          "DockedWidth": 1045,
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -55,7 +55,7 @@
               "RelativeDocumentMoniker": "wwwroot\\js\\project-add-members.js",
               "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
               "RelativeToolTip": "wwwroot\\js\\project-add-members.js",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCQAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACUAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-10-31T03:52:41.082Z",
               "EditorCaption": ""

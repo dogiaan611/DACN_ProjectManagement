@@ -55,7 +55,7 @@ async function renderProjectDetails(data) {
         data.members.forEach(member => {
             const memberEl = document.createElement('div');
             // Thêm -ml-2 để các avatar chồng lên nhau một chút
-            memberEl.className = 'flex items-center justify-center -ml-2 first:ml-0';
+            memberEl.className = 'flex items-center justify-center border border-white rounded-full';
             memberEl.role = 'button';
             memberEl.tabIndex = 0;
             memberEl.title = `${member.name} (${member.isOwner ? 'Owner' : (member.role === 0 ? 'Admin' : 'Member')})`;

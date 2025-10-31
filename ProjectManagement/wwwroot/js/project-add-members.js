@@ -59,15 +59,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         ${avatarHtml}
                         <div>
                             <p class="font-medium text-gray-800">${member.name || 'Người dùng'}</p>
-                            <p class="text-sm text-gray-500">${member.email || 'Không có email'}</p>
+                            <p class="text-sm text-gray-500">@${member.email || 'Không có email'}</p>
                         </div>
                     </div>
                     <span class="text-xs px-2 py-1 rounded-full ${
                         member.isOwner
-                            ? 'bg-yellow-100 text-yellow-700'
+                            ? 'bg-yellow-200 text-yellow-600'
                             : member.role === 0
-                            ? 'bg-blue-100 text-blue-700'
-                            : 'bg-gray-100 text-gray-600'
+                            ? 'bg-blue-200 text-blue-600'
+                            : 'bg-gray-200 text-gray-600'
                     }">${roleText}</span>
                 `;
 
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             for (const u of data) {
                 const item = document.createElement("button");
                 item.type = "button";
-                item.className = "flex w-full items-center justify-between px-3 py-1 text-left hover:bg-gray-50";
+                item.className = "flex w-full items-center justify-between px-3 py-2 text-left hover:bg-gray-50";
                 item.innerHTML = `<div><div class="text-sm text-gray-900">${u.email ?? "(no email)"}</div></div>`;
                 item.addEventListener("click", () => {
                     if (u.id && !selectedUsers.has(u.id)) {
@@ -203,7 +203,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (membersToAdd.length > 0) {
             await addMembers(membersToAdd);
             close();
-            window.location.reload(); // Tải lại trang để cập nhật danh sách thành viên
+            // Tải lại nội dung trang project-detail để cập nhật danh sách thành viên
+            // mà không cần reload toàn bộ trang.
+            // Điều này giả định rằng hàm loadProjectDetails có thể được gọi lại.
+            document.dispatchEvent(new CustomEvent('project-members-updated'));
         }
     });
 

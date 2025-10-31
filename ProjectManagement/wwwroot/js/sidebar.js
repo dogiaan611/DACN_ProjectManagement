@@ -61,6 +61,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Khởi tạo project sidebar sau khi sidebar HTML đã được chèn vào DOM
     window.projectSidebar.init();
+    // Mở modal settings khi bấm vào nút trong sidebar
+    const openSettingBtn = document.getElementById("open-setting");
+    if (openSettingBtn) {
+      openSettingBtn.addEventListener("click", async () => {
+        try {
+          // Kiểm tra module settingsModal đã được load
+          if (window.settingsModal && typeof window.settingsModal.open === 'function') {
+            await window.settingsModal.open();
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      });
+    }
   } catch (error) {
     console.error("Không thể tải sidebar:", error);
   }
