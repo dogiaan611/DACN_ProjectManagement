@@ -221,10 +221,6 @@
       "PackagePath": "staticwebassets\\js\\register.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\router.js",
-      "PackagePath": "staticwebassets\\js\\router.js"
-    },
-    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-delete-account.js",
       "PackagePath": "staticwebassets\\js\\settings-delete-account.js"
     },

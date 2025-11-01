@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>bjf67qilqg</Fingerprint>
-      <Integrity>JwMR/8LYwTE471I7aocLfy0fqA/E58Yvu7lsM9lieF8=</Integrity>
+      <Fingerprint>ssovzihq4t</Fingerprint>
+      <Integrity>TKqhx2dymKNjdY+S2n60Chc6MVhE89HfrkPaPFHKfcQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\components\sidebar.html'))</OriginalItemSpec>
@@ -930,8 +930,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>3whc2y7fo7</Fingerprint>
-      <Integrity>beD2cf/5Q1ifrhzjIOB5Zo6BI1TPAahEgJmLRrlGagA=</Integrity>
+      <Fingerprint>vwlh235zk8</Fingerprint>
+      <Integrity>0Tg+XmCuVrKP+LO75WSKez8Y3h/2EKNySf4mSXD0TtU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project-detail.js'))</OriginalItemSpec>
@@ -966,8 +966,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>hi5eayvovr</Fingerprint>
-      <Integrity>l+pnqxIftFGPPaCIa7PVObkLFLcDnzY7iZU6Sq4ckVE=</Integrity>
+      <Fingerprint>fj7deeud9h</Fingerprint>
+      <Integrity>a03v18SkCDwdPstDT6xxGB1BMWgBNDxiSrpzTLOJS3A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project-sidebar.js'))</OriginalItemSpec>
@@ -989,24 +989,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\register.js'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\router.js'))">
-      <SourceType>Package</SourceType>
-      <SourceId>ProjectManagement</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/ProjectManagement</BasePath>
-      <RelativePath>js/router.js</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>5lfm98f45u</Fingerprint>
-      <Integrity>abHjZZETGtEZ81mHUlHzdBmKkfqXcWhspEQL+M76dEg=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\router.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\settings-delete-account.js'))">
       <SourceType>Package</SourceType>
@@ -1146,8 +1128,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>94ervfhzzs</Fingerprint>
-      <Integrity>x5Ts+FdxSAXSZ7R7DTshR4zRZo6hmtdowx05wmozzuU=</Integrity>
+      <Fingerprint>odqir1lidu</Fingerprint>
+      <Integrity>DMW96Psnm+NIHLIhgBfX57cheE5wxeRvhzbSxDDn/YY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\project.html'))</OriginalItemSpec>
