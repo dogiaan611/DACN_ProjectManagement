@@ -4,19 +4,18 @@ import { ProjectSidebar } from './project-sidebar.js';
 document.addEventListener("DOMContentLoaded", async () => {
   
   try {
-    const container = document.getElementById("sidebar-container");
-    if (!container) return;
-
-    const cacheBuster = `v=${Date.now()}`;
-    const sidebarResponse = await fetch(`/components/sidebar.html?${cacheBuster}`, { cache: "no-store" });
-    if (!sidebarResponse.ok) throw new Error(`HTTP error! status: ${sidebarResponse.status}`);
     
-    const html = await sidebarResponse.text();
-    container.innerHTML = html;
 
     // --- BÂY GIỜ: Sidebar đã có trong trang, chúng ta có thể lấy và cập nhật các phần tử của nó ---
-    
-    // 1. Tải thông tin người dùng và điền vào sidebar
+    // 1. Tải sidebar
+    const container = document.getElementById("sidebar-container");
+    if (container) {
+      const cacheBuster = `v=${Date.now()}`;
+      const sidebarResponse = await fetch(`/components/sidebar.html?${cacheBuster}`, { cache: "no-store" });
+      container.innerHTML = await sidebarResponse.text();
+    }
+    container.innerHTML = html;
+    // 2. Tải thông tin người dùng và điền vào sidebar
     try {
       const res = await authFetch('/user/read'); // Dùng hàm authFetch từ auth.js
       if (res.ok) {
@@ -31,51 +30,46 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error('Load user for sidebar failed:', err);
     }
     
-    // 2. Gắn các sự kiện tương tác cho sidebar
-    const link = document.getElementById("link");
-    const r2 = document.getElementById("r2");
-    const r1 = document.getElementById("r1");
-
-    function toggleOpacity(showEl, hideEl) {
-      if (!showEl || !hideEl) return;
-      showEl.classList.replace("opacity-0", "opacity-[1]");
-      hideEl.classList.replace("opacity-[1]", "opacity-0");
-    }
-
-    if (link && r1 && r2) {
-      // hover icon
-      link.addEventListener("mouseenter", () => toggleOpacity(r1, r2));
-      link.addEventListener("mouseleave", () => toggleOpacity(r2, r1));
-    }
-
-    const favouriteBookmarkButton = document.getElementById("favourite-bookmark");
-    const favouriteBookmarkItems = document.getElementById("favourite-bookmark-items");
-
-    if (favouriteBookmarkButton && favouriteBookmarkItems) {
-      favouriteBookmarkButton.addEventListener("click", () => {
-        const isExpanded = favouriteBookmarkButton.getAttribute("aria-expanded") === "true";
-        favouriteBookmarkButton.setAttribute("aria-expanded", String(!isExpanded));
-        favouriteBookmarkItems.classList.toggle("hidden");
-      });
-    }
-
-    // Khởi tạo project sidebar sau khi sidebar HTML đã được chèn vào DOM
+     // --- 3. Khởi tạo ProjectSidebar ---
+    window.projectSidebar = new ProjectSidebar();
     window.projectSidebar.init();
-    // Mở modal settings khi bấm vào nút trong sidebar
-    const openSettingBtn = document.getElementById("open-setting");
-    if (openSettingBtn) {
-      openSettingBtn.addEventListener("click", async () => {
-        try {
-          // Kiểm tra module settingsModal đã được load
-          if (window.settingsModal && typeof window.settingsModal.open === 'function') {
-            await window.settingsModal.open();
-          }
-        } catch (err) {
-          console.error(err);
-        }
-      });
-    }
+    // --- 4. Gắn event chuyển trang bằng pushState ---
+    setupNavigation();
+
+    // --- 5. Load nội dung trang hiện tại ---
+    await loadPage(location.pathname);
   } catch (error) {
     console.error("Không thể tải sidebar:", error);
   }
+
+  function setupNavigation() {
+  document.body.addEventListener("click", async (e) => {
+    const link = e.target.closest("a[data-spa-link]");
+    if (!link) return;
+
+    e.preventDefault(); // Ngăn reload trang
+    const url = link.getAttribute("href");
+    history.pushState(null, "", url); // Cập nhật URL
+    await loadPage(url); // Chỉ tải lại phần main-content
+  });
+
+  window.addEventListener("popstate", async () => {
+    await loadPage(location.pathname);
+  });
+}
+
+async function loadPage(path) {
+  const main = document.getElementById("main-content");
+  if (!main) return;
+
+  try {
+    const res = await fetch(`/pages${path}.html`);
+    if (!res.ok) throw new Error(`Page not found: ${path}`);
+    const html = await res.text();
+    main.innerHTML = html;
+  } catch (err) {
+    main.innerHTML = `<div class="text-red-500 p-4">Không thể tải trang: ${path}</div>`;
+    console.error(err);
+  }
+}
 });
