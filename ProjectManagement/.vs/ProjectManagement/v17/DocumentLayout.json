@@ -3,32 +3,20 @@
   "WorkspaceRootPath": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\js\\project-add-members.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\js\\project-add-members.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\tailwind.config.cjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:tailwind.config.cjs||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\js\\project-detail.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\js\\project-detail.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\components\\sidebar.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\components\\sidebar.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\js\\sidebar.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\js\\sidebar.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\project.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\project.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\github\\dacn_projectmanagement\\projectmanagement\\wwwroot\\js\\home.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:wwwroot\\js\\home.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,21 +26,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1654,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tailwind.config.cjs",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\tailwind.config.cjs",
-              "RelativeDocumentMoniker": "tailwind.config.cjs",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\tailwind.config.cjs",
-              "RelativeToolTip": "tailwind.config.cjs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-02T15:04:49.888Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -63,83 +38,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "project-detail.js",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\project-detail.js",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
-              "RelativeToolTip": "wwwroot\\js\\project-detail.js",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACAAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-02T14:59:10.012Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "sidebar.html",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\sidebar.html",
-              "RelativeDocumentMoniker": "wwwroot\\components\\sidebar.html",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\sidebar.html",
-              "RelativeToolTip": "wwwroot\\components\\sidebar.html",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADgAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-11-01T09:27:31.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "sidebar.js",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\sidebar.js",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar.js",
-              "RelativeToolTip": "wwwroot\\js\\sidebar.js",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAUAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-31T13:56:31.389Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
-              "RelativeDocumentMoniker": "wwwroot\\index.html",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
-              "RelativeToolTip": "wwwroot\\index.html",
-              "ViewState": "AgIAAIYAAAAAAAAAAABRwJgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-31T13:42:15.911Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "project.html",
               "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
               "RelativeDocumentMoniker": "wwwroot\\project.html",
               "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\project.html",
               "RelativeToolTip": "wwwroot\\project.html",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAewGcAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGQAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-31T03:52:57.83Z"
+              "WhenOpened": "2025-11-06T17:11:49.454Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "project-add-members.js",
-              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\project-add-members.js",
-              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
-              "RelativeToolTip": "wwwroot\\js\\project-add-members.js",
-              "ViewState": "AgIAADEAAAAAAAAAAAAUwD0AAABXAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProjectController.cs",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "Controllers\\ProjectController.cs",
+              "ViewState": "AgIAALsAAAAAAAAAAAAkwPUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-06T14:35:18.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "home.js",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\home.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\home.js",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\home.js",
+              "RelativeToolTip": "wwwroot\\js\\home.js",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwDAAAAAjAQAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-10-31T03:52:41.082Z",
+              "WhenOpened": "2025-11-06T14:26:13.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "wwwroot\\index.html",
+              "ToolTip": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
+              "RelativeToolTip": "wwwroot\\index.html",
+              "ViewState": "AgIAADEAAAAAAAAAAAAAAGUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-10-31T13:42:15.911Z",
               "EditorCaption": ""
             }
           ]
         },
         {
-          "DockedWidth": 1122,
+          "DockedWidth": 314,
           "SelectedChildIndex": -1,
           "Children": [
             {

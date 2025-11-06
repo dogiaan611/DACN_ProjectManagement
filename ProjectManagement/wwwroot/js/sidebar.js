@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const sidebarResponse = await fetch(`/components/sidebar.html?${cacheBuster}`, { cache: "no-store" });
       container.innerHTML = await sidebarResponse.text();
     }
-    container.innerHTML = html;
+
     // 2. Tải thông tin người dùng và điền vào sidebar
     try {
       const res = await authFetch('/user/read'); // Dùng hàm authFetch từ auth.js
@@ -63,7 +63,10 @@ async function loadPage(path) {
   if (!main) return;
 
   try {
-    const res = await fetch(`/pages${path}.html`);
+    // Xử lý trường hợp trang chủ. Nếu path là '/' thì tải 'home.html'.
+    const pagePath = path === '/' ? '/index' : path;
+
+    const res = await fetch(`/pages${pagePath}.html?v=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`Page not found: ${path}`);
     const html = await res.text();
     main.innerHTML = html;

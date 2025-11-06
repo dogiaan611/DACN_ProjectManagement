@@ -25,11 +25,11 @@ function ensureContainers() {
 
     backdrop = document.createElement("div");
     backdrop.id = "settings-backdrop";
-    backdrop.className = "fixed inset-0 z-40 hidden bg-black/50";
+    backdrop.className = "fixed inset-0 z-40 hidden bg-black/50 opacity-0 transition-opacity duration-300";
 
     modal = document.createElement("div");
     modal.id = "settings-modal";
-    modal.className = "fixed inset-0 hidden items-center justify-center z-50 overflow-y-auto";
+    modal.className = "fixed inset-0 hidden items-center justify-center z-50 overflow-y-auto transition-all duration-300 ease-out opacity-0 scale-95";
     modal.innerHTML = modalHtml;
 
     document.body.appendChild(backdrop);
@@ -53,8 +53,17 @@ async function open() {
 
     // Close modal handler
     const close = () => {
-        modal.classList.add('hidden');
-        backdrop.classList.add('hidden');
+        // Bắt đầu animation
+        backdrop.classList.remove('opacity-100');
+        modal.classList.remove('opacity-100', 'scale-100');
+        modal.classList.add('opacity-0', 'scale-95');
+
+        // Ẩn hẳn sau 300ms (hết animation)
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            backdrop.classList.add('hidden');
+        }, 300);
     };
 
     const outer = modal.querySelector('#settings-outer');
@@ -96,10 +105,17 @@ async function open() {
         }
     });
 
-    // Show modal
+    // Hiện modal + hiệu ứng fade/scale
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     backdrop.classList.remove('hidden');
+
+    // Trigger animation sau một tick
+    setTimeout(() => {
+    backdrop.classList.add('opacity-100');
+    modal.classList.remove('opacity-0', 'scale-95');
+    modal.classList.add('opacity-100', 'scale-100');
+    }, 10);
 }
 
 window.settingsModal = { open };

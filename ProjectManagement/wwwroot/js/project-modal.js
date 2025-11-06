@@ -15,22 +15,42 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function openModal() {
     if (!modal || !backdrop) return;
-    modal.classList.remove("hidden");
+     modal.classList.remove("hidden");
     modal.classList.add("flex");
+
+    // hiện backdrop
     backdrop.classList.remove("hidden");
+    setTimeout(() => backdrop.classList.add("opacity-100"), 10);
+
+    // hiện modal content
+    const content = document.getElementById("create-project-content");
+    setTimeout(() => {
+      content.classList.remove("scale-95", "opacity-0");
+      content.classList.add("scale-100", "opacity-100");
+    }, 10);
+
     nameInput?.focus();
   }
 
   function closeModal() {
     if (!modal || !backdrop) return;
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-    backdrop.classList.add("hidden");
-    form?.reset();
-    selectedUsers.clear();
-    selectedWrap.innerHTML = "";
-    suggestions.classList.add("hidden");
-    suggestions.innerHTML = "";
+     const content = document.getElementById("create-project-content");
+    content.classList.remove("scale-100", "opacity-100");
+    content.classList.add("scale-95", "opacity-0");
+
+    backdrop.classList.remove("opacity-100");
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      backdrop.classList.add("hidden");
+
+      // reset form sau khi đóng
+      form?.reset();
+      selectedUsers.clear();
+      selectedWrap.innerHTML = "";
+      suggestions.classList.add("hidden");
+      suggestions.innerHTML = "";
+    }, 300);
   }
 
   function renderSelected() {

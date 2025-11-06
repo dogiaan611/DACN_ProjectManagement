@@ -40,7 +40,7 @@ export function initializeDeleteAccountModal(contentContainer) {
     });
     observer.observe(mainModal, { attributes: true, attributeFilter: ['class'] });
 
-    const errorMsg = contentContainer.querySelector('#error-content-delete');
+    const errorMsg = contentContainer.querySelector('#error-content');
     confirmDeleteBtn?.addEventListener('click', async (e) => {
         e.preventDefault();
         const currentEmailInput = contentContainer.querySelector('#current-email');

@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\kanban-board.html",
+      "PackagePath": "staticwebassets\\components\\kanban-board.html"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\settings_sidebar.html",
       "PackagePath": "staticwebassets\\components\\settings_sidebar.html"
     },
@@ -197,6 +201,10 @@
       "PackagePath": "staticwebassets\\js\\auth.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\home.js",
+      "PackagePath": "staticwebassets\\js\\home.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\login.js",
       "PackagePath": "staticwebassets\\js\\login.js"
     },
@@ -207,6 +215,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
       "PackagePath": "staticwebassets\\js\\project-detail.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-edit.js",
+      "PackagePath": "staticwebassets\\js\\project-edit.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-modal.js",
@@ -327,6 +339,14 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251029164514.jpg",
       "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251029164514.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134226.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134226.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134232.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134232.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_e81b7dea-4e93-48d9-91ee-e53373c7ff81_20251027103055.jpg",

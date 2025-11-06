@@ -185,19 +185,34 @@ namespace ProjectManagement.Controllers
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
-            var projects = await _db.ProjectMembers
-                .Where(pm => pm.UserId == currentUserId)
-                .Join(_db.Projects,
-                    pm => pm.ProjectId,
-                    p => p.ProjectId,
-                    (pm, p) => new {
-                        p.ProjectId,
-                        p.Name,
-                        p.Description,
-                        p.Type,
-                        pm.Role,
-                        pm.IsOwner
-                    })
+            var projects = await _db.Projects
+                .Where(p => p.Members.Any(m => m.UserId == currentUserId))
+                .Include(p => p.CreatedBy) // Lấy thông tin người tạo
+                .Include(p => p.Members) // Lấy danh sách thành viên
+                    .ThenInclude(m => m.User) // Lấy thông tin chi tiết của từng thành viên
+                .Select(p => new
+                {
+                    p.ProjectId,
+                    p.Name,
+                    p.Description,
+                    p.Type,
+                    p.CreatedAt,
+                    CreatedBy = new { p.CreatedBy.Id, p.CreatedBy.AvatarUrl, p.CreatedBy.Name, p.CreatedBy.Email },
+                    Members = p.Members.Select(m => new
+                    {
+                        m.UserId,
+                        m.User.Name,
+                        m.User.Email,
+                        m.User.AvatarUrl,
+                        m.Role,
+                        m.IsOwner
+                    }),
+                    // Lấy vai trò và quyền owner của người dùng hiện tại trong project này
+                    CurrentUserMembership = p.Members
+                        .Where(m => m.UserId == currentUserId)
+                        .Select(m => new { m.Role, m.IsOwner })
+                        .FirstOrDefault()
+                })
                 .ToListAsync();
 
             return Ok(projects);

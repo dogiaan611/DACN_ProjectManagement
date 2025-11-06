@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Gọi API để lấy thông tin chi tiết project
     await loadProjectDetails(projectId);
+
+    // Lắng nghe sự kiện khi project được cập nhật từ modal edit
+    document.addEventListener('project-updated', () => {
+        loadProjectDetails(projectId);
+    });
 });
 
 async function loadProjectDetails(projectId) {
@@ -44,7 +49,7 @@ async function loadProjectDetails(projectId) {
 async function renderProjectDetails(data) {
     // Điền thông tin cơ bản
     document.getElementById('project-name').textContent = data.name;
-
+    document.getElementById('project-description').textContent = data.description;
 
     // Hiển thị danh sách thành viên
     const memberListEl = document.getElementById('member-list');

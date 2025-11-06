@@ -15,10 +15,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!projectId) return;
 
     async function open() {
-        if(!inviteModal || !inviteBackdrop) return;
+        if (!inviteModal || !inviteBackdrop) return;
+
         inviteModal.classList.remove('hidden');
-        inviteModal.classList.add('flex');
         inviteBackdrop.classList.remove('hidden');
+
+        // Hiển thị dần
+        setTimeout(() => {
+            inviteBackdrop.classList.add('opacity-100');
+            const modalContent = document.getElementById('invite-content');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+        }, 10);
         searchInput?.focus();
         try {
             const res = await authFetch(`/projects/${projectId}/readProject`);
@@ -118,9 +126,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function close() {
         if(!inviteModal || !inviteBackdrop) return;
-        inviteModal.classList.add('hidden');
-        inviteModal.classList.remove('flex');
-        inviteBackdrop.classList.add('hidden');
+        const modalContent = document.getElementById('invite-content');
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        inviteBackdrop.classList.remove('opacity-100');
+        inviteBackdrop.classList.add('opacity-0');
+
+        // Đợi animation kết thúc rồi ẩn hẳn
+        setTimeout(() => {
+            inviteModal.classList.add('hidden');
+            inviteBackdrop.classList.add('hidden');
+        }, 300);
 
         // Reset state
         selectedUsers.clear();
