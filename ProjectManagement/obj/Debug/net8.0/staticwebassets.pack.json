@@ -249,6 +249,10 @@
       "PackagePath": "staticwebassets\\js\\settings-profile.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar-dropdown.js",
+      "PackagePath": "staticwebassets\\js\\sidebar-dropdown.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar.js",
       "PackagePath": "staticwebassets\\js\\sidebar.js"
     },
@@ -279,6 +283,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg",
       "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_3ee4824c-429f-4b6e-942f-a1a6f4fda13f_20251107063212.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_3ee4824c-429f-4b6e-942f-a1a6f4fda13f_20251107063212.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132027.jpg",
@@ -347,6 +355,14 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134232.jpg",
       "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134232.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_e28a4b13-d797-448c-bde3-a1b5f1f3b371_20251107064543.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_e28a4b13-d797-448c-bde3-a1b5f1f3b371_20251107064543.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_e28a4b13-d797-448c-bde3-a1b5f1f3b371_20251107064704.jpg",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\avatar_e28a4b13-d797-448c-bde3-a1b5f1f3b371_20251107064704.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_e81b7dea-4e93-48d9-91ee-e53373c7ff81_20251027103055.jpg",

@@ -37,7 +37,7 @@ function ensureContainers() {
     return { backdrop, modal };
 }
 
-async function open() {
+export async function open() {
     const { backdrop, modal } = ensureContainers();
 
     // Load main components
@@ -117,5 +117,3 @@ async function open() {
     modal.classList.add('opacity-100', 'scale-100');
     }, 10);
 }
-
-window.settingsModal = { open };

@@ -1,5 +1,8 @@
-import { authFetch } from './auth.js';
+import { authFetch, clearToken } from './auth.js';
 import { ProjectSidebar } from './project-sidebar.js';
+import { open as openCreateProjectModal } from './project-modal.js';
+import { open as openSettingsModal } from './settings-modal.js';
+import { open as openDropdownModal } from './sidebar-dropdown.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
   
@@ -15,16 +18,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       container.innerHTML = await sidebarResponse.text();
     }
 
+
     // 2. Tải thông tin người dùng và điền vào sidebar
     try {
       const res = await authFetch('/user/read'); // Dùng hàm authFetch từ auth.js
       if (res.ok) {
         const data = await res.json();
         const nameEl = document.querySelector('#us-name-sidebar');
-        const emailEl = document.querySelector('#us-email-sidebar');
-        
-        if (nameEl && data) nameEl.textContent = data.name ?? data.Name ?? 'User';
-        if (emailEl && data) emailEl.textContent = data.email ?? data.Email ?? '';
+        const avataEl = document.getElementById('us-avatar-sidebar');
+
+        if (nameEl && data) nameEl.textContent = data.name ?? data.Name ?? 'User';        
+        if (avataEl && data) {
+          avataEl.src = data.avatarUrl;
+          avataEl.alt = data.name ?? data.Name ?? 'User';
+        }
       }
     } catch (err) {
       console.error('Load user for sidebar failed:', err);
@@ -34,6 +41,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.projectSidebar = new ProjectSidebar();
     window.projectSidebar.init();
     // --- 4. Gắn event chuyển trang bằng pushState ---
+    const createProjectBtn = document.getElementById('open-create-project');
+    if (createProjectBtn) {
+        createProjectBtn.addEventListener('click', () => {
+            // Hàm open từ project-modal.js đã được đổi tên thành openCreateProjectModal để tránh trùng lặp
+            openCreateProjectModal();
+        });
+    }
+
+    const settingsBtn = document.getElementById('settings-button');
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', () => openSettingsModal());
+    }
+    
+    const dropdownOpen = document.getElementById("dropdown-btn");
+    if(dropdownOpen) {
+      dropdownOpen.addEventListener('click', () => openDropdownModal());
+    }
     setupNavigation();
 
     // --- 5. Load nội dung trang hiện tại ---

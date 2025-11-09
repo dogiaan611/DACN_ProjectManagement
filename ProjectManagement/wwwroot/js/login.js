@@ -1,3 +1,5 @@
+import { saveToken } from './auth.js';
+
     const passwordShow = document.getElementById('password');
     const togglePasswordButton = document.getElementById('togglePassword');
     const eyeIcon = document.getElementById('eyeIcon');
@@ -49,14 +51,7 @@
                 if(response.ok){
                     // Save JWT
                     try {
-                        if (data && data.access_token) {
-                            // dynamic import in browser environments not supported everywhere; use eval-safe fallback
-                            (function(){
-                                try {
-                                    localStorage.setItem('pm_jwt', data.access_token);
-                                } catch {}
-                            })();
-                        }
+                        if (data && data.access_token) saveToken(data.access_token);
                     } catch {}
                     const loadingModal = document.getElementById('loadingModal');
                     loadingModal.classList.remove('hidden');
@@ -72,7 +67,7 @@
                     //xu ly loi
                     let errorMessage = 'Đăng nhập thất bại. Hãy kiểm tra email hoặc mật khẩu.';
                     if(data.errors && Array.isArray(data.errors)){
-                        errorMessage = data.erros.map(err => err.description).join('\n');
+                        errorMessage = data.errors.map(err => err.description).join('\n');
                     }else if(data.message){
                         errorMessage = data.message;
                     }

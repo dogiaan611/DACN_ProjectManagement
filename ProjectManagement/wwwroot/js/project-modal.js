@@ -1,21 +1,21 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const openBtn = document.getElementById("open-create-project");
-  const modal = document.getElementById("create-project-modal");
-  const backdrop = document.getElementById("create-project-backdrop");
-  const cancelBtn = document.getElementById("cancel-create-project");
-  const outer = document.getElementById("modal-outer");
-  const form = document.getElementById("create-project-form");
-  const nameInput = document.getElementById("project-name");
-  const descInput = document.getElementById("project-description");
-  const searchInput = document.getElementById("member-search");
-  const suggestions = document.getElementById("member-suggestions");
-  const selectedWrap = document.getElementById("selected-members");
+import { authFetch } from "./auth.js";
 
+  // --- State ---
   const selectedUsers = new Map(); // userId -> { id, email, name }
+  let isInitialized = false;
 
-  function openModal() {
+  // --- Elements (will be queried later) ---
+  let modal, backdrop, cancelBtn, outer, form, nameInput, descInput, searchInput, suggestions, selectedWrap;
+
+  export function open() {
+    // Query for elements only when opening for the first time
+    if (!isInitialized) {
+      initialize();
+    }
+
     if (!modal || !backdrop) return;
-     modal.classList.remove("hidden");
+
+    modal.classList.remove("hidden");
     modal.classList.add("flex");
 
     // hiện backdrop
@@ -33,8 +33,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function closeModal() {
+    // No need to do anything if elements aren't there
     if (!modal || !backdrop) return;
-     const content = document.getElementById("create-project-content");
+
+    const content = document.getElementById("create-project-content");
     content.classList.remove("scale-100", "opacity-100");
     content.classList.add("scale-95", "opacity-0");
 
@@ -47,13 +49,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       // reset form sau khi đóng
       form?.reset();
       selectedUsers.clear();
-      selectedWrap.innerHTML = "";
-      suggestions.classList.add("hidden");
-      suggestions.innerHTML = "";
+      if (selectedWrap) selectedWrap.innerHTML = "";
+      if (suggestions) {
+        suggestions.classList.add("hidden");
+        suggestions.innerHTML = "";
+      }
     }, 300);
   }
 
   function renderSelected() {
+    if (!selectedWrap) return;
     selectedWrap.innerHTML = "";
     for (const [, u] of selectedUsers) {
       const chip = document.createElement("span");
@@ -73,16 +78,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function searchUsers(term) {
+    if (!suggestions) return;
     if (!term || term.trim().length < 2) {
       suggestions.classList.add("hidden");
       suggestions.innerHTML = "";
       return;
     }
     try {
-      const token = (function(){ try { return localStorage.getItem('pm_jwt') || ''; } catch { return ''; } })();
-      const headers = new Headers({ "Accept": "application/json" });
-      if (token) headers.set("Authorization", `Bearer ${token}`);
-      const res = await fetch(`/user/search?q=${encodeURIComponent(term)}&limit=5`, { headers });
+      const res = await authFetch(`/user/search?q=${encodeURIComponent(term)}&limit=5`);
       if (!res.ok) throw new Error("Search failed");
       const data = await res.json();
       suggestions.innerHTML = "";
@@ -114,80 +117,85 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function createProject(payload) {
-    const token = (function(){ try { return localStorage.getItem('pm_jwt') || ''; } catch { return ''; } })();
-    const headers = new Headers({ "Content-Type": "application/json", "Accept": "application/json" });
-    if (token) headers.set("Authorization", `Bearer ${token}`);
-    const res = await fetch("/projects/create", {
+    const res = await authFetch("/projects/create", {
       method: "POST",
-      headers,
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
     if (!res.ok) throw new Error("Create project failed");
     return res.json();
   }
 
   async function addMember(projectId, userId) {
-    const token = (function(){ try { return localStorage.getItem('pm_jwt') || ''; } catch { return ''; } })();
-    const headers = new Headers({ "Content-Type": "application/json", "Accept": "application/json" });
-    if (token) headers.set("Authorization", `Bearer ${token}`);
-    const res = await fetch(`/projects/${projectId}/add/members`, {
+    const res = await authFetch(`/projects/${projectId}/add/members`, {
       method: "POST",
-      headers,
-      body: JSON.stringify({ userId, role: 1 }) // ProjectMember as default
+      body: JSON.stringify({ userId, role: 1 }),
     });
     if (!res.ok) throw new Error("Add member failed");
-    return res.json();
+    return res.json();  
   }
 
-  // Events
-  openBtn?.addEventListener("click", openModal);
-  cancelBtn?.addEventListener("click", closeModal);
-  backdrop?.addEventListener("click", closeModal);
-  // click outside content closes
-  outer?.addEventListener("click", (e) => {
-    if (e.target === outer) closeModal();
-  });
+  function initialize() {
+    // Query for elements inside the initializer
+    modal = document.getElementById("create-project-modal");
+    backdrop = document.getElementById("create-project-backdrop");
+    cancelBtn = document.getElementById("cancel-create-project");
+    outer = document.getElementById("modal-outer");
+    form = document.getElementById("create-project-form");
+    nameInput = document.getElementById("project-create-name");
+    descInput = document.getElementById("project-create-description");
+    searchInput = document.getElementById("member-search");
+    suggestions = document.getElementById("member-suggestions");
+    selectedWrap = document.getElementById("selected-members");
 
-  // ESC to close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
-  });
-
-  let searchTimer;
-  searchInput?.addEventListener("input", () => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => searchUsers(searchInput.value), 250);
-  });
-
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const name = nameInput.value.trim();
-    const description = (descInput.value || "").trim();
-    const projectTypeValue = document.querySelector('input[name="project-type"]:checked')?.value || 'Kanban';
-
-    // Convert string to enum value (Kanban = 0, Scrum = 1)
-    const projectType = projectTypeValue === 'Scrum' ? 1 : 0;
-
-    if (!name) {
-      nameInput.focus();
+    if (!modal) {
+      console.error("Create project modal not found in DOM.");
       return;
     }
-    try {
-      const created = await createProject({ name, description, type: projectType });
-      const projectId = created?.projectId ?? created?.ProjectId;
-      const members = Array.from(selectedUsers.values());
-      for (const m of members) {
-        await addMember(projectId, m.id);
+
+    // Events
+    cancelBtn?.addEventListener("click", closeModal);
+    backdrop?.addEventListener("click", closeModal);
+    outer?.addEventListener("click", (e) => {
+      if (e.target === outer) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+    });
+
+    let searchTimer;
+    searchInput?.addEventListener("input", () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => searchUsers(searchInput.value), 250);
+    });
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const description = (descInput.value || "").trim();
+      const projectTypeValue = document.querySelector('input[name="project-type"]:checked')?.value || 'Kanban';
+      const projectType = projectTypeValue === 'Scrum' ? 1 : 0;
+
+      if (!name) {
+        nameInput.focus();
+        return;
       }
-      closeModal();
-      // Refresh sidebar to show the new project
-      if (window.projectSidebar && typeof window.projectSidebar.refresh === 'function') {
-        window.projectSidebar.refresh();
+      try {
+        const created = await createProject({ name, description, type: projectType });
+        const projectId = created?.projectId ?? created?.ProjectId;
+        const members = Array.from(selectedUsers.values());
+        for (const m of members) {
+          await addMember(projectId, m.id);
+        }
+        closeModal();
+        if (window.projectSidebar && typeof window.projectSidebar.refresh === 'function') {
+          window.projectSidebar.refresh();
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Có lỗi khi tạo project hoặc thêm thành viên");
       }
-      // Optionally reload or show toast
-    } catch (err) {
-      console.error(err);
-      alert("Có lỗi khi tạo project hoặc thêm thành viên");
-    }
-  });
-});
+    });
+
+    isInitialized = true;
+  }
