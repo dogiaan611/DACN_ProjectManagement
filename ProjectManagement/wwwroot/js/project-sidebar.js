@@ -1,4 +1,5 @@
 import { authFetch } from './auth.js';
+import { loadPage } from './sidebar.js';
 
 // Quản lý hiển thị projects trong sidebar
 export class ProjectSidebar {
@@ -83,11 +84,14 @@ export class ProjectSidebar {
     return div;
   }
 
-  openProject(project) {
+  async openProject(project) {
     // API có thể trả về 'id' hoặc 'projectId'. Cần xử lý cả hai trường hợp.
     const projectId = project.id ?? project.projectId;
     console.log('Opening project:', project, 'with ID:', projectId);
-    window.location.href = `/project.html?id=${projectId}`;
+    const url = `/project.html?id=${projectId}`;
+    // Sử dụng SPA navigation để không reload sidebar
+    history.pushState(null, "", url);
+    await loadPage(url);
   }
 
   // Method để refresh sidebar sau khi tạo project mới

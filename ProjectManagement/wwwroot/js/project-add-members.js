@@ -1,6 +1,8 @@
 import { authFetch  } from "./auth.js";
-document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
+
+// Hàm khởi tạo, sẽ được gọi bởi SPA router
+export async function initProjectAddMembers() {
+    console.log("initProjectAddMembers called");
     const projectId = urlParams.get('id');
     const selectedUsers = new Map();
     const inviteButton = document.getElementById('add-member-btn');
@@ -41,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (data.members && data.members.length > 0) {
             data.members.forEach(member => {
-                const memberEl = document.createElement('div'); 
+                const memberEl = document.createElement('div');
                 memberEl.className = `
                     flex flex-row items-center justify-between p-2 rounded-xl
                     hover:bg-gray-50 transition cursor-pointer
@@ -104,12 +106,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             });
 
+            const delBackdrop = document.getElementById('del-conf-backdrop');
+            const delModal = document.getElementById('del-conf-modal');
+            const delConfirmBtn = delModal.querySelector('button.bg-red-500'); // nút Delete
+            const delCancelBtn = delModal.querySelector('button.border-2');    // nút Cancel
+
             currMemberList.querySelectorAll('.remove-member-btn').forEach(btn => {
-                btn.addEventListener('click', async () => {
+                btn.addEventListener('click', () => {
                     const memberId = btn.getAttribute('data-id');
-                    if (confirm("Xác nhận xóa thành viên này khỏi project?")) {
+
+                    // Hiển thị modal
+                    delBackdrop.classList.remove('hidden');
+                    delModal.classList.remove('hidden');
+
+                    // Xử lý click Delete
+                    const handleDelete = async () => {
                         await handleAction('remove-member', projectId, memberId);
-                    }
+                        closeModal();
+                    };
+
+                    // Xử lý click Cancel
+                    const closeModal = () => {
+                        delBackdrop.classList.add('hidden');
+                        delModal.classList.add('hidden');
+
+                        // Remove các listener để tránh bị gắn nhiều lần
+                        delConfirmBtn.removeEventListener('click', handleDelete);
+                        delCancelBtn.removeEventListener('click', closeDelModal);
+                    };
+
+                    delConfirmBtn.addEventListener('click', handleDelete);
+                    delCancelBtn.addEventListener('click', closeDelModal);
+                    delBackdrop.addEventListener('click', closeDelModal);
                 });
             });
         } else {
@@ -173,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         selectedWrap.appendChild(chip);
         }
     }
-    
+
     async function searchUsers(term) {
         if (!term || term.trim().length < 2) {
             suggestions.classList.add("hidden");
@@ -249,11 +277,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const membersToAdd = Array.from(selectedUsers.values());
         if (membersToAdd.length > 0) {
             await addMembers(membersToAdd);
-            close();
-            // Tải lại nội dung trang project-detail để cập nhật danh sách thành viên
-            // mà không cần reload toàn bộ trang.
             // Điều này giả định rằng hàm loadProjectDetails có thể được gọi lại.
             document.dispatchEvent(new CustomEvent('project-members-updated'));
+            await open(); // Tải lại danh sách trong modal
         }
     });
 
@@ -273,8 +299,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             if (response.ok) {
-                alert('Thao tác thành công!');
+
                 await open(); // tải lại danh sách mà không reload toàn trang
+                document.dispatchEvent(new CustomEvent('project-members-updated')); // Bắn sự kiện để project-detail cập nhật
             } else {
                 const err = await response.json();
                 throw new Error(err.message || 'Thao tác thất bại.');
@@ -284,4 +311,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert(`Lỗi: ${error.message}`);
         }
     }
-})
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+document.addEventListener('DOMContentLoaded', initProjectAddMembers);

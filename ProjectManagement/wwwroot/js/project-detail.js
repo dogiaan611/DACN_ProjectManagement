@@ -1,8 +1,14 @@
 import { authFetch } from './auth.js';
+import { initProjectEdit } from './project-edit.js';
+import { initProjectAddMembers } from './project-add-members.js';
 
 let currentProjectData = null;
-document.addEventListener('DOMContentLoaded', async () => {
-    // Lấy projectId từ URL
+
+// Hàm khởi tạo, sẽ được gọi bởi SPA router
+export async function initProjectDetail() {
+    console.log("initProjectDetail called");
+    initProjectEdit();
+    initProjectAddMembers();
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
 
@@ -23,7 +29,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('project-updated', () => {
         loadProjectDetails(projectId);
     });
-});
+
+    // Lắng nghe sự kiện khi thành viên được thêm/xóa/thay đổi từ modal add-members
+    document.addEventListener('project-members-updated', () => {
+        loadProjectDetails(projectId);
+    });
+}
+
+// document.addEventListener('DOMContentLoaded', initProjectDetail); // Dòng này không cần thiết trong SPA
 
 async function loadProjectDetails(projectId) {
     try {
@@ -73,7 +86,7 @@ async function renderProjectDetails(data) {
                 : `<span class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold border-2 border-white">${avatarInitial}</span>`;
 
             memberEl.innerHTML = `
-                ${avatarHtml}  
+                ${avatarHtml}
             `;
 
             // Thêm sự kiện click để mở modal

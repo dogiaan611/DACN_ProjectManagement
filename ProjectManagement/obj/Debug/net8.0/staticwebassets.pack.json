@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\kanban-board.html",
-      "PackagePath": "staticwebassets\\components\\kanban-board.html"
-    },
-    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\components\\settings_sidebar.html",
       "PackagePath": "staticwebassets\\components\\settings_sidebar.html"
     },

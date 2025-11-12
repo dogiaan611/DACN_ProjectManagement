@@ -1,7 +1,8 @@
 import { authFetch } from "./auth.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
+// Hàm khởi tạo, sẽ được gọi bởi SPA router
+export function initProjectEdit() {
+    console.log("initProjectEdit called");
     const projectId = urlParams.get('id');
 
     const editButton = document.getElementById('edit-button');
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Hiển thị modal và backdrop nhưng giữ chúng "vô hình" hoặc ngoài màn hình
         modal.classList.remove('hidden'); // Quan trọng: Xóa class 'hidden' để modal có thể hiển thị
         backdrop.classList.remove('hidden');
-        
+
         try {
             const res = await authFetch(`/projects/${projectId}/readProject`);
             if (!res.ok) {
@@ -148,9 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
     editButton?.addEventListener('click', open);
     closeBtn?.addEventListener('click', close);
     backdrop?.addEventListener('click', close);
-    outer?.addEventListener('click', (e) => { 
+    outer?.addEventListener('click', (e) => {
         // Đóng modal khi click vào vùng nền mờ bên ngoài
-        if (e.target === outer) close(); 
+        if (e.target === outer) close();
     });
     saveBtn?.addEventListener('click', saveChanges);
-});
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+document.addEventListener('DOMContentLoaded', initProjectEdit);

@@ -1,6 +1,8 @@
 import { authFetch } from './auth.js';
+import { loadPage } from './sidebar.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
+// Hàm khởi tạo, sẽ được gọi bởi SPA router
+export async function initHome() {
     const projectsListContainer = document.getElementById('projects-list-container');
 
     if (!projectsListContainer) {
@@ -87,8 +89,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         projects.forEach(project => {
             const projectCard = document.createElement('div');
             projectCard.className = 'bg-white relative select-none overflow-hidden w-[144px] h-[144px] rounded-lg border p-4 hover:shadow-lg transition-shadow duration-200 cursor-pointer justify-stretch flex flex-col';
-            projectCard.addEventListener('click', () => {
-                window.location.href = `/project.html?id=${project.projectId}`;
+            projectCard.addEventListener('click', async () => {
+                const url = `/project.html?id=${project.projectId}`;
+                history.pushState(null, "", url);
+                // Gọi hàm loadPage đã được toàn cục hóa từ sidebar.js
+                await loadPage(url);
             });
 
             const typeIcon = project.type === 1 // 1 là Scrum, 0 là Kanban
@@ -103,9 +108,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                         <div class="absolute bottom-0 left-1 flex items-center justify-start gap-2">
                             <div class="flex items-center gap-2">
-                                <img 
-                                    src="${project.createdBy?.avatarUrl || '/images/default-avatar.png'}" 
-                                    alt="${project.created5y?.name || 'Unknown'}" 
+                                <img
+                                    src="${project.createdBy?.avatarUrl || '/images/default-avatar.png'}"
+                                    alt="${project.created5y?.name || 'Unknown'}"
                                     class="w-5 h-5 rounded-full object-cover"
                                 />
                             </div>
@@ -122,8 +127,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Load projects when the page loads
-    loadProject();
-})
+    await loadProject();
+}
+
+document.addEventListener('DOMContentLoaded', initHome);
 // ${typeIcon}
 //                     <h3 class="text-xl font-semibold text-gray-800 truncate" title="${project.name}">
 //                         ${project.name}
