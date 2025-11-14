@@ -711,10 +711,6 @@ video {
   margin-bottom: 0.25rem;
 }
 
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -809,6 +805,10 @@ video {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 
 .block {
@@ -915,6 +915,10 @@ video {
   min-height: 5rem;
 }
 
+.min-h-\[100px\] {
+  min-height: 100px;
+}
+
 .min-h-full {
   min-height: 100%;
 }
@@ -1019,6 +1023,10 @@ video {
   max-width: 80rem;
 }
 
+.max-w-\[320px\] {
+  max-width: 320px;
+}
+
 .max-w-\[400px\] {
   max-width: 400px;
 }
@@ -1112,6 +1120,10 @@ video {
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+.cursor-move {
+  cursor: move;
 }
 
 .cursor-pointer {
@@ -1288,10 +1300,6 @@ video {
   border-radius: 0.375rem;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
-}
-
 .rounded-xl {
   border-radius: 0.75rem;
 }
@@ -1326,6 +1334,10 @@ video {
 
 .border-dashed {
   border-style: dashed;
+}
+
+.border-none {
+  border-style: none;
 }
 
 .border-blue-200 {
@@ -1761,6 +1773,10 @@ video {
   line-height: 1;
 }
 
+.leading-none {
+  line-height: 1;
+}
+
 .tracking-tight {
   letter-spacing: -0.025em;
 }
@@ -2025,10 +2041,6 @@ video {
 
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.duration-\[20ms\] {
-  transition-duration: 20ms;
 }
 
 .ease-in {

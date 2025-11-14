@@ -1,16 +1,87 @@
 import { authFetch  } from "./auth.js";
 
+// Lưu trữ các event listeners và state để có thể cleanup
+let addMembersEventHandlers = {
+    inviteButton: null,
+    cancelBtn: null,
+    inviteBackdrop: null,
+    outer: null,
+    searchInput: null,
+    inviteForm: null,
+    keydown: null
+};
+
+let searchTimer = null;
+let selectedUsers = new Map();
+
+// Hàm cleanup event listeners cũ
+function cleanupAddMembersListeners() {
+    const inviteButton = document.getElementById('add-member-btn');
+    const cancelBtn = document.getElementById('cancel-invite-btn');
+    const inviteBackdrop = document.getElementById('invite-backdrop');
+    const outer = document.getElementById('invite-modal-outer');
+    const searchInput = document.getElementById('member-search');
+    const inviteForm = document.getElementById('invite-member-form');
+
+    if (inviteButton && addMembersEventHandlers.inviteButton) {
+        inviteButton.removeEventListener('click', addMembersEventHandlers.inviteButton);
+    }
+    if (cancelBtn && addMembersEventHandlers.cancelBtn) {
+        cancelBtn.removeEventListener('click', addMembersEventHandlers.cancelBtn);
+    }
+    if (inviteBackdrop && addMembersEventHandlers.inviteBackdrop) {
+        inviteBackdrop.removeEventListener('click', addMembersEventHandlers.inviteBackdrop);
+    }
+    if (outer && addMembersEventHandlers.outer) {
+        outer.removeEventListener('click', addMembersEventHandlers.outer);
+    }
+    if (searchInput && addMembersEventHandlers.searchInput) {
+        searchInput.removeEventListener('input', addMembersEventHandlers.searchInput);
+    }
+    if (inviteForm && addMembersEventHandlers.inviteForm) {
+        inviteForm.removeEventListener('submit', addMembersEventHandlers.inviteForm);
+    }
+    if (addMembersEventHandlers.keydown) {
+        document.removeEventListener('keydown', addMembersEventHandlers.keydown);
+    }
+
+    // Clear timer
+    if (searchTimer) {
+        clearTimeout(searchTimer);
+        searchTimer = null;
+    }
+
+    // Reset handlers và state
+    addMembersEventHandlers = {
+        inviteButton: null,
+        cancelBtn: null,
+        inviteBackdrop: null,
+        outer: null,
+        searchInput: null,
+        inviteForm: null,
+        keydown: null
+    };
+    selectedUsers.clear();
+}
+
 // Hàm khởi tạo, sẽ được gọi bởi SPA router
 export async function initProjectAddMembers() {
     console.log("initProjectAddMembers called");
+
+    // Cleanup listeners cũ trước
+    cleanupAddMembersListeners();
+
+    // Reset selectedUsers
+    selectedUsers = new Map();
+
+    const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
-    const selectedUsers = new Map();
     const inviteButton = document.getElementById('add-member-btn');
     const inviteModal = document.getElementById('invite-modal');
     const inviteBackdrop = document.getElementById('invite-backdrop');
-    const searchInput = document.getElementById('member-search');
-    const suggestions = document.getElementById('member-suggestions');
-    const selectedWrap = document.getElementById('selected-members');
+    const searchInput = document.getElementById('invite-member-search');
+    const suggestions = document.getElementById('invite-member-suggestions');
+    const selectedWrap = document.getElementById('invite-selected-members');
     const cancelBtn = document.getElementById('cancel-invite-btn');
     const outer = document.getElementById('invite-modal-outer');
     const inviteForm = document.getElementById('invite-member-form');
@@ -119,20 +190,21 @@ export async function initProjectAddMembers() {
                     delBackdrop.classList.remove('hidden');
                     delModal.classList.remove('hidden');
 
-                    // Xử lý click Delete
+                    // Xử lý click Delete - phải định nghĩa trước closeDelModal
                     const handleDelete = async () => {
                         await handleAction('remove-member', projectId, memberId);
-                        closeModal();
+                        closeDelModal();
                     };
 
                     // Xử lý click Cancel
-                    const closeModal = () => {
+                    const closeDelModal = () => {
                         delBackdrop.classList.add('hidden');
                         delModal.classList.add('hidden');
 
                         // Remove các listener để tránh bị gắn nhiều lần
                         delConfirmBtn.removeEventListener('click', handleDelete);
                         delCancelBtn.removeEventListener('click', closeDelModal);
+                        delBackdrop.removeEventListener('click', closeDelModal);
                     };
 
                     delConfirmBtn.addEventListener('click', handleDelete);
@@ -176,12 +248,47 @@ export async function initProjectAddMembers() {
         if (searchInput) searchInput.value = "";
     }
 
-    // Event Listeners
-    inviteButton?.addEventListener('click', open);
-    cancelBtn?.addEventListener('click', close);
-    inviteBackdrop?.addEventListener('click', close);
-    outer?.addEventListener('click', (e) => { if (e.target === outer) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !inviteModal.classList.contains('hidden')) close(); });
+    // Tạo handlers và lưu lại
+    const handleOuterClick = (e) => {
+        if (e.target === outer) close();
+    };
+
+    const handleKeydown = (e) => {
+        if (e.key === 'Escape' && inviteModal && !inviteModal.classList.contains('hidden')) close();
+    };
+
+    const handleSearchInput = () => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => searchUsers(searchInput.value), 250);
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        const membersToAdd = Array.from(selectedUsers.values());
+        if (membersToAdd.length > 0) {
+            await addMembers(membersToAdd);
+            document.dispatchEvent(new CustomEvent('project-members-updated'));
+            await open(); // Tải lại danh sách trong modal
+        }
+    };
+
+    // Lưu handlers
+    addMembersEventHandlers.inviteButton = open;
+    addMembersEventHandlers.cancelBtn = close;
+    addMembersEventHandlers.inviteBackdrop = close;
+    addMembersEventHandlers.outer = handleOuterClick;
+    addMembersEventHandlers.keydown = handleKeydown;
+    addMembersEventHandlers.searchInput = handleSearchInput;
+    addMembersEventHandlers.inviteForm = handleFormSubmit;
+
+    // Gắn event listeners
+    if (inviteButton) inviteButton.addEventListener('click', addMembersEventHandlers.inviteButton);
+    if (cancelBtn) cancelBtn.addEventListener('click', addMembersEventHandlers.cancelBtn);
+    if (inviteBackdrop) inviteBackdrop.addEventListener('click', addMembersEventHandlers.inviteBackdrop);
+    if (outer) outer.addEventListener('click', addMembersEventHandlers.outer);
+    if (searchInput) searchInput.addEventListener('input', addMembersEventHandlers.searchInput);
+    if (inviteForm) inviteForm.addEventListener('submit', addMembersEventHandlers.inviteForm);
+    document.addEventListener('keydown', addMembersEventHandlers.keydown);
 
     function renderSelected() {
         selectedWrap.innerHTML = "";
@@ -264,24 +371,6 @@ export async function initProjectAddMembers() {
         }
     }
 
-    // Debounce search input
-    let searchTimer;
-    searchInput?.addEventListener("input", () => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(() => searchUsers(searchInput.value), 250);
-    });
-
-    // Form submission
-    inviteForm?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const membersToAdd = Array.from(selectedUsers.values());
-        if (membersToAdd.length > 0) {
-            await addMembers(membersToAdd);
-            // Điều này giả định rằng hàm loadProjectDetails có thể được gọi lại.
-            document.dispatchEvent(new CustomEvent('project-members-updated'));
-            await open(); // Tải lại danh sách trong modal
-        }
-    });
 
     async function handleAction(action, projectId, memberId) {
         try {
@@ -313,5 +402,3 @@ export async function initProjectAddMembers() {
     }
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-document.addEventListener('DOMContentLoaded', initProjectAddMembers);

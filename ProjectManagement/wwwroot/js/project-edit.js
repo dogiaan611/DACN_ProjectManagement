@@ -1,8 +1,62 @@
 import { authFetch } from "./auth.js";
 
+// Lưu trữ các event listeners để có thể cleanup
+let editEventHandlers = {
+    editButton: null,
+    closeBtn: null,
+    backdrop: null,
+    outer: null,
+    saveBtn: null,
+    delBtn: null
+};
+
+// Hàm cleanup event listeners cũ
+function cleanupEditListeners() {
+    const editButton = document.getElementById('edit-button');
+    const closeBtn = document.getElementById('close-modal');
+    const backdrop = document.getElementById('edit-backdrop');
+    const outer = document.getElementById('edit-modal-outer');
+    const saveBtn = document.getElementById('save-btn');
+    const delBtn = document.getElementById('del-btn');
+
+    if (editButton && editEventHandlers.editButton) {
+        editButton.removeEventListener('click', editEventHandlers.editButton);
+    }
+    if (closeBtn && editEventHandlers.closeBtn) {
+        closeBtn.removeEventListener('click', editEventHandlers.closeBtn);
+    }
+    if (backdrop && editEventHandlers.backdrop) {
+        backdrop.removeEventListener('click', editEventHandlers.backdrop);
+    }
+    if (outer && editEventHandlers.outer) {
+        outer.removeEventListener('click', editEventHandlers.outer);
+    }
+    if (saveBtn && editEventHandlers.saveBtn) {
+        saveBtn.removeEventListener('click', editEventHandlers.saveBtn);
+    }
+    if (delBtn && editEventHandlers.delBtn) {
+        delBtn.removeEventListener('click', editEventHandlers.delBtn);
+    }
+
+    // Reset handlers
+    editEventHandlers = {
+        editButton: null,
+        closeBtn: null,
+        backdrop: null,
+        outer: null,
+        saveBtn: null,
+        delBtn: null
+    };
+}
+
 // Hàm khởi tạo, sẽ được gọi bởi SPA router
 export function initProjectEdit() {
     console.log("initProjectEdit called");
+
+    // Cleanup listeners cũ trước
+    cleanupEditListeners();
+
+    const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
 
     const editButton = document.getElementById('edit-button');
@@ -124,7 +178,8 @@ export function initProjectEdit() {
         }
     }
 
-    delBtn?.addEventListener('click', async (e) => {
+    // Tạo handlers và lưu lại để có thể cleanup sau
+    const handleDelete = async (e) => {
         e.preventDefault();
         if (confirm('Bạn có chắc chắn muốn xóa dự án này?')) {
             try {
@@ -141,20 +196,27 @@ export function initProjectEdit() {
                 console.error('Failed to delete project:', error);
                 alert('Lỗi khi xóa project. Vui lòng thử lại.');
             }
-
         }
-    });
+    };
 
-    // Event listeners
-    editButton?.addEventListener('click', open);
-    closeBtn?.addEventListener('click', close);
-    backdrop?.addEventListener('click', close);
-    outer?.addEventListener('click', (e) => {
+    const handleOuterClick = (e) => {
         // Đóng modal khi click vào vùng nền mờ bên ngoài
         if (e.target === outer) close();
-    });
-    saveBtn?.addEventListener('click', saveChanges);
-}
+    };
 
-const urlParams = new URLSearchParams(window.location.search);
-document.addEventListener('DOMContentLoaded', initProjectEdit);
+    // Lưu handlers
+    editEventHandlers.editButton = open;
+    editEventHandlers.closeBtn = close;
+    editEventHandlers.backdrop = close;
+    editEventHandlers.outer = handleOuterClick;
+    editEventHandlers.saveBtn = saveChanges;
+    editEventHandlers.delBtn = handleDelete;
+
+    // Gắn event listeners
+    if (editButton) editButton.addEventListener('click', editEventHandlers.editButton);
+    if (closeBtn) closeBtn.addEventListener('click', editEventHandlers.closeBtn);
+    if (backdrop) backdrop.addEventListener('click', editEventHandlers.backdrop);
+    if (outer) outer.addEventListener('click', editEventHandlers.outer);
+    if (saveBtn) saveBtn.addEventListener('click', editEventHandlers.saveBtn);
+    if (delBtn) delBtn.addEventListener('click', editEventHandlers.delBtn);
+}

@@ -49,6 +49,8 @@ async function loadProjectDetails(projectId) {
 
         // Cập nhật UI với dữ liệu nhận được
         renderProjectDetails(projectData);
+        initProjectEdit();
+        initProjectAddMembers();
     } catch (error) {
         console.error('Lỗi khi tải chi tiết project:', error);
         document.getElementById('project-detail-container').innerHTML = `

@@ -177,6 +177,23 @@ export async function loadPage(url) {
       throw new Error('Không tìm thấy container để load nội dung');
     }
 
+    // Nếu là trang project, đảm bảo các modals được append vào body
+    if (pagePath.includes('project.html')) {
+      // Tìm các modals trong HTML đã parse
+      const modals = doc.querySelectorAll('#invite-modal, #invite-backdrop, #edit-modal, #edit-backdrop, #del-conf-modal, #del-conf-backdrop');
+      modals.forEach(modal => {
+        // Kiểm tra xem modal đã tồn tại chưa
+        const existingModal = document.getElementById(modal.id);
+        if (!existingModal) {
+          // Nếu chưa tồn tại, append vào body
+          document.body.appendChild(modal.cloneNode(true));
+        } else {
+          // Nếu đã tồn tại, cập nhật nội dung nếu cần (giữ lại để tránh mất state)
+          // Chỉ cập nhật nếu có thay đổi về structure
+        }
+      });
+    }
+
     // Gọi hàm init tương ứng dựa trên route
     // Sử dụng requestAnimationFrame để đảm bảo DOM đã được render
     requestAnimationFrame(() => {
@@ -184,8 +201,10 @@ export async function loadPage(url) {
         // Gọi initHome
         initHome().catch(err => console.error('Lỗi khi khởi tạo trang home:', err));
       } else if (pagePath.includes('project.html')) {
-        // Gọi initProjectDetail
-        initProjectDetail().catch(err => console.error('Lỗi khi khởi tạo trang project:', err));
+        // Đợi thêm một chút để đảm bảo DOM đã được render hoàn toàn
+        setTimeout(() => {
+          initProjectDetail().catch(err => console.error('Lỗi khi khởi tạo trang project:', err));
+        }, 50);
       }
     });
 

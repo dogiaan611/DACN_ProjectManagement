@@ -73,28 +73,28 @@
                                 <label for="member-search" class="block text-lg font-medium text-gray-700">Email</label>
                                 <div class=" flex items-center justify-center w-full gap-1">
                                     <div class="relative flex-1">
-                                        <input id="member-search" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="Search by email..." />
-                                        <div id="member-suggestions" class="absolute left-0 top-full w-full z-10 mt-1 hidden overflow-hidden rounded-xl border border-gray-200 bg-white shadow">
+                                        <input id="invite-member-search" type="text" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" placeholder="Search by email..." />
+                                        <div id="invite-member-suggestions" class="absolute left-0 top-full w-full z-10 mt-1 hidden overflow-hidden rounded-xl border border-gray-200 bg-white shadow">
                                             <!-- suggestions injected here -->
                                         </div>
                                     </div>
                                     <button type="submit" class="rounded-xl bg-gray-800 px-4 py-2 text-white hover:bg-gray-900">Invites</button>
                                 </div>
-                                <div id="selected-members" class="mt-1 flex flex-wrap gap-2"></div>
-                                
+                                <div id="invite-selected-members" class="mt-1 flex flex-wrap gap-2"></div>
+
                             </div>
 
                         </form>
                         <div id="current-members-list" class="flex flex-col justify-center gap-2 mt-3">
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    
+
     <!-- modal edit project -->
     <div id="edit-backdrop" class="fixed inset-0 z-40 hidden bg-black/40"></div>
     <div id="edit-modal" class="fixed inset-y-0 right-0 z-50 hidden flex justify-end transform translate-x-full transition-transform duration-300 ease-in-out">
@@ -110,7 +110,7 @@
 
                 <!-- Body -->
                 <div class="flex-1 overflow-y-auto p-5 space-y-4">
-                
+
                 <!-- Basic Info -->
                 <form id="edit-form">
                     <h2 class="text-sm font-medium text-gray-500 uppercase mb-2">General</h2>
