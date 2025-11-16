@@ -1,7 +1,10 @@
 import { authFetch } from './auth.js';
 import { initProjectEdit } from './project-edit.js';
 import { initProjectAddMembers } from './project-add-members.js';
+import { initProjectBoard } from './project-board.js';
+import { initProjectList } from './project-list.js';
 
+// Lưu trữ dữ liệu project hiện tại
 let currentProjectData = null;
 
 // Hàm khởi tạo, sẽ được gọi bởi SPA router
@@ -24,7 +27,7 @@ export async function initProjectDetail() {
 
     // Gọi API để lấy thông tin chi tiết project
     await loadProjectDetails(projectId);
-
+    viewSwitcher();
     // Lắng nghe sự kiện khi project được cập nhật từ modal edit
     document.addEventListener('project-updated', () => {
         loadProjectDetails(projectId);
@@ -59,6 +62,36 @@ async function loadProjectDetails(projectId) {
             </div>
         `;
     }
+}
+
+async function viewSwitcher() {
+    const kanbanBtn = document.getElementById('kanban-view-btn');
+    const listBtn = document.getElementById('list-view-btn');
+    if(!kanbanBtn || !listBtn) {
+        console.log('View btn not found');
+        initProjectBoard();
+        return;
+    }
+
+    if(kanbanBtn.dataset.listenerAdded=== 'true'){
+        return;
+    }
+    kanbanBtn.dataset.listenerAdded = 'true';
+    listBtn.dataset.listenerAdded = 'true';
+
+    kanbanBtn.addEventListener('click', () => {
+        kanbanBtn.classList.add('active', 'text-blue-400');
+        listBtn.classList.remove('active', 'text-blue-400');
+        initProjectBoard();
+    })
+
+    listBtn.addEventListener('click', () => {
+        kanbanBtn.classList.remove('active', 'text-blue-400');
+        listBtn.classList.add('active', 'text-blue-400');
+        initProjectList();
+    })
+
+    kanbanBtn.click();
 }
 
 async function renderProjectDetails(data) {

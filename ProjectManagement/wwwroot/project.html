@@ -42,10 +42,19 @@
             </header>
 
             <!-- Khu vực nội dung chính của project (Kanban/Scrum) -->
-            <section id="project-content" class="mt-10">
-                <h2 class="text-2xl font-semibold text-gray-800">Bảng công việc</h2>
-                <div class="mt-4 p-6 bg-gray-100 rounded-xl border border-dashed">
-                    <p class="text-center text-gray-500">Nội dung Kanban/Scrum sẽ được hiển thị ở đây.</p>
+            <section class="mt-10">
+                <div class="flex gap-8 items-center justify-start mb-5 border-b border-gray-200">
+                    <div role="button" id="kanban-view-btn" class="flex items-center justify-center gap-1 hover:text-blue-400 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-kanban-icon lucide-folder-kanban"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>
+                        Kanban
+                    </div>
+                    <div role="button" id="list-view-btn" class="flex items-center justify-center gap-1 hover:text-blue-400 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-icon lucide-list"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></svg>
+                        List
+                    </div>
+                </div>
+                <div id="project-content">
+
                 </div>
             </section>
         </main>

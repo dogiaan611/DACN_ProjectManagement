@@ -79,8 +79,7 @@ export function initProjectEdit() {
     async function open() {
         if (!modal || !backdrop) return;
 
-        // 1. Hiển thị modal và backdrop nhưng giữ chúng "vô hình" hoặc ngoài màn hình
-        modal.classList.remove('hidden'); // Quan trọng: Xóa class 'hidden' để modal có thể hiển thị
+        modal.classList.remove('hidden');
         backdrop.classList.remove('hidden');
 
         try {
@@ -124,10 +123,6 @@ export function initProjectEdit() {
             } else {
                 memberListContainer.innerHTML = '<p class="text-gray-500 text-sm">Chưa có thành viên nào.</p>';
             }
-
-            // 2. Sau khi tải xong dữ liệu, bắt đầu hiệu ứng trượt vào
-            // Thuộc tính transform được định nghĩa trong CSS, ta chỉ cần thay đổi class
-            // Thêm class để trượt vào
         requestAnimationFrame(() => modal.classList.replace('translate-x-full', 'translate-x-0'));
 
         } catch (error) {
@@ -138,15 +133,12 @@ export function initProjectEdit() {
 
     function close() {
         if (!modal || !backdrop) return;
-        // Trượt modal ra khỏi màn hình
-        // Thêm class để trượt ra
         modal.classList.replace('translate-x-0', 'translate-x-full');
 
-        // Ẩn sau khi trượt xong
         setTimeout(() => {
             modal.classList.add('hidden');
             backdrop.classList.add('hidden');
-        }, 300); // khớp với duration-300
+        }, 300);
     }
 
     async function saveChanges() {
@@ -178,7 +170,6 @@ export function initProjectEdit() {
         }
     }
 
-    // Tạo handlers và lưu lại để có thể cleanup sau
     const handleDelete = async (e) => {
         e.preventDefault();
         if (confirm('Bạn có chắc chắn muốn xóa dự án này?')) {

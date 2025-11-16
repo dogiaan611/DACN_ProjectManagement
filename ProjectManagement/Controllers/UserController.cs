@@ -208,9 +208,26 @@ namespace ProjectManagement.Controllers
             var user = await _userManager.FindByIdAsync(userId!);
             if (user == null) return NotFound();
             var roles = await _userManager.GetRolesAsync(user);
-            return Ok(new { user.Id, user.Email, user.Name, user.AvatarUrl, user.PhoneNumber, Roles = roles });
+            return Ok(new { user.Id, user.Email, user.Name, user.AvatarUrl, user.PhoneNumber, user.SystemRole, Roles = roles });
         }
 
+        /// Lấy danh sách tất cả người dùng (chỉ admin)
+        [HttpGet("read-all")]
+        [Authorize(Roles = "system_admin")]
+        public async Task<IActionResult> ReadAllUsers()
+        {
+            var users = await _userManager.Users
+                .OrderBy(u => u.Email)
+                .Select(u => new {
+                    u.Id,
+                    u.Email,
+                    u.Name,
+                    u.AvatarUrl,
+                    u.PhoneNumber,
+                    u.SystemRole
+                }).ToListAsync();
+            return Ok(users);
+        }
 
         /// Upload ảnh đại diện
         [HttpPost("upload-avatar")]
@@ -417,5 +434,3 @@ namespace ProjectManagement.Controllers
         }
     }
 }
-
-
