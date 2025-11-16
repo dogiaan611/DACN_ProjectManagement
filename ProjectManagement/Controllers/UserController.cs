@@ -24,54 +24,34 @@ namespace ProjectManagement.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _config;
         private readonly PMDbContext _db;
+        private readonly IConfiguration _config;
         private readonly INotificationService _notificationService;
 
         public UserController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
-            IConfiguration config,
             PMDbContext db,
+            IConfiguration config,
             INotificationService notificationService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-            _config = config;
             _db = db;
+            _config = config;
             _notificationService = notificationService;
         }
 
-        /// Tìm kiếm người dùng theo email (phần đầu vào: q)
-        [HttpGet("search")]
-        [Authorize]
-        public async Task<IActionResult> SearchByEmail([FromQuery] string q, [FromQuery] int limit = 5)
-        {
-            if (string.IsNullOrWhiteSpace(q)) return Ok(Array.Empty<object>());
-
-            var term = q.Trim().ToLowerInvariant();
-
-            var users = await _userManager.Users
-                .Where(u => u.Email != null && u.Email.ToLower().Contains(term))
-                .OrderBy(u => u.Email)
-                .Take(Math.Clamp(limit, 1, 20))
-                .Select(u => new { u.Id, u.Email, u.Name, u.AvatarUrl })
-                .ToListAsync();
-
-            return Ok(users);
-        }
-
         public record RegisterRequestDto(string Name, string Email, string Password);
-        public record RequestOtpDto(string Email); // DTO mới cho yêu cầu OTP ban đầu
-        public record RegisterOTPDto(string Otp, string Name, string Password); // DTO cập nhật cho xác nhận OTP và đăng ký cuối cùng
+        public record RequestOtpDto(string Email); 
+        public record RegisterOTPDto(string Otp, string Name, string Password); 
         public record LoginDto(string Email, string Password);
         public record UpdateDto(string? Name, string? AvatarUrl, string? PhoneNumber);
         public record SetRoleDto(string Role);
-        //dto thay đổi password
         public record ChangePasswordDto(string CurrentPassword, string NewPassword);
-
+        public record ConfirmEmailDto(string Email);
 
         /// Đăng ký tài khoản mới
         [HttpPost("register")]
@@ -83,11 +63,11 @@ namespace ProjectManagement.Controllers
 
             var normalizedEmail = dto.Email.Trim().ToLowerInvariant();
 
-            // Check if email already exists
+            // Kiểm tra email đã tồn tại chưa
             if (await _userManager.FindByEmailAsync(normalizedEmail) != null)
                 return BadRequest("Email đã tồn tại");
 
-            // Prevent frequent OTP requests
+            // Gửi mã OTP nếu không có mã đang hoạt động
             var now = DateTime.UtcNow;
             var existingActive = await _db.RegistrationCodes
                 .Where(r => r.Email == normalizedEmail && !r.IsUsed && r.ExpiresAtUtc > now)
@@ -96,7 +76,7 @@ namespace ProjectManagement.Controllers
             if (existingActive != null)
                 return Ok(new { message = "Đã gửi mã, vui lòng kiểm tra email (mã còn hiệu lực)." });
 
-            // Generate OTP
+            // Tạo mã OTP ngẫu nhiên 6 chữ số
             var rng = RandomNumberGenerator.Create();
             var bytes = new byte[4];
             rng.GetBytes(bytes);
@@ -110,9 +90,9 @@ namespace ProjectManagement.Controllers
                 CreatedAtUtc = now,
                 ExpiresAtUtc = now.AddMinutes(ttlMinutes),
                 IsUsed = false,
-                TempUsername = dto.Email, // Username là email đăng ký
-                TempPassword = null, // Password có thể nhập sausau
-                TempName = null // Name có thể nhập sausau
+                TempUsername = dto.Email,
+                TempPassword = null, 
+                TempName = null
             };
             _db.RegistrationCodes.Add(reg);
             await _db.SaveChangesAsync();
@@ -142,20 +122,20 @@ namespace ProjectManagement.Controllers
             // kiểm tra email đã tồn tại chưa
             if (await _userManager.FindByEmailAsync(otpRecord.Email) != null)
                 return BadRequest("Email đã tồn tại");
-            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name)) // kiểm tra tên tồn tại chưa
+            if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name))
                 return BadRequest("Name đã tồn tại");
 
             var user = new ApplicationUser
             {
-                UserName = otpRecord.Email, // Sử dụng email làm UserName
+                UserName = otpRecord.Email,
                 Email = otpRecord.Email,
                 EmailConfirmed = true,
-                Name = dto.Name // Sử dụng Name từ DTO
+                Name = dto.Name 
             };
 
             user.SystemRole = SystemRole.Member;
 
-            var createResult = await _userManager.CreateAsync(user, dto.Password!); // Sử dụng Password từ DTO
+            var createResult = await _userManager.CreateAsync(user, dto.Password!); 
             if (!createResult.Succeeded)
                 return BadRequest(createResult.Errors);
 
@@ -174,7 +154,6 @@ namespace ProjectManagement.Controllers
 
             return Ok(new { message = "Đăng ký thành công" });
         }
-
 
         /// Đăng nhập bằng email/mật khẩu.
         [HttpPost("login")]
@@ -198,7 +177,6 @@ namespace ProjectManagement.Controllers
             return Ok(new { access_token = token });
         }
 
-
         /// Lấy thông tin người dùng hiện tại
         [HttpGet("read")]
         [Authorize]
@@ -210,7 +188,6 @@ namespace ProjectManagement.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             return Ok(new { user.Id, user.Email, user.Name, user.AvatarUrl, user.PhoneNumber, Roles = roles });
         }
-
 
         /// Upload ảnh đại diện
         [HttpPost("upload-avatar")]
@@ -293,8 +270,8 @@ namespace ProjectManagement.Controllers
         }
 
         //đổi mật khẩu
-        [Authorize]
         [HttpPut("update-password")]
+        [Authorize]
         public async Task<IActionResult> UpdatePassword([FromBody] ChangePasswordDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -314,10 +291,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đổi mật khẩu thành công" });
         }
 
-
         /// Xóa tài khoản của chính người dùng hiện tại, có xác nhận email từ frontend.
-        public record ConfirmEmailDto(string Email);
-
         [HttpDelete("delete")]
         [Authorize]
         public async Task<IActionResult> DeleteMe([FromBody] ConfirmEmailDto dto)
@@ -329,7 +303,7 @@ namespace ProjectManagement.Controllers
             var user = await _userManager.FindByIdAsync(userId!);
             if (user == null) return NotFound();
 
-            // So khớp email nhập từ frontend với email tài khoản hiện tại (không phân biệt hoa thường, cắt khoảng trắng)
+            // Kiểm tra email xác nhận
             var normalizedInput = dto.Email.Trim().ToLowerInvariant();
             var normalizedUserEmail = (user.Email ?? string.Empty).Trim().ToLowerInvariant();
             if (!string.Equals(normalizedInput, normalizedUserEmail, StringComparison.Ordinal))
@@ -340,6 +314,25 @@ namespace ProjectManagement.Controllers
             var result = await _userManager.DeleteAsync(user);
             if (!result.Succeeded) return BadRequest(result.Errors);
             return Ok(new { message = "Xóa tài khoản thành công" });
+        }
+
+        /// Tìm kiếm người dùng
+        [HttpGet("search")]
+        [Authorize]
+        public async Task<IActionResult> SearchByEmail([FromQuery] string q, [FromQuery] int limit = 5)
+        {
+            if (string.IsNullOrWhiteSpace(q)) return Ok(Array.Empty<object>());
+
+            var term = q.Trim().ToLowerInvariant();
+
+            var users = await _userManager.Users
+                .Where(u => u.Email != null && u.Email.ToLower().Contains(term))
+                .OrderBy(u => u.Email)
+                .Take(Math.Clamp(limit, 1, 20))
+                .Select(u => new { u.Id, u.Email, u.Name, u.AvatarUrl })
+                .ToListAsync();
+
+            return Ok(users);
         }
 
         /// Tự cập nhật role của người dùng hiện tại.
@@ -353,7 +346,7 @@ namespace ProjectManagement.Controllers
             var user = await _userManager.FindByIdAsync(userId!);
             if (user == null) return NotFound();
 
-            // Map input to enum
+            // Quy chiếu role sang enum
             var roleEnum = SystemRole.Member;
             var raw = dto.Role.Trim();
             if (Enum.TryParse<SystemRole>(raw, true, out var parsed))
@@ -372,7 +365,7 @@ namespace ProjectManagement.Controllers
                 if (!created.Succeeded) return BadRequest(created.Errors);
             }
 
-            // Remove current roles then add new one
+            // Xóa các role hiện có và thêm role mới
             var currentRoles = await _userManager.GetRolesAsync(user);
             if (currentRoles.Count > 0)
             {
