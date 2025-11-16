@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace ProjectManagement.Controllers
 {
 
-    /// Controller quản lý Column trên Board; tạo cột (với position), liệt kê, lấy chi tiết, cập nhật, xóa.
+    // Controller quản lý Column trên Board; tạo cột (với position), liệt kê, lấy chi tiết, cập nhật, xóa.
     [ApiController]
     [Route("boards/{boardId:int}/columns")]
     [Authorize]
@@ -24,7 +24,7 @@ namespace ProjectManagement.Controllers
         public record CreateColumnDto(string Name, int? Position = null, int? WipLimit = null);
         public record UpdateColumnDto(string? Name = null, int? Position = null, int? WipLimit = null);
 
-        /// Tạo cột mới trên board.
+        // Tạo cột mới trên board.
         [HttpPost]
         public async Task<IActionResult> Create(int boardId, [FromBody] CreateColumnDto dto)
         {
@@ -59,7 +59,7 @@ namespace ProjectManagement.Controllers
             return CreatedAtAction(nameof(Get), new { boardId = boardId, columnId = column.ColumnId }, new { column.ColumnId, column.Name, column.Position, column.WipLimit });
         }
 
-        /// Liệt kê các cột của board theo thứ tự position.
+        // Liệt kê các cột của board theo thứ tự position.
         [HttpGet]
         public async Task<IActionResult> List(int boardId)
         {
@@ -71,7 +71,7 @@ namespace ProjectManagement.Controllers
             return Ok(cols);
         }
 
-        /// Lấy thông tin chi tiết 1 cột.
+        // Lấy thông tin chi tiết 1 cột.
         [HttpGet("{columnId:int}")]
         public async Task<IActionResult> Get(int boardId, int columnId)
         {
@@ -83,7 +83,7 @@ namespace ProjectManagement.Controllers
             return Ok(col);
         }
 
-        /// Cập nhật cột:
+        // Cập nhật cột:
 
         [HttpPut("{columnId:int}")]
         public async Task<IActionResult> Update(int boardId, int columnId, [FromBody] UpdateColumnDto dto)
@@ -95,7 +95,7 @@ namespace ProjectManagement.Controllers
 
             if (dto.WipLimit.HasValue) column.WipLimit = dto.WipLimit;
 
-            /// Nếu thay đổi position, điều chỉnh position các cột khác tương ứng.
+            // Nếu thay đổi position, điều chỉnh position các cột khác tương ứng.
             if (dto.Position.HasValue && dto.Position.Value != column.Position)
             {
                 var oldPos = column.Position;
@@ -123,7 +123,7 @@ namespace ProjectManagement.Controllers
         }
 
 
-        /// Xóa cột và điều chỉnh position của các cột còn lại (dịch xuống -1).
+        // Xóa cột và điều chỉnh position của các cột còn lại (dịch xuống -1).
         [HttpDelete("{columnId:int}")]
         public async Task<IActionResult> Delete(int boardId, int columnId)
         {
@@ -133,7 +133,7 @@ namespace ProjectManagement.Controllers
             var pos = column.Position;
             _db.Columns.Remove(column);
 
-            // dời các cột phía sau lên
+            // Dời các cột phía sau lên
             var toShift = await _db.Columns.Where(c => c.BoardId == boardId && c.Position > pos).ToListAsync();
             foreach (var c in toShift) c.Position--;
 

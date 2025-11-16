@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProjectManagement.Domain.Entities;
 
-/// Controller quản lý dự án: tạo/xem/sửa/xóa project và quản lý thành viên (thêm, đổi vai trò, xóa, chuyển owner).
+// Controller quản lý dự án: tạo/xem/sửa/xóa project và quản lý thành viên (thêm, đổi vai trò, xóa, chuyển owner).
 namespace ProjectManagement.Controllers
 {
     [ApiController]
@@ -43,8 +43,8 @@ namespace ProjectManagement.Controllers
         public record ChangeOwnerDto(string NewOwnerId);
 
 
-        /// Tạo project mới. Người tạo được gán làm owner và ProjectAdmin mặc định.
-        /// Khi tạo project, tự động tạo 1 Board mặc định và 3 cột (To Do, In Progress, Done).
+        // Tạo project mới. Người tạo được gán làm owner và ProjectAdmin mặc định.
+        // Khi tạo project, tự động tạo 1 Board mặc định và 3 cột (To Do, In Progress, Done).
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateProjectDto dto)
         {
@@ -83,7 +83,7 @@ namespace ProjectManagement.Controllers
                 var board = new Board
                 {
                     ProjectId = project.ProjectId,
-                    Name = "Board", // hoặc $"{project.Name} Board"
+                    Name = "Board",
                     Type = BoardType.Kanban,
                     CreatedAt = DateTime.UtcNow
                 };
@@ -123,7 +123,7 @@ namespace ProjectManagement.Controllers
             }
         }
 
-        /// Thêm thành viên vào project (chỉ owner). Chặn thêm trùng.
+        // Thêm thành viên vào project (chỉ owner). Chặn thêm trùng.
         [HttpPost("{projectId:int}/add/members")]
         public async Task<IActionResult> AddMember([FromRoute] int projectId, [FromBody] AddMemberDto dto)
         {
@@ -155,7 +155,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đã thêm thành viên" });
         }
 
-        /// Cập nhật vai trò thành viên (chỉ owner). Không cho đổi role của owner hiện tại.
+        // Cập nhật vai trò thành viên (chỉ owner). Không cho đổi role của owner hiện tại.
         [HttpPut("{projectId:int}/update/members/{userId}")]
         public async Task<IActionResult> UpdateMemberRole([FromRoute] int projectId, [FromRoute] string userId, [FromBody] ProjectRole role)
         {
@@ -175,7 +175,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đã cập nhật vai trò" });
         }
 
-        /// Xóa thành viên khỏi project (chỉ owner). Không thể xóa owner.
+        // Xóa thành viên khỏi project (chỉ owner). Không thể xóa owner.
         [HttpDelete("{projectId:int}/delete/members/{userId}")]
         public async Task<IActionResult> RemoveMember([FromRoute] int projectId, [FromRoute] string userId)
         {
@@ -194,7 +194,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đã xóa thành viên" });
         }
 
-        /// Chuyển quyền owner sang thành viên khác (chỉ owner).
+        // Chuyển quyền owner sang thành viên khác (chỉ owner).
         [HttpPost("{projectId:int}/update/owner")]
         public async Task<IActionResult> ChangeOwner([FromRoute] int projectId, [FromBody] ChangeOwnerDto dto)
         {
@@ -224,7 +224,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đã chuyển quyền owner" });
         }
 
-        /// Liệt kê các project mà người dùng hiện tại là thành viên (kèm vai trò và trạng thái owner).
+        // Liệt kê các project mà người dùng hiện tại là thành viên (kèm vai trò và trạng thái owner).
         [HttpGet("read")]
         public async Task<IActionResult> ListMine()
         {
@@ -264,7 +264,7 @@ namespace ProjectManagement.Controllers
             return Ok(projects);
         }
 
-        /// Lấy chi tiết project (khi là member) và danh sách members.
+        // Lấy chi tiết project (khi là member) và danh sách members.
         [HttpGet("{projectId:int}/readProject")]
         public async Task<IActionResult> GetById([FromRoute] int projectId)
         {
@@ -306,7 +306,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
-        /// Cập nhật tên/mô tả project (owner hoặc ProjectAdmin).
+        // Cập nhật tên/mô tả project (owner hoặc ProjectAdmin).
         [HttpPut("{projectId:int}/update")]
         public async Task<IActionResult> Update([FromRoute] int projectId, [FromBody] UpdateProjectDto dto)
         {
@@ -327,7 +327,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Cập nhật project thành công" });
         }
 
-        /// Xóa project (chỉ owner).
+        // Xóa project (chỉ owner).
         [HttpDelete("{projectId:int}/Delete")]
         public async Task<IActionResult> Delete([FromRoute] int projectId)
         {

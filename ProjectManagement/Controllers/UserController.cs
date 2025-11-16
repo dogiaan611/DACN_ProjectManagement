@@ -13,7 +13,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using ProjectManagement.Services;
 
-/// Controller xác thực người dùng: đăng ký, đăng nhập, xem/cập nhật hồ sơ, tự đổi vai trò và phát hành JWT.
+// Controller xác thực người dùng: đăng ký, đăng nhập, xem/cập nhật hồ sơ, tự đổi vai trò và phát hành JWT.
 namespace ProjectManagement.Controllers
 {
     [ApiController]
@@ -52,7 +52,7 @@ namespace ProjectManagement.Controllers
         public record ChangePasswordDto(string CurrentPassword, string NewPassword);
         public record ConfirmEmailDto(string Email);
 
-        /// Đăng ký tài khoản mới
+        // Đăng ký tài khoản mới
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterRequestOtp([FromBody] RequestOtpDto dto)
@@ -101,7 +101,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
         }
 
-        ///Kiểm tra các trường thông tin và gửi mã OTP đến email để đăng ký 2 bước
+        // Kiểm tra các trường thông tin và gửi mã OTP đến email để đăng ký 2 bước
         [HttpPost("register/otp")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterWithOtp([FromBody] RegisterOTPDto dto)
@@ -154,7 +154,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đăng ký thành công" });
         }
 
-        /// Đăng nhập
+        // Đăng nhập
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
@@ -176,7 +176,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { access_token = token });
         }
 
-        /// Lấy thông tin người dùng hiện tại
+        // Lấy thông tin người dùng hiện tại
         [HttpGet("read")]
         [Authorize]
         public async Task<IActionResult> ReadMe()
@@ -188,7 +188,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { user.Id, user.Email, user.Name, user.AvatarUrl, user.PhoneNumber, user.SystemRole, Roles = roles });
         }
 
-        /// Upload ảnh đại diện
+        // Upload ảnh đại diện
         [HttpPost("upload-avatar")]
         [Authorize]
         public async Task<IActionResult> UploadAvatar(IFormFile file)
@@ -290,7 +290,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Đổi mật khẩu thành công" });
         }
 
-        /// Xóa tài khoản của chính người dùng hiện tại
+        // Xóa tài khoản của chính người dùng hiện tại
         [HttpDelete("delete")]
         [Authorize]
         public async Task<IActionResult> DeleteMe([FromBody] ConfirmEmailDto dto)
@@ -315,7 +315,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Xóa tài khoản thành công" });
         }
 
-        /// Tìm kiếm người dùng theo email
+        // Tìm kiếm người dùng theo email
         [HttpGet("search")]
         [Authorize]
         public async Task<IActionResult> SearchByEmail([FromQuery] string q, [FromQuery] int limit = 5)
@@ -334,7 +334,7 @@ namespace ProjectManagement.Controllers
             return Ok(users);
         }
 
-        /// Lấy danh sách tất cả người dùng
+        // Lấy danh sách tất cả người dùng
         [HttpGet("read-all")]
         [Authorize(Roles = "system_admin")]
         public async Task<IActionResult> ReadAllUsers()
@@ -352,7 +352,7 @@ namespace ProjectManagement.Controllers
             return Ok(users);
         }
 
-        /// Tự cập nhật role của người dùng hiện tại.
+        // Tự cập nhật role của người dùng hiện tại.
         [HttpPost("update/role")]
         [Authorize(Roles = "system_admin")]
         public async Task<IActionResult> SetMyRole([FromBody] SetRoleDto dto)
@@ -397,7 +397,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Cập nhật role thành công", role = roleName });
         }
 
-        /// Tạo JWT cho người dùng kèm các claim vai trò; thời hạn token lấy từ cấu hình.
+        // Tạo JWT cho người dùng kèm các claim vai trò; thời hạn token lấy từ cấu hình.
         private string GenerateJwt(ApplicationUser user, IList<string> roles)
         {
             var jwt = _config.GetSection("Jwt");
