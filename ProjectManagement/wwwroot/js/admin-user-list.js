@@ -22,7 +22,6 @@ async function loadUserInfor(){
     const userName = document.getElementById('admin-name');
     const userEmail = document.getElementById('admin-email');
     const userPhone = document.getElementById('admin-phone');
-    const userRole = document.getElementById('admin-role');
 
     try {
         const res = await authFetch('user/read');
@@ -32,7 +31,6 @@ async function loadUserInfor(){
         userName.textContent = user.name;
         userEmail.textContent = user.email;
         userPhone.textContent = user.phoneNumber;
-        userRole.textContent = user.systemRole === 0 ? 'System Admin' : 'Member';
     } catch(err) {
         console.log("Cannot load user data",err);
     }
