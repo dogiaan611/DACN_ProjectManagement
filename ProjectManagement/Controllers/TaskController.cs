@@ -28,15 +28,13 @@ namespace ProjectManagement.Controllers
         // DTOs
         public record CreateTaskDto(string Title, string? Description, string? AssigneeId, TaskPriority? Priority = null, DateTime? DueDate = null);
 
-        // UpdateDto expanded: cho phép thay đổi cột (move) bằng TargetColumnId/TargetPosition
+        // UpdateDto simplified: chỉ cập nhật các trường cơ bản (không di chuyển cột)
         public record UpdateTaskDto(
             string? Title = null,
             string? Description = null,
             string? AssigneeId = null,
             TaskPriority? Priority = null,
-            DateTime? DueDate = null,
-            int? TargetColumnId = null,      // nếu muốn di chuyển sang cột khác
-            int? TargetPosition = null       // position trong cột đích (optional)
+            DateTime? DueDate = null
         );
 
         // Tạo task mới trong column. 
@@ -237,8 +235,6 @@ namespace ProjectManagement.Controllers
             var oldAssignee = task.AssigneeId;
             var oldPriority = task.Priority;
             var oldDue = task.DueDate;
-            var oldColumnId = task.ColumnId;
-            var oldSort = task.SortOrder;
 
             // Thực hiện thay đổi nội bộ (title/desc/priority/due/assignee)
             if (!string.IsNullOrWhiteSpace(dto.Title)) task.Title = dto.Title.Trim();
@@ -261,116 +257,43 @@ namespace ProjectManagement.Controllers
                 task.AssigneeId = null;
             }
 
-            // Nếu không có TargetColumnId => chỉ cập nhật fields thông thường
-            if (!dto.TargetColumnId.HasValue || dto.TargetColumnId.Value == task.ColumnId)
+            task.UpdatedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
+
+            // Ghi log nếu có thay đổi
+            var changed = new List<string>();
+            if (oldTitle != task.Title) changed.Add("Title");
+            if (oldDescription != task.Description) changed.Add("Description");
+            if (oldAssignee != task.AssigneeId) changed.Add("AssigneeId");
+            if (oldPriority != task.Priority) changed.Add("Priority");
+            if (oldDue != task.DueDate) changed.Add("DueDate");
+
+            if (changed.Count > 0)
             {
-                // chỉ cập nhật trường nội bộ
-                task.UpdatedAt = DateTime.UtcNow;
-                await _db.SaveChangesAsync();
-
-                // Ghi log nếu có thay đổi
-                var changed = new List<string>();
-                if (oldTitle != task.Title) changed.Add("Title");
-                if (oldDescription != task.Description) changed.Add("Description");
-                if (oldAssignee != task.AssigneeId) changed.Add("AssigneeId");
-                if (oldPriority != task.Priority) changed.Add("Priority");
-                if (oldDue != task.DueDate) changed.Add("DueDate");
-
-                if (changed.Count > 0)
-                {
-                    var newSnapshot = JsonSerializer.Serialize(new
-                    {
-                        task.Title,
-                        task.Description,
-                        task.AssigneeId,
-                        Priority = task.Priority.ToString(),
-                        task.DueDate,
-                        ColumnId = task.ColumnId,
-                        task.SortOrder
-                    });
-
-                    _db.ActivityLogs.Add(new ActivityLog
-                    {
-                        TaskId = task.TaskId,
-                        UserId = userId,
-                        Action = "Update Task - " + string.Join(", ", changed),
-                        OldValue = oldJson,
-                        NewValue = newSnapshot,
-                        CreatedAt = DateTime.UtcNow
-                    });
-                    await _db.SaveChangesAsync();
-                }
-
-                return Ok(new { message = "Task updated" });
-            }
-
-            // Nếu có TargetColumnId khác => thực hiện di chuyển task (move)
-            var targetColumn = await _db.Columns.Include(c => c.Board).FirstOrDefaultAsync(c => c.ColumnId == dto.TargetColumnId.Value);
-            if (targetColumn == null) return BadRequest("Target column không tồn tại");
-            if (targetColumn.BoardId != boardId) return BadRequest("Target column không thuộc cùng board");
-
-            // WIP check nếu chuyển sang cột khác
-            if (task.ColumnId != targetColumn.ColumnId && targetColumn.WipLimit.HasValue)
-            {
-                var targetCount = await _db.PojectTasks.CountAsync(t => t.ColumnId == targetColumn.ColumnId);
-                if (targetCount >= targetColumn.WipLimit.Value) return BadRequest("WIP limit của cột đích đã đầy");
-            }
-
-            await using var tx = await _db.Database.BeginTransactionAsync();
-            try
-            {
-                // 1) shift down tasks after old position in source column
-                var sourceTasksToShift = await _db.PojectTasks
-                    .Where(t => t.ColumnId == task.ColumnId && t.SortOrder > task.SortOrder)
-                    .ToListAsync();
-                foreach (var t in sourceTasksToShift) t.SortOrder--;
-
-                // 2) compute insert position in target
-                var targetTasks = await _db.PojectTasks.Where(t => t.ColumnId == targetColumn.ColumnId).ToListAsync();
-                var maxTarget = targetTasks.Any() ? targetTasks.Max(t => t.SortOrder) : -1;
-                var requested = dto.TargetPosition ?? (maxTarget + 1);
-                var insertPos = Math.Max(0, Math.Min(requested, maxTarget + 1));
-
-                // 3) shift up tasks in target with sort >= insertPos
-                var toShiftUp = targetTasks.Where(t => t.SortOrder >= insertPos).ToList();
-                foreach (var t in toShiftUp) t.SortOrder++;
-
-                // 4) move task
-                task.ColumnId = targetColumn.ColumnId;
-                task.SortOrder = insertPos;
-                task.UpdatedAt = DateTime.UtcNow;
-
-                await _db.SaveChangesAsync();
-
                 var newSnapshot = JsonSerializer.Serialize(new
                 {
-                    task.TaskId,
-                    OldColumn = oldColumnId,
-                    NewColumn = task.ColumnId,
-                    OldSort = oldSort,
-                    NewSort = task.SortOrder
+                    task.Title,
+                    task.Description,
+                    task.AssigneeId,
+                    Priority = task.Priority.ToString(),
+                    task.DueDate,
+                    ColumnId = task.ColumnId,
+                    task.SortOrder
                 });
 
                 _db.ActivityLogs.Add(new ActivityLog
                 {
                     TaskId = task.TaskId,
                     UserId = userId,
-                    Action = $"Move Task from Column {oldColumnId} to {task.ColumnId}",
+                    Action = "Update Task - " + string.Join(", ", changed),
                     OldValue = oldJson,
                     NewValue = newSnapshot,
                     CreatedAt = DateTime.UtcNow
                 });
-
                 await _db.SaveChangesAsync();
-                await tx.CommitAsync();
+            }
 
-                return Ok(new { message = "Task moved", taskId = task.TaskId, columnId = task.ColumnId, sortOrder = task.SortOrder });
-            }
-            catch
-            {
-                await tx.RollbackAsync();
-                throw;
-            }
+            return Ok(new { message = "Task updated" });
         }
 
         /// Xóa task.
