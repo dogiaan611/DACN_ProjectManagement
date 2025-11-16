@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\boardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\boardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\columncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\columncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\notificationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\projectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +30,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1654,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProjectController.cs",
-              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProjectController.cs",
-              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
-              "RelativeToolTip": "Controllers\\ProjectController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T14:32:07.815Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAIYBAAAAAAAAAAAAAJUBAAApAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwBMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T14:23:28.787Z",
+              "WhenOpened": "2025-11-16T16:19:34.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProjectController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProjectController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ProjectController.cs",
+              "RelativeToolTip": "Controllers\\ProjectController.cs",
+              "ViewState": "AgIAAAABAAAAAAAAAAAcwBYBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T16:19:10.129Z",
               "EditorCaption": ""
             },
             {
@@ -53,6 +65,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BoardController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\BoardController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BoardController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\BoardController.cs",
+              "RelativeToolTip": "Controllers\\BoardController.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAgwHIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T16:18:08.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ColumnController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ColumnController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ColumnController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\ColumnController.cs",
+              "RelativeToolTip": "Controllers\\ColumnController.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAAwIcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T16:18:26.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotificationController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\NotificationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NotificationController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\NotificationController.cs",
+              "RelativeToolTip": "Controllers\\NotificationController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwAYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T16:18:57.275Z",
+              "EditorCaption": ""
             }
           ]
         },

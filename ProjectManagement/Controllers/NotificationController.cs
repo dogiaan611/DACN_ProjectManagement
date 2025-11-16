@@ -4,6 +4,7 @@ using ProjectManagement.Services;
 using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
 
+///Controler thông báo: Gửi email và OTP
 namespace ProjectManagement.Controllers
 {
     [ApiController]

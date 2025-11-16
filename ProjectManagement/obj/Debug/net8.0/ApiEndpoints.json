@@ -1,5 +1,110 @@
 [
   {
+    "ContainingType": "ProjectManagement.Controllers.ColumnController",
+    "Method": "Create",
+    "RelativePath": "boards/{boardId}/columns",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ColumnController\u002BCreateColumnDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ColumnController",
+    "Method": "List",
+    "RelativePath": "boards/{boardId}/columns",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ColumnController",
+    "Method": "Get",
+    "RelativePath": "boards/{boardId}/columns/{columnId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ColumnController",
+    "Method": "Update",
+    "RelativePath": "boards/{boardId}/columns/{columnId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ColumnController\u002BUpdateColumnDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ColumnController",
+    "Method": "Delete",
+    "RelativePath": "boards/{boardId}/columns/{columnId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_5",
     "RelativePath": "db/ping",
@@ -63,6 +168,85 @@
       {
         "Name": "dto",
         "Type": "ProjectManagement.Controllers.ProjectController\u002BAddMemberDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.BoardController",
+    "Method": "CreateBoard",
+    "RelativePath": "projects/{projectId}/boards",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.BoardController\u002BCreateBoardDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.BoardController",
+    "Method": "ListBoards",
+    "RelativePath": "projects/{projectId}/boards",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.BoardController",
+    "Method": "GetBoard",
+    "RelativePath": "projects/{projectId}/boards/{boardId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.BoardController",
+    "Method": "DeleteBoard",
+    "RelativePath": "projects/{projectId}/boards/{boardId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

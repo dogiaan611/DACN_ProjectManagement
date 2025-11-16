@@ -44,6 +44,7 @@ namespace ProjectManagement.Controllers
 
 
         /// Tạo project mới. Người tạo được gán làm owner và ProjectAdmin mặc định.
+        /// Khi tạo project, tự động tạo 1 Board mặc định và 3 cột (To Do, In Progress, Done).
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateProjectDto dto)
         {
@@ -52,29 +53,74 @@ namespace ProjectManagement.Controllers
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
-            var project = new Project
+            // Dùng transaction để đảm bảo project, member, board và columns được tạo đồng bộ
+            await using var tx = await _db.Database.BeginTransactionAsync();
+            try
             {
-                Name = dto.Name.Trim(),
-                Description = dto.Description?.Trim() ?? string.Empty,
-                Type = dto.Type,
-                CreatedById = currentUserId,
-                CreatedAt = DateTime.UtcNow
-            };
+                var project = new Project
+                {
+                    Name = dto.Name.Trim(),
+                    Description = dto.Description?.Trim() ?? string.Empty,
+                    Type = dto.Type,
+                    CreatedById = currentUserId,
+                    CreatedAt = DateTime.UtcNow
+                };
 
-            _db.Projects.Add(project);
-            await _db.SaveChangesAsync();
+                _db.Projects.Add(project);
+                await _db.SaveChangesAsync();
 
-            var ownerMember = new ProjectMember
+                var ownerMember = new ProjectMember
+                {
+                    ProjectId = project.ProjectId,
+                    UserId = currentUserId,
+                    Role = ProjectRole.ProjectAdmin,
+                    IsOwner = true
+                };
+                _db.ProjectMembers.Add(ownerMember);
+                await _db.SaveChangesAsync();
+
+                // Tạo board mặc định cho project mới
+                var board = new Board
+                {
+                    ProjectId = project.ProjectId,
+                    Name = "Board", // hoặc $"{project.Name} Board"
+                    Type = BoardType.Kanban,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _db.Boards.Add(board);
+                await _db.SaveChangesAsync();
+
+                // Tạo 3 cột mặc định
+                var defaultColumns = new[]
+                {
+                    new Column { BoardId = board.BoardId, Name = "To Do", Position = 0, CreatedAt = DateTime.UtcNow },
+                    new Column { BoardId = board.BoardId, Name = "In Progress", Position = 1, CreatedAt = DateTime.UtcNow },
+                    new Column { BoardId = board.BoardId, Name = "Done", Position = 2, CreatedAt = DateTime.UtcNow }
+                };
+                _db.Columns.AddRange(defaultColumns);
+                await _db.SaveChangesAsync();
+
+                await tx.CommitAsync();
+
+                // Trả về thông tin project và board mặc định
+                return Ok(new
+                {
+                    project.ProjectId,
+                    project.Name,
+                    project.Type,
+                    DefaultBoard = new
+                    {
+                        board.BoardId,
+                        board.Name,
+                        Columns = defaultColumns.Select(c => new { c.ColumnId, c.Name, c.Position })
+                    }
+                });
+            }
+            catch
             {
-                ProjectId = project.ProjectId,
-                UserId = currentUserId,
-                Role = ProjectRole.ProjectAdmin,
-                IsOwner = true
-            };
-            _db.ProjectMembers.Add(ownerMember);
-            await _db.SaveChangesAsync();
-
-            return Ok(new { project.ProjectId, project.Name, project.Type });
+                await tx.RollbackAsync();
+                throw;
+            }
         }
 
         /// Thêm thành viên vào project (chỉ owner). Chặn thêm trùng.
@@ -230,7 +276,7 @@ namespace ProjectManagement.Controllers
 
             var project = await _db.Projects.FirstOrDefaultAsync(p => p.ProjectId == projectId);
             if (project == null) return NotFound();
-            //join bảng để lấy user name và avt
+            //Vào bảng để lấy user name và avt
             var members = await _db.ProjectMembers
                 .Where(pm => pm.ProjectId == projectId)
                 .Join(_db.Users,

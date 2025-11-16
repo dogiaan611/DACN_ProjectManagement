@@ -1,8 +1,8 @@
 wwwroot\components\settings_sidebar.html
-wwwroot\components\sidebar.html
+wwwroot\js\project-detail.js
 wwwroot\components\user_settings.html
 wwwroot\css\input.css
-wwwroot\css\site.css
+wwwroot\js\project-board.js
 wwwroot\goodbye.html
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (10).png
@@ -50,8 +50,8 @@ wwwroot\js\auth.js
 wwwroot\js\home.js
 wwwroot\js\login.js
 wwwroot\js\project-add-members.js
-wwwroot\js\project-detail.js
-wwwroot\js\project-edit.js
+wwwroot\js\admin-user-list.js
+wwwroot\css\site.css
 wwwroot\js\project-modal.js
 wwwroot\js\project-sidebar.js
 wwwroot\js\register.js
@@ -60,10 +60,10 @@ wwwroot\js\settings-modal.js
 wwwroot\js\settings-password.js
 wwwroot\js\settings-profile.js
 wwwroot\js\sidebar-dropdown.js
-wwwroot\js\sidebar.js
+wwwroot\components\sidebar.html
 wwwroot\js\user-settings-autosave.js
 wwwroot\loginPage.html
-wwwroot\project.html
+wwwroot\adminUser.html
 wwwroot\registerPage.html
 wwwroot\uploads\avatars\.gitkeep
 wwwroot\uploads\avatars\avatar_231a3783-b4af-490d-a354-076ec12b3686_20251026055036.jpg
@@ -94,3 +94,8 @@ wwwroot\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_202510301447
 wwwroot\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg
 wwwroot\uploads\avatars\avatar_fb7f9712-10f8-47e9-acd7-6e29b84b0860_20251026174721.jpg
 wwwroot\uploads\avatars\avatar_3bed22de-500c-4ed9-bfdf-1b26080456bf_20251116141313.jpeg
+wwwroot\js\project-edit.js
+wwwroot\js\project-list.js
+wwwroot\js\sidebar.js
+wwwroot\project.html
+wwwroot\uploads\avatars\avatar_faa7330c-4c1f-4089-ba44-cc824155bd3e_20251116155101.jpeg
