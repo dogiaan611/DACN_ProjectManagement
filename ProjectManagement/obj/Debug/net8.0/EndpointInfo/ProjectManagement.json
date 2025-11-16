@@ -480,6 +480,18 @@
         }
       }
     },
+    "/user/read-all": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/user/upload-avatar": {
       "post": {
         "tags": [

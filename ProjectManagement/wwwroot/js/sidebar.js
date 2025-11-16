@@ -5,6 +5,7 @@ import { open as openSettingsModal } from './settings-modal.js';
 import { open as openDropdownModal } from './sidebar-dropdown.js';
 import { initHome } from './home.js';
 import { initProjectDetail } from './project-detail.js';
+import { loadUserList } from './admin-user-list.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -34,6 +35,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           avataEl.src = data.avatarUrl;
           avataEl.alt = data.name ?? data.Name ?? 'User';
         }
+
+        // Hiển thị link admin nếu người dùng có vai trò là SystemAdmin (SystemRole === 0)
+        const adminLink = document.getElementById('admin-user-link');
+        if (adminLink && data.systemRole === 0) {
+          adminLink.classList.remove('hidden');
+        }
+
       }
     } catch (err) {
       console.error('Load user for sidebar failed:', err);
@@ -87,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sidebarContainer = document.getElementById('sidebar-container');
     if (!sidebarContainer) return;
 
-    const link = e.target.closest("a[id='sidebar-link']");
+    const link = e.target.closest("a[id='sidebar-link'], a[id='admin-user-link']");
     if (!link || !sidebarContainer.contains(link)) return;
 
     const href = link.getAttribute("href");
@@ -205,6 +213,8 @@ export async function loadPage(url) {
         setTimeout(() => {
           initProjectDetail().catch(err => console.error('Lỗi khi khởi tạo trang project:', err));
         }, 50);
+      } else if (pagePath.includes('adminUser.html')) {
+        loadUserList().catch(err => console.error('Lỗi khi khởi tạo trang admin user:', err));
       }
     });
 

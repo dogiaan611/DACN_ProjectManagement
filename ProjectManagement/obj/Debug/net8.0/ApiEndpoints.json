@@ -259,6 +259,16 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.UserController",
+    "Method": "ReadAllUsers",
+    "RelativePath": "user/read-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.UserController",
     "Method": "RegisterRequestOtp",
     "RelativePath": "user/register",
     "HttpMethod": "POST",
