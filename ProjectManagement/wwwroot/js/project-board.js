@@ -56,15 +56,15 @@ async function createBoard(tasks, projectId) {
         const titleColour = (title) => {
             switch (title) { // The title property from the column object
                 case 'To Do':
-                    return 'border-l-4 rounded-l px-3 py-1';
-                case 'In Progress':
                     return 'border-l-4 rounded-l border-l-blue-500 px-3 py-1';
+                case 'In Progress':
+                    return 'border-l-4 rounded-l border-l-orange-500 px-3 py-1';
                 case 'Review':
-                    return 'rounded-l px-3 py-1 border-orange-500 border-l-4';
+                    return 'rounded-l px-3 py-1 border-purple-500 border-l-4';
                 case 'Done':
-                    return 'rounded-l px-3 py-1 border-l-4 border-l-green-200';
+                    return 'rounded-l px-3 py-1 border-l-4 border-l-green-500';
                 default:
-                    return 'rounded-2xl px-3 py-1 bg-gray-200';
+                    return 'rounded-l px-3 py-1 border-l-4 border-l-purple-500';
             }
         }
 
@@ -107,11 +107,16 @@ async function createBoard(tasks, projectId) {
 
         // Tạo HTML cho toàn bộ cột
         return `
-            <div class="flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 border" id="column-${column.columnId}">
+            <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 border bg-gray-50" id="column-${column.columnId}">
                 <div class="flex flex-row justify-between mb-4 items-center transition-colors duration-100">
                     <h3 class="px-1 tracking-wide ${titleColour(column.name)}">${column.name}</h3>
-                    <div role="button" class="add-task-btn flex hover:bg-gray-200 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <div class="group-hover:opacity-100 opacity-0 flex items-center transition-opacity duration-200">
+                        <div role="button" class="column-option-btn flex hover:bg-gray-100 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                        </div>
+                        <div role="button" class="add-task-btn flex hover:bg-gray-100 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div class="tasks-container flex-grow min-h-[100px] flex flex-col gap-4" data-column-id="${column.columnId}">
@@ -221,11 +226,28 @@ function createTaskModalHtml() {
     `;
 }
 
+async function addColumn(boardId, payload) {
+    try {
+        const res = await authFetch(`/boards/${boardId}/columns`, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+            throw new Error('Failed to add new column');
+        }
+        return res.json();
+    } catch (err) {
+        console.error('Error adding column:', err);
+        throw err; // Re-throw the error to be handled by the caller
+    }
+}
+
 function addEventListeners(tasks, projectId, container) {
     const modal = document.getElementById('task-modal');
     const taskForm = document.getElementById('task-form');
     const cancelBtn = document.getElementById('modal-cancel');
     const addTaskBtns = document.querySelectorAll('.add-task-btn');
+    const addColumnBtn = document.getElementById('add-column-btn');
 
     const openModal = (columnId) => {
         taskForm.reset();
@@ -283,4 +305,68 @@ function addEventListeners(tasks, projectId, container) {
         addEventListeners(tasks, projectId, container); // Gắn lại event listeners cho các nút mới
         closeModal();
     });
+
+    if (addColumnBtn) {
+        addColumnBtn.addEventListener('click', async () => {
+            addColumnBtn.classList.add('hidden');
+
+            const formHtml = `
+                <div id="new-column-form-container" class="min-w-[250px] max-w-[280px] rounded-lg border-blue-400 border p-2 flex flex-col mb-3 h-fit">
+                    <form id="new-column-form" class="flex gap-1 items-center justify-between">
+                        <input type="text" id="new-column-name" placeholder="Enter column name..." class="transition-colors duration-200 w-full px-2 py-1 border-none rounded-md outline-none" required autocomplete="off">
+                        <button type="submit" class="flex items-center justify-center rounded-md bg-blue-400 text-white px-2 py-1">
+                            Done
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-corner-down-left-icon lucide-corner-down-left"><path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/></svg>
+                        </button>
+                    </form>
+                </div>
+            `;
+
+            addColumnBtn.insertAdjacentHTML('afterend', formHtml);
+
+            const formContainer = document.getElementById('new-column-form-container');
+            const form = document.getElementById('new-column-form');
+            const input = document.getElementById('new-column-name');
+
+            input.focus();
+
+            const cleanup = () => {
+                formContainer.remove();
+                addColumnBtn.classList.remove('hidden');
+            };
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const columnName = input.value.trim();
+                if (columnName) {
+                    try {
+                        const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
+                        const boards = await boardsResponse.json();
+                        const boardId = boards[0]?.boardId;
+
+                        if (boardId) {
+                            await addColumn(boardId, { name: columnName });
+                            initProjectBoard(); // Tải lại toàn bộ board
+                        } else {
+                            throw new Error("Board ID not found.");
+                        }
+                    } catch (error) {
+                        console.error('Error adding column:', error);
+                        alert('Error: Could not add the new column.');
+                        cleanup(); // Dọn dẹp nếu có lỗi
+                    }
+                }
+            });
+
+            input.addEventListener('blur', () => {
+                // Đợi một chút để xem có phải là do submit form không
+                setTimeout(() => {
+                    // Nếu input vẫn còn trên DOM (chưa bị xóa bởi submit thành công) thì mới cleanup
+                    if (document.getElementById('new-column-name')) {
+                        cleanup();
+                    }
+                }, 100);
+            });
+        });
+    }
 }
