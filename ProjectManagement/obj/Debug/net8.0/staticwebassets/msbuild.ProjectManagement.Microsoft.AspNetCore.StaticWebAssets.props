@@ -894,8 +894,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>32yp0lhx25</Fingerprint>
-      <Integrity>VcNhpMGHGce9bvWcGZOCxW7NychWcCDoIr+LsBHagDw=</Integrity>
+      <Fingerprint>1wqd3siwvs</Fingerprint>
+      <Integrity>YbwmV1tQ5542z+kvMV+ht8UkNGMB8PoX0m+Vc7fe0ko=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\admin-user-list.js'))</OriginalItemSpec>
@@ -984,8 +984,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>u4z3g2gax3</Fingerprint>
-      <Integrity>nqxeDZDSCh0Ho4m1E7lEntEE9cSqgllzenBymM4P1EM=</Integrity>
+      <Fingerprint>wwxbtpz5br</Fingerprint>
+      <Integrity>cDH3YNrj5MsdrFSXDG4W877HMgKnx11lXTugrteY3SM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project-board.js'))</OriginalItemSpec>
@@ -1781,6 +1781,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_faa7330c-4c1f-4089-ba44-cc824155bd3e_20251116155101.jpeg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjectManagement</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjectManagement</BasePath>
+      <RelativePath>uploads/avatars/avatar_faa7330c-4c1f-4089-ba44-cc824155bd3e_20251116155101.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>j9v9koq5f8</Fingerprint>
+      <Integrity>h9rEOkVrlsxDa0NiPzf5/Gobt8J3l86AN1osjESnZBQ=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_faa7330c-4c1f-4089-ba44-cc824155bd3e_20251116155101.jpeg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\avatars\avatar_fb7f9712-10f8-47e9-acd7-6e29b84b0860_20251026174721.jpg'))">
       <SourceType>Package</SourceType>

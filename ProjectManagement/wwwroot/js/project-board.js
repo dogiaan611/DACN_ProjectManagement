@@ -17,39 +17,54 @@ export async function initProjectBoard() {
         { id: 6, title: 'Sửa lỗi hiển thị trên mobile', description: 'Lỗi vỡ giao diện trên màn hình nhỏ.', status: 'Done', priority: 'Medium' },
     ];
 
-    container.innerHTML = createBoard(tasks);
+    container.innerHTML = await createBoard(tasks, projectId);
 
     // Thêm modal vào body và ẩn nó đi
     document.body.insertAdjacentHTML('beforeend', createTaskModalHtml());
 
     addDragAndDropHandlers(tasks);
-    addEventListeners(tasks, projectId);
+    addEventListeners(tasks, projectId, container);
 }
 
-function createBoard(tasks) {
-    const columns = [
-        { id: 'ToDo', title: 'To Do' },
-        { id: 'InProgress', title: 'In Progress' },
-        { id: 'InReview', title: 'Review' },
-        { id: 'Done', title: 'Done' }
-    ];
+async function createBoard(tasks, projectId) {
+    // Fetch boards for the project
+    const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
+    if (!boardsResponse.ok) {
+        console.error("Failed to fetch boards");
+        return `<p class="text-red-500">Error loading project boards.</p>`;
+    }
+    const boards = await boardsResponse.json();
 
+    if (!boards || boards.length === 0) {
+        return `<p>No boards found for this project.</p>`;
+    }
+
+    // Assume we are working with the first board
+    const boardId = boards[0].boardId;
+
+    // Fetch columns for the board
+    const columnsResponse = await authFetch(`/boards/${boardId}/columns`);
+    if (!columnsResponse.ok) {
+        return `<p class="text-red-500">Error loading board columns.</p>`;
+    }
+    const columns = await columnsResponse.json();
+    
     const columnsHtml = columns.map(column => {
         // Lọc các task thuộc về cột hiện tại
-        const tasksInColumn = tasks.filter(task => task.status === column.id);
+        const tasksInColumn = tasks.filter(task => task.status === column.columnId);
 
         const titleColour = (title) => {
-            switch (title) {
+            switch (title) { // The title property from the column object
                 case 'To Do':
-                    return 'text-blue-500 bg-blue-50';
+                    return 'border-l-4 rounded-l px-3 py-1';
                 case 'In Progress':
-                    return 'text-yellow-500 bg-yellow-50';
+                    return 'border-l-4 rounded-l border-l-blue-500 px-3 py-1';
                 case 'Review':
-                    return 'text-orange-500 bg-orange-50';
+                    return 'rounded-l px-3 py-1 border-orange-500 border-l-4';
                 case 'Done':
-                    return 'text-green-500 bg-green-50';
+                    return 'rounded-l px-3 py-1 border-l-4 border-l-green-200';
                 default:
-                    return 'text-gray-500 bg-gray-50';
+                    return 'rounded-2xl px-3 py-1 bg-gray-200';
             }
         }
 
@@ -92,24 +107,33 @@ function createBoard(tasks) {
 
         // Tạo HTML cho toàn bộ cột
         return `
-            <div class="flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 ${titleColour(column.title)}" id="column-${column.id.toLowerCase()}">
+            <div class="flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 border" id="column-${column.columnId}">
                 <div class="flex flex-row justify-between mb-4 items-center transition-colors duration-100">
-                    <h3 class="font-bold px-1 tracking-wide">${column.title}</h3>
-                    <div role="button" class="add-task-btn flex hover:bg-gray-200 border-none rounded cursor-pointer p-1" data-column-id="${column.id}">
+                    <h3 class="px-1 tracking-wide ${titleColour(column.name)}">${column.name}</h3>
+                    <div role="button" class="add-task-btn flex hover:bg-gray-200 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </div>
                 </div>
-                <div class="tasks-container flex-grow min-h-[100px] flex flex-col gap-4" data-column-id="${column.id}">
+                <div class="tasks-container flex-grow min-h-[100px] flex flex-col gap-4" data-column-id="${column.columnId}">
                     ${tasksHtml}
                 </div>
             </div>
         `;
     }).join('');
 
+    const addColumnButtonHtml = `
+        <div role="button" id="add-column-btn" class="min-w-[250px] max-w-[280px] rounded-lg p-3 flex justify-center mb-3 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-colors h-fit">
+            <div class="flex items-center gap-2 text-gray-700 font-normal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <span>Add column</span>
+            </div>
+        </div>
+    `;
+
     // Trả về HTML của toàn bộ bảng Kanban
     return `
         <div class="flex gap-6 h-full overflow-x-auto">
-            ${columnsHtml}
+            ${columnsHtml}${addColumnButtonHtml}
         </div>
     `;
 }
@@ -197,7 +221,7 @@ function createTaskModalHtml() {
     `;
 }
 
-function addEventListeners(tasks, projectId) {
+function addEventListeners(tasks, projectId, container) {
     const modal = document.getElementById('task-modal');
     const taskForm = document.getElementById('task-form');
     const cancelBtn = document.getElementById('modal-cancel');
@@ -227,7 +251,7 @@ function addEventListeners(tasks, projectId) {
         }
     });
 
-    taskForm.addEventListener('submit', (e) => {
+    taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(taskForm);
         const newTask = {
@@ -253,11 +277,10 @@ function addEventListeners(tasks, projectId) {
         // });
         
         // Tạm thời cập nhật giao diện với dữ liệu mẫu
-        const container = document.getElementById('project-content');
         tasks.push(newTask);
-        container.innerHTML = createBoard(tasks);
+        container.innerHTML = await createBoard(tasks, projectId);
         addDragAndDropHandlers(tasks);
-        addEventListeners(tasks, projectId); // Gắn lại event listeners cho các nút mới
+        addEventListeners(tasks, projectId, container); // Gắn lại event listeners cho các nút mới
         closeModal();
     });
 }
