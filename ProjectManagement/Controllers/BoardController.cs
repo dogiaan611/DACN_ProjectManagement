@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace ProjectManagement.Controllers
 {
-    /// Controller quản lý Board trong một Project: Tạo(tự động tạo 3 board mặc định), Liệt kê, Xóa
+    // Controller quản lý Board trong một Project: Tạo(tự động tạo 3 board mặc định), liệt kê, xóa
     [ApiController]
     [Route("projects/{projectId:int}/boards")]
     [Authorize]
@@ -26,7 +26,7 @@ namespace ProjectManagement.Controllers
 
         public record CreateBoardDto(string Name, BoardType? Type = null);
 
-        /// Tạo board mới cho project. Nếu thành công sẽ auto-create 3 cột mặc định: To Do, In Progress, Done.
+        // Tạo board mới cho project. Nếu thành công sẽ auto-create 3 cột mặc định: To Do, In Progress, Done.
         [HttpPost]
         public async Task<IActionResult> CreateBoard(int projectId, [FromBody] CreateBoardDto dto)
         {
@@ -93,7 +93,7 @@ namespace ProjectManagement.Controllers
             return CreatedAtAction(nameof(GetBoard), new { projectId = projectId, boardId = board.BoardId }, created);
         }
 
-        /// Liệt kê các board của project.
+        // Liệt kê các board của project.
         [HttpGet]
         public async Task<IActionResult> ListBoards(int projectId)
         {
@@ -111,7 +111,7 @@ namespace ProjectManagement.Controllers
             return Ok(boards);
         }
 
-        /// Lấy chi tiết board kèm danh sách cột (theo position).
+        // Lấy chi tiết board kèm danh sách cột (theo position).
         [HttpGet("{boardId:int}")]
         public async Task<IActionResult> GetBoard(int projectId, int boardId)
         {
@@ -137,7 +137,7 @@ namespace ProjectManagement.Controllers
             return Ok(board);
         }
 
-        /// Xóa board. Kiểm tra membership trước khi xóa.
+        // Xóa board. Kiểm tra membership trước khi xóa.
         [HttpDelete("{boardId:int}")]
         public async Task<IActionResult> DeleteBoard(int projectId, int boardId)
         {

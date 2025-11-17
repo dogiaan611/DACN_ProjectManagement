@@ -71,7 +71,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    // Add JWT Bearer to Swagger UI
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ProjectManagement", Version = "v1" });
     var securityScheme = new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {

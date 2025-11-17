@@ -105,6 +105,193 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ProjectManagement.Controllers.TaskController",
+    "Method": "Create",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.TaskController\u002BCreateTaskDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.TaskController",
+    "Method": "List",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.TaskController",
+    "Method": "Get",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.TaskController",
+    "Method": "Update",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.TaskController\u002BUpdateTaskDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.TaskController",
+    "Method": "Delete",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ActivityLogController",
+    "Method": "List",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/activity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.ActivityLogController",
+    "Method": "Create",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/activity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.ActivityLogController\u002BCreateActivityDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Program\u002B\u003C\u003Ec",
     "Method": "\u003C\u003CMain\u003E$\u003Eb__0_5",
     "RelativePath": "db/ping",
