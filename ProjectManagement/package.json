@@ -13,6 +13,7 @@
     "watch:css": "npx tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/site.css --watch"
   },
   "dependencies": {
-    "lucide": "^0.545.0"
+    "lucide": "^0.545.0",
+    "vanilla-calendar-pro": "^3.0.5"
   }
 }

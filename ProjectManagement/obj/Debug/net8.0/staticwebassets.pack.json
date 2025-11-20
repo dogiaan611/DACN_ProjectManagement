@@ -205,6 +205,18 @@
       "PackagePath": "staticwebassets\\js\\auth.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\column.js",
+      "PackagePath": "staticwebassets\\js\\column.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\components\\calendar.js",
+      "PackagePath": "staticwebassets\\js\\components\\calendar.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\drag-drop.js",
+      "PackagePath": "staticwebassets\\js\\drag-drop.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\home.js",
       "PackagePath": "staticwebassets\\js\\home.js"
     },
@@ -269,6 +281,10 @@
       "PackagePath": "staticwebassets\\js\\sidebar.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task.js",
+      "PackagePath": "staticwebassets\\js\\task.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
       "PackagePath": "staticwebassets\\js\\user-settings-autosave.js"
     },
@@ -283,6 +299,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\registerPage.html",
       "PackagePath": "staticwebassets\\registerPage.html"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\test.html",
+      "PackagePath": "staticwebassets\\test.html"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\.gitkeep",
