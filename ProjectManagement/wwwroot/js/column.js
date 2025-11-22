@@ -19,8 +19,8 @@ function getColumnTitleColour(title) {
 
 export function createColumnHtml(column, tasksHtml, boardId, taskCount) {
     return `
-        <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible" id="column-${column.columnId}" draggable="true">
-            <div class="flex flex-row justify-between mb-4 py-2 px-1 rounded-md bg-white border items-center transition-colors duration-100">
+        <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible bg-gray-50" id="column-${column.columnId}" draggable="true">
+            <div class="flex flex-row justify-between mb-4 py-2 px-1 rounded-md bg-white items-center transition-colors duration-100">
                 <div class="px-2 flex gap-1 items-center justify-start">
                     <div class="${getColumnTitleColour(column.name)}"></div>
                     <div class="flex items-center justify-center gap-1">

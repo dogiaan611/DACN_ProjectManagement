@@ -10,19 +10,19 @@ import { createTaskDetailModalHtml, createTaskCardHtml, createTaskFormHtml, togg
 //         onDrop: async (e) => {
 //             const droppedOnColumn = e.currentTarget;
 //             const draggedTask = droppedOnColumn.querySelector('.dragging');
-
+// 
 //             if (!draggedTask) return;
-
+// 
 //             const taskId = draggedTask.dataset.taskId;
 //             const newColumnId = droppedOnColumn.dataset.columnId;
 //             const boardId = droppedOnColumn.dataset.boardId;
-
+// 
 //             // Calculate new position (index in the list of tasks)
 //             const tasksInColumn = [...droppedOnColumn.querySelectorAll('[draggable="true"]')];
 //             const newPosition = tasksInColumn.indexOf(draggedTask);
-
+// 
 //             console.log(`Moving task ${taskId} to column ${newColumnId} at position ${newPosition}`);
-
+// 
 //             try {
 //                 const res = await authFetch(`/boards/${boardId}/columns/${newColumnId}/tasks/${taskId}`, {
 //                     method: 'PUT',
@@ -31,13 +31,13 @@ import { createTaskDetailModalHtml, createTaskCardHtml, createTaskFormHtml, togg
 //                         position: newPosition
 //                     })
 //                 });
-
+// 
 //                 if (!res.ok) {
 //                     throw new Error('Failed to update task position');
 //                 }
 //             } catch (error) {
 //                 console.error('Error moving task:', error);
-
+// 
 export async function openTaskDetailModal(taskId, projectId, boardId, columnId) {
     await closeTaskDetailModal();
     try {
@@ -370,6 +370,49 @@ export function closeTaskDetailModal() {
 
 export function initTaskEventListeners(tasks, projectId, container) {
     const addTaskBtns = document.querySelectorAll('.add-task-btn');
+
+    // Task dropdowns (3 dots)
+    const taskDropdownBtns = document.querySelectorAll('#task-dropdown-btn');
+
+    taskDropdownBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const taskCard = btn.closest('[data-task-id]');
+            if (!taskCard) return;
+
+            const taskId = taskCard.dataset.taskId;
+            const dropdownMenu = taskCard.querySelector('#task-dropdown-menu');
+
+            toggleDropdown(btn, dropdownMenu, `task-dropdown-portal-${taskId}`, (portal, closePortal) => {
+                const deleteBtn = portal.querySelector('#delete-task-btn');
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', async () => {
+                        if (confirm('Are you sure you want to delete this task?')) {
+                            try {
+                                const tasksContainer = taskCard.closest('.tasks-container');
+                                const columnId = tasksContainer.dataset.columnId;
+                                const boardId = tasksContainer.dataset.boardId;
+
+                                const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`, {
+                                    method: 'DELETE'
+                                });
+
+                                if (res.ok) {
+                                    taskCard.remove();
+                                } else {
+                                    alert('Failed to delete task');
+                                }
+                            } catch (error) {
+                                console.error('Error deleting task:', error);
+                                alert('Error deleting task');
+                            }
+                        }
+                        closePortal();
+                    });
+                }
+            });
+        });
+    });
 
     addTaskBtns.forEach(btn => {
         btn.addEventListener('click', () => {

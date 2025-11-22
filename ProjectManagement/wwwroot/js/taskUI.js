@@ -32,17 +32,20 @@ export function createTaskCardHtml(task) {
         ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-5 h-5 rounded-full border object-cover">`
         : `<div class="w-5 h-5 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${assigneeInitial}</div>`;
     return `
-        <div class="bg-white p-4 rounded-md border cursor-pointer group" draggable="true" data-task-id="${task.taskId}">
+        <div class="bg-white p-4 rounded-md cursor-pointer group" draggable="true" data-task-id="${task.taskId}">
             <div class="mb-2 flex items-center justify-between">
                 ${getPriorityChip(task.priority)}
                 <div class="flex items-center justify-center px-1 group-hover:opacity-100 opacity-0 transition-opacity duration-200">
                     <div type="button" id="task-detail-btn" class="border rounded-l-md hover:bg-gray-50 flex items-center justify-center p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                     </div>
-                    <div type="button" class="rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1">
+                    <div type="button" id="task-dropdown-btn" class="rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
                     </div>
                 </div>
+            </div>
+            <div id="task-dropdown-menu" class="hidden absolute z-10 w-48 bg-white rounded-md shadow-lg py-1">
+                <button type="button" id="delete-task-btn" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Task</button>
             </div>
             <div class="flex justify-between items-start mb-2">
                 <div class="flex items-center gap-2 cursor-text">
@@ -232,7 +235,7 @@ export function createTaskDetailModalHtml(task) {
                                 </div>
                                 
                             </div>
-                            <textarea id="task-description" class="w-full p-2 border rounded-md outline-none text-sm text-gray-700 min-h-[70px]">${task.description || ''}</textarea>
+                            <textarea id="task-description" class="w-full p-2 border rounded-md outline-none text-sm bg-gray-50 text-gray-600 min-h-[70px]">${task.description || ''}</textarea>
 
                             <div class="flex flex-col">
                                 <div class="flex justify-between">
@@ -283,17 +286,35 @@ export function closeAllPortals() {
 
 export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallback) {
     const existing = document.getElementById(portalId);
-    const wasOpen = !!existing;
+
+    // Helper function for closing with animation
+    const closeWithAnimation = (element) => {
+        element.classList.remove('scale-100', 'opacity-100');
+        element.classList.add('scale-95', 'opacity-0');
+
+        const onTransitionEnd = () => {
+            if (element.parentNode) {
+                element.remove();
+            }
+        };
+
+        element.addEventListener('transitionend', onTransitionEnd, { once: true });
+        // Fallback for safety
+        setTimeout(onTransitionEnd, 200);
+    };
 
     closeAllPortals();
 
-    if (wasOpen) return;
+    if (existing) {
+        closeWithAnimation(existing);
+        return;
+    }
 
     const portal = dropdownContent.cloneNode(true);
     portal.id = portalId;
     portal.classList.remove('hidden');
-    portal.classList.add('z-50');
-    portal.style.position = 'fixed';
+    // Add animation classes
+    portal.classList.add('z-50', 'fixed', 'transition-all', 'duration-200', 'ease-out', 'transform', 'origin-top-left', 'scale-95', 'opacity-0');
 
     const rect = triggerBtn.getBoundingClientRect();
     portal.style.top = `${rect.top + window.scrollY}px`;
@@ -302,13 +323,19 @@ export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallb
 
     document.body.appendChild(portal);
 
+    // Trigger open animation
+    requestAnimationFrame(() => {
+        portal.classList.remove('scale-95', 'opacity-0');
+        portal.classList.add('scale-100', 'opacity-100');
+    });
+
     const closePortal = (ev) => {
         if (!portal.contains(ev.target) && ev.target !== triggerBtn && !triggerBtn.contains(ev.target)) {
             if (portal._picker && typeof portal._picker.destroy === 'function') {
                 portal._picker.destroy();
             }
-            portal.remove();
             document.removeEventListener('click', closePortal);
+            closeWithAnimation(portal);
         }
     };
     document.addEventListener('click', closePortal);
@@ -317,8 +344,8 @@ export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallb
         if (portal._picker && typeof portal._picker.destroy === 'function') {
             portal._picker.destroy();
         }
-        portal.remove();
         document.removeEventListener('click', closePortal);
+        closeWithAnimation(portal);
     };
 
     if (setupCallback) {
