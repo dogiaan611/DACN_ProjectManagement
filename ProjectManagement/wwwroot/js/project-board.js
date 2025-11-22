@@ -1,7 +1,7 @@
 import { authFetch } from "./auth.js";
 import { createColumnHtml, initColumnEventListeners } from "./column.js";
-import createTaskModalHtml, { createTaskCardHtml, addDragAndDropHandlers, initTaskEventListeners } from "./task.js";
-
+import { initTaskEventListeners } from "./task.js";
+import { createTaskCardHtml, createTaskDetailModalHtml } from "./taskUI.js";
 export async function initProjectBoard() {
     const urlParams = new URLSearchParams(window.location.search);
     const container = document.getElementById('project-content');
@@ -15,11 +15,9 @@ export async function initProjectBoard() {
 
     container.innerHTML = await createBoard(tasks, projectId);
 
-    // Thêm modal vào body và ẩn nó đi
-    document.body.insertAdjacentHTML('beforeend', createTaskModalHtml());
-
-    addDragAndDropHandlers();
-    addEventListeners(tasks, projectId, container);
+    // Lấy boardId từ board đầu tiên và truyền vào event listeners
+    const firstBoardId = document.querySelector('[data-board-id]')?.dataset.boardId;
+    addEventListeners(tasks, projectId, container, firstBoardId);
 }
 
 export async function createBoard(tasks, projectId) {
@@ -57,7 +55,7 @@ export async function createBoard(tasks, projectId) {
         const tasksHtml = tasksInColumn.map(createTaskCardHtml).join('');
 
         // Tạo HTML cho toàn bộ cột
-        return createColumnHtml(column, tasksHtml, boardId);
+        return createColumnHtml(column, tasksHtml, boardId, tasksInColumn.length);
     });
 
     const columnsHtml = (await Promise.all(columnsHtmlPromises)).join('');
@@ -79,7 +77,7 @@ export async function createBoard(tasks, projectId) {
     `;
 }
 
-function addEventListeners(tasks, projectId, container) {
-    initTaskEventListeners(tasks, projectId, container);
+function addEventListeners(tasks, projectId, container, boardId) {
+    initTaskEventListeners(tasks, projectId, container, boardId);
     initColumnEventListeners(projectId);
 }

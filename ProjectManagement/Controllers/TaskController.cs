@@ -112,13 +112,16 @@ namespace ProjectManagement.Controllers
             _db.ActivityLogs.Add(createLog);
             await _db.SaveChangesAsync();
 
+            var assignee = task.AssigneeId == null ? null : await _userManager.FindByIdAsync(task.AssigneeId);
+
             return CreatedAtAction(nameof(Get), new { boardId = boardId, columnId = columnId, taskId = task.TaskId }, new
             {
                 task.TaskId,
                 task.Title,
                 task.Description,
                 task.AssigneeId,
-                AssigneeName = task.AssigneeId == null ? null : (await _userManager.FindByIdAsync(task.AssigneeId))?.Name,
+                AssigneeName = assignee?.Name,
+                AssigneeAvatarUrl = assignee?.AvatarUrl,
                 Priority = task.Priority,
                 task.DueDate,
                 task.ColumnId,
@@ -145,13 +148,15 @@ namespace ProjectManagement.Controllers
             var tasks = await _db.PojectTasks
                 .Where(t => t.ColumnId == columnId)
                 .OrderBy(t => t.SortOrder)
+                .Include(t => t.Assignee) // Eager loading thông tin Assignee
                 .Select(t => new
                 {
                     t.TaskId,
                     t.Title,
                     t.Description,
                     t.AssigneeId,
-                    AssigneeName = t.AssigneeId == null ? null : _db.Users.Where(u => u.Id == t.AssigneeId).Select(u => u.Name).FirstOrDefault(),
+                    AssigneeName = t.Assignee.Name, // Truy cập trực tiếp sau khi Include
+                    AssigneeAvatarUrl = t.Assignee.AvatarUrl, // Truy cập trực tiếp sau khi Include
                     Priority = t.Priority,
                     t.DueDate,
                     t.SortOrder,
@@ -190,6 +195,7 @@ namespace ProjectManagement.Controllers
                 task.Description,
                 task.AssigneeId,
                 AssigneeName = task.Assignee?.Name,
+                AssigneeAvatarUrl = task.Assignee?.AvatarUrl,
                 Priority = task.Priority,
                 task.DueDate,
                 task.ColumnId,

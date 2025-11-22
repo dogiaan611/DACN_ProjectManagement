@@ -285,6 +285,10 @@
       "PackagePath": "staticwebassets\\js\\task.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskUI.js",
+      "PackagePath": "staticwebassets\\js\\taskUI.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
       "PackagePath": "staticwebassets\\js\\user-settings-autosave.js"
     },

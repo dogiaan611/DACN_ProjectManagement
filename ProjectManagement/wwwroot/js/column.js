@@ -17,13 +17,16 @@ function getColumnTitleColour(title) {
     }
 }
 
-export function createColumnHtml(column, tasksHtml, boardId) {
+export function createColumnHtml(column, tasksHtml, boardId, taskCount) {
     return `
         <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible" id="column-${column.columnId}" draggable="true">
             <div class="flex flex-row justify-between mb-4 py-2 px-1 rounded-md bg-white border items-center transition-colors duration-100">
                 <div class="px-2 flex gap-1 items-center justify-start">
                     <div class="${getColumnTitleColour(column.name)}"></div>
-                    <h3 class="px-1 tracking-wide text-gray-700">${column.name}</h3>
+                    <div class="flex items-center justify-center gap-1">
+                        <h3 class="px-1 tracking-wide text-gray-700">${column.name}</h3>
+                        <span class="text-xs font-bold flex border rounded-xl px-2 py-1 text-gray-500">${taskCount}</span>
+                    </div>
                 </div>
                 <div class="group-hover:opacity-100 opacity-0 flex items-center transition-opacity duration-200">
                     <div role="button" class="column-option-btn flex hover:bg-gray-100 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
@@ -262,7 +265,7 @@ export function initColumnEventListeners(projectId) {
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.value = currentName;
-                input.className = 'w-full px-2 py-1 border border-blue-400 rounded-md outline-none';
+                input.className = 'ml-1 w-full border border-blue-400 rounded-md px-2 py-1 text-xs outline-none';
 
                 h3.replaceWith(input);
                 input.focus();
