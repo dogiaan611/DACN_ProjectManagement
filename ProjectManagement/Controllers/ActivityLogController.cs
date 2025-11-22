@@ -5,9 +5,9 @@ using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
 using System.Security.Claims;
 
+// Controller quản lý ActivityLog cho Task: Liệt kê, tạo activity log
 namespace ProjectManagement.Controllers
 {
-    // Controller quản lý ActivityLog cho Task: Liệt kê, tạo activity log
     [ApiController]
     [Route("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/activity")]
     [Authorize]

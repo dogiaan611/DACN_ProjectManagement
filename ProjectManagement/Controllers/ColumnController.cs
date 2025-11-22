@@ -5,10 +5,9 @@ using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
 using System.Security.Claims;
 
+// Controller quản lý Column trên Board; tạo cột (với position), liệt kê, lấy chi tiết, cập nhật, xóa.
 namespace ProjectManagement.Controllers
 {
-
-    // Controller quản lý Column trên Board; tạo cột (với position), liệt kê, lấy chi tiết, cập nhật, xóa.
     [ApiController]
     [Route("boards/{boardId:int}/columns")]
     [Authorize]
@@ -21,8 +20,8 @@ namespace ProjectManagement.Controllers
             _db = db;
         }
 
-        public record CreateColumnDto(string Name, int? Position = null, int? WipLimit = null);
-        public record UpdateColumnDto(string? Name = null, int? Position = null, int? WipLimit = null);
+        public record CreateColumnDto(string Name, int? Position = null, int? WipLimit = null, string? Color = null);
+        public record UpdateColumnDto(string? Name = null, int? Position = null, int? WipLimit = null, string? Color = null);
 
         // Tạo cột mới trên board.
         [HttpPost]
@@ -37,16 +36,20 @@ namespace ProjectManagement.Controllers
             var maxPos = board.Columns.Any() ? board.Columns.Max(c => c.Position) : -1;
             var position = dto.Position ?? (maxPos + 1);
 
+            // Mặc định màu trắng nếu không truyền
+            var color = string.IsNullOrWhiteSpace(dto.Color) ? "#ffffff" : dto.Color.Trim();
+
             var column = new Column
             {
                 BoardId = boardId,
                 Name = dto.Name.Trim(),
                 Position = position,
                 WipLimit = dto.WipLimit,
+                Color = color,
                 CreatedAt = DateTime.UtcNow
             };
 
-            // - Nếu chèn vào giữa, các cột có position >= vị trí mới sẽ được dịch +1.
+            // Nếu chèn vào giữa, các cột có position >= vị trí mới sẽ được dịch +1.
             if (board.Columns.Any(c => c.Position >= position))
             {
                 var toShift = board.Columns.Where(c => c.Position >= position).ToList();
@@ -56,7 +59,7 @@ namespace ProjectManagement.Controllers
             _db.Columns.Add(column);
             await _db.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), new { boardId = boardId, columnId = column.ColumnId }, new { column.ColumnId, column.Name, column.Position, column.WipLimit });
+            return CreatedAtAction(nameof(Get), new { boardId = boardId, columnId = column.ColumnId }, new { column.ColumnId, column.Name, column.Position, column.WipLimit, column.Color });
         }
 
         // Liệt kê các cột của board theo thứ tự position.
@@ -66,7 +69,7 @@ namespace ProjectManagement.Controllers
             var cols = await _db.Columns
                 .Where(c => c.BoardId == boardId)
                 .OrderBy(c => c.Position)
-                .Select(c => new { c.ColumnId, c.Name, c.Position, c.WipLimit })
+                .Select(c => new { c.ColumnId, c.Name, c.Position, c.WipLimit, c.Color })
                 .ToListAsync();
             return Ok(cols);
         }
@@ -77,7 +80,7 @@ namespace ProjectManagement.Controllers
         {
             var col = await _db.Columns
                 .Where(c => c.BoardId == boardId && c.ColumnId == columnId)
-                .Select(c => new { c.ColumnId, c.Name, c.Position, c.WipLimit })
+                .Select(c => new { c.ColumnId, c.Name, c.Position, c.WipLimit, c.Color })
                 .FirstOrDefaultAsync();
             if (col == null) return NotFound();
             return Ok(col);
@@ -94,6 +97,8 @@ namespace ProjectManagement.Controllers
             if (!string.IsNullOrWhiteSpace(dto.Name)) column.Name = dto.Name.Trim();
 
             if (dto.WipLimit.HasValue) column.WipLimit = dto.WipLimit;
+
+            if (dto.Color != null) column.Color = dto.Color.Trim();
 
             // Nếu thay đổi position, điều chỉnh position các cột khác tương ứng.
             if (dto.Position.HasValue && dto.Position.Value != column.Position)

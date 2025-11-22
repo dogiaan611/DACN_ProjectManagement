@@ -8,9 +8,9 @@ using ProjectManagement.Domain.Identity;
 using System.Security.Claims;
 using System.Text.Json;
 
+// Controller quản lý Task (ProjectTask): Tạo, lấy chi tiết, cập nhật, xóa task trong column của board.
 namespace ProjectManagement.Controllers
 {
-    // Controller quản lý Task (ProjectTask): Tạo, lấy chi tiết, cập nhật, xóa task trong column của board.
     [ApiController]
     [Route("boards/{boardId:int}/columns/{columnId:int}/tasks")]
     [Authorize]

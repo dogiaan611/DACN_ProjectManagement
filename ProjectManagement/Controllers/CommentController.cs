@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 
+// Controller quản lý Comment trên Task: tạo comment, liệt kê comment, xóa comment
 namespace ProjectManagement.Controllers
 {
-    // Controller quản lý Comment trên Task: tạo comment, liệt kê comment, xóa comment
     [ApiController]
     [Route("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments")]
     [Authorize]
