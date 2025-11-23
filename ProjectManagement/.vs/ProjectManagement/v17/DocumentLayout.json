@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|d:\\project\\dacn_projectmanagement\\projectmanagement\\controllers\\attachmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{89125E43-D6DF-48FC-BB11-B9C8A25D33E5}|ProjectManagement.csproj|solutionrelative:controllers\\attachmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,7 +26,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -31,20 +35,19 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-11-22T11:49:29.982Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AttachmentController.cs",
-              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AttachmentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AttachmentController.cs",
-              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AttachmentController.cs",
-              "RelativeToolTip": "Controllers\\AttachmentController.cs",
-              "ViewState": "AgIAAJgAAAAAAAAAAAAIwA0AAAATAAAAAAAAAA==",
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CommentController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "Controllers\\CommentController.cs",
+              "ViewState": "AgIAACgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-22T16:12:08.142Z",
+              "WhenOpened": "2025-11-23T14:24:27.908Z",
               "EditorCaption": ""
             },
             {
@@ -54,6 +57,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AttachmentController.cs",
+              "DocumentMoniker": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AttachmentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AttachmentController.cs",
+              "ToolTip": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\Controllers\\AttachmentController.cs",
+              "RelativeToolTip": "Controllers\\AttachmentController.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAIwA0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T16:12:08.142Z",
+              "EditorCaption": ""
             }
           ]
         },
