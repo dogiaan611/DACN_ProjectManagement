@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +10,47 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
+
 <body>
     <div class="w-full max-w-md mx-auto flex flex-col items-center mt-24 px-5">
         <h2 class="text-xl font-medium ">Help you manage your project.</h2>
         <h1 class="mb-4 text-2xl font-medium text-gray-300">Log in to your account</h1>
-        <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+        <button
+            class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
             <i class="fa-brands fa-google w-6 h-6 ml-2 flex content-center text-yellow-500"></i>
             <span class="flex-1 text-center text-gray-700 font-medium">Continue with Google</span>
         </button>
-        <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+        <button
+            class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
             <i class="fa-brands fa-facebook w-6 h-6 ml-2 flex content-center text-blue-500"></i>
             <span class="flex-1 text-center text-gray-700 font-medium">Continue with Facebook</span>
         </button>
-        <button class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
+        <button
+            class="w-full flex items-center justify-center border border-gray-300 rounded-lg py-3 mb-2 bg-white cursor-pointer hover:bg-gray-50 transition ">
             <i class="fa-brands fa-github w-6 h-6 ml-2 content-center text-black"></i>
             <span class="flex-1 text-center text-gray-700 font-medium">Continue with Github</span>
         </button>
         <form id="loginForm" class="w-full mt-6">
             <p id="email-msg" class="text-red-500 text-xs mt-1"></p>
             <div class="mt-5 flex flex-col w-full">
-                <label for="email" class="block text-base font-medium mb-2 text-left text-gray-400">Enter your email</label>
-                <input id="email" type="email" placeholder="Email" class="w-full border border-gray-200 px-3 py-2 rounded-lg text-base text-gray-500 placeholder-gray-400">
+                <label for="email" class="block text-base font-medium mb-2 text-left text-gray-400">Enter your
+                    email</label>
+                <input id="email" type="email" placeholder="Email"
+                    class="w-full border border-gray-200 px-3 py-2 rounded-lg text-base text-gray-500 placeholder-gray-400">
             </div>
             <div class="mt-1 flex flex-col w-full">
-                <label for="password" class="block text-base font-medium mb-2 text-left text-gray-400">Enter your password</label>
+                <label for="password" class="block text-base font-medium mb-2 text-left text-gray-400">Enter your
+                    password</label>
                 <div class="relative w-full">
-                    <input id="password" type="password" placeholder="Password" class="border border-gray-200 px-3 py-2 rounded-lg text-base text-gray-500 placeholder-gray-400 w-full">
-                    <button id="togglePassword" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer">
+                    <input id="password" type="password" placeholder="Password"
+                        class="border border-gray-200 px-3 py-2 rounded-lg text-base text-gray-500 placeholder-gray-400 w-full">
+                    <button id="togglePassword" type="button"
+                        class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer">
                         <i id="eyeIcon" class="fa-solid fa-eye mr-1"></i></button>
                 </div>
             </div>
-            <button id="login-btn" type="submit" class="w-full bg-black text-white py-2 rounded mt-5 hover:bg-gray-700 transition cursor-pointer">
+            <button id="login-btn" type="submit"
+                class="w-full bg-black text-white py-2 rounded mt-5 hover:bg-gray-700 transition cursor-pointer">
                 Login
             </button>
         </form>
@@ -47,16 +58,20 @@
             <a href="#" class="text-right underline text-blue-500 text-sm">Forgot password?</a>
         </div>
     </div>
-<!-- Loading Modal -->
-<div id="loadingModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
-    <div class="bg-white p-6 rounded-lg shadow-xl flex items-center">
-        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        <p class="text-gray-700">Đăng nhập thành công</p>
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl flex items-center">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
+            </svg>
+            <p class="text-gray-700">Đăng nhập thành công</p>
+        </div>
     </div>
-</div>
 </body>
 <script type="module" src="/js/login.js?v=2"></script>
+
 </html>

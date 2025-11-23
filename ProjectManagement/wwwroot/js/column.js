@@ -3,14 +3,14 @@ import { initProjectBoard } from "./project-board.js";
 import { initializeDragAndDrop } from "./drag-drop.js";
 
 function getColumnTitleColour(title) {
-    switch (title) {
-        case 'To Do':
+    switch (title.toLowerCase()) {
+        case 'to do':
             return 'w-3 h-3 rounded-full bg-blue-500';
-        case 'In Progress':
+        case 'in progress':
             return 'w-3 h-3 rounded-full bg-orange-500';
-        case 'Review':
+        case 'review':
             return 'w-3 h-3 rounded-full bg-purple-500';
-        case 'Done':
+        case 'done':
             return 'w-3 h-3 rounded-full bg-green-500';
         default:
             return 'w-3 h-3 rounded-full bg-pink-500';
@@ -180,24 +180,24 @@ export function initColumnEventListeners(projectId) {
 
     // Modal column option
     const columnModalHtml = `
-        <div class="p-2 border rounded-sm max-w-[200px] min-w-[170px] flex flex-col justify-start gap-1">
-            <div role="button" id="rename-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-base cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-pen-icon lucide-folder-pen"><path d="M2 11.5V5a2 2 0 0 1 2-2h3.9c.7 0 1.3.3 1.7.9l.8 1.2c.4.6 1 .9 1.7.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-9.5"/><path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>
+        <div class="py-2 px-1 border rounded-sm max-w-[200px] min-w-[170px] flex flex-col justify-start gap-1">
+            <div role="button" id="rename-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-pen-icon lucide-folder-pen"><path d="M2 11.5V5a2 2 0 0 1 2-2h3.9c.7 0 1.3.3 1.7.9l.8 1.2c.4.6 1 .9 1.7.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-9.5"/><path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg>
                 Rename
             </div>
 
-            <div role="button" id="delete-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-base cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <div role="button" id="delete-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 Delete
             </div>
 
-            <div role="button" id="set-limit-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-base cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked"><path d="M11 13H7"/><path d="M19 9h-4"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="15" y="5" width="4" height="12" rx="1"/><rect x="7" y="8" width="4" height="9" rx="1"/></svg>
+            <div role="button" id="set-limit-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked"><path d="M11 13H7"/><path d="M19 9h-4"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="15" y="5" width="4" height="12" rx="1"/><rect x="7" y="8" width="4" height="9" rx="1"/></svg>
                 Set WIP limit
             </div>
 
-            <div role="button" id="move-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-base cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical-icon lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+            <div role="button" id="move-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical-icon lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
                 Move Column
             </div>
         </div>`;
@@ -238,13 +238,14 @@ export function initColumnEventListeners(projectId) {
             requestAnimationFrame(() => {
                 popupContainer.classList.remove('opacity-0', 'scale-95');
                 popupContainer.classList.add('opacity-100', 'scale-100');
+                btn.classList.add('hidden');
             });
-
             const closePopup = (event) => {
                 if (!popupContainer.contains(event.target)) {
                     // Kích hoạt animation đóng
                     popupContainer.classList.remove('opacity-100', 'scale-100');
                     popupContainer.classList.add('opacity-0', 'scale-95');
+                    btn.classList.remove('hidden');
                     // Xóa element sau khi animation kết thúc
                     setTimeout(() => popupContainer.remove(), 200); // 200ms khớp với duration-200
                     document.removeEventListener('click', closePopup);
@@ -357,6 +358,7 @@ export function initColumnEventListeners(projectId) {
                     setTimeout(() => {
                         modal.classList.add('hidden');
                         modal.classList.remove('flex');
+                        btn.classList.remove('hidden');
                     }, 200);
                 };
 

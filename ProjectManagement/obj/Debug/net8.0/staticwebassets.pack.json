@@ -209,6 +209,10 @@
       "PackagePath": "staticwebassets\\js\\column.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\comment.js",
+      "PackagePath": "staticwebassets\\js\\comment.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\components\\calendar.js",
       "PackagePath": "staticwebassets\\js\\components\\calendar.js"
     },
@@ -283,6 +287,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task.js",
       "PackagePath": "staticwebassets\\js\\task.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskDetail.js",
+      "PackagePath": "staticwebassets\\js\\taskDetail.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskUI.js",

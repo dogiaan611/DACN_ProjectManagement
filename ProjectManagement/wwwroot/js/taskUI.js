@@ -36,16 +36,38 @@ export function createTaskCardHtml(task) {
             <div class="mb-2 flex items-center justify-between">
                 ${getPriorityChip(task.priority)}
                 <div class="flex items-center justify-center px-1 group-hover:opacity-100 opacity-0 transition-opacity duration-200">
-                    <div type="button" id="task-detail-btn" class="border rounded-l-md hover:bg-gray-50 flex items-center justify-center p-1">
+                    <div type="button" class="task-detail-btn border rounded-l-md hover:bg-gray-50 flex items-center justify-center p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                     </div>
-                    <div type="button" id="task-dropdown-btn" class="rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1">
+                    <div type="button" class="task-dropdown-btn rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
                     </div>
                 </div>
             </div>
-            <div id="task-dropdown-menu" class="hidden absolute z-10 w-48 bg-white rounded-md shadow-lg py-1">
-                <button type="button" id="delete-task-btn" class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Delete Task</button>
+            <div class="task-dropdown-menu hidden absolute z-10 w-48 bg-white border rounded-md shadow-lg py-2 px-1">
+                <div class="flex flex-col gap-1">
+                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                        Add to favourite
+                    </div>
+                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarm-clock-icon lucide-alarm-clock"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
+                        Remind me
+                    </div>
+                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+                        Move to
+                    </div>
+                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        Copy link
+                    </div>
+                    <div class="border-t border-gray-200"></div>
+                    <div type="button" class="delete-task-btn w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md hover:text-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        Delete
+                    </div>
+                </div>
             </div>
             <div class="flex justify-between items-start mb-2">
                 <div class="flex items-center gap-2 cursor-text">
@@ -250,16 +272,18 @@ export function createTaskDetailModalHtml(task) {
                                 </div>
                                 
                             </div>
-
                             <div class="flex flex-col gap-3">
-                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-dot-icon lucide-message-square-dot"><path d="M12.7 3H4a2 2 0 0 0-2 2v16.286a.71.71 0 0 0 1.212.502l2.202-2.202A2 2 0 0 1 6.828 19H20a2 2 0 0 0 2-2v-4.7"/><circle cx="19" cy="6" r="3"/></svg>
                                     Comment
                                 </div>
+                                <div id="task-comments-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto border-y py-2">
+                                    <!-- Comments will be loaded here -->
+                                </div>
                                 <div class="flex flex-col border rounded-md p-3">
-                                    <textarea class="w-full text-sm text-gray-800 outline-none rounded-md" placeholder="Add a comment..."></textarea>
+                                    <div id="new-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
                                     <div class="flex justify-end mt-2">
-                                        <button class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
+                                        <button id="add-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
                                     </div>
                                 </div>
                             </div>

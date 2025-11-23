@@ -54,10 +54,11 @@ namespace ProjectManagement.Controllers
                     c.CommentId,
                     c.TaskId,
                     c.UserId,
-                    UserName = c.User.Name,
+                    UserName = c.User.Name, // Lấy tên người comment
+                    UserAvatarUrl = c.User.AvatarUrl, // Lấy avatar người comment
                     c.Content,
                     c.CreatedAt,
-                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name })
+                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name, UserAvatarUrl = m.User.AvatarUrl })
                 })
                 .ToListAsync();
 
