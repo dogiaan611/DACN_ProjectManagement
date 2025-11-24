@@ -1,6 +1,7 @@
 import { authFetch } from './auth.js';
 import { createTaskDetailModalHtml, toggleDropdown, getPriorityChip } from "./taskUI.js";
 import { initComments } from "./comment.js";
+import { initTaskTags } from "./taskTag.js";
 
 export async function openTaskDetailModal(taskId, projectId, boardId, columnId) {
     await closeTaskDetailModal();
@@ -17,6 +18,7 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
 
         const modal = document.getElementById('task-detail-modal');
         initComments(taskId, boardId, projectId, columnId, modal);
+        initTaskTags(boardId, columnId, projectId, taskId);
 
         const backdrop = document.getElementById('task-detail-modal-backdrop');
         const closeBtn = document.getElementById('close-task-detail-modal-btn');

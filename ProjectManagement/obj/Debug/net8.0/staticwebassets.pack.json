@@ -285,12 +285,20 @@
       "PackagePath": "staticwebassets\\js\\sidebar.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\tag.js",
+      "PackagePath": "staticwebassets\\js\\tag.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task.js",
       "PackagePath": "staticwebassets\\js\\task.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskDetail.js",
       "PackagePath": "staticwebassets\\js\\taskDetail.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskTag.js",
+      "PackagePath": "staticwebassets\\js\\taskTag.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskUI.js",

@@ -219,12 +219,29 @@ export function createTaskDetailModalHtml(task) {
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                            <div class="flex items-start">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
                                     Tags
                                 </div>
-                                
+                                <div class="flex flex-wrap ml-2 gap-2 items-center relative">
+                                    <div id="task-tags-container" class="flex flex-wrap gap-2">
+                                        <!-- Tags will be rendered here -->
+                                    </div>
+                                    <button type="button" id="add-tag-btn" class="flex items-center justify-center w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 text-gray-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                    </button>
+                                    
+                                    <!-- Dropdown chọn tag -->
+                                    <div id="tag-dropdown" class="absolute top-8 left-0 z-20 w-48 bg-white border rounded-md shadow-lg hidden">
+                                        <div class="p-2 border-b">
+                                            <input type="text" id="tag-search-input" class="w-full text-xs p-1 outline-none" placeholder="Search tags...">
+                                        </div>
+                                        <div id="tag-dropdown-list" class="max-h-40 overflow-y-auto p-1 flex flex-col gap-1">
+                                            <!-- Available tags will be listed here -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="flex items-center">
