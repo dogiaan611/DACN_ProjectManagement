@@ -29,8 +29,8 @@ wwwroot\uploads\avatars\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_202510260509
 wwwroot\uploads\avatars\avatar_231a3783-b4af-490d-a354-076ec12b3686_20251026055036.jpg
 wwwroot\uploads\avatars\.gitkeep
 wwwroot\registerPage.html
-wwwroot\js\taskUI.js
-wwwroot\js\column.js
+wwwroot\test.html
+wwwroot\loginPage.html
 wwwroot\js\user-settings-autosave.js
 wwwroot\js\sidebar.js
 wwwroot\js\sidebar-dropdown.js
@@ -44,7 +44,7 @@ wwwroot\js\project-modal.js
 wwwroot\js\project-list.js
 wwwroot\js\project-edit.js
 wwwroot\js\project-detail.js
-wwwroot\js\taskDetail.js
+wwwroot\project.html
 wwwroot\js\project-add-members.js
 wwwroot\js\home.js
 wwwroot\js\auth.js
@@ -89,9 +89,9 @@ wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustra
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (10).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
 wwwroot\goodbye.html
-wwwroot\js\task.js
+wwwroot\js\taskUI.js
 wwwroot\components\user_settings.html
-wwwroot\loginPage.html
+wwwroot\components\sidebar.html
 wwwroot\adminUser.html
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (1).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (8).svg
@@ -99,11 +99,9 @@ wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustra
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (17).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (14).svg
 wwwroot\components\settings_sidebar.html
+wwwroot\js\task.js
 wwwroot\js\project-board.js
 wwwroot\js\drag-drop.js
 wwwroot\js\components\calendar.js
-wwwroot\js\comment.js
+wwwroot\js\column.js
 wwwroot\css\site.css
-wwwroot\components\sidebar.html
-wwwroot\project.html
-wwwroot\test.html

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectManagement.Data;
 
@@ -11,9 +12,11 @@ using ProjectManagement.Data;
 namespace ProjectManagement.Migrations
 {
     [DbContext(typeof(PMDbContext))]
-    partial class PMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251122164033_addComentIdAndSubTaskIdAttachment")]
+    partial class addComentIdAndSubTaskIdAttachment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -463,12 +466,7 @@ namespace ProjectManagement.Migrations
                     b.Property<string>("TempUsername")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("Email", "IsUsed", "ExpiresAtUtc");
 
@@ -982,15 +980,6 @@ namespace ProjectManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("ProjectManagement.Domain.Entities.RegistrationCode", b =>
-                {
-                    b.HasOne("ProjectManagement.Domain.Identity.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectMember", b =>

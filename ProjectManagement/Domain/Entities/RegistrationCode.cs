@@ -1,5 +1,7 @@
+using ProjectManagement.Domain.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectManagement.Domain.Entities
 {
@@ -7,6 +9,10 @@ namespace ProjectManagement.Domain.Entities
     {
         [Key]
         public int Id { get; set; }
+
+        [ForeignKey("User")]
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
 
         [Required]
         [MaxLength(256)]

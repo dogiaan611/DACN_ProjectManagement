@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectManagement.Data;
 
@@ -11,9 +12,11 @@ using ProjectManagement.Data;
 namespace ProjectManagement.Migrations
 {
     [DbContext(typeof(PMDbContext))]
-    partial class PMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251122153743_updateColorColumn")]
+    partial class updateColorColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,16 +72,10 @@ namespace ProjectManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttachmentId"));
 
-                    b.Property<int?>("CommentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FilePath")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<int?>("SubtaskId")
-                        .HasColumnType("int");
 
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
@@ -90,10 +87,6 @@ namespace ProjectManagement.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AttachmentId");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("SubtaskId");
 
                     b.HasIndex("TaskId");
 
@@ -463,12 +456,7 @@ namespace ProjectManagement.Migrations
                     b.Property<string>("TempUsername")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("Email", "IsUsed", "ExpiresAtUtc");
 
@@ -809,14 +797,6 @@ namespace ProjectManagement.Migrations
 
             modelBuilder.Entity("Attachment", b =>
                 {
-                    b.HasOne("Comment", "Comment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("Subtask", "Subtask")
-                        .WithMany()
-                        .HasForeignKey("SubtaskId");
-
                     b.HasOne("ProjectTask", "Task")
                         .WithMany("Attachments")
                         .HasForeignKey("TaskId")
@@ -827,10 +807,6 @@ namespace ProjectManagement.Migrations
                         .WithMany()
                         .HasForeignKey("UploadedById")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("Subtask");
 
                     b.Navigation("Task");
 
@@ -982,15 +958,6 @@ namespace ProjectManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("ProjectManagement.Domain.Entities.RegistrationCode", b =>
-                {
-                    b.HasOne("ProjectManagement.Domain.Identity.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectMember", b =>

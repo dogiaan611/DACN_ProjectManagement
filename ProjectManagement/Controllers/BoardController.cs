@@ -7,9 +7,9 @@ using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Identity;
 using System.Security.Claims;
 
+// Controller quản lý Board trong một Project: Tạo(tự động tạo 3 board mặc định), liệt kê, xóa
 namespace ProjectManagement.Controllers
 {
-    // Controller quản lý Board trong một Project: Tạo(tự động tạo 3 board mặc định), liệt kê, xóa
     [ApiController]
     [Route("projects/{projectId:int}/boards")]
     [Authorize]
