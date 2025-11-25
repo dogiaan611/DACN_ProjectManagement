@@ -52,7 +52,9 @@ export async function createBoard(tasks, projectId) {
         }
 
         // Tạo HTML cho từng card công việc
-        const tasksHtml = tasksInColumn.map(createTaskCardHtml).join('');
+        const tasksHtml = tasksInColumn.map(task =>
+            createTaskCardHtml(task, task.commentCount, task.attachmentCount)
+        ).join('');
 
         // Tạo HTML cho toàn bộ cột
         return createColumnHtml(column, tasksHtml, boardId, tasksInColumn.length);

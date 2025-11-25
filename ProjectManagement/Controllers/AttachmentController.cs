@@ -131,8 +131,8 @@ namespace ProjectManagement.Controllers
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
 
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var (task, projectId) = await ValidateTaskAndMembership(boardId, columnId, taskId, userId);
             if (task == null) return Forbid();
@@ -294,8 +294,8 @@ namespace ProjectManagement.Controllers
 
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var relativePath = await SaveFileAsync(file);
 
@@ -454,8 +454,8 @@ namespace ProjectManagement.Controllers
 
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var relativePath = await SaveFileAsync(file);
 

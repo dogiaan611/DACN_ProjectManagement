@@ -2,7 +2,7 @@
 const AUTH_STORAGE_KEY = "pm_jwt";
 
 export function saveToken(token) {
-  try { localStorage.setItem(AUTH_STORAGE_KEY, token); } catch {}
+  try { localStorage.setItem(AUTH_STORAGE_KEY, token); } catch { }
 }
 
 export function getToken() {
@@ -10,21 +10,22 @@ export function getToken() {
 }
 
 export function clearToken() {
-  try { localStorage.removeItem(AUTH_STORAGE_KEY); } catch {}
+  try { localStorage.removeItem(AUTH_STORAGE_KEY); } catch { }
 }
 
 export async function authFetch(input, init = {}) {
-    const token = getToken();
-    const headers = new Headers(init.headers || {});
-    if (token) headers.set("Authorization", `Bearer ${token}`);
-    headers.set("Accept", headers.get("Accept") || "application/json");
+  const token = getToken();
+  const headers = new Headers(init.headers || {});
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+  headers.set("Accept", headers.get("Accept") || "application/json");
 
-    // Chỉ đặt Content-Type: application/json nếu body không phải là FormData
-    if (init.body && !(init.body instanceof FormData) && !headers.has("Content-Type")) {
-        headers.set("Content-Type", "application/json");
-    }
-    const merged = { ...init, headers };
-    return fetch(input, merged);
+  if (init.body instanceof FormData) {
+    headers.delete("Content-Type");
+  } else if (init.body && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+  const merged = { ...init, headers };
+  return fetch(input, merged);
 }
 
 export async function requireAuth() {

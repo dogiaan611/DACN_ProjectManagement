@@ -21,7 +21,7 @@ export function getPriorityChip(priority) {
     }
 }
 
-export function createTaskCardHtml(task) {
+export function createTaskCardHtml(task, commentCount, attachmentCount) {
     const dueDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString('vi-VN', {
         day: '2-digit',
         month: 'long',
@@ -79,10 +79,10 @@ export function createTaskCardHtml(task) {
             <div class="flex items-center justify-between">
                 ${assigneeAvatar}
                 <div class="flex items-center justify-center px-1 gap-2">
-                    <div type="button" class="flex items-center justify-center p-1 border rounded-md hover:bg-gray-50 text-xs text-gray-500">
+                    <div type="button" class="flex items-center justify-center gap-1 p-1 border rounded-md hover:bg-gray-50 text-xs text-gray-500">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square-icon lucide-messages-square"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/></svg>    
                     </div>
-                    <div type="button" class="flex items-center justify-center p-1 border rounded-md hover:bg-gray-50 text-xs text-gray-500">
+                    <div type="button" class="flex items-center justify-center gap-1 p-1 border rounded-md hover:bg-gray-50 text-xs text-gray-500">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
                     </div>
                 </div>
@@ -167,7 +167,7 @@ export function createTaskDetailModalHtml(task) {
 
     return `
         <div id="task-detail-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out opacity-0"></div>
-        <div id="task-detail-modal" data-task-id="${task.taskId}" class="fixed top-4 right-2 h-[95vh] w-[600px] max-w-3xl rounded-lg bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div id="task-detail-modal" data-task-id="${task.taskId}" class="fixed top-4 right-2 h-[95vh] w-[550px] max-w-3xl rounded-lg bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
             <div class="flex flex-col overflow-y-auto h-full">
                 <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
                     <div></div>
@@ -276,31 +276,47 @@ export function createTaskDetailModalHtml(task) {
                             </div>
                             <textarea id="task-description" class="w-full p-2 border rounded-md outline-none text-sm bg-gray-50 text-gray-600 min-h-[70px]">${task.description || ''}</textarea>
 
-                            <div class="flex flex-col">
+                            <div class="flex flex-col gap-2">
                                 <div class="flex justify-between">
                                     <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
                                         Attachments
                                     </div>
-                                    <div type="button" id="download-attachment" class="flex gap-1 items-center justify-center text-blue-400 hover:text-blue-500 cursor-pointer text-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
-                                        Download all
+                                </div>
+                                <div class="flex flex-wrap items-center justify-start gap-2">
+                                    <div id="task-attachments-list" class="flex flex-wrap items-center justify-start gap-2">
+                                        <!-- Attachments will be rendered here -->
+                                    </div>
+                                    <div class="flex items-center justify-center p-2 border border-dashed rounded-lg hover:bg-gray-50 cursor-pointer text-gray-600" onclick="document.getElementById('task-upload-file').click()">
+                                        <input type="file" id="task-upload-file" accept="*" class="hidden" />
+                                        <button type="button" class="pointer-events-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                        </button>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="flex flex-col gap-3">
-                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-dot-icon lucide-message-square-dot"><path d="M12.7 3H4a2 2 0 0 0-2 2v16.286a.71.71 0 0 0 1.212.502l2.202-2.202A2 2 0 0 1 6.828 19H20a2 2 0 0 0 2-2v-4.7"/><circle cx="19" cy="6" r="3"/></svg>
-                                    Comment
+                                <div class="flex items-center gap-4 border-b mb-2">
+                                    <button id="tab-comment-btn" class="px-3 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 focus:outline-none">Comments</button>
+                                    <button id="tab-subtask-btn" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none">Subtasks</button>
                                 </div>
-                                <div id="task-comments-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto border-y py-2">
-                                    <!-- Comments will be loaded here -->
+
+                                <div id="tab-content-comment" class="block">
+                                    <div id="task-comments-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto py-2">
+                                        <!-- Comments will be loaded here -->
+                                    </div>
+                                    <div class="flex flex-col border rounded-md p-3">
+                                        <div id="new-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
+                                        <div class="flex justify-end mt-2">
+                                            <button id="add-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex flex-col border rounded-md p-3">
-                                    <div id="new-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
-                                    <div class="flex justify-end mt-2">
-                                        <button id="add-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
+
+                                <div id="tab-content-subtask" class="hidden">
+                                    <div class="flex flex-col items-center justify-center py-8 text-gray-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-todo mb-2"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+                                        <span>Subtasks functionality is coming soon...</span>
                                     </div>
                                 </div>
                             </div>

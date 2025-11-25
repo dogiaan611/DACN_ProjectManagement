@@ -2,6 +2,7 @@ import { authFetch } from './auth.js';
 import { createTaskDetailModalHtml, toggleDropdown, getPriorityChip } from "./taskUI.js";
 import { initComments } from "./comment.js";
 import { initTaskTags } from "./taskTag.js";
+import { initAttachments } from "./attachment.js";
 
 export async function openTaskDetailModal(taskId, projectId, boardId, columnId) {
     await closeTaskDetailModal();
@@ -19,6 +20,7 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
         const modal = document.getElementById('task-detail-modal');
         initComments(taskId, boardId, projectId, columnId, modal);
         initTaskTags(boardId, columnId, projectId, taskId);
+        initAttachments(taskId, boardId, columnId, projectId, modal);
 
         const backdrop = document.getElementById('task-detail-modal-backdrop');
         const closeBtn = document.getElementById('close-task-detail-modal-btn');
@@ -35,6 +37,42 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
             backdrop.classList.remove('opacity-0');
             modal.classList.remove('translate-x-full');
         });
+
+        // --- TAB SWITCHING LOGIC ---
+        const tabCommentBtn = modal.querySelector('#tab-comment-btn');
+        const tabSubtaskBtn = modal.querySelector('#tab-subtask-btn');
+        const tabContentComment = modal.querySelector('#tab-content-comment');
+        const tabContentSubtask = modal.querySelector('#tab-content-subtask');
+
+        const setActiveTab = (tab) => {
+            if (tab === 'comment') {
+                tabContentComment.classList.remove('hidden');
+                tabContentComment.classList.add('block');
+                tabContentSubtask.classList.remove('block');
+                tabContentSubtask.classList.add('hidden');
+
+                tabCommentBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                tabCommentBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+
+                tabSubtaskBtn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                tabSubtaskBtn.classList.add('text-gray-500', 'hover:text-gray-700');
+            } else {
+                tabContentComment.classList.remove('block');
+                tabContentComment.classList.add('hidden');
+                tabContentSubtask.classList.remove('hidden');
+                tabContentSubtask.classList.add('block');
+
+                tabSubtaskBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                tabSubtaskBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+
+                tabCommentBtn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                tabCommentBtn.classList.add('text-gray-500', 'hover:text-gray-700');
+            }
+        };
+
+        tabCommentBtn.addEventListener('click', () => setActiveTab('comment'));
+        tabSubtaskBtn.addEventListener('click', () => setActiveTab('subtask'));
+        // --- END TAB SWITCHING LOGIC ---
 
         // --- BẮT ĐẦU: LOGIC CẬP NHẬT TIÊU ĐỀ ---
         const titleInput = modal.querySelector('#task-detail-title-input');
