@@ -289,6 +289,10 @@
       "PackagePath": "staticwebassets\\js\\sidebar.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\subtask.js",
+      "PackagePath": "staticwebassets\\js\\subtask.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\tag.js",
       "PackagePath": "staticwebassets\\js\\tag.js"
     },
@@ -329,12 +333,20 @@
       "PackagePath": "staticwebassets\\test.html"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\13f850172eb24122b69086a0043b5bc3_Chinheo.jpg",
-      "PackagePath": "staticwebassets\\uploads\\2025\\11\\13f850172eb24122b69086a0043b5bc3_Chinheo.jpg"
-    },
-    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx",
       "PackagePath": "staticwebassets\\uploads\\2025\\11\\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\20a115a99de244e4ab836d8e1a457c42_NHOM03-PHIEUTHUYETMINH.docx",
+      "PackagePath": "staticwebassets\\uploads\\2025\\11\\20a115a99de244e4ab836d8e1a457c42_NHOM03-PHIEUTHUYETMINH.docx"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\3a4394f9cbd641bc9bd395211632fbeb_2909 Listening.pdf",
+      "PackagePath": "staticwebassets\\uploads\\2025\\11\\3a4394f9cbd641bc9bd395211632fbeb_2909 Listening.pdf"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\3b951c913a6c456dbecf8f5a67fa6da0_FULL READING-Test2.pdf",
+      "PackagePath": "staticwebassets\\uploads\\2025\\11\\3b951c913a6c456dbecf8f5a67fa6da0_FULL READING-Test2.pdf"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\b8fd1383b25540f4a4b5e1f06e096876_Chuong-I.docx",

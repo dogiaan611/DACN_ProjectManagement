@@ -3,6 +3,7 @@ import { createTaskDetailModalHtml, toggleDropdown, getPriorityChip } from "./ta
 import { initComments } from "./comment.js";
 import { initTaskTags } from "./taskTag.js";
 import { initAttachments } from "./attachment.js";
+import { initSubtasks } from './subtask.js';
 
 export async function openTaskDetailModal(taskId, projectId, boardId, columnId) {
     await closeTaskDetailModal();
@@ -21,6 +22,7 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
         initComments(taskId, boardId, projectId, columnId, modal);
         initTaskTags(boardId, columnId, projectId, taskId);
         initAttachments(taskId, boardId, columnId, projectId, modal);
+        initSubtasks(taskId, boardId, columnId, projectId, modal);
 
         const backdrop = document.getElementById('task-detail-modal-backdrop');
         const closeBtn = document.getElementById('close-task-detail-modal-btn');
@@ -199,9 +201,10 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                         // Update UI in modal
                         const avatarInitial = task.assignee?.name ? task.assignee.name.charAt(0).toUpperCase() : '?';
                         const avatarHtml = task.assignee?.avatarUrl
-                            ? `<img src="${task.assignee.avatarUrl}" alt="${task.assignee.name}" class="w-7 h-7 rounded-full object-cover">`
-                            : `<div class="w-7 h-7 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${avatarInitial}</div>`;
-                        assigneeAvtar.innerHTML = avatarHtml;
+                            ? `<img src="${task.assignee.avatarUrl}" alt="${task.assignee.name}" class="w-6 h-6 rounded-full object-cover">` // Avatar with image
+                            : `<div class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${avatarInitial}</div>`; // Fallback avatar
+                        const assigneeName = task.assignee?.name || 'Unassigned';
+                        assigneeAvtar.innerHTML = `${avatarHtml}<span class="text-sm font-medium text-gray-600">${assigneeName}</span>`;
 
                         // Update task card on the board
                         const taskCardAvatarContainer = document.querySelector(`.group[data-task-id="${taskId}"] > div:last-child > :first-child`);

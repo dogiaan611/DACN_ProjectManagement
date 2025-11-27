@@ -162,12 +162,12 @@ export function createTaskDetailModalHtml(task) {
     }) : 'No due date';
 
     const assigneeAvatar = task.assigneeAvatarUrl
-        ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-7 h-7 rounded-full border object-cover">`
-        : `<div class="w-7 h-7 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">${task.assigneeName ? task.assigneeName.charAt(0).toUpperCase() : '?'}</div>`;
+        ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-6 h-6 rounded-full border object-cover">`
+        : `<div class="w-6 h-6 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">${task.assigneeName ? task.assigneeName.charAt(0).toUpperCase() : '?'}</div>`;
 
     return `
         <div id="task-detail-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out opacity-0"></div>
-        <div id="task-detail-modal" data-task-id="${task.taskId}" class="fixed top-4 right-2 h-[95vh] w-[550px] max-w-3xl rounded-lg bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+        <div id="task-detail-modal" data-task-id="${task.taskId}" class="fixed top-4 right-2 h-[95vh] w-[700px] max-w-3xl rounded-lg bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
             <div class="flex flex-col overflow-y-auto h-full">
                 <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
                     <div></div>
@@ -213,7 +213,7 @@ export function createTaskDetailModalHtml(task) {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
                                     Due date
                                 </div>
-                                <div id="task-detail-calendar-btn" class="p-2 cursor-pointer text-sm text-gray-600">${dueDate}</div>
+                                <div id="task-detail-calendar-btn" class="p-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-50 rounded-md">${dueDate}</div>
                                 <div id="task-detail-calendar-dropdown" class="absolute z-10 p-2 w-fit bg-white mt-1 hidden" >
                                     <div id="calendar" class="p-2 bg-white"></div>
                                 </div>
@@ -250,7 +250,7 @@ export function createTaskDetailModalHtml(task) {
                                     Assignee
                                 </div>
                                 <div class="flex items-center gap-5 p-2">
-                                    <div id="task-detail-assignee-avt">${assigneeAvatar}</div>
+                                    <div id="task-detail-assignee-avt" class="flex gap-2 items-center justify-center">${assigneeAvatar}<span class="text-sm font-medium text-gray-600">${task.assigneeName}</span></div>
                                     <div type="button" tabindex='0' id="change-assignee" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
                                         Change
@@ -314,9 +314,23 @@ export function createTaskDetailModalHtml(task) {
                                 </div>
 
                                 <div id="tab-content-subtask" class="hidden">
-                                    <div class="flex flex-col items-center justify-center py-8 text-gray-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-todo mb-2"><rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
-                                        <span>Subtasks functionality is coming soon...</span>
+                                    <div id="subtask-progress-container" class="mb-3 hidden">
+                                        <div class="flex justify-between items-center mb-1">
+                                            <span class="text-xs font-medium text-gray-500">Progress</span>
+                                            <span id="subtask-progress-text" class="text-xs font-medium text-gray-700">0%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                            <div id="subtask-progress-bar" class="bg-blue-600 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                    <div id="task-subtasks-list" class="flex flex-col gap-2 max-h-80 overflow-y-auto">
+
+                                    </div>
+                                    <div class="flex justify-start items-center gap-2 mt-2">
+                                        <button id="add-subtask-btn" class="px-2 py-1 w-full text-sm flex items-center justify-start gap-4 text-gray-600 hover:bg-gray-50">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                            Add task
+                                        </button>
                                     </div>
                                 </div>
                             </div>
