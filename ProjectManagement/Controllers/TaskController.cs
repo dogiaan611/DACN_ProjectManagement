@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Identity;
+using ProjectManagement.Services;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -111,6 +112,13 @@ namespace ProjectManagement.Controllers
             };
             _db.ActivityLogs.Add(createLog);
             await _db.SaveChangesAsync();
+
+            // Notification: notify assignee (if assigned and not the creator)
+            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
+            {
+                var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, currentUserName);
+            }
 
             var assignee = task.AssigneeId == null ? null : await _userManager.FindByIdAsync(task.AssigneeId);
 
@@ -297,6 +305,13 @@ namespace ProjectManagement.Controllers
                     CreatedAt = DateTime.UtcNow
                 });
                 await _db.SaveChangesAsync();
+
+                // Notification: notify new assignee when changed
+                if (oldAssignee != task.AssigneeId && !string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
+                {
+                    var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                    await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, currentUserName);
+                }
             }
 
             return Ok(new { message = "Task updated" });

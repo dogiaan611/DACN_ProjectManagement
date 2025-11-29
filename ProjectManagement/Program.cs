@@ -55,6 +55,25 @@ builder.Services
             ValidateLifetime = true,
             ClockSkew = TimeSpan.FromMinutes(2)
         };
+
+        // Allow token via ?access_token=... for download endpoints only (DEV / short-term)
+        options.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"].FirstOrDefault();
+                var path = context.HttpContext.Request.Path.Value ?? string.Empty;
+
+                // only read token from query for attachment download routes
+                if (!string.IsNullOrEmpty(accessToken)
+                    && path.Contains("/attachments/") && path.Contains("/download"))
+                {
+                    context.Token = accessToken;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
     });
 
 builder.Services.AddAuthorization();

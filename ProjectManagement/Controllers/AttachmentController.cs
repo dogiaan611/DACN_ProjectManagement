@@ -6,9 +6,11 @@ using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
+using ProjectManagement.Services;
 using System.Security.Claims;
 using System.IO;
 
+// Controller quản lý Attachment cho Task / Subtask / Comment: Upload file, liệt kê, tải về, xóa. 
 namespace ProjectManagement.Controllers
 {
     [ApiController]
@@ -20,7 +22,10 @@ namespace ProjectManagement.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly FileExtensionContentTypeProvider _contentTypeProvider = new();
 
+        // Giới hạn file: 25 MB
         private const long MAX_FILE_BYTES = 25 * 1024 * 1024; // 25 MB
+
+        // Danh sách extension được chấp nhận. Điều chỉnh nếu cần.
         private static readonly string[] ALLOWED_EXT = new[]
         {
             ".jpg", ".jpeg", ".png", ".gif", ".webp",
@@ -35,8 +40,9 @@ namespace ProjectManagement.Controllers
             _userManager = userManager;
         }
 
-        // ---------- Helper methods ----------
         private string GetWebRoot() => _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+        // Lưu file vào disk và trả về đường dẫn relative (ví dụ: /uploads/2025/11/{guid}_file.ext)
         private async Task<string> SaveFileAsync(IFormFile file)
         {
             var webRoot = GetWebRoot();
@@ -57,6 +63,7 @@ namespace ProjectManagement.Controllers
             return relativePath;
         }
 
+        // Map đường dẫn relative lưu trong DB -> đường dẫn vật lý trên disk.
         private string MapToPhysical(string relativePath)
         {
             var webRoot = GetWebRoot();
@@ -64,7 +71,8 @@ namespace ProjectManagement.Controllers
             return Path.Combine(webRoot, rel);
         }
 
-        private async Task<(ProjectTask task, int projectId)> ValidateTaskAndMembership(int boardId, int columnId, int taskId, string userId)
+        // Validate task tồn tại thuộc board/column và user là member của project.
+        private async Task<(ProjectTask? task, int projectId)> ValidateTaskAndMembership(int boardId, int columnId, int taskId, string userId)
         {
             var task = await _db.PojectTasks
                 .Include(t => t.Column!).ThenInclude(c => c.Board)
@@ -78,12 +86,8 @@ namespace ProjectManagement.Controllers
             return (task, projectId);
         }
 
-        private async Task<(bool ok, string message)> EnsureUserIsMemberOfProject(int projectId, string userId)
-        {
-            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
-            return (isMember, isMember ? string.Empty : "Not a project member");
-        }
 
+        /// Kiểm tra user có thể xóa attachment (uploader hoặc project owner/admin).
         private async Task<bool> CanDeleteAttachment(int projectId, string userId, Attachment attach)
         {
             var membership = await _db.ProjectMembers.FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
@@ -93,7 +97,7 @@ namespace ProjectManagement.Controllers
             return false;
         }
 
-        // ---------- TASK attachments ----------
+        // Liệt kê các attachment trực tiếp gắn với Task (không bao gồm attachments gắn với subtask/comment).
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/attachments")]
         public async Task<IActionResult> ListForTask(int boardId, int columnId, int taskId)
         {
@@ -121,6 +125,7 @@ namespace ProjectManagement.Controllers
             return Ok(list);
         }
 
+        // Upload file gắn trực tiếp vào Task.
         [HttpPost("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/attachments")]
         [RequestSizeLimit(MAX_FILE_BYTES)]
         public async Task<IActionResult> UploadToTask(int boardId, int columnId, int taskId, IFormFile file)
@@ -131,8 +136,8 @@ namespace ProjectManagement.Controllers
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
 
-            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var (task, projectId) = await ValidateTaskAndMembership(boardId, columnId, taskId, userId);
             if (task == null) return Forbid();
@@ -160,6 +165,13 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             });
 
+            // notify task assignee
+            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
+            {
+                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
+            }
+
             await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetForTask), new { boardId, columnId, taskId, attachmentId = attachment.AttachmentId }, new
@@ -172,6 +184,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Lấy metadata một attachment gắn với Task.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> GetForTask(int boardId, int columnId, int taskId, int attachmentId)
         {
@@ -189,6 +202,7 @@ namespace ProjectManagement.Controllers
             {
                 attach.AttachmentId,
                 attach.FilePath,
+                Url = $"{Request.Scheme}://{Request.Host}{attach.FilePath}",
                 FileName = Path.GetFileName(attach.FilePath),
                 attach.UploadedById,
                 UploadedByName = attach.UploadedBy?.Name,
@@ -196,6 +210,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        /// Tải file attachment gắn với Task.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/attachments/{attachmentId:int}/download")]
         public async Task<IActionResult> DownloadForTask(int boardId, int columnId, int taskId, int attachmentId)
         {
@@ -215,6 +230,7 @@ namespace ProjectManagement.Controllers
             return PhysicalFile(physical, contentType, Path.GetFileName(physical));
         }
 
+        // Xóa attachment gắn với Task.
         [HttpDelete("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> DeleteForTask(int boardId, int columnId, int taskId, int attachmentId)
         {
@@ -247,7 +263,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Attachment deleted" });
         }
 
-        // ---------- SUBTASK attachments ----------
+        // Liệt kê attachments gắn với Subtask.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/subtasks/{subtaskId:int}/attachments")]
         public async Task<IActionResult> ListForSubtask(int boardId, int columnId, int taskId, int subtaskId)
         {
@@ -278,6 +294,7 @@ namespace ProjectManagement.Controllers
             return Ok(list);
         }
 
+        // Upload file gắn với Subtask.
         [HttpPost("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/subtasks/{subtaskId:int}/attachments")]
         [RequestSizeLimit(MAX_FILE_BYTES)]
         public async Task<IActionResult> UploadToSubtask(int boardId, int columnId, int taskId, int subtaskId, IFormFile file)
@@ -294,8 +311,8 @@ namespace ProjectManagement.Controllers
 
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
-            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var relativePath = await SaveFileAsync(file);
 
@@ -320,6 +337,13 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             });
 
+            // notify task assignee
+            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
+            {
+                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
+            }
+
             await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetForSubtask), new { boardId, columnId, taskId, subtaskId, attachmentId = attachment.AttachmentId }, new
@@ -332,6 +356,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Lấy metadata attachment gắn với Subtask.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/subtasks/{subtaskId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> GetForSubtask(int boardId, int columnId, int taskId, int subtaskId, int attachmentId)
         {
@@ -356,6 +381,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Download attachment gắn với Subtask.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/subtasks/{subtaskId:int}/attachments/{attachmentId:int}/download")]
         public async Task<IActionResult> DownloadForSubtask(int boardId, int columnId, int taskId, int subtaskId, int attachmentId)
         {
@@ -375,6 +401,7 @@ namespace ProjectManagement.Controllers
             return PhysicalFile(physical, contentType, Path.GetFileName(physical));
         }
 
+        // Xóa attachment gắn với Subtask.
         [HttpDelete("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/subtasks/{subtaskId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> DeleteForSubtask(int boardId, int columnId, int taskId, int subtaskId, int attachmentId)
         {
@@ -407,7 +434,7 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Attachment deleted" });
         }
 
-        // ---------- COMMENT attachments ----------
+        // Liệt kê attachments gắn với Comment.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments/{commentId:int}/attachments")]
         public async Task<IActionResult> ListForComment(int boardId, int columnId, int taskId, int commentId)
         {
@@ -438,6 +465,7 @@ namespace ProjectManagement.Controllers
             return Ok(list);
         }
 
+        // Upload file gắn với Comment.
         [HttpPost("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments/{commentId:int}/attachments")]
         [RequestSizeLimit(MAX_FILE_BYTES)]
         public async Task<IActionResult> UploadToComment(int boardId, int columnId, int taskId, int commentId, IFormFile file)
@@ -454,8 +482,8 @@ namespace ProjectManagement.Controllers
 
             if (file.Length == 0) return BadRequest("Empty file");
             if (file.Length > MAX_FILE_BYTES) return BadRequest($"File too large. Max {MAX_FILE_BYTES / (1024 * 1024)} MB");
-            // var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
-            // if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
+            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            if (!ALLOWED_EXT.Contains(ext)) return BadRequest("File type not allowed");
 
             var relativePath = await SaveFileAsync(file);
 
@@ -480,6 +508,13 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             });
 
+            // notify task assignee
+            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
+            {
+                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
+            }
+
             await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetForComment), new { boardId, columnId, taskId, commentId, attachmentId = attachment.AttachmentId }, new
@@ -492,6 +527,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Lấy metadata một attachment gắn với Comment.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments/{commentId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> GetForComment(int boardId, int columnId, int taskId, int commentId, int attachmentId)
         {
@@ -516,6 +552,7 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Tải file attachment gắn với Comment.
         [HttpGet("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments/{commentId:int}/attachments/{attachmentId:int}/download")]
         public async Task<IActionResult> DownloadForComment(int boardId, int columnId, int taskId, int commentId, int attachmentId)
         {
@@ -535,6 +572,7 @@ namespace ProjectManagement.Controllers
             return PhysicalFile(physical, contentType, Path.GetFileName(physical));
         }
 
+        // Xóa attachment gắn với Comment.
         [HttpDelete("boards/{boardId:int}/columns/{columnId:int}/tasks/{taskId:int}/comments/{commentId:int}/attachments/{attachmentId:int}")]
         public async Task<IActionResult> DeleteForComment(int boardId, int columnId, int taskId, int commentId, int attachmentId)
         {

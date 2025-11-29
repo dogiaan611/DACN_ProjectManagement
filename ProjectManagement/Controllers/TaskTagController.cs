@@ -73,6 +73,18 @@ namespace ProjectManagement.Controllers
             if (exists) return BadRequest("Tag đã được gán cho Task");
 
             _db.TaskTags.Add(new TaskTag { TaskId = taskId, TagId = dto.TagId });
+
+            // Activity log for task-level change
+            _db.ActivityLogs.Add(new ActivityLog
+            {
+                TaskId = task.TaskId,
+                UserId = userId,
+                Action = "Assign Tag",
+                OldValue = string.Empty,
+                NewValue = $"TagId:{dto.TagId};TagName:{tag.Name}",
+                CreatedAt = DateTime.UtcNow
+            });
+
             await _db.SaveChangesAsync();
 
             return Ok(new { message = "Gán Tag thành công" });
@@ -98,7 +110,22 @@ namespace ProjectManagement.Controllers
             var mapping = await _db.TaskTags.FirstOrDefaultAsync(tt => tt.TaskId == taskId && tt.TagId == tagId);
             if (mapping == null) return NotFound();
 
+            // Lấy tên tag để ghi log
+            var tagName = (await _db.Tags.FindAsync(tagId))?.Name ?? string.Empty;
+
             _db.TaskTags.Remove(mapping);
+
+            // Activity log for task-level change
+            _db.ActivityLogs.Add(new ActivityLog
+            {
+                TaskId = task.TaskId,
+                UserId = userId,
+                Action = "Unassign Tag",
+                OldValue = $"TagId:{tagId};TagName:{tagName}",
+                NewValue = string.Empty,
+                CreatedAt = DateTime.UtcNow
+            });
+
             await _db.SaveChangesAsync();
             return Ok(new { message = "Tag đã được xóa khỏi Task" });
         }

@@ -175,3 +175,28 @@ export async function initAttachments(taskId, boardId, columnId, projectId, cont
         }
     });
 }
+
+// frontend: download attachment with Authorization header and save locally
+async function downloadAttachment(url, bearerToken) {
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + bearerToken }
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(()=>res.statusText);
+    throw new Error(`Download failed ${res.status}: ${text}`);
+  }
+  const blob = await res.blob();
+  // get filename from content-disposition if present
+  const cd = res.headers.get('content-disposition') || '';
+  let filename = 'download';
+  const m = /filename="?([^"]+)"?/.exec(cd);
+  if (m) filename = m[1];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(a.href);
+  a.remove();
+}

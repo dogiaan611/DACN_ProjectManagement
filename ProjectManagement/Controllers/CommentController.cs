@@ -5,6 +5,7 @@ using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
 using ProjectManagement.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
+using ProjectManagement.Services;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 
@@ -39,7 +40,7 @@ namespace ProjectManagement.Controllers
                     .ThenInclude(c => c.Board)
                 .FirstOrDefaultAsync(t => t.TaskId == taskId && t.ColumnId == columnId && t.Column!.BoardId == boardId);
 
-            if (task == null) return NotFound("Task không tồn tại");
+            if (task == null) return NotFound();
 
             var projectId = task.Column!.Board.ProjectId;
             var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
@@ -54,8 +55,8 @@ namespace ProjectManagement.Controllers
                     c.CommentId,
                     c.TaskId,
                     c.UserId,
-                    UserName = c.User.Name, // Lấy tên người comment
-                    UserAvatarUrl = c.User.AvatarUrl, // Lấy avatar người comment
+                    UserName = c.User.Name,
+                    UserAvatarUrl = c.User.AvatarUrl,
                     c.Content,
                     c.CreatedAt,
                     Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name, UserAvatarUrl = m.User.AvatarUrl })
@@ -147,6 +148,13 @@ namespace ProjectManagement.Controllers
             });
             await _db.SaveChangesAsync();
 
+            // Notifications for mentions (batch)
+            if (mentionedUserIds.Any())
+            {
+                var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                await _db.AddMentionNotificationsBatchAsync(mentionedUserIds, projectId, taskId, commenterName, task.Title);
+            }
+
             return CreatedAtAction(nameof(List), new { boardId, columnId, taskId }, new
             {
                 comment.CommentId,
@@ -156,6 +164,25 @@ namespace ProjectManagement.Controllers
                 comment.Content,
                 comment.CreatedAt
             });
+        }
+
+        // Lấy thông tin comment chi tiết
+        [HttpGet("{commentId:int}")]
+        public async Task<IActionResult> Get(int boardId, int columnId, int taskId, int commentId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
+
+            var task = await _db.PojectTasks
+                .Include(t => t.Column!)
+                    .ThenInclude(c => c.Board)
+                .FirstOrDefaultAsync(t => t.TaskId == taskId && t.ColumnId == columnId && t.Column!.BoardId == boardId);
+            if (task == null) return NotFound();
+
+            var comment = await _db.Comments.Include(c => c.User).FirstOrDefaultAsync(c => c.CommentId == commentId && c.TaskId == taskId);
+            if (comment == null) return NotFound();
+
+            return Ok(new { comment.CommentId, comment.Content, comment.UserId, UserName = comment.User.Name, comment.CreatedAt });
         }
 
         // Xóa comment.
@@ -297,6 +324,13 @@ namespace ProjectManagement.Controllers
             });
 
             await _db.SaveChangesAsync();
+
+            // Notify newly mentioned users (batch)
+            if (toAdd.Any())
+            {
+                var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                await _db.AddMentionNotificationsBatchAsync(toAdd, projectId, taskId, commenterName, comment.Task.Title);
+            }
 
             // Trở về comment đã cập nhật
             var updated = await _db.Comments
