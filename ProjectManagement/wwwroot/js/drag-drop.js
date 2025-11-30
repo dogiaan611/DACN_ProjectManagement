@@ -24,6 +24,19 @@ function getDragAfterElement(container, clientX, clientY) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
+// Global dragover to ensure smooth movement (drag event on source can be choppy)
+// We need to track the currently dragging element
+document.addEventListener('dragover', e => {
+    const dragging = document.querySelector('.dragging');
+    if (dragging && dragging._dragPreview) {
+        e.preventDefault(); // Allow drop
+        // Update preview position
+        // Note: e.clientX/Y are available here
+        dragging._dragPreview.style.left = `${e.clientX - dragging._offsetX}px`;
+        dragging._dragPreview.style.top = `${e.clientY - dragging._offsetY}px`;
+    }
+});
+
 /**
  * Khởi tạo chức năng kéo và thả cho một tập hợp các phần tử.
  * @param {object} options - Các tùy chọn cấu hình.
@@ -116,19 +129,6 @@ export function initializeDragAndDrop({ containerSelector, draggableSelector, on
                 // ignore
             }
         });
-    });
-
-    // Global dragover to ensure smooth movement (drag event on source can be choppy)
-    // We need to track the currently dragging element
-    document.addEventListener('dragover', e => {
-        const dragging = document.querySelector('.dragging');
-        if (dragging && dragging._dragPreview) {
-            e.preventDefault(); // Allow drop
-            // Update preview position
-            // Note: e.clientX/Y are available here
-            dragging._dragPreview.style.left = `${e.clientX - dragging._offsetX}px`;
-            dragging._dragPreview.style.top = `${e.clientY - dragging._offsetY}px`;
-        }
     });
 
     containers.forEach(container => {

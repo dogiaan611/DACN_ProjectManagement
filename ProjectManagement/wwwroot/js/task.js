@@ -314,4 +314,73 @@ export function initTaskEventListeners(tasks, projectId, container) {
             openTaskDetailModal(taskId, projectId, boardId, columnId);
         });
     });
+
+    // Initialize drag and drop for tasks
+    initializeDragAndDrop({
+        containerSelector: '.tasks-container',
+        draggableSelector: '[data-task-id]',
+        onDrop: async (e) => {
+            e.stopPropagation();
+            const draggingTask = document.querySelector('.dragging');
+            if (!draggingTask) return;
+
+            const taskId = draggingTask.dataset.taskId;
+            const originalColumnId = draggingTask.dataset.originalColumnId;
+            const targetContainer = e.currentTarget;
+            const targetColumnId = targetContainer.dataset.columnId;
+            const boardId = targetContainer.dataset.boardId;
+
+            if (!originalColumnId || !boardId) return;
+
+            // Calculate new position
+            const tasksInColumn = [...targetContainer.querySelectorAll('[data-task-id]')];
+            const newPosition = tasksInColumn.indexOf(draggingTask);
+
+            try {
+                const res = await authFetch(`/boards/${boardId}/columns/${originalColumnId}/tasks/${taskId}/move`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        toColumnId: parseInt(targetColumnId),
+                        toPosition: newPosition
+                    })
+                });
+
+                if (!res.ok) {
+                    throw new Error('Failed to move task');
+                }
+
+                // Update column counts if moved to a different column
+                if (originalColumnId !== targetColumnId) {
+                    const oldColumn = document.getElementById(`column-${originalColumnId}`);
+                    const newColumn = document.getElementById(`column-${targetColumnId}`);
+
+                    if (oldColumn) {
+                        const countSpan = oldColumn.querySelector('h3 + span');
+                        if (countSpan) countSpan.textContent = Math.max(0, parseInt(countSpan.textContent) - 1);
+                    }
+                    if (newColumn) {
+                        const countSpan = newColumn.querySelector('h3 + span');
+                        if (countSpan) countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error moving task:', error);
+                alert('Failed to move task. Reloading board.');
+                initProjectBoard();
+            }
+        }
+    });
+
+    // Add dragstart listener to capture original column
+    const taskCards = document.querySelectorAll('[data-task-id]');
+    taskCards.forEach(card => {
+        card.addEventListener('dragstart', () => {
+            const col = card.closest('.tasks-container');
+            if (col) {
+                card.dataset.originalColumnId = col.dataset.columnId;
+            }
+        });
+    });
 }

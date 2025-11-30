@@ -307,7 +307,16 @@ export function createTaskDetailModalHtml(task) {
                                     </div>
                                     <div class="flex flex-col border rounded-md p-3">
                                         <div id="new-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
-                                        <div class="flex justify-end mt-2">
+                                        <div id="attachment-comment-review" class="flex flex-wrap items-center justify-start gap-2">
+
+                                        </div>
+                                        <div class="flex justify-end mt-2 gap-2">
+                                            <div class="flex items-center justify-center p-1 rounded-md cursor-pointer border hover:bg-gray-50" onclick="document.getElementById('comment-upload-file').click()">
+                                                <input type="file" id="comment-upload-file" accept="*" multiple class="hidden" />
+                                                <button type="button" class="pointer-events-none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                                                </button>
+                                            </div>
                                             <button id="add-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
                                         </div>
                                     </div>

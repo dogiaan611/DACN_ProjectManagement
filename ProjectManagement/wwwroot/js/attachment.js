@@ -116,46 +116,69 @@ function createAttachmentHtml(attachment, boardId, columnId, taskId) {
             <div class="flex items-center gap-2">
                 <a href="/boards/${boardId}/columns/${columnId}/tasks/${taskId}/attachments/${attachment.attachmentId}/download" target="_blank" class="flex items-center gap-2 hover:underline" title="${attachment.fileName}">
                     ${icon}
-                    <span class="truncate max-w-[150px]">${formatFileName(attachment.fileName)}</span>
-                </a>
-            </div>
+                <span class="truncate max-w-[150px]">${formatFileName(attachment.fileName)}</span>
+                </a >
+            </div >
             <button type="button" class="delete-attachment-btn p-1 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" data-attachment-id="${attachment.attachmentId}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             </button>
-        </div>
-    `;
+        </div >
+        `;
 }
 
 export async function initAttachments(taskId, boardId, columnId, projectId, containerElement) {
     const attachmentsContainer = containerElement.querySelector('#task-attachments-list');
     const uploadFileInput = containerElement.querySelector('#task-upload-file');
+    let isListenerAttached = false; // Flag để đảm bảo listener chỉ được gắn một lần
 
     const renderAttachments = async () => {
         const taskAttachments = await getTaskAttachments(taskId, boardId, columnId);
         attachmentsContainer.innerHTML = taskAttachments.map(attachment => createAttachmentHtml(attachment, boardId, columnId, taskId)).join('');
+    };
 
-        // Add event listeners for delete buttons
-        attachmentsContainer.querySelectorAll('.delete-attachment-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (confirm('Are you sure you want to delete this attachment?')) {
-                    const attachmentId = btn.dataset.attachmentId;
-                    try {
-                        await deleteAttachment(boardId, columnId, taskId, attachmentId);
-                        // Remove the element from DOM
-                        const el = document.getElementById(`attachment-${attachmentId}`);
-                        if (el) el.remove();
-                    } catch (err) {
-                        alert('Failed to delete attachment');
-                    }
+    // Sử dụng Event Delegation để quản lý tất cả các click bên trong container
+    const handleContainerClick = async (e) => {
+        const deleteBtn = e.target.closest('.delete-attachment-btn');
+        const downloadLink = e.target.closest('a[href*="/download"]');
+
+        // Xử lý xóa attachment
+        if (deleteBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (confirm('Are you sure you want to delete this attachment?')) {
+                const attachmentId = deleteBtn.dataset.attachmentId;
+                try {
+                    await deleteAttachment(boardId, columnId, taskId, attachmentId);
+                    await renderAttachments(); // Tải lại danh sách sau khi xóa
+                } catch (err) {
+                    alert('Failed to delete attachment');
                 }
-            });
-        });
+            }
+        }
+
+        // Xử lý tải file
+        if (downloadLink) {
+            e.preventDefault();
+            const url = downloadLink.getAttribute('href');
+            if (url) {
+                try {
+                    await downloadAttachment(url);
+                } catch (err) {
+                    console.error("Download failed from click handler:", err);
+                    alert("Could not start download.");
+                }
+            }
+        }
     };
 
     // Initial render
     await renderAttachments();
+
+    // Gắn listener một lần duy nhất cho container
+    if (!isListenerAttached) {
+        attachmentsContainer.addEventListener('click', handleContainerClick);
+        isListenerAttached = true;
+    }
 
     // Handle file upload
     // Remove existing event listener if any (to avoid duplicates if init is called multiple times)
@@ -167,8 +190,8 @@ export async function initAttachments(taskId, boardId, columnId, projectId, cont
         if (file) {
             try {
                 await addTaskAttachments(boardId, columnId, taskId, file);
-                await renderAttachments(); // Refresh list
-                newUploadInput.value = ''; // Reset input
+                await renderAttachments();
+                newUploadInput.value = '';
             } catch (err) {
                 alert('Failed to upload attachment: ' + err.message);
             }
@@ -176,27 +199,36 @@ export async function initAttachments(taskId, boardId, columnId, projectId, cont
     });
 }
 
-// frontend: download attachment with Authorization header and save locally
-async function downloadAttachment(url, bearerToken) {
-  const res = await fetch(url, {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + bearerToken }
-  });
-  if (!res.ok) {
-    const text = await res.text().catch(()=>res.statusText);
-    throw new Error(`Download failed ${res.status}: ${text}`);
-  }
-  const blob = await res.blob();
-  // get filename from content-disposition if present
-  const cd = res.headers.get('content-disposition') || '';
-  let filename = 'download';
-  const m = /filename="?([^"]+)"?/.exec(cd);
-  if (m) filename = m[1];
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  URL.revokeObjectURL(a.href);
-  a.remove();
+/**
+ * Tải xuống một file đính kèm bằng cách sử dụng authFetch để tự động thêm header xác thực.
+ * @param {string} url - URL để tải file.
+ */
+export async function downloadAttachment(url) {
+    try {
+        const res = await authFetch(url); // Sử dụng authFetch để có header Authorization
+
+        if (!res.ok) {
+            const text = await res.text().catch(() => res.statusText);
+            throw new Error(`Tải file thất bại ${res.status}: ${text} `);
+        }
+
+        const blob = await res.blob();
+
+        // Lấy tên file từ header 'content-disposition'
+        const disposition = res.headers.get('content-disposition') || '';
+        let filename = 'download';
+        const match = /filename="?([^"]+)"?/.exec(disposition);
+        if (match && match[1]) filename = match[1];
+
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(a.href);
+        a.remove();
+    } catch (error) {
+        console.error('Lỗi khi tải file:', error);
+        alert(error.message);
+    }
 }

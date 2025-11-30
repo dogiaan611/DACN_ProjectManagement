@@ -21,4 +21,5 @@ public class Comment
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public ICollection<CommentMention> Mentions { get; set; } = new List<CommentMention>();
+    public ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
 }

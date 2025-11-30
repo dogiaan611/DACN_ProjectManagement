@@ -50,6 +50,7 @@ namespace ProjectManagement.Controllers
                 .Where(c => c.TaskId == taskId)
                 .OrderBy(c => c.CreatedAt)
                 .Include(c => c.User)
+                .Include(c => c.Attachments) // Added this line
                 .Select(c => new
                 {
                     c.CommentId,
@@ -59,7 +60,8 @@ namespace ProjectManagement.Controllers
                     UserAvatarUrl = c.User.AvatarUrl,
                     c.Content,
                     c.CreatedAt,
-                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name, UserAvatarUrl = m.User.AvatarUrl })
+                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name, UserAvatarUrl = m.User.AvatarUrl }),
+                    Attachments = c.Attachments.Select(a => new { a.AttachmentId, a.FilePath, FileName = System.IO.Path.GetFileName(a.FilePath) }) // Added this line
                 })
                 .ToListAsync();
 
@@ -178,11 +180,18 @@ namespace ProjectManagement.Controllers
                     .ThenInclude(c => c.Board)
                 .FirstOrDefaultAsync(t => t.TaskId == taskId && t.ColumnId == columnId && t.Column!.BoardId == boardId);
             if (task == null) return NotFound();
-
-            var comment = await _db.Comments.Include(c => c.User).FirstOrDefaultAsync(c => c.CommentId == commentId && c.TaskId == taskId);
+            //lấy dữ liệu bao gồm attachment
+            var comment = await _db.Comments.Include(c => c.User).Include(c => c.Attachments).FirstOrDefaultAsync(c => c.CommentId == commentId && c.TaskId == taskId);
             if (comment == null) return NotFound();
-
-            return Ok(new { comment.CommentId, comment.Content, comment.UserId, UserName = comment.User.Name, comment.CreatedAt });
+            //trả về json có attachment
+            return Ok(new { 
+                comment.CommentId, 
+                comment.Content, 
+                comment.UserId, 
+                UserName = comment.User.Name, 
+                comment.CreatedAt,
+                Attachments = comment.Attachments.Select(a => new { a.AttachmentId, a.FilePath, FileName = System.IO.Path.GetFileName(a.FilePath) })
+            });
         }
 
         // Xóa comment.
@@ -338,6 +347,7 @@ namespace ProjectManagement.Controllers
                 .Include(c => c.User)
                 .Include(c => c.Mentions)
                     .ThenInclude(m => m.User)
+                .Include(c => c.Attachments) // Added this line
                 .Select(c => new
                 {
                     c.CommentId,
@@ -346,7 +356,8 @@ namespace ProjectManagement.Controllers
                     UserName = c.User.Name,
                     c.Content,
                     c.CreatedAt,
-                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name })
+                    Mentions = c.Mentions.Select(m => new { m.UserId, UserName = m.User.Name }),
+                    Attachments = c.Attachments.Select(a => new { a.AttachmentId, a.FilePath, FileName = System.IO.Path.GetFileName(a.FilePath) }) // Added this line
                 })
                 .FirstAsync();
 
