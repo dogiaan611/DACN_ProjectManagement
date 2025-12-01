@@ -172,6 +172,9 @@ export function createTaskDetailModalHtml(task) {
                 <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
                     <div></div>
                     <div class="flex items-center justify-center gap-2">
+                        <div id="task-detail-watcher-btn" tabindex='0' type="button" class="text-xs text-gray-400 hover:text-green-500 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
                         <div tabindex='0' type="button" id="edit-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                         </div>
@@ -269,6 +272,29 @@ export function createTaskDetailModalHtml(task) {
 
                             <div class="flex items-center">
                                 <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                                    Watcher
+                                </div>
+                                <div class="flex items-center gap-5 p-2">
+                                    <div id="task-detail-watcher-avt" class="flex items-center -space-x-3 gap-2 justify-center"></div>
+                                    <div type="button" tabindex='0' id="edit-watcher" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+                                        Change
+                                    </div>
+                                </div>
+                                <div id="watcher-detail-dropdown" class="absolute z-10 w-fit border rounded-sm mt-1 hidden">
+                                    <div class="border-b py-1 px-2 flex items-center justify-start bg-white sticky top-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-search-icon lucide-user-search"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
+                                        <input type="text" id="watcher-search" class="outline-none p-2 w-full text-base text-gray-500" placeholder="Search watcher..." autocomplete="off">
+                                    </div>
+                                    <div id="watcher-detail-list" class="flex flex-col bg-white items-start justify-start p-1 max-h-48 overflow-y-auto">
+                                        <!-- Watcher list will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                                     Description
                                 </div>
@@ -299,6 +325,7 @@ export function createTaskDetailModalHtml(task) {
                                 <div class="flex items-center gap-4 border-b mb-2">
                                     <button id="tab-comment-btn" class="px-3 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 focus:outline-none">Comments</button>
                                     <button id="tab-subtask-btn" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none">Subtasks</button>
+                                    <button id="tab-activity-btn" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none">Activity</button>
                                 </div>
 
                                 <div id="tab-content-comment" class="block">
@@ -340,6 +367,12 @@ export function createTaskDetailModalHtml(task) {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                                             Add task
                                         </button>
+                                    </div>
+                                </div>
+
+                                <div id="tab-content-activity" class="hidden">
+                                    <div id="task-activity-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto py-2">
+                                        <!-- Activity will be loaded here -->
                                     </div>
                                 </div>
                             </div>

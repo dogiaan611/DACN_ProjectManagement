@@ -301,6 +301,10 @@
       "PackagePath": "staticwebassets\\js\\task.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskActivityLog.js",
+      "PackagePath": "staticwebassets\\js\\taskActivityLog.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskDetail.js",
       "PackagePath": "staticwebassets\\js\\taskDetail.js"
     },
@@ -311,6 +315,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskUI.js",
       "PackagePath": "staticwebassets\\js\\taskUI.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskWatcher.js",
+      "PackagePath": "staticwebassets\\js\\taskWatcher.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
@@ -335,10 +343,6 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx",
       "PackagePath": "staticwebassets\\uploads\\2025\\11\\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx"
-    },
-    {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\1ad10dc7871c4c5b8e58af4cb913b2a2_Chuong-I.docx",
-      "PackagePath": "staticwebassets\\uploads\\2025\\11\\1ad10dc7871c4c5b8e58af4cb913b2a2_Chuong-I.docx"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\3a4394f9cbd641bc9bd395211632fbeb_2909 Listening.pdf",
@@ -385,8 +389,12 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\11\\e0b9611c7a994ac798af2df9d04a9a39_NHOM03-PHIEUTHUYETMINH.docx"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\ef403e14675b4d05b79dac2becb2bccf_BaoCaoQLDA_CNTT.pdf",
-      "PackagePath": "staticwebassets\\uploads\\2025\\11\\ef403e14675b4d05b79dac2becb2bccf_BaoCaoQLDA_CNTT.pdf"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\c300ad5e7f17469c937c3fc61449fb64_BaoCaoQLDA_CNTT.pdf",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\c300ad5e7f17469c937c3fc61449fb64_BaoCaoQLDA_CNTT.pdf"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\.gitkeep",

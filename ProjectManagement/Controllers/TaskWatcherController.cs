@@ -45,7 +45,8 @@ namespace ProjectManagement.Controllers
                 .Select(w => new
                 {
                     w.UserId,
-                    UserName = w.User != null ? w.User.Name : null
+                    UserName = w.User != null ? w.User.Name : null,
+                    AvatarUrl = w.User != null ? w.User.AvatarUrl : null
                 })
                 .ToListAsync();
 

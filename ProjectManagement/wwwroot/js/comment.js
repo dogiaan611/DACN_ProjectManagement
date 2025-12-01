@@ -310,7 +310,7 @@ export async function initComments(taskId, boardId, projectId, columnId, contain
                     }
                 });
             }
-
+            // Format date
             const date = formatTimeAgo(comment.createdAt);
 
             const initial = comment.userName ? comment.userName.charAt(0).toUpperCase() : '?';
@@ -324,8 +324,9 @@ export async function initComments(taskId, boardId, projectId, columnId, contain
                 ${avatar}
                 <div class="comment-body flex-grow"> 
                     <div class="flex items-center justify-between mb-1">
-                        <div class="flex items-center justify-center gap-2">
+                        <div class="flex items-center justify-center">
                             <span class="text-sm font-semibold text-gray-900">${comment.userName || 'Unknown'}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 lucide lucide-dot-icon lucide-dot"><circle cx="12.1" cy="12.1" r="1"/></svg>
                             <span class="text-xs text-gray-500">${date}</span>
                         </div>
                             ${isOwner ? `
@@ -346,9 +347,9 @@ export async function initComments(taskId, boardId, projectId, columnId, contain
                             ${comment.attachments.map(att => `
                                 <a href="/boards/${boardId}/columns/${columnId}/tasks/${taskId}/comments/${comment.commentId}/attachments/${att.attachmentId}/download" 
                                    class="download-attachment-link flex items-center gap-2 p-1.5 border rounded bg-gray-50 hover:bg-gray-100 text-xs text-gray-700 transition-colors"
-                                   title="${att.fileName}">
+                                   title="${formatFileName(att.fileName)}">
                                     ${getAttachmentIcon(att.fileName)}
-                                    <span class="truncate max-w-[150px]">${att.fileName}</span>
+                                    <span class="truncate max-w-[150px]">${formatFileName(att.fileName)}</span>
                                 </a>
                             `).join('')}
                         </div>
@@ -531,6 +532,11 @@ export async function initComments(taskId, boardId, projectId, columnId, contain
         if (isDocx) return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-type-corner-icon lucide-file-type-corner text-blue-500"><path d="M12 22h6a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v6"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M3 16v-1.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5V16"/><path d="M6 22h2"/><path d="M7 14v8"/></svg>`;
         if (isPdf) return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text text-red-500"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>`;
         return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file text-gray-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>`;
+    }
+
+    function formatFileName(fileName) {
+        // Remove the 32-character UUID prefix and underscore if present
+        return fileName.replace(/^[a-f0-9]{32}_/i, '');
     }
 
 
