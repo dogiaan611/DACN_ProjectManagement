@@ -1,96 +1,111 @@
+import { authFetch } from "./auth.js";
+import { initColumnEventListeners } from "./column.js";
+import { initTaskEventListeners } from "./task.js";
+import { createTaskRowHtml } from "./taskUI.js";
+import { getColumnTitleColour } from "./column.js";
 export async function initProjectList() {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
+    if (!projectId) return;
+
     const container = document.getElementById('project-content');
+    container.innerHTML = await createList(projectId);
 
-    if(!projectId) return;
-        const tasks = [
-        { id: 1, title: 'Thiết kế giao diện người dùng', description: 'Tạo wireframe và mockup cho trang chủ.', status: 'ToDo', priority: 'Low' },
-        { id: 2, title: 'Phát triển API đăng nhập', description: 'Xây dựng endpoint cho việc xác thực người dùng.', status: 'InProgress', priority: 'Medium' },
-        { id: 3, title: 'Viết tài liệu kỹ thuật', description: 'Tài liệu hóa các API đã hoàn thành.', status: 'InReview', priority: 'High' },
-        { id: 4, title: 'Kiểm thử tính năng thanh toán', description: 'Kiểm tra luồng thanh toán với các trường hợp khác nhau.', status: 'Done', priority: 'Low' },
-        { id: 5, title: 'Cấu hình server', description: 'Cài đặt và cấu hình môi trường production.', status: 'InProgress', priority: 'Medium' },
-        { id: 6, title: 'Sửa lỗi hiển thị trên mobile', description: 'Lỗi vỡ giao diện trên màn hình nhỏ.', status: 'Done', priority: 'Medium' },
-    ];
+    // Get boardId from the first rendered group (if any)
+    const firstGroup = container.querySelector('[data-board-id]');
+    const boardId = firstGroup ? firstGroup.dataset.boardId : null;
 
-    container.innerHTML = createList(tasks);
-
+    addEventListeners(projectId, container, boardId);
 }
 
-function createTaskRow(task) {
-    const priorityClasses = {
-        'High': 'border border-red-200 text-red-600',
-        'Medium': 'border border-blue-200 text-blue-600',
-        'Low': 'border border-green-200 text-green-600'
-    };
+export async function createList(projectId) {
+    // 1. Fetch Boards
+    const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
+    if (!boardsResponse.ok) {
+        console.error("Failed to fetch boards");
+        return `<p class="text-red-500">Error loading project lists.</p>`;
+    }
+    const boards = await boardsResponse.json();
+    if (!boards || boards.length === 0) {
+        return `<p>No boards found for this project.</p>`;
+    }
 
-    const statusClasses = {
-        'ToDo': 'bg-gray-100 text-gray-800',
-        'InProgress': 'bg-blue-100 text-blue-800',
-        'InReview': 'bg-purple-100 text-purple-800',
-        'Done': 'bg-green-100 text-green-800'
-    };
+    // Use the first board
+    const boardId = boards[0].boardId;
 
-    const statusText = {
-        'ToDo': 'To Do',
-        'InProgress': 'In Progress',
-        'InReview': 'In Review',
-        'Done': 'Done'
-    };
+    // 2. Fetch Columns
+    const columnsResponse = await authFetch(`/boards/${boardId}/columns`);
+    if (!columnsResponse.ok) {
+        return `<p class="text-red-500">Error loading list rows.</p>`;
+    }
+    const columns = await columnsResponse.json();
 
+    // 3. Fetch Tasks for each Column and Render
+    const rowsHtmlPromises = columns.map(async column => {
+        const tasksResponse = await authFetch(`/boards/${boardId}/columns/${column.columnId}/tasks`);
+        let tasksInColumn = [];
+        if (tasksResponse.ok) {
+            tasksInColumn = await tasksResponse.json();
+        }
+
+        const tasksHtml = tasksInColumn.map(task =>
+            createTaskRowHtml(task)
+        ).join('');
+
+        return createListGroupHtml(column, tasksHtml, boardId, tasksInColumn.length);
+    });
+
+    const rowsHtml = (await Promise.all(rowsHtmlPromises)).join('');
+
+    // 4. Render Final HTML
     return `
-        <tr class="bg-white border-b hover:bg-gray-50 transition-colors duration-200" data-task-id="${task.id}">
-            <td class="px-6 py-4">
-                <div class="text-sm font-medium text-gray-900 whitespace-nowrap">${task.title}</div>
-                <div class="text-xs font-normal text-gray-500 whitespace-nowrap">${task.description}</div>
-            </td>
-            <td class="px-6 py-4">
-                <span class="text-xs font-medium px-2.5 py-0.5 rounded-md ${priorityClasses[task.priority] || 'border-gray-100 text-gray-600'}">
-                    ${task.priority}
-                </span>
-            </td>
-        </tr>
+        <div class="list-view-container flex flex-col w-full mx-auto pb-10">
+            ${rowsHtml}
+        </div>
     `;
 }
 
-function createList(tasks) {
-    const statusOrder = ['ToDo', 'InProgress', 'InReview', 'Done'];
-    const statusText = {
-        'ToDo': 'To Do',
-        'InProgress': 'In Progress',
-        'InReview': 'In Review',
-        'Done': 'Done'
-    };
+function createListGroupHtml(column, tasksHtml, boardId, taskCount) {
+    const headerHtml = `
+        <div class="flex items-center px-3 py-2 bg-gray-50 border-b text-xs font-semibold text-gray-500 uppercase tracking-wider">
+            <div class="w-[40%] min-w-[300px] pl-2">Task Name</div>
+            <div class="flex items-center gap-6">
+                <div class="w-32">Priority</div>
+                <div class="w-32">Assignee</div>
+                <div class="w-32 text-right">Due Date</div>
+                <div class="w-5"></div>
+                <div class="w-5"></div>
+                <div class="w-4"></div>
+            </div>
+        </div>
+    `;
 
-    const groupedTasks = tasks.reduce((groups, task) => {
-        const { status } = task;
-        if (!groups[status]) {
-            groups[status] = [];
-        }
-        groups[status].push(task);
-        return groups;
-    }, {});
+    return `
+        <div class="flex flex-col gap-2 w-full mb-6" id="column-${column.columnId}" draggable="true">
+            <div class="flex items-center justify-between px-2">
+                <div class="flex items-center gap-2">
+                    <div class="${getColumnTitleColour(column.name || column.title || '')}"></div>
+                    <h3 class="font-semibold text-gray-700">${column.name || column.title || 'Untitled'}</h3>
+                    <span class="text-sm text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">${taskCount}</span>
+                </div>
+            </div>
+            <div class="tasks-container flex flex-col border rounded-lg overflow-hidden bg-white shadow-sm" data-column-id="${column.columnId}" data-board-id="${boardId}">
+                ${headerHtml}
+                ${tasksHtml}
+                <!-- Add Task Button for this group -->
+                <div class="list-group-footer p-1 border-t bg-gray-50">
+                    <button class="add-task-btn w-full py-1.5 px-3 flex items-center justify-start gap-2 text-gray-500 hover:bg-gray-200 rounded-md transition-colors text-sm font-medium" data-column-id="${column.columnId}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
-    return statusOrder.map(status => {
-        const tasksInStatus = groupedTasks[status];
-        if (!tasksInStatus || tasksInStatus.length === 0) return '';
-
-        const taskRowsHtml = tasksInStatus.map(createTaskRow).join('');
-        return `
-            <h2 class="text-xl font-semibold text-gray-800 mt-8 mb-4">${statusText[status]}</h2>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 font-normal">Name</th>
-                            <th scope="col" class="px-6 py-3 font-normal">Priority</th>
-                            <th scope="col" class="px-6 py-3 font-normal">Tag</th>
-                            <th scope="col" class="px-6 py-3 font-normal">Due Date</th>
-                            <th scope="col" class="px-6 py-3 font-normal">Assigne</th>
-                        </tr>
-                    </thead>
-                    <tbody>${taskRowsHtml}</tbody>
-                </table>
-            </div>`;
-    }).join('');
+function addEventListeners(projectId, container, boardId) {
+    // Pass empty array for tasks as initTaskEventListeners doesn't use it
+    initTaskEventListeners([], projectId, container);
+    initColumnEventListeners(projectId);
 }

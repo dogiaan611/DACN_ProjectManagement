@@ -2,7 +2,7 @@ import { authFetch } from "./auth.js";
 import { initProjectBoard } from "./project-board.js";
 import { initializeDragAndDrop } from "./drag-drop.js";
 
-function getColumnTitleColour(title) {
+export function getColumnTitleColour(title) {
     switch (title.toLowerCase()) {
         case 'to do':
             return 'w-3 h-3 rounded-full bg-blue-500';
@@ -387,15 +387,15 @@ export function initColumnEventListeners(projectId) {
 
     // Khởi tạo kéo-thả cho cột
     initializeDragAndDrop({
-        containerSelector: '.board-container', // Selector cho board chứa các cột
-        draggableSelector: '.group.flex-1', // Selector cho các cột
+        containerSelector: '.board-container, .list-view-container', // Selector cho board hoặc list container
+        draggableSelector: '[draggable="true"][id^="column-"]', // Selector cho các cột (có id bắt đầu bằng column-)
         onDrop: async (e) => {
             const draggingColumn = e.currentTarget.querySelector('.dragging');
             if (!draggingColumn) return;
 
             const columnId = draggingColumn.id.replace('column-', '');
             const boardContainer = e.currentTarget;
-            const allColumns = [...boardContainer.querySelectorAll('.group.flex-1')];
+            const allColumns = [...boardContainer.querySelectorAll('[draggable="true"][id^="column-"]')];
             const newPosition = allColumns.findIndex(c => c.id === draggingColumn.id);
 
             try {

@@ -147,7 +147,12 @@ export function initializeDragAndDrop({ containerSelector, draggableSelector, on
 
             const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
             if (afterElement == null) {
-                container.appendChild(dragging);
+                const footer = container.querySelector('.list-group-footer');
+                if (footer) {
+                    container.insertBefore(dragging, footer);
+                } else {
+                    container.appendChild(dragging);
+                }
             } else {
                 container.insertBefore(dragging, afterElement);
             }

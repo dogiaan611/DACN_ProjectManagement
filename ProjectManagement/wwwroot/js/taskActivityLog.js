@@ -19,6 +19,40 @@ async function fetchActivityLog(boardId, columnId, taskId, container) {
     }
 }
 
+function formatTimeAgo(dateString) {
+    const utcDateString = dateString.endsWith('Z') ? dateString : dateString + 'Z';
+    const date = new Date(utcDateString);
+
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+
+    if (seconds < 10) {
+        return 'vừa xong';
+    }
+
+    let interval = seconds / 31536000; // 1 year
+    if (interval > 1) {
+        return Math.floor(interval) + " năm trước";
+    }
+    interval = seconds / 2592000; // 1 month
+    if (interval > 1) {
+        return Math.floor(interval) + " tháng trước";
+    }
+    interval = seconds / 86400; // 1 day
+    if (interval > 1) {
+        return Math.floor(interval) + " ngày trước";
+    }
+    interval = seconds / 3600; // 1 hour
+    if (interval > 1) {
+        return Math.floor(interval) + " tiếng trước";
+    }
+    interval = seconds / 60; // 1 minute
+    if (interval > 1) {
+        return Math.floor(interval) + " phút trước";
+    }
+    return Math.floor(seconds) + " giây trước";
+}
+
 function renderActivityLogs(container, logs) {
     container.innerHTML = '';
     if (logs.length === 0) {
@@ -27,7 +61,7 @@ function renderActivityLogs(container, logs) {
     }
 
     logs.forEach(log => {
-        const date = new Date(log.createdAt).toLocaleString('vi-VN');
+        const date = formatTimeAgo(log.createdAt);
         const userInitial = log.userName ? log.userName.charAt(0).toUpperCase() : 'U';
         const avatarHtml = `<div class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 text-gray-600 text-xs font-medium">${userInitial}</div>`;
         const itemHtml = `
@@ -38,7 +72,7 @@ function renderActivityLogs(container, logs) {
                         <span class="font-semibold">${log.userName || 'Unknown'}</span>
                         <span class="text-gray-600">${log.action}</span>
                     </div>
-                    <span class="text-xs text-gray-400">${date}</span>
+                    <span class="text-xs text-blue-400">${date}</span>
                     <div class="text-xs text-gray-500 mt-1">${formatLogMessage(log)}</div>
                 </div>
             </div>

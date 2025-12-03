@@ -1,7 +1,8 @@
 import { createBoard, initProjectBoard } from "./project-board.js";
+import { initProjectList } from "./project-list.js";
 import { initializeDragAndDrop } from "./drag-drop.js";
 import { authFetch } from './auth.js';
-import { createTaskCardHtml, createTaskFormHtml, toggleDropdown } from "./taskUI.js";
+import { createTaskCardHtml, createTaskFormHtml, createTaskRowFormHtml, toggleDropdown } from "./taskUI.js";
 import { openTaskDetailModal } from "./taskDetail.js";
 
 export function initTaskEventListeners(tasks, projectId, container) {
@@ -124,11 +125,31 @@ export function initTaskEventListeners(tasks, projectId, container) {
             }
 
             btn.classList.add('hidden');
-            tasksContainer.insertAdjacentHTML('afterbegin', createTaskFormHtml());
+            const isListView = tasksContainer.closest('.list-view-container');
+            const formHtml = isListView ? createTaskRowFormHtml() : createTaskFormHtml();
+            tasksContainer.insertAdjacentHTML('afterbegin', formHtml);
 
             const formContainer = tasksContainer.querySelector('.new-task-form-container');
             const form = formContainer.querySelector('form');
             const assigneeInput = form.querySelector('input[name="assigneeId"]');
+
+            // Hàm dọn dẹp: xóa form, hiển thị lại nút và gỡ bỏ event listener
+            const cleanup = () => {
+                formContainer.remove();
+                btn.classList.remove('hidden');
+                document.removeEventListener('click', handleClickOutside);
+            };
+
+            // Hàm xử lý khi click ra ngoài
+            const handleClickOutside = (event) => {
+                // Nếu click bên trong form hoặc các popup (portal) thì không làm gì cả
+                if (formContainer.contains(event.target) || event.target.closest('[id*="-portal"]')) {
+                    return;
+                }
+                cleanup();
+            };
+
+            setTimeout(() => document.addEventListener('click', handleClickOutside), 0);
 
 
             // Add assignee dropdown
@@ -259,6 +280,7 @@ export function initTaskEventListeners(tasks, projectId, container) {
             });
 
             form.addEventListener('submit', async (e) => {
+                document.removeEventListener('click', handleClickOutside); // Gỡ listener trước khi submit
                 e.preventDefault();
                 const formData = new FormData(form);
                 const title = formData.get('title').trim();
@@ -286,7 +308,11 @@ export function initTaskEventListeners(tasks, projectId, container) {
                         body: JSON.stringify(payload)
                     });
                     if (res.ok) {
-                        initProjectBoard(); // Reload the whole board to show the new task
+                        if (tasksContainer.closest('.list-view-container')) {
+                            initProjectList();
+                        } else {
+                            initProjectBoard();
+                        }
                     } else {
                         throw new Error('Failed to create task');
                     }

@@ -9,18 +9,14 @@ export async function initProjectBoard() {
 
     if (!projectId) return;
 
-    // Dữ liệu mẫu cho các công việc (tasks)
-    // Sau này bạn có thể thay thế bằng cách gọi API từ backend
-    const tasks = [];
-
-    container.innerHTML = await createBoard(tasks, projectId);
+    container.innerHTML = await createBoard(projectId);
 
     // Lấy boardId từ board đầu tiên và truyền vào event listeners
     const firstBoardId = document.querySelector('[data-board-id]')?.dataset.boardId;
-    addEventListeners(tasks, projectId, container, firstBoardId);
+    addEventListeners([], projectId, container, firstBoardId);
 }
 
-export async function createBoard(tasks, projectId) {
+export async function createBoard(projectId) {
     // Fetch boards for the project
     const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
     if (!boardsResponse.ok) {

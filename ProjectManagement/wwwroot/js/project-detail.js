@@ -3,7 +3,7 @@ import { initProjectEdit } from './project-edit.js';
 import { initProjectAddMembers } from './project-add-members.js';
 import { initProjectBoard } from './project-board.js';
 import { initProjectList } from './project-list.js';
-
+import { initProjectSpreadsheet } from './project-spreadsheet.js';
 // Lưu trữ dữ liệu project hiện tại
 let currentProjectData = null;
 
@@ -67,30 +67,37 @@ async function loadProjectDetails(projectId) {
 async function viewSwitcher() {
     const kanbanBtn = document.getElementById('kanban-view-btn');
     const listBtn = document.getElementById('list-view-btn');
-    if(!kanbanBtn || !listBtn) {
+    const spreadsheetBtn = document.getElementById('spreadsheet-view-btn');
+    if (!kanbanBtn || !listBtn || !spreadsheetBtn) {
         console.log('View btn not found');
         initProjectBoard();
         return;
     }
-
-    if(kanbanBtn.dataset.listenerAdded=== 'true'){
+    if (kanbanBtn.dataset.listenerAdded === 'true') {
         return;
     }
     kanbanBtn.dataset.listenerAdded = 'true';
     listBtn.dataset.listenerAdded = 'true';
+    spreadsheetBtn.dataset.listenerAdded = 'true';
 
     kanbanBtn.addEventListener('click', () => {
         kanbanBtn.classList.add('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
+        spreadsheetBtn.classList.remove('active', 'text-blue-400');
         initProjectBoard();
-    })
-
+    });
     listBtn.addEventListener('click', () => {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.add('active', 'text-blue-400');
+        spreadsheetBtn.classList.remove('active', 'text-blue-400');
         initProjectList();
-    })
-
+    });
+    spreadsheetBtn.addEventListener('click', () => {
+        kanbanBtn.classList.remove('active', 'text-blue-400');
+        listBtn.classList.remove('active', 'text-blue-400');
+        spreadsheetBtn.classList.add('active', 'text-blue-400');
+        initProjectSpreadsheet();
+    });
     kanbanBtn.click();
 }
 

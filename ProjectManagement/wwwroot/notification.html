@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script type="module" src="/js/auth.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+    <div class="flex h-screen items-stretch">
+        <!-- Sidebar sẽ được load vào đây -->
+        <div id="sidebar-container" class="h-full shrink-0"></div>
+
+        <!-- Nội dung chính của trang chi tiết project -->
+        <main class="flex-1 overflow-y-auto ml-64">
+            <div class="p-6 flex flex-col items-center justify-center">
+                <div class="flex w-full flex-col gap-2 px-6 py-2 mb-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <h1 class="text-3xl font-medium">Notification</h1>
+                        <button id="mark-as-read-all"
+                            class="flex items-center justify-center hover:bg-gray-100 text-gray-600 hover:text-green-500 rounded-full p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-check-check-icon lucide-check-check">
+                                <path d="M18 6 7 17l-5-5" />
+                                <path d="m22 10-7.5 7.5L13 16" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="notification-list" class="flex flex-col gap-2">
+                        <!-- Danh sách notification sẽ được chèn vào đây -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="/js/sidebar.js"></script>
+    <script type="module" src="/js/notification.js?v=1"></script>
+    <script type="module" src="/js/project-modal.js?v=2"></script>
+    <script type="module" src="/js/settings-modal.js?v=2"></script>
+    <script type="module" src="/js/user-settings-autosave.js?v=1"></script>
+</body>
+
+</html>

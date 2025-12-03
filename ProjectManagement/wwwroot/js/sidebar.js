@@ -6,6 +6,7 @@ import { open as openDropdownModal } from './sidebar-dropdown.js';
 import { initHome } from './home.js';
 import { initProjectDetail } from './project-detail.js';
 import { loadUserList } from './admin-user-list.js';
+import { initNotification, updateNotificationBadge } from './notification.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const cacheBuster = `v=${Date.now()}`;
       const sidebarResponse = await fetch(`/components/sidebar.html?${cacheBuster}`, { cache: "no-store" });
       container.innerHTML = await sidebarResponse.text();
+      updateNotificationBadge();
     }
 
 
@@ -47,25 +49,25 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error('Load user for sidebar failed:', err);
     }
 
-     // --- 3. Khởi tạo ProjectSidebar ---
+    // --- 3. Khởi tạo ProjectSidebar ---
     window.projectSidebar = new ProjectSidebar();
     window.projectSidebar.init();
     // --- 4. Gắn event chuyển trang bằng pushState ---
     const createProjectBtn = document.getElementById('open-create-project');
     if (createProjectBtn) {
-        createProjectBtn.addEventListener('click', () => {
-            // Hàm open từ project-modal.js đã được đổi tên thành openCreateProjectModal để tránh trùng lặp
-            openCreateProjectModal();
-        });
+      createProjectBtn.addEventListener('click', () => {
+        // Hàm open từ project-modal.js đã được đổi tên thành openCreateProjectModal để tránh trùng lặp
+        openCreateProjectModal();
+      });
     }
 
     const settingsBtn = document.getElementById('settings-button');
     if (settingsBtn) {
-        settingsBtn.addEventListener('click', () => openSettingsModal());
+      settingsBtn.addEventListener('click', () => openSettingsModal());
     }
 
     const dropdownOpen = document.getElementById("dropdown-btn");
-    if(dropdownOpen) {
+    if (dropdownOpen) {
       dropdownOpen.addEventListener('click', () => openDropdownModal());
     }
     setupNavigation();
@@ -77,43 +79,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function setupNavigation() {
-  // Xử lý các link có attribute data-spa-link
-  document.body.addEventListener("click", async (e) => {
-    const link = e.target.closest("a[data-spa-link]");
-    if (!link) return;
+    // Xử lý các link có attribute data-spa-link
+    document.body.addEventListener("click", async (e) => {
+      const link = e.target.closest("a[data-spa-link]");
+      if (!link) return;
 
-    e.preventDefault(); // Ngăn reload trang
-    const url = link.getAttribute("href");
-    if (!url) return;
-    history.pushState(null, "", url); // Cập nhật URL
-    await loadPage(url); // Chỉ tải lại phần main-content
-  });
+      e.preventDefault(); // Ngăn reload trang
+      const url = link.getAttribute("href");
+      if (!url) return;
+      history.pushState(null, "", url); // Cập nhật URL
+      await loadPage(url); // Chỉ tải lại phần main-content
+    });
 
-  // Xử lý các link sidebar (Home, Tasks, Activity, Inbox)
-  document.body.addEventListener("click", async (e) => {
-    // Tìm link trong sidebar container
-    const sidebarContainer = document.getElementById('sidebar-container');
-    if (!sidebarContainer) return;
+    // Xử lý các link sidebar (Home, Tasks, Activity, Inbox)
+    document.body.addEventListener("click", async (e) => {
+      // Tìm link trong sidebar container
+      const sidebarContainer = document.getElementById('sidebar-container');
+      if (!sidebarContainer) return;
 
-    const link = e.target.closest("a[id='sidebar-link'], a[id='admin-user-link']");
-    if (!link || !sidebarContainer.contains(link)) return;
+      const link = e.target.closest("a[id='sidebar-link'], a[id='admin-user-link']");
+      if (!link || !sidebarContainer.contains(link)) return;
 
-    const href = link.getAttribute("href");
-    // Chỉ xử lý nếu có href và không rỗng
-    if (!href || href === '') return;
+      const href = link.getAttribute("href");
+      // Chỉ xử lý nếu có href và không rỗng
+      if (!href || href === '') return;
 
-    // Bỏ qua các link external hoặc anchor
-    if (href.startsWith('http') || href.startsWith('#')) return;
+      // Bỏ qua các link external hoặc anchor
+      if (href.startsWith('http') || href.startsWith('#')) return;
 
-    e.preventDefault(); // Ngăn reload trang
-    history.pushState(null, "", href); // Cập nhật URL
-    await loadPage(href); // Chỉ tải lại phần main-content
-  });
+      e.preventDefault(); // Ngăn reload trang
+      history.pushState(null, "", href); // Cập nhật URL
+      await loadPage(href); // Chỉ tải lại phần main-content
+    });
 
-  window.addEventListener("popstate", async () => {
-    await loadPage(location.pathname + location.search);
-  });
-}
+    window.addEventListener("popstate", async () => {
+      await loadPage(location.pathname + location.search);
+    });
+  }
 
 });
 
@@ -129,6 +131,9 @@ export async function loadPage(url) {
     } else if (!pagePath.endsWith('.html')) {
       pagePath = `${pagePath}.html`;
     }
+
+    // Update active state in sidebar
+    updateSidebarActiveState(pagePath);
 
     // Load HTML từ đúng vị trí (root, không phải /pages/)
     // Query string vẫn được giữ trong window.location nhờ history.pushState
@@ -215,6 +220,8 @@ export async function loadPage(url) {
         }, 50);
       } else if (pagePath.includes('adminUser.html')) {
         loadUserList().catch(err => console.error('Lỗi khi khởi tạo trang admin user:', err));
+      } else if (pagePath.includes('notification.html')) {
+        initNotification().catch(err => console.error('Lỗi khi khởi tạo trang notification:', err));
       }
     });
 
@@ -225,4 +232,28 @@ export async function loadPage(url) {
       main.innerHTML = `<div class="text-red-500 p-4">Không thể tải trang: ${url}</div>`;
     }
   }
+}
+
+function updateSidebarActiveState(path) {
+  const sidebarLinks = document.querySelectorAll("a[id='sidebar-link'], a[id='admin-user-link']");
+  const currentPath = new URL(path, window.location.origin).pathname;
+
+  sidebarLinks.forEach(link => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    const linkPath = new URL(href, window.location.origin).pathname;
+
+    // Handle root path normalization
+    const isRootCurrent = currentPath === '/' || currentPath === '/index.html';
+    const isRootLink = linkPath === '/' || linkPath === '/index.html';
+
+    if (isRootCurrent && isRootLink) {
+      link.classList.add("bg-gray-100");
+    } else if (!isRootCurrent && currentPath === linkPath) {
+      link.classList.add("bg-gray-100");
+    } else {
+      link.classList.remove("bg-gray-100");
+    }
+  });
 }

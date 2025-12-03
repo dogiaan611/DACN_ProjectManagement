@@ -110,8 +110,8 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                     })
                 });
                 if (!updateRes.ok) throw new Error('Failed to update title.');
-                const taskCardTitle = document.querySelector(`.group[data-task-id="${taskId}"] .font-semibold.text-gray-800`);
-                if (taskCardTitle) taskCardTitle.textContent = newTitle;
+                const taskTitles = document.querySelectorAll(`.group[data-task-id="${taskId}"] .font-semibold.text-gray-800, .group[data-task-id="${taskId}"] .font-medium.text-gray-800`);
+                taskTitles.forEach(el => el.textContent = newTitle);
                 task.title = newTitle;
 
             } catch (err) {
@@ -218,12 +218,21 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                         const assigneeName = task.assignee?.name || 'Unassigned';
                         assigneeAvtar.innerHTML = `${avatarHtml}<span class="text-sm font-medium text-gray-600">${assigneeName}</span>`;
 
-                        // Update task card on the board
-                        const taskCardAvatarContainer = document.querySelector(`.group[data-task-id="${taskId}"] > div:last-child > :first-child`);
-                        if (taskCardAvatarContainer) {
-                            taskCardAvatarContainer.outerHTML = task.assignee?.avatarUrl
+                        // Update task card on the board (Kanban)
+                        const kanbanAvatarContainer = document.querySelector(`.group[data-task-id="${taskId}"] > div:last-child > :first-child`);
+                        if (kanbanAvatarContainer) {
+                            kanbanAvatarContainer.outerHTML = task.assignee?.avatarUrl
                                 ? `<img src="${task.assignee.avatarUrl}" alt="${task.assignee.name}" class="w-5 h-5 rounded-full border object-cover">`
                                 : `<div class="w-5 h-5 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${avatarInitial}</div>`;
+                        }
+
+                        // Update task row (List View)
+                        const listAvatarContainer = document.querySelector(`.group[data-task-id="${taskId}"] .w-32.flex.items-center.gap-2`);
+                        if (listAvatarContainer) {
+                            const avatarHtml = task.assignee?.avatarUrl
+                                ? `<img src="${task.assignee.avatarUrl}" alt="${task.assignee.name}" class="w-6 h-6 rounded-full border object-cover">`
+                                : `<div class="w-6 h-6 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${avatarInitial}</div>`;
+                            listAvatarContainer.innerHTML = `${avatarHtml}<span class="truncate max-w-[100px]">${task.assignee?.name || 'Unassigned'}</span>`;
                         }
 
                     } catch (err) {
@@ -301,8 +310,11 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                             if (!updateRes.ok) throw new Error('Failed to update priority');
                             priorityBtn.innerHTML = getPriorityChip(newPriority);
                             task.priority = newPriority;
-                            const taskCard = document.querySelector(`.group[data-task-id="${taskId}"] .mb-2`);
-                            if (taskCard) taskCard.innerHTML = getPriorityChip(newPriority) + taskCard.querySelector('.flex.items-center.justify-center').outerHTML;
+                            const kanbanCardPriority = document.querySelector(`.group[data-task-id="${taskId}"] .mb-2`);
+                            if (kanbanCardPriority) kanbanCardPriority.innerHTML = getPriorityChip(newPriority) + kanbanCardPriority.querySelector('.flex.items-center.justify-center').outerHTML;
+
+                            const listRowPriority = document.querySelector(`.group[data-task-id="${taskId}"] .w-32.flex.justify-start`);
+                            if (listRowPriority) listRowPriority.innerHTML = getPriorityChip(newPriority);
                         } catch (error) {
                             console.error("Error updating priority:", error);
                             alert("Could not update priority.");
@@ -344,9 +356,13 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                                 const dateString = newDueDate.toLocaleDateString('vi-VN', { day: '2-digit', month: 'long', year: 'numeric' });
                                 calendarBtn.textContent = dateString;
 
-                                // Cập nhật UI trên card ở ngoài board
-                                const taskCardDueDate = document.querySelector(`.group[data-task-id="${taskId}"] .text-xs.text-gray-500`);
-                                if (taskCardDueDate) taskCardDueDate.textContent = dateString;
+                                // Cập nhật UI trên card ở ngoài board (Kanban)
+                                const kanbanDueDate = document.querySelector(`.group[data-task-id="${taskId}"] .text-xs.text-gray-500`);
+                                if (kanbanDueDate) kanbanDueDate.textContent = dateString;
+
+                                // Cập nhật UI trên row (List View)
+                                const listDueDate = document.querySelector(`.group[data-task-id="${taskId}"] .w-24.text-sm.text-gray-500.text-right`);
+                                if (listDueDate) listDueDate.textContent = dateString;
 
                             } catch (error) {
                                 console.error("Error updating due date:", error);
