@@ -16,6 +16,7 @@ namespace ProjectManagement.Data
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public DbSet<Board> Boards { get; set; }
         public DbSet<Column> Columns { get; set; }
+        public DbSet<ColumnStatusMapping> ColumnStatusMappings { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
         public DbSet<ProjectTask> PojectTasks { get; set; }
         public DbSet<Tag> Tags { get; set; }
@@ -25,6 +26,9 @@ namespace ProjectManagement.Data
         public DbSet<CommentMention> CommentMentions { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Subtask> Subtasks { get; set; }
+        public DbSet<SubtaskComment> SubtaskComments { get; set; }
+        public DbSet<SubtaskCommentMention> SubtaskCommentMentions { get; set; }
+        public DbSet<SubtaskActivityLog> SubtaskActivityLogs { get; set; }
         public DbSet<TaskWatcher> TaskWatchers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
@@ -49,6 +53,9 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<TaskWatcher>()
                 .HasKey(tw => new { tw.TaskId, tw.UserId });
+
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasKey(scm => new { scm.CommentId, scm.UserId });
 
             // Relationships
             // User ↔ Project
@@ -78,11 +85,24 @@ namespace ProjectManagement.Data
                 .HasForeignKey(b => b.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Board>()
+                .HasOne(b => b.ActiveSprint)
+                .WithMany()
+                .HasForeignKey(b => b.ActiveSprintId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             // Column ↔ Board
             modelBuilder.Entity<Column>()
                 .HasOne(c => c.Board)
                 .WithMany(b => b.Columns)
                 .HasForeignKey(c => c.BoardId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ColumnStatusMapping ↔ Column
+            modelBuilder.Entity<ColumnStatusMapping>()
+                .HasOne(csm => csm.Column)
+                .WithMany()
+                .HasForeignKey(csm => csm.ColumnId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Sprint ↔ Project
@@ -91,6 +111,12 @@ namespace ProjectManagement.Data
                 .WithMany(p => p.Sprints)
                 .HasForeignKey(s => s.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Sprint>()
+                .HasOne(s => s.CreatedBy)
+                .WithMany()
+                .HasForeignKey(s => s.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // ProjectTask ↔ Column
             modelBuilder.Entity<ProjectTask>()
@@ -249,6 +275,65 @@ namespace ProjectManagement.Data
                 .WithMany()
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            // Subtask relationships
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.Task)
+                .WithMany(t => t.Subtasks)
+                .HasForeignKey(s => s.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.Assignee)
+                .WithMany()
+                .HasForeignKey(s => s.AssigneeId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.CreatedBy)
+                .WithMany()
+                .HasForeignKey(s => s.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // SubtaskComment relationships
+            modelBuilder.Entity<SubtaskComment>()
+                .HasOne(sc => sc.Subtask)
+                .WithMany(s => s.Comments)
+                .HasForeignKey(sc => sc.SubtaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskComment>()
+                .HasOne(sc => sc.User)
+                .WithMany()
+                .HasForeignKey(sc => sc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // SubtaskCommentMention relationships
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasOne(scm => scm.Comment)
+                .WithMany(sc => sc.Mentions)
+                .HasForeignKey(scm => scm.CommentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasOne(scm => scm.User)
+                .WithMany()
+                .HasForeignKey(scm => scm.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // SubtaskActivityLog relationships
+            modelBuilder.Entity<SubtaskActivityLog>()
+                .HasOne(sal => sal.Subtask)
+                .WithMany(s => s.ActivityLogs)
+                .HasForeignKey(sal => sal.SubtaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskActivityLog>()
+                .HasOne(sal => sal.User)
+                .WithMany()
+                .HasForeignKey(sal => sal.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
 
             // RegistrationCode
             modelBuilder.Entity<RegistrationCode>()

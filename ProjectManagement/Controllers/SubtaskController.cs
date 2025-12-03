@@ -21,8 +21,22 @@ namespace ProjectManagement.Controllers
             _db = db;
         }
 
-        public record CreateSubtaskDto(string Title);
-        public record UpdateSubtaskDto(string? Title = null, bool? IsDone = null);
+        public record CreateSubtaskDto(
+            string Title,
+            string? Description = null,
+            string? AssigneeId = null,
+            TaskPriority Priority = TaskPriority.Medium,
+            DateTime? DueDate = null
+        );
+
+        public record UpdateSubtaskDto(
+            string? Title = null,
+            string? Description = null,
+            string? AssigneeId = null,
+            TaskPriority? Priority = null,
+            DateTime? DueDate = null,
+            bool? IsDone = null
+        );
 
         // Liệt kê subtask của task
         [HttpGet]
@@ -43,14 +57,32 @@ namespace ProjectManagement.Controllers
 
             var subtasks = await _db.Subtasks
                 .Where(s => s.TaskId == taskId)
+                .Include(s => s.Assignee)
+                .Include(s => s.CreatedBy)
                 .OrderBy(s => s.SubtaskId)
                 .Select(s => new
                 {
                     s.SubtaskId,
                     s.TaskId,
                     s.Title,
+                    s.Description,
+                    s.Priority,
+                    s.DueDate,
                     s.IsDone,
-                    s.CreatedAt
+                    Assignee = s.Assignee == null ? null : new
+                    {
+                        s.Assignee.Id,
+                        s.Assignee.Name,
+                        s.Assignee.AvatarUrl
+                    },
+                    CreatedBy = new
+                    {
+                        s.CreatedBy.Id,
+                        s.CreatedBy.Name,
+                        s.CreatedBy.AvatarUrl
+                    },
+                    s.CreatedAt,
+                    s.UpdatedAt
                 })
                 .ToListAsync();
 
@@ -80,17 +112,37 @@ namespace ProjectManagement.Controllers
             {
                 TaskId = taskId,
                 Title = dto.Title.Trim(),
+                Description = dto.Description?.Trim(),
+                AssigneeId = dto.AssigneeId,
+                Priority = dto.Priority,
+                DueDate = dto.DueDate,
                 IsDone = false,
-                CreatedAt = DateTime.UtcNow
+                CreatedById = userId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
 
             _db.Subtasks.Add(subtask);
 
+            // Activity log for parent task
             _db.ActivityLogs.Add(new ActivityLog
             {
                 TaskId = task.TaskId,
                 UserId = userId,
                 Action = "Add Subtask",
+                OldValue = string.Empty,
+                NewValue = subtask.Title,
+                CreatedAt = DateTime.UtcNow
+            });
+
+            await _db.SaveChangesAsync();
+
+            // Subtask activity log
+            _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+            {
+                SubtaskId = subtask.SubtaskId,
+                UserId = userId,
+                Action = "Create Subtask",
                 OldValue = string.Empty,
                 NewValue = subtask.Title,
                 CreatedAt = DateTime.UtcNow
@@ -123,6 +175,8 @@ namespace ProjectManagement.Controllers
                 .Include(s => s.Task)
                     .ThenInclude(t => t.Column!)
                         .ThenInclude(c => c.Board)
+                .Include(s => s.Assignee)
+                .Include(s => s.CreatedBy)
                 .FirstOrDefaultAsync(s => s.SubtaskId == subtaskId && s.TaskId == taskId && s.Task.ColumnId == columnId && s.Task.Column!.BoardId == boardId);
             if (subtask == null) return NotFound();
 
@@ -135,8 +189,24 @@ namespace ProjectManagement.Controllers
                 subtask.SubtaskId,
                 subtask.TaskId,
                 subtask.Title,
+                subtask.Description,
+                subtask.Priority,
+                subtask.DueDate,
                 subtask.IsDone,
-                subtask.CreatedAt
+                Assignee = subtask.Assignee == null ? null : new
+                {
+                    subtask.Assignee.Id,
+                    subtask.Assignee.Name,
+                    subtask.Assignee.AvatarUrl
+                },
+                CreatedBy = new
+                {
+                    subtask.CreatedBy.Id,
+                    subtask.CreatedBy.Name,
+                    subtask.CreatedBy.AvatarUrl
+                },
+                subtask.CreatedAt,
+                subtask.UpdatedAt
             });
         }
 
@@ -158,23 +228,124 @@ namespace ProjectManagement.Controllers
             var membership = await _db.ProjectMembers.FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
             if (membership == null) return Forbid();
 
-            // Cho phép thành viên cập nhật, có thể giới hạn quyền nếu cần
+            // Track old values for change detection
             var oldTitle = subtask.Title;
+            var oldDescription = subtask.Description;
+            var oldAssigneeId = subtask.AssigneeId;
+            var oldPriority = subtask.Priority;
+            var oldDueDate = subtask.DueDate;
             var oldIsDone = subtask.IsDone;
 
-            if (!string.IsNullOrWhiteSpace(dto.Title)) subtask.Title = dto.Title.Trim();
-            if (dto.IsDone.HasValue) subtask.IsDone = dto.IsDone.Value;
+            var changed = new List<string>();
 
-            // Tạo Activity Log nếu có thay đổi
-            if (oldTitle != subtask.Title || oldIsDone != subtask.IsDone)
+            // Update Title
+            if (!string.IsNullOrWhiteSpace(dto.Title) && dto.Title.Trim() != oldTitle)
             {
+                subtask.Title = dto.Title.Trim();
+                changed.Add("Title");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Update Title",
+                    OldValue = oldTitle,
+                    NewValue = subtask.Title,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update Description
+            if (dto.Description != null && dto.Description != oldDescription)
+            {
+                subtask.Description = string.IsNullOrWhiteSpace(dto.Description) ? null : dto.Description.Trim();
+                changed.Add("Description");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Update Description",
+                    OldValue = oldDescription ?? string.Empty,
+                    NewValue = subtask.Description ?? string.Empty,
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update Assignee
+            if (dto.AssigneeId != null && dto.AssigneeId != oldAssigneeId)
+            {
+                subtask.AssigneeId = string.IsNullOrWhiteSpace(dto.AssigneeId) ? null : dto.AssigneeId;
+                changed.Add("Assignee");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Assign Subtask",
+                    OldValue = oldAssigneeId ?? "Unassigned",
+                    NewValue = subtask.AssigneeId ?? "Unassigned",
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update Priority
+            if (dto.Priority.HasValue && dto.Priority.Value != oldPriority)
+            {
+                subtask.Priority = dto.Priority.Value;
+                changed.Add("Priority");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Update Priority",
+                    OldValue = oldPriority.ToString(),
+                    NewValue = subtask.Priority.ToString(),
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update DueDate
+            if (dto.DueDate != oldDueDate)
+            {
+                subtask.DueDate = dto.DueDate;
+                changed.Add("DueDate");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Update Due Date",
+                    OldValue = oldDueDate?.ToString("yyyy-MM-dd") ?? "None",
+                    NewValue = subtask.DueDate?.ToString("yyyy-MM-dd") ?? "None",
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update IsDone
+            if (dto.IsDone.HasValue && dto.IsDone.Value != oldIsDone)
+            {
+                subtask.IsDone = dto.IsDone.Value;
+                changed.Add("Status");
+                _db.SubtaskActivityLogs.Add(new SubtaskActivityLog
+                {
+                    SubtaskId = subtaskId,
+                    UserId = userId,
+                    Action = "Update Status",
+                    OldValue = oldIsDone.ToString(),
+                    NewValue = subtask.IsDone.ToString(),
+                    CreatedAt = DateTime.UtcNow
+                });
+            }
+
+            // Update timestamp and create parent task activity log if any changes
+            if (changed.Any())
+            {
+                subtask.UpdatedAt = DateTime.UtcNow;
+
                 _db.ActivityLogs.Add(new ActivityLog
                 {
                     TaskId = subtask.TaskId,
                     UserId = userId,
                     Action = "Update Subtask",
-                    OldValue = $"Title:{oldTitle};IsDone:{oldIsDone}",
-                    NewValue = $"Title:{subtask.Title};IsDone:{subtask.IsDone}",
+                    OldValue = $"Subtask: {oldTitle}",
+                    NewValue = $"Changed: {string.Join(", ", changed)}",
                     CreatedAt = DateTime.UtcNow
                 });
             }
@@ -188,7 +359,7 @@ namespace ProjectManagement.Controllers
                 await _db.NotifySubtaskStatusChangedAsync(subtask.Task, userId, currentUserName, subtask.Title, subtask.IsDone);
             }
 
-            return Ok(new { message = "Subtask updated" });
+            return Ok(new { message = "Subtask updated", changed });
         }
 
         // Chuyển trạng thái hoàn thành của subtask
@@ -268,6 +439,50 @@ namespace ProjectManagement.Controllers
 
             await _db.SaveChangesAsync();
             return Ok(new { message = "Subtask deleted" });
+        }
+
+        // Get activity logs for subtask
+        [HttpGet("{subtaskId:int}/activity")]
+        public async Task<IActionResult> GetActivity(int boardId, int columnId, int taskId, int subtaskId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
+
+            var subtask = await _db.Subtasks
+                .Include(s => s.Task)
+                    .ThenInclude(t => t.Column!)
+                        .ThenInclude(c => c.Board)
+                .FirstOrDefaultAsync(s => s.SubtaskId == subtaskId && s.TaskId == taskId && 
+                    s.Task.ColumnId == columnId && s.Task.Column!.BoardId == boardId);
+            
+            if (subtask == null) return NotFound("Subtask not found");
+
+            var projectId = subtask.Task.Column!.Board.ProjectId;
+            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
+            if (!isMember) return Forbid();
+
+            var activities = await _db.SubtaskActivityLogs
+                .Where(a => a.SubtaskId == subtaskId)
+                .Include(a => a.User)
+                .OrderByDescending(a => a.CreatedAt)
+                .Select(a => new
+                {
+                    a.LogId,
+                    a.SubtaskId,
+                    User = a.User == null ? null : new
+                    {
+                        a.User.Id,
+                        a.User.Name,
+                        a.User.AvatarUrl
+                    },
+                    a.Action,
+                    a.OldValue,
+                    a.NewValue,
+                    a.CreatedAt
+                })
+                .ToListAsync();
+
+            return Ok(activities);
         }
     }
 }

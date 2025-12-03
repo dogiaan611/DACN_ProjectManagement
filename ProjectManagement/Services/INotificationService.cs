@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Services
 {

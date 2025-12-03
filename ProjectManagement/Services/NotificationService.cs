@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
+using ProjectManagement.Domain.Entities;
 using ProjectManagement.Options;
 using Task = System.Threading.Tasks.Task;
 

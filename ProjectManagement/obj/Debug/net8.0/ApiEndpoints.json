@@ -958,6 +958,37 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "ProjectManagement.Controllers.SubtaskController",
+    "Method": "GetActivity",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/activity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subtaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ProjectManagement.Controllers.AttachmentController",
     "Method": "ListForSubtask",
     "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/attachments",
@@ -1126,6 +1157,150 @@
       },
       {
         "Name": "attachmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SubtaskCommentController",
+    "Method": "List",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/comments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subtaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SubtaskCommentController",
+    "Method": "Create",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/comments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subtaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.SubtaskCommentController\u002BCreateSubtaskCommentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SubtaskCommentController",
+    "Method": "Update",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/comments/{commentId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subtaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "commentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.SubtaskCommentController\u002BUpdateSubtaskCommentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SubtaskCommentController",
+    "Method": "Delete",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/subtasks/{subtaskId}/comments/{commentId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subtaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "commentId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1597,6 +1772,111 @@
     "Parameters": [
       {
         "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SprintController",
+    "Method": "List",
+    "RelativePath": "projects/{projectId}/sprints",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SprintController",
+    "Method": "Create",
+    "RelativePath": "projects/{projectId}/sprints",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.SprintController\u002BCreateSprintDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SprintController",
+    "Method": "Get",
+    "RelativePath": "projects/{projectId}/sprints/{sprintId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sprintId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SprintController",
+    "Method": "Update",
+    "RelativePath": "projects/{projectId}/sprints/{sprintId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sprintId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.SprintController\u002BUpdateSprintDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.SprintController",
+    "Method": "Delete",
+    "RelativePath": "projects/{projectId}/sprints/{sprintId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sprintId",
         "Type": "System.Int32",
         "IsRequired": true
       }
