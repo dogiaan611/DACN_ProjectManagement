@@ -500,6 +500,37 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.CommentController",
+    "Method": "Get",
+    "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/comments/{commentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "boardId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "columnId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "commentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.CommentController",
     "Method": "Delete",
     "RelativePath": "boards/{boardId}/columns/{columnId}/tasks/{taskId}/comments/{commentId}",
     "HttpMethod": "DELETE",
@@ -1326,6 +1357,59 @@
   },
   {
     "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "GetNotifications",
+    "RelativePath": "notification",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "MarkAsRead",
+    "RelativePath": "notification/{id}/read",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "CreateNotification",
+    "RelativePath": "notification/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ProjectManagement.Controllers.NotificationController\u002BCreateNotificationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
     "Method": "SendEmail",
     "RelativePath": "notification/email/send",
     "HttpMethod": "POST",
@@ -1354,6 +1438,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectManagement.Controllers.NotificationController",
+    "Method": "MarkAllAsRead",
+    "RelativePath": "notification/read-all",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

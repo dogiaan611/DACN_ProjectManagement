@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
+using ProjectManagement.Services;
 using System.Security.Claims;
 
 // Quản lý tag của task: liệt kê, gán, gỡ tag
@@ -87,6 +88,10 @@ namespace ProjectManagement.Controllers
 
             await _db.SaveChangesAsync();
 
+            // Notification: Event 17 Tag Added
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifyTagAddedAsync(task, userId, currentUserName, tag.Name);
+
             return Ok(new { message = "Gán Tag thành công" });
         }
 
@@ -125,6 +130,10 @@ namespace ProjectManagement.Controllers
                 NewValue = string.Empty,
                 CreatedAt = DateTime.UtcNow
             });
+
+            // Notification: Event 18 Tag Removed
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifyTagRemovedAsync(task, userId, currentUserName, tagName);
 
             await _db.SaveChangesAsync();
             return Ok(new { message = "Tag đã được xóa khỏi Task" });

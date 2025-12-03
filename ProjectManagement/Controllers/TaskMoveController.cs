@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
+using ProjectManagement.Services;
 using System.Security.Claims;
 
 // Move / reorder tasks (drag & drop).
@@ -108,6 +109,21 @@ namespace ProjectManagement.Controllers
                     NewValue = $"Column:{dto.ToColumnId};Pos:{insertPos}",
                     CreatedAt = DateTime.UtcNow
                 });
+
+                // Notification: Event 4 Task Status Changed (if column changed)
+                if (oldColumnId != dto.ToColumnId)
+                {
+                    var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                    var oldColumnName = (await _db.Columns.FindAsync(oldColumnId))?.Name ?? "Unknown";
+                    var newColumnName = targetColumn.Name;
+                    await _db.NotifyTaskStatusChangedAsync(task, userId, currentUserName, oldColumnName, newColumnName);
+
+                    // Enhanced Feature 2: Notify creator when task moves to Done
+                    if (newColumnName.Contains("Done", StringComparison.OrdinalIgnoreCase))
+                    {
+                        await _db.NotifyCreatorTaskCompletedAsync(task, userId, currentUserName, projectId);
+                    }
+                }
 
                 await _db.SaveChangesAsync();
                 await tx.CommitAsync();

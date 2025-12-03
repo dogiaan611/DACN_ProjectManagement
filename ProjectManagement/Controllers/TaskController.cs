@@ -114,10 +114,17 @@ namespace ProjectManagement.Controllers
             await _db.SaveChangesAsync();
 
             // Notification: notify assignee (if assigned and not the creator)
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
             if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
             {
-                var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
-                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, currentUserName);
+                // Event 1 & 3: Task Created & Assigned
+                await _db.NotifyTaskCreatedAsync(task, currentUserName);
+            }
+
+            // Enhanced Feature 1: Notify team leads if priority is Highest
+            if (task.Priority == TaskPriority.Critical)
+            {
+                await _db.NotifyTeamLeadHighestPriorityAsync(task, userId, currentUserName, projectId);
             }
 
             var assignee = task.AssigneeId == null ? null : await _userManager.FindByIdAsync(task.AssigneeId);
@@ -306,11 +313,22 @@ namespace ProjectManagement.Controllers
                 });
                 await _db.SaveChangesAsync();
 
-                // Notification: notify new assignee when changed
+                var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+
+                // Notification: notify new assignee when changed (Event 3)
                 if (oldAssignee != task.AssigneeId && !string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
                 {
-                    var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
-                    await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, currentUserName);
+                    await _db.NotifyTaskAssignedAsync(task, task.AssigneeId, currentUserName);
+                }
+
+                // Notification: Event 2 Task Updated
+                var changesStr = string.Join(", ", changed);
+                await _db.NotifyTaskUpdatedAsync(task, userId, currentUserName, changesStr);
+
+                // Enhanced Feature 1: Notify team leads if priority changed to Highest
+                if (oldPriority != task.Priority && task.Priority == TaskPriority.Critical)
+                {
+                    await _db.NotifyTeamLeadHighestPriorityAsync(task, userId, currentUserName, projectId);
                 }
             }
 
@@ -354,6 +372,10 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             };
             _db.ActivityLogs.Add(deleteLog);
+
+            // Notification: Event 5 Task Deleted (before removing)
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifyTaskDeletedAsync(task, userId, currentUserName);
 
             _db.PojectTasks.Remove(task);
             await _db.SaveChangesAsync();

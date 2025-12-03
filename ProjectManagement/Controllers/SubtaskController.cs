@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
 using ProjectManagement.Domain.Entities;
+using ProjectManagement.Services;
 using System.Security.Claims;
 
 //Controller quản lý Subtask: tạo, cập nhật, xóa, liệt kê subtasks trong task
@@ -97,6 +98,10 @@ namespace ProjectManagement.Controllers
 
             await _db.SaveChangesAsync();
 
+            // Notification: Event 11 Subtask Created
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifySubtaskCreatedAsync(task, userId, currentUserName, subtask.Title);
+
             return CreatedAtAction(nameof(Get), new { boardId, columnId, taskId, subtaskId = subtask.SubtaskId }, new
             {
                 subtask.SubtaskId,
@@ -176,6 +181,13 @@ namespace ProjectManagement.Controllers
 
             await _db.SaveChangesAsync();
 
+            // Notification: Event 12 Subtask Status Changed (if IsDone changed)
+            if (oldIsDone != subtask.IsDone)
+            {
+                var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+                await _db.NotifySubtaskStatusChangedAsync(subtask.Task, userId, currentUserName, subtask.Title, subtask.IsDone);
+            }
+
             return Ok(new { message = "Subtask updated" });
         }
 
@@ -211,6 +223,11 @@ namespace ProjectManagement.Controllers
             });
 
             await _db.SaveChangesAsync();
+
+            // Notification: Event 12 Subtask Status Changed
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifySubtaskStatusChangedAsync(subtask.Task, userId, currentUserName, subtask.Title, subtask.IsDone);
+
             return Ok(new { subtask.SubtaskId, subtask.IsDone });
         }
 
@@ -231,6 +248,10 @@ namespace ProjectManagement.Controllers
             var projectId = subtask.Task.Column!.Board.ProjectId;
             var membership = await _db.ProjectMembers.FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
             if (membership == null) return Forbid();
+
+            // Notification: Event 14 Subtask Deleted (before removing)
+            var currentUserName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+            await _db.NotifySubtaskDeletedAsync(subtask.Task, userId, currentUserName, subtask.Title);
 
             // Cho phép thành viên xóa, có thể giới hạn quyền nếu cần
             _db.Subtasks.Remove(subtask);

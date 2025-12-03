@@ -441,7 +441,6 @@ D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebas
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.development.json
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectM.83DF0853.Up2Date
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.dll
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\ProjectManagement.dll

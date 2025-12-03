@@ -150,12 +150,16 @@ namespace ProjectManagement.Controllers
             });
             await _db.SaveChangesAsync();
 
+            var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+
             // Notifications for mentions (batch)
             if (mentionedUserIds.Any())
             {
-                var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
                 await _db.AddMentionNotificationsBatchAsync(mentionedUserIds, projectId, taskId, commenterName, task.Title);
             }
+
+            // Notification: Event 6 Comment Created
+            await _db.NotifyCommentCreatedAsync(task, userId, commenterName, comment.Content);
 
             return CreatedAtAction(nameof(List), new { boardId, columnId, taskId }, new
             {
@@ -220,6 +224,10 @@ namespace ProjectManagement.Controllers
             // Xóa các mention liên quan
             var mentions = await _db.CommentMentions.Where(cm => cm.CommentId == commentId).ToListAsync();
             _db.CommentMentions.RemoveRange(mentions);
+
+            // Xóa các attachment liên quan
+            var attachments = await _db.Attachments.Where(a => a.CommentId == commentId).ToListAsync();
+            _db.Attachments.RemoveRange(attachments);
 
             _db.Comments.Remove(comment);
 
@@ -334,12 +342,16 @@ namespace ProjectManagement.Controllers
 
             await _db.SaveChangesAsync();
 
+            var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
+
             // Notify newly mentioned users (batch)
             if (toAdd.Any())
             {
-                var commenterName = (await _db.Users.FindAsync(userId))?.Name ?? "someone";
                 await _db.AddMentionNotificationsBatchAsync(toAdd, projectId, taskId, commenterName, comment.Task.Title);
             }
+
+            // Notification: Event 7 Comment Edited
+            await _db.NotifyCommentEditedAsync(comment.Task, userId, commenterName);
 
             // Trở về comment đã cập nhật
             var updated = await _db.Comments

@@ -165,14 +165,11 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             });
 
-            // notify task assignee
-            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
-            {
-                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
-                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
-            }
-
             await _db.SaveChangesAsync();
+
+            // Notification: Event 15 File Attached to Task
+            var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+            await _db.NotifyTaskAttachmentAsync(task, userId, uploaderName);
 
             return CreatedAtAction(nameof(GetForTask), new { boardId, columnId, taskId, attachmentId = attachment.AttachmentId }, new
             {
@@ -244,6 +241,11 @@ namespace ProjectManagement.Controllers
             if (attach == null) return NotFound();
 
             if (!await CanDeleteAttachment(projectId, userId, attach)) return Forbid();
+
+            // Notification: Event 16 File Deleted From Task (before removing)
+            var currentUserName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+            var fileName = Path.GetFileName(attach.FilePath);
+            await _db.NotifyTaskAttachmentDeletedAsync(task, userId, currentUserName, fileName);
 
             var physical = MapToPhysical(attach.FilePath);
             try { if (System.IO.File.Exists(physical)) System.IO.File.Delete(physical); } catch { }
@@ -336,13 +338,6 @@ namespace ProjectManagement.Controllers
                 NewValue = $"Subtask:{subtaskId};{relativePath}",
                 CreatedAt = DateTime.UtcNow
             });
-
-            // notify task assignee
-            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
-            {
-                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
-                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
-            }
 
             await _db.SaveChangesAsync();
 
@@ -508,12 +503,9 @@ namespace ProjectManagement.Controllers
                 CreatedAt = DateTime.UtcNow
             });
 
-            // notify task assignee
-            if (!string.IsNullOrWhiteSpace(task.AssigneeId) && task.AssigneeId != userId)
-            {
-                var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
-                await _db.NotifyAssigneeAsync(task.AssigneeId, projectId, task.TaskId, task.Title, uploaderName);
-            }
+            // Notification: Event 10 Attachment in Comment
+            var uploaderName = (await _userManager.FindByIdAsync(userId))?.Name ?? "someone";
+            await _db.NotifyCommentAttachmentAsync(task, userId, uploaderName);
 
             await _db.SaveChangesAsync();
 
