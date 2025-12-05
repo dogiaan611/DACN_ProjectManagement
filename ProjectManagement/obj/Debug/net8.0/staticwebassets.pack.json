@@ -241,6 +241,10 @@
       "PackagePath": "staticwebassets\\js\\project-add-members.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-backlog.js",
+      "PackagePath": "staticwebassets\\js\\project-backlog.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-board.js",
       "PackagePath": "staticwebassets\\js\\project-board.js"
     },
@@ -389,10 +393,6 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\11\\b8fd1383b25540f4a4b5e1f06e096876_Chuong-I.docx"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\d0e40d4ad98f430b9fbd0d2c042a773b_DAQLDACNTT_Nhom11.pdf",
-      "PackagePath": "staticwebassets\\uploads\\2025\\11\\d0e40d4ad98f430b9fbd0d2c042a773b_DAQLDACNTT_Nhom11.pdf"
-    },
-    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\11\\d743844259cc4f45afb4aadf6983cdf8_BaoCaoQLDA_CNTT.pdf",
       "PackagePath": "staticwebassets\\uploads\\2025\\11\\d743844259cc4f45afb4aadf6983cdf8_BaoCaoQLDA_CNTT.pdf"
     },
@@ -431,6 +431,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\880d4b0504a64aa38d9712e7c7390cf8_DAQLDACNTT_Nhom11.docx",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\880d4b0504a64aa38d9712e7c7390cf8_DAQLDACNTT_Nhom11.docx"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\a8883d0795bb4e17b2bf8872cd433192_Hoa.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\a8883d0795bb4e17b2bf8872cd433192_Hoa.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\bf2592760efd4103a1650b24baa47a5b_DAQLDACNTT_Nhom11.docx",

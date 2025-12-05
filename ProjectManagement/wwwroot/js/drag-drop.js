@@ -5,7 +5,7 @@
  * @param {number} clientY - Tọa độ Y của chuột (cho task).
  * @returns {HTMLElement | null} - Phần tử đứng ngay sau vị trí thả, hoặc null nếu thả ở cuối.
  */
-function getDragAfterElement(container, clientX, clientY) {
+export function getDragAfterElement(container, clientX, clientY) {
     const draggableElements = [...container.querySelectorAll('[draggable="true"]:not(.dragging)')];
 
     return draggableElements.reduce((closest, child) => {

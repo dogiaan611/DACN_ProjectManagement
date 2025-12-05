@@ -29,7 +29,7 @@ namespace ProjectManagement.Domain.Entities
         public bool IsDone { get; set; } = false;
 
         [ForeignKey("CreatedBy")]
-        public string CreatedById { get; set; }
+        public string? CreatedById { get; set; }
         public ApplicationUser CreatedBy { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

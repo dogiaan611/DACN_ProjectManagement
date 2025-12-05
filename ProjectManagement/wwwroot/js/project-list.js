@@ -3,13 +3,32 @@ import { initColumnEventListeners } from "./column.js";
 import { initTaskEventListeners } from "./task.js";
 import { createTaskRowHtml } from "./taskUI.js";
 import { getColumnTitleColour } from "./column.js";
-export async function initProjectList() {
+
+export async function initProjectList(projectType) {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('id');
     if (!projectId) return;
 
     const container = document.getElementById('project-content');
-    container.innerHTML = await createList(projectId);
+
+    let type = projectType;
+    if (type === undefined) {
+        try {
+            const res = await authFetch(`/projects/${projectId}/readProject`);
+            if (res.ok) {
+                const data = await res.json();
+                type = data.type;
+            }
+        } catch (e) {
+            console.error("Error fetching project type", e);
+        }
+    }
+
+    if (type === 1) {
+        container.innerHTML = await renderScrumList(projectId);
+    } else {
+        container.innerHTML = await renderKanbanList(projectId);
+    }
 
     // Get boardId from the first rendered group (if any)
     const firstGroup = container.querySelector('[data-board-id]');
@@ -18,7 +37,7 @@ export async function initProjectList() {
     addEventListeners(projectId, container, boardId);
 }
 
-export async function createList(projectId) {
+async function renderKanbanList(projectId) {
     // 1. Fetch Boards
     const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
     if (!boardsResponse.ok) {
@@ -65,6 +84,72 @@ export async function createList(projectId) {
     `;
 }
 
+async function renderScrumList(projectId) {
+    // 1. Fetch Sprints to find Active Sprint
+    const sprintsRes = await authFetch(`/projects/${projectId}/sprints`);
+    if (!sprintsRes.ok) return `<p class="text-red-500">Error loading sprints.</p>`;
+    const sprints = await sprintsRes.json();
+
+    const activeSprint = sprints.find(s => s.status === 1); // 1 = Active
+
+    if (!activeSprint) {
+        return `
+            <div class="flex flex-col items-center justify-center h-[60vh] text-center">
+                <div class="bg-blue-50 p-6 rounded-full mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket text-blue-500"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                </div>
+                <h2 class="text-xl font-bold text-gray-900 mb-2">Get started in the backlog</h2>
+                <p class="text-gray-500 mb-6 max-w-md">Plan and start a sprint to see work here.</p>
+                <button onclick="document.getElementById('backlog-view-btn').click()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors">
+                    Go to Backlog
+                </button>
+            </div>
+        `;
+    }
+
+    // 2. Fetch Board & Columns (Structure)
+    const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
+    if (!boardsResponse.ok) return `<p class="text-red-500">Error loading boards.</p>`;
+    const boards = await boardsResponse.json();
+    if (!boards || boards.length === 0) return `<p>No boards found.</p>`;
+    const boardId = boards[0].boardId;
+
+    const columnsResponse = await authFetch(`/boards/${boardId}/columns`);
+    if (!columnsResponse.ok) return `<p class="text-red-500">Error loading columns.</p>`;
+    const columns = await columnsResponse.json();
+
+    // 3. Fetch Tasks for Active Sprint
+    const sprintTasksRes = await authFetch(`/projects/${projectId}/sprints/${activeSprint.sprintId}/backlog`);
+    if (!sprintTasksRes.ok) return `<p class="text-red-500">Error loading sprint tasks.</p>`;
+    const sprintData = await sprintTasksRes.json();
+    const tasks = sprintData.tasks || [];
+
+    // 4. Map tasks to columns
+    const rowsHtmlPromises = columns.map(async column => {
+        // Filter tasks for this column
+        const tasksInColumn = tasks.filter(t => t.column.columnId === column.columnId);
+
+        const tasksHtml = tasksInColumn.map(task =>
+            createTaskRowHtml(task)
+        ).join('');
+
+        return createListGroupHtml(column, tasksHtml, boardId, tasksInColumn.length);
+    });
+
+    const rowsHtml = (await Promise.all(rowsHtmlPromises)).join('');
+
+    return `
+        <div class="list-view-container flex flex-col w-full mx-auto pb-10">
+            <div class="mb-4 px-2">
+                <span class="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                    Active Sprint: ${activeSprint.name}
+                </span>
+            </div>
+            ${rowsHtml}
+        </div>
+    `;
+}
+
 function createListGroupHtml(column, tasksHtml, boardId, taskCount) {
     const headerHtml = `
         <div class="flex items-center px-3 py-2 bg-gray-50 border-b text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -106,6 +191,6 @@ function createListGroupHtml(column, tasksHtml, boardId, taskCount) {
 
 function addEventListeners(projectId, container, boardId) {
     // Pass empty array for tasks as initTaskEventListeners doesn't use it
-    initTaskEventListeners([], projectId, container);
+    initTaskEventListeners([], projectId, container, 0);
     initColumnEventListeners(projectId);
 }

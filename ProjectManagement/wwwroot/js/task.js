@@ -2,10 +2,10 @@ import { createBoard, initProjectBoard } from "./project-board.js";
 import { initProjectList } from "./project-list.js";
 import { initializeDragAndDrop } from "./drag-drop.js";
 import { authFetch } from './auth.js';
-import { createTaskCardHtml, createTaskFormHtml, createTaskRowFormHtml, toggleDropdown } from "./taskUI.js";
+import { createTaskCardHtml, createTaskFormHtml, createTaskRowFormHtml, toggleDropdown, createTaskScrumHtml } from "./taskUI.js";
 import { openTaskDetailModal } from "./taskDetail.js";
 
-export function initTaskEventListeners(tasks, projectId, container) {
+export function initTaskEventListeners(tasks, projectId, container, projectType) {
     const addTaskBtns = document.querySelectorAll('.add-task-btn');
 
     // Task dropdowns (3 dots)
@@ -126,7 +126,7 @@ export function initTaskEventListeners(tasks, projectId, container) {
 
             btn.classList.add('hidden');
             const isListView = tasksContainer.closest('.list-view-container');
-            const formHtml = isListView ? createTaskRowFormHtml() : createTaskFormHtml();
+            const formHtml = isListView ? createTaskRowFormHtml() : (projectType === 1 ? createTaskScrumHtml() : createTaskFormHtml());
             tasksContainer.insertAdjacentHTML('afterbegin', formHtml);
 
             const formContainer = tasksContainer.querySelector('.new-task-form-container');

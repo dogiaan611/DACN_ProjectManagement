@@ -89,7 +89,8 @@ namespace ProjectManagement.Data
                 .HasOne(b => b.ActiveSprint)
                 .WithMany()
                 .HasForeignKey(b => b.ActiveSprintId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             // Column ↔ Board
             modelBuilder.Entity<Column>()

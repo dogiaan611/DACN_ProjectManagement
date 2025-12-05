@@ -4,6 +4,7 @@ import { initProjectAddMembers } from './project-add-members.js';
 import { initProjectBoard } from './project-board.js';
 import { initProjectList } from './project-list.js';
 import { initProjectSpreadsheet } from './project-spreadsheet.js';
+import { initProjectBacklog } from './project-backlog.js';
 // Lưu trữ dữ liệu project hiện tại
 let currentProjectData = null;
 
@@ -68,9 +69,10 @@ async function viewSwitcher() {
     const kanbanBtn = document.getElementById('kanban-view-btn');
     const listBtn = document.getElementById('list-view-btn');
     const spreadsheetBtn = document.getElementById('spreadsheet-view-btn');
-    if (!kanbanBtn || !listBtn || !spreadsheetBtn) {
+    const backlogBtn = document.getElementById('backlog-view-btn');
+    if (!kanbanBtn || !listBtn || !spreadsheetBtn || !backlogBtn) {
         console.log('View btn not found');
-        initProjectBoard();
+        initProjectBoard(currentProjectData?.type);
         return;
     }
     if (kanbanBtn.dataset.listenerAdded === 'true') {
@@ -79,24 +81,35 @@ async function viewSwitcher() {
     kanbanBtn.dataset.listenerAdded = 'true';
     listBtn.dataset.listenerAdded = 'true';
     spreadsheetBtn.dataset.listenerAdded = 'true';
+    backlogBtn.dataset.listenerAdded = 'true';
 
     kanbanBtn.addEventListener('click', () => {
         kanbanBtn.classList.add('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
-        initProjectBoard();
+        backlogBtn.classList.remove('active', 'text-blue-400');
+        initProjectBoard(currentProjectData?.type);
     });
     listBtn.addEventListener('click', () => {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.add('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        backlogBtn.classList.remove('active', 'text-blue-400');
         initProjectList();
     });
     spreadsheetBtn.addEventListener('click', () => {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.add('active', 'text-blue-400');
+        backlogBtn.classList.remove('active', 'text-blue-400');
         initProjectSpreadsheet();
+    });
+    backlogBtn.addEventListener('click', () => {
+        kanbanBtn.classList.remove('active', 'text-blue-400');
+        listBtn.classList.remove('active', 'text-blue-400');
+        spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        backlogBtn.classList.add('active', 'text-blue-400');
+        initProjectBacklog();
     });
     kanbanBtn.click();
 }
@@ -138,5 +151,20 @@ async function renderProjectDetails(data) {
         });
     } else {
         memberListEl.innerHTML = '<p class="text-gray-500">Chưa có thành viên nào.</p>';
+    }
+
+    // Xử lý hiển thị tab Backlog dựa trên loại project (Scrum = 1)
+    const backlogBtn = document.getElementById('backlog-view-btn');
+    if (backlogBtn) {
+        if (data.type === 1) {
+            backlogBtn.style.display = 'flex';
+        } else {
+            backlogBtn.style.display = 'none';
+            // Nếu đang ở tab Backlog mà bị ẩn đi thì chuyển về Kanban
+            if (backlogBtn.classList.contains('active')) {
+                const kanbanBtn = document.getElementById('kanban-view-btn');
+                if (kanbanBtn) kanbanBtn.click();
+            }
+        }
     }
 }

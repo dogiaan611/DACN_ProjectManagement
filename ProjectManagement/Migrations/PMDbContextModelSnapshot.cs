@@ -662,7 +662,6 @@ namespace ProjectManagement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedById")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -1262,8 +1261,7 @@ namespace ProjectManagement.Migrations
                     b.HasOne("ProjectManagement.Domain.Identity.ApplicationUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ProjectManagement.Domain.Entities.ProjectTask", "Task")
                         .WithMany("Subtasks")

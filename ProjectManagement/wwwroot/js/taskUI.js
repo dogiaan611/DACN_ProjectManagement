@@ -27,9 +27,12 @@ export function createTaskCardHtml(task, commentCount, attachmentCount) {
         month: 'long',
         year: 'numeric'
     }) : '';
-    const assigneeInitial = task.assigneeName ? task.assigneeName.charAt(0).toUpperCase() : '?';
-    const assigneeAvatar = task.assigneeAvatarUrl
-        ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-5 h-5 rounded-full border object-cover">`
+    const assigneeName = task.assigneeName || (task.assignee ? task.assignee.name : '');
+    const assigneeAvatarUrl = task.assigneeAvatarUrl || (task.assignee ? task.assignee.avatarUrl : '');
+
+    const assigneeInitial = assigneeName ? assigneeName.charAt(0).toUpperCase() : '?';
+    const assigneeAvatar = assigneeAvatarUrl
+        ? `<img src="${assigneeAvatarUrl}" alt="${assigneeName}" class="w-5 h-5 rounded-full border object-cover">`
         : `<div class="w-5 h-5 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${assigneeInitial}</div>`;
     return `
         <div class="bg-white p-4 rounded-md cursor-pointer group" draggable="true" data-task-id="${task.taskId}">
@@ -215,6 +218,67 @@ export function createTaskFormHtml() {
     `;
 }
 
+export function createTaskScrumHtml() {
+    return `
+        <div class="bg-white border p-1 rounded-md shadow-sm new-task-form-container">
+            <form class="new-task-form">
+                <div class="flex items-center gap-2 justify-start">
+                    <div class="flex items-center justify-center w-2/3">
+                        <input name="title" type="text" class="w-full p-2 outline-none rounded-md mb-2" placeholder="Enter task title..." required></input>
+                        <button type="submit" class="flex text-sm items-center justify-start gap-1 px-1 py-0.5 bg-blue-500 text-white rounded-md">
+                            Tạo
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-corner-down-left-icon lucide-corner-down-left"><path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/></svg>
+                        </button>
+                    </div>
+                    <input type="hidden" name="assigneeId" value="">
+                    <input type="hidden" name="priority" value="Medium">
+                    <input type="hidden" name="dueDate" value="">
+                    <div class="relative">
+                        <div type="button" id="assignee-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                        </div>
+                        <div id="assignee-dropdown" class="absolute z-10 w-fit border rounded-sm mt-1 hidden">
+                            <div class="border-b py-1 px-2 flex items-center justify-start bg-white sticky top-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-search-icon lucide-user-search"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
+                                <input type="text" id="assignee-search" class="outline-none p-2 w-full text-base text-gray-500" placeholder="Search assignee..." autocomplete="off">
+                            </div>
+                            <div id="assignee-list" class="flex flex-col bg-white items-start justify-start p-1 max-h-48 overflow-y-auto">
+                                <!-- Assignee list will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div type="button" id="duedate-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days-icon lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                        </div>
+                        <div id="calendar-dropdown" class="absolute z-10 w-fit mt-1 hidden" >
+                            <div id="calendar" class="p-2 bg-white"></div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <button type="button" id="priority-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-goal-icon lucide-goal"><path d="M12 13V2l8 4-8 4"/><path d="M20.561 10.222a9 9 0 1 1-12.55-5.29"/><path d="M8.002 9.997a5 5 0 1 0 8.9 2.02"/></svg>
+                            <span id="priority-btn-text">Medium Priority</span>
+                        </button>
+                        <div id="priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
+                            <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="High">
+                                ${getPriorityChip(1)}
+                            </div>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
+                                ${getPriorityChip(2)}
+                            </div>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Low">
+                                ${getPriorityChip(3)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    `;
+}
+
 export function createTaskDetailModalHtml(task) {
     const dueDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString('vi-VN', {
         day: '2-digit',
@@ -278,7 +342,7 @@ export function createTaskDetailModalHtml(task) {
                                     Due date
                                 </div>
                                 <div id="task-detail-calendar-btn" class="p-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-50 rounded-md">${dueDate}</div>
-                                <div id="task-detail-calendar-dropdown" class="absolute z-10 p-2 w-fit bg-white mt-1 hidden" >
+                                <div id="task-detail-calendar-dropdown" class="absolute z-10 w-fit bg-white mt-1 hidden" >
                                     <div id="calendar" class="p-2 bg-white"></div>
                                 </div>
                             </div>
@@ -314,7 +378,7 @@ export function createTaskDetailModalHtml(task) {
                                     Assignee
                                 </div>
                                 <div class="flex items-center gap-5 p-2">
-                                    <div id="task-detail-assignee-avt" class="flex gap-2 items-center justify-center">${assigneeAvatar}<span class="text-sm font-medium text-gray-600">${task.assigneeName}</span></div>
+                                    <div id="task-detail-assignee-avt" class="flex gap-2 items-center justify-center">${assigneeAvatar}<span class="text-sm font-medium text-gray-600">${task.assigneeName || ''}</span></div>
                                     <div type="button" tabindex='0' id="change-assignee" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
                                         Change
@@ -458,7 +522,7 @@ export function closeAllPortals() {
     });
 }
 
-export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallback) {
+export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallback, position = 'right') {
     const existing = document.getElementById(portalId);
 
     // Helper function for closing with animation
@@ -490,12 +554,33 @@ export function toggleDropdown(triggerBtn, dropdownContent, portalId, setupCallb
     // Add animation classes
     portal.classList.add('z-50', 'fixed', 'transition-all', 'duration-200', 'ease-out', 'transform', 'origin-top-left', 'scale-95', 'opacity-0');
 
-    const rect = triggerBtn.getBoundingClientRect();
-    portal.style.top = `${rect.top + window.scrollY}px`;
-    portal.style.left = `${rect.right + window.scrollX + 4}px`;
-    portal.style.minWidth = `${rect.width}px`;
-
     document.body.appendChild(portal);
+
+    const rect = triggerBtn.getBoundingClientRect();
+
+    // Use fixed positioning relative to viewport (no scrollY/scrollX)
+    if (position === 'top') {
+        // Position above the button
+        // Use bottom property so it grows upwards if height changes
+        portal.style.bottom = `${window.innerHeight - rect.top + 4}px`;
+        portal.style.top = 'auto';
+        portal.style.left = `${rect.left}px`;
+
+        // Change transform origin for better animation
+        portal.classList.remove('origin-top-left');
+        portal.classList.add('origin-bottom-left');
+    } else if (position === 'bottom') {
+        // Position below the button
+        portal.style.top = `${rect.bottom + 4}px`;
+        portal.style.bottom = 'auto';
+        portal.style.left = `${rect.left}px`;
+    } else {
+        // Default 'right'
+        portal.style.top = `${rect.top}px`;
+        portal.style.left = `${rect.right + 4}px`;
+    }
+
+    portal.style.minWidth = `${rect.width}px`;
 
     // Trigger open animation
     requestAnimationFrame(() => {
@@ -533,9 +618,12 @@ export function createTaskRowHtml(task) {
         month: 'long',
         year: 'numeric'
     }) : '';
-    const assigneeInitial = task.assigneeName ? task.assigneeName.charAt(0).toUpperCase() : '?';
-    const assigneeAvatar = task.assigneeAvatarUrl
-        ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-6 h-6 rounded-full border object-cover">`
+    const assigneeName = task.assigneeName || (task.assignee ? task.assignee.name : '');
+    const assigneeAvatarUrl = task.assigneeAvatarUrl || (task.assignee ? task.assignee.avatarUrl : '');
+
+    const assigneeInitial = assigneeName ? assigneeName.charAt(0).toUpperCase() : '?';
+    const assigneeAvatar = assigneeAvatarUrl
+        ? `<img src="${assigneeAvatarUrl}" alt="${assigneeName}" class="w-6 h-6 rounded-full border object-cover">`
         : `<div class="w-6 h-6 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xs font-semibold">${assigneeInitial}</div>`;
 
     return `
@@ -583,7 +671,7 @@ export function createTaskRowHtml(task) {
                 
                 <div class="w-32 flex items-center gap-2 text-sm text-gray-600">
                      ${assigneeAvatar}
-                     <span class="truncate max-w-[100px]">${task.assigneeName || 'Unassigned'}</span>
+                     <span class="truncate max-w-[100px]">${assigneeName || 'Unassigned'}</span>
                 </div>
 
                 <div class="w-32 text-sm text-gray-500 text-right">

@@ -110,7 +110,7 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                     })
                 });
                 if (!updateRes.ok) throw new Error('Failed to update title.');
-                const taskTitles = document.querySelectorAll(`.group[data-task-id="${taskId}"] .font-semibold.text-gray-800, .group[data-task-id="${taskId}"] .font-medium.text-gray-800`);
+                const taskTitles = document.querySelectorAll(`.group[data-task-id="${taskId}"] .font-semibold.text-gray-800, .group[data-task-id="${taskId}"] .font-medium.text-gray-800, .group[data-task-id="${taskId}"] .task-title`);
                 taskTitles.forEach(el => el.textContent = newTitle);
                 task.title = newTitle;
 
@@ -235,6 +235,15 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
                             listAvatarContainer.innerHTML = `${avatarHtml}<span class="truncate max-w-[100px]">${task.assignee?.name || 'Unassigned'}</span>`;
                         }
 
+                        // Update backlog task (Scrum View)
+                        const backlogAvatar = document.querySelector(`.group[data-task-id="${taskId}"] .task-assignee`);
+                        if (backlogAvatar) {
+                            const newAvatarHtml = task.assignee?.avatarUrl
+                                ? `<img src="${task.assignee.avatarUrl}" title="${task.assignee.name}" class="task-assignee w-6 h-6 rounded-full border border-white">`
+                                : `<div class="task-assignee w-6 h-6 rounded-full bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-xs text-gray-400">?</div>`;
+                            backlogAvatar.outerHTML = newAvatarHtml;
+                        }
+
                     } catch (err) {
                         console.error("Error updating assignee: ", err);
                         alert("Could not update assignee.");
@@ -315,6 +324,25 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
 
                             const listRowPriority = document.querySelector(`.group[data-task-id="${taskId}"] .w-32.flex.justify-start`);
                             if (listRowPriority) listRowPriority.innerHTML = getPriorityChip(newPriority);
+
+                            const backlogPriority = document.querySelector(`.group[data-task-id="${taskId}"] .task-priority`);
+                            if (backlogPriority) {
+                                // We need to reconstruct the span with correct classes for backlog view
+                                const priorityColors = {
+                                    0: 'bg-gray-200 text-gray-700', // Low
+                                    1: 'bg-red-100 text-red-700', // Medium
+                                    2: 'bg-orange-100 text-orange-700', // High
+                                    3: 'bg-blue-100 text-blue-700' // Urgent
+                                };
+                                const priorityText = {
+                                    0: 'Low',
+                                    1: 'High',
+                                    2: 'Medium',
+                                    3: 'Low'
+                                };
+                                backlogPriority.className = `task-priority text-[10px] px-1.5 py-0.5 rounded-full ${priorityColors[newPriority] || 'bg-gray-100'}`;
+                                backlogPriority.textContent = priorityText[newPriority] || 'Normal';
+                            }
                         } catch (error) {
                             console.error("Error updating priority:", error);
                             alert("Could not update priority.");
