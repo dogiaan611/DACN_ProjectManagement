@@ -6,6 +6,8 @@ import { getDragAfterElement } from './drag-drop.js';
 let currentProjectId = null;
 let defaultBoardId = null;
 let defaultColumnId = null;
+let selectedTaskIds = new Set();
+let lastSelectedTaskId = null;
 
 export async function initProjectBacklog() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -54,147 +56,166 @@ export async function initProjectBacklog() {
 
         <!-- Create Sprint Modal -->
         <div id="create-sprint-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
-                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-800">Create Sprint</h3>
-                    <button id="close-sprint-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                    </button>
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-5">
+                        <div class="flex flex-col">
+                            <h3 class="text-2xl font-medium text-gray-900">Create Sprint</h3>
+                            <p class="mt-1 text-sm text-gray-600">Plan your next iteration of work.</p>
+                        </div>
+                        <button id="close-sprint-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </div>
+
+                    <form id="create-sprint-form" class="space-y-5">
+                        <div>
+                            <label for="sprint-name" class="block text-sm font-medium text-gray-700 mb-1">Sprint Name <span class="text-red-500">*</span></label>
+                            <input type="text" id="sprint-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all" placeholder="e.g. Sprint 1">
+                        </div>
+                        <div>
+                            <label for="sprint-goal" class="block text-sm font-medium text-gray-700 mb-1">Sprint Goal</label>
+                            <textarea id="sprint-goal" name="goal" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all" placeholder="What is the goal of this sprint?"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                                <div id="sprint-start-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-xl cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
+                                    <span class="text-gray-500 text-sm" id="sprint-start-date-text">Select date</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                </div>
+                                <input type="hidden" name="startDate" id="sprint-start-date-input">
+                                <div id="sprint-start-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-xl border overflow-hidden">
+                                    <div id="sprint-start-calendar-container"></div>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                                <div id="sprint-end-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-xl cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
+                                    <span class="text-gray-500 text-sm" id="sprint-end-date-text">Select date</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                </div>
+                                <input type="hidden" name="endDate" id="sprint-end-date-input">
+                                <div id="sprint-end-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-xl border overflow-hidden">
+                                    <div id="sprint-end-calendar-container"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end gap-3 pt-2">
+                            <button type="button" id="cancel-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-black transition-colors">Cancel</button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-black transition-colors shadow-sm">Create Sprint</button>
+                        </div>
+                    </form>
                 </div>
-                <form id="create-sprint-form" class="p-6 space-y-4">
-                    <div>
-                        <label for="sprint-name" class="block text-sm font-medium text-gray-700 mb-1">Sprint Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="sprint-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow" placeholder="e.g. Sprint 1">
-                    </div>
-                    <div>
-                        <label for="sprint-goal" class="block text-sm font-medium text-gray-700 mb-1">Sprint Goal</label>
-                        <textarea id="sprint-goal" name="goal" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow" placeholder="What is the goal of this sprint?"></textarea>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="relative">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                            <div id="sprint-start-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors">
-                                <span class="text-gray-500 text-sm" id="sprint-start-date-text">Select date</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            </div>
-                            <input type="hidden" name="startDate" id="sprint-start-date-input">
-                            <div id="sprint-start-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-md border">
-                                <div id="sprint-start-calendar-container"></div>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-                            <div id="sprint-end-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors">
-                                <span class="text-gray-500 text-sm" id="sprint-end-date-text">Select date</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            </div>
-                            <input type="hidden" name="endDate" id="sprint-end-date-input">
-                            <div id="sprint-end-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-md border">
-                                <div id="sprint-end-calendar-container"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-end gap-3 pt-2">
-                        <button type="button" id="cancel-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">Cancel</button>
-                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-sm">Create Sprint</button>
-                    </div>
-                </form>
             </div>
         </div>
         <!-- Start Sprint Modal -->
         <div id="start-sprint-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
-                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                    <h3 class="text-lg font-semibold text-gray-800">Start Sprint</h3>
-                    <button id="close-start-sprint-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                    </button>
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-5">
+                         <div class="flex flex-col">
+                            <h3 class="text-2xl font-medium text-gray-900">Start Sprint</h3>
+                            <p class="mt-1 text-sm text-gray-600">Launch your sprint to start tracking progress.</p>
+                        </div>
+                        <button id="close-start-sprint-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </div>
+                    <form id="start-sprint-form" class="space-y-5">
+                        <input type="hidden" id="start-sprint-id" name="sprintId">
+                        <div>
+                             <label for="start-sprint-name" class="block text-sm font-medium text-gray-700 mb-1">Sprint Name <span class="text-red-500">*</span></label>
+                             <input type="text" id="start-sprint-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all">
+                        </div>
+                        <div>
+                            <label for="start-sprint-goal" class="block text-sm font-medium text-gray-700 mb-1">Sprint Goal</label>
+                            <textarea id="start-sprint-goal" name="goal" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-all"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                             <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                                <div id="start-sprint-start-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-xl cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
+                                     <span class="text-gray-500 text-sm" id="start-sprint-start-date-text">Select date</span>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                </div>
+                                <input type="hidden" name="startDate" id="start-sprint-start-date-input">
+                                <div id="start-sprint-start-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-xl border overflow-hidden">
+                                    <div id="start-sprint-start-calendar-container"></div>
+                                </div>
+                             </div>
+                             <div class="relative">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                                <div id="start-sprint-end-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-xl cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors focus-within:border-black focus-within:ring-1 focus-within:ring-black">
+                                    <span class="text-gray-500 text-sm" id="start-sprint-end-date-text">Select date</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                </div>
+                                <input type="hidden" name="endDate" id="start-sprint-end-date-input">
+                                <div id="start-sprint-end-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-xl border overflow-hidden">
+                                     <div id="start-sprint-end-calendar-container"></div>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="flex justify-end gap-3 pt-2">
+                             <button type="button" id="cancel-start-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-black transition-colors">Cancel</button>
+                             <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-1 focus:ring-black transition-colors shadow-sm">Start Sprint</button>
+                        </div>
+                    </form>
                 </div>
-                <form id="start-sprint-form" class="p-6 space-y-4">
-                    <input type="hidden" id="start-sprint-id" name="sprintId">
-                    <div>
-                        <label for="start-sprint-name" class="block text-sm font-medium text-gray-700 mb-1">Sprint Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="start-sprint-name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow">
-                    </div>
-                    <div>
-                        <label for="start-sprint-goal" class="block text-sm font-medium text-gray-700 mb-1">Sprint Goal</label>
-                        <textarea id="start-sprint-goal" name="goal" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow"></textarea>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="relative">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
-                            <div id="start-sprint-start-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors">
-                                <span class="text-gray-500 text-sm" id="start-sprint-start-date-text">Select date</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            </div>
-                            <input type="hidden" name="startDate" id="start-sprint-start-date-input">
-                            <div id="start-sprint-start-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-md border">
-                                <div id="start-sprint-start-calendar-container"></div>
-                            </div>
-                        </div>
-                        <div class="relative">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">End Date</label>
-                            <div id="start-sprint-end-date-btn" class="w-full px-3 py-2 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between hover:bg-gray-50 transition-colors">
-                                <span class="text-gray-500 text-sm" id="start-sprint-end-date-text">Select date</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar text-gray-400"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                            </div>
-                            <input type="hidden" name="endDate" id="start-sprint-end-date-input">
-                            <div id="start-sprint-end-date-dropdown" class="absolute z-50 mt-1 hidden bg-white shadow-lg rounded-md border">
-                                <div id="start-sprint-end-calendar-container"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-end gap-3 pt-2">
-                        <button type="button" id="cancel-start-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">Cancel</button>
-                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-sm">Start Sprint</button>
-                    </div>
-                </form>
             </div>
         </div>
         <!-- Complete Sprint Modal -->
         <div id="complete-sprint-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-start items-center bg-gray-50">
-                <h3 class="text-lg font-semibold text-gray-800">Complete Sprint</h3>
-            </div>
-            <form id="complete-sprint-form" class="p-6 space-y-4">
-                <input type="hidden" id="complete-sprint-id" name="sprintId">
-                
-                <!-- Statistics -->
-                <div class="flex gap-4 mb-4">
-                    <div class="flex-1 bg-green-50 p-3 rounded-lg border border-green-100 text-center">
-                        <div class="text-2xl font-bold text-green-600" id="complete-sprint-completed-count">0</div>
-                        <div class="text-xs text-green-800 font-medium">Completed Tasks</div>
-                    </div>
-                    <div class="flex-1 bg-orange-50 p-3 rounded-lg border border-orange-100 text-center">
-                        <div class="text-2xl font-bold text-orange-600" id="complete-sprint-incomplete-count">0</div>
-                        <div class="text-xs text-orange-800 font-medium">Incomplete Tasks</div>
-                    </div>
-                </div>
-
-                <div id="incomplete-tasks-action-container">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Move incomplete tasks to:</label>
-                    <div class="relative">
-                        <select name="action" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white">
-                            <option value="moveToNextSprint">New Sprint (Next Planning Sprint)</option>
-                            <option value="moveToBacklog">Product Backlog</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-5">
+                        <div class="flex flex-col">
+                            <h3 class="text-2xl font-medium text-gray-900">Complete Sprint</h3>
+                            <p class="mt-1 text-sm text-gray-600">Review your sprint progress and move incomplete items.</p>
                         </div>
+                        <button id="close-complete-sprint-modal-btn" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-full hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2">
-                        Tasks currently in "Done" columns will be considered completed. All other tasks will be moved based on your selection.
-                    </p>
-                </div>
+                    <form id="complete-sprint-form" class="space-y-5">
+                        <input type="hidden" id="complete-sprint-id" name="sprintId">
+                        
+                        <!-- Statistics -->
+                        <div class="flex gap-4">
+                            <div class="flex-1 bg-green-50 p-4 rounded-xl border border-green-100 text-center">
+                                <div class="text-3xl font-bold text-green-600" id="complete-sprint-completed-count">0</div>
+                                <div class="text-xs text-green-800 font-medium uppercase tracking-wide mt-1">Completed Tasks</div>
+                            </div>
+                            <div class="flex-1 bg-orange-50 p-4 rounded-xl border border-orange-100 text-center">
+                                <div class="text-3xl font-bold text-orange-600" id="complete-sprint-incomplete-count">0</div>
+                                <div class="text-xs text-orange-800 font-medium uppercase tracking-wide mt-1">Incomplete Tasks</div>
+                            </div>
+                        </div>
 
-                <div class="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-4">
-                    <button type="button" id="cancel-complete-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
-                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 shadow-sm">Complete Sprint</button>
+                        <div id="incomplete-tasks-action-container">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Move incomplete tasks to:</label>
+                            <div class="relative">
+                                <select name="action" class="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-black focus:ring-1 focus:ring-black appearance-none bg-white transition-all">
+                                    <option value="moveToNextSprint">New Sprint (Next Planning Sprint)</option>
+                                    <option value="moveToBacklog">Product Backlog</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">
+                                Tasks currently in "Done" columns will be considered completed. All other tasks will be moved based on your selection.
+                            </p>
+                        </div>
+
+                        <div class="flex justify-end gap-3 pt-2">
+                            <button type="button" id="cancel-complete-sprint-btn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-black transition-colors">Cancel</button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 shadow-sm focus:outline-none focus:ring-1 focus:ring-black transition-colors">Complete Sprint</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
     <!-- Confirmation Modal -->
     <div id="confirmation-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-0">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 overflow-hidden transform transition-all duration-300 scale-95 opacity-0">
@@ -590,6 +611,8 @@ export async function initProjectBacklog() {
         });
     }
     cancelCompleteSprintBtn.addEventListener('click', closeCompleteModal);
+    const closeCompleteSprintBtn = document.getElementById('close-complete-sprint-modal-btn');
+    if (closeCompleteSprintBtn) closeCompleteSprintBtn.addEventListener('click', closeCompleteModal);
     //xu ly submit form
     completeSprintForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -621,7 +644,7 @@ export async function initProjectBacklog() {
                 alert(`Error: ${err.message}`);
             }
         } catch (err) {
-            console.err('Error Complete sprint: ', err);
+            console.error('Error Complete sprint: ', err);
             alert('Failed to complete sprint');
         }
     })
@@ -865,23 +888,39 @@ export async function initProjectBacklog() {
 
     backlogContainer.addEventListener('drop', async (e) => {
         e.preventDefault();
-        const taskId = e.dataTransfer.getData('text/plain');
-        const sourceSprintId = e.dataTransfer.getData('source-sprint-id');
+
+        let taskIds = [];
+        let sourceSprintId = null;
+        const jsonData = e.dataTransfer.getData('application/json');
+
+        if (jsonData) {
+            try {
+                const data = JSON.parse(jsonData);
+                taskIds = data.taskIds || [];
+                sourceSprintId = data.sourceSprintId;
+            } catch (err) {
+                console.error('Error parsing drag data', err);
+            }
+        }
+
+        if (taskIds.length === 0) {
+            const singleId = e.dataTransfer.getData('text/plain');
+            if (singleId) taskIds.push(singleId);
+            sourceSprintId = e.dataTransfer.getData('source-sprint-id');
+        }
 
         // If coming from a sprint, remove it from that sprint (move to backlog)
         if (sourceSprintId) {
             try {
-                const res = await authFetch(`/projects/${currentProjectId}/sprints/${sourceSprintId}/tasks/${taskId}`, {
-                    method: 'DELETE'
-                });
-                if (res.ok) {
-                    loadBacklogData(currentProjectId);
-                } else {
-                    console.error('Failed to move task to backlog');
-                    loadBacklogData(currentProjectId); // Revert UI
-                }
+                const promises = taskIds.map(tid =>
+                    authFetch(`/projects/${currentProjectId}/sprints/${sourceSprintId}/tasks/${tid}`, {
+                        method: 'DELETE'
+                    })
+                );
+                await Promise.all(promises);
+                loadBacklogData(currentProjectId);
             } catch (error) {
-                console.error('Error moving task to backlog:', error);
+                console.error('Error moving tasks to backlog:', error);
                 loadBacklogData(currentProjectId);
             }
         }
@@ -889,6 +928,8 @@ export async function initProjectBacklog() {
 }
 
 async function loadBacklogData(projectId) {
+    selectedTaskIds.clear();
+    lastSelectedTaskId = null;
     try {
         if (!defaultBoardId) {
             const boardsRes = await authFetch(`/projects/${projectId}/boards`);
@@ -1033,10 +1074,10 @@ function createSprintElement(sprint, canStart = false) {
     div.innerHTML = `
         <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <button class="text-gray-400 hover:text-gray-600">
+                <button class="hid-print text-gray-400 hover:text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
-                <div>
+                <div id="sprint-list">
                     <div class="flex items-center gap-2">
                         <h3 class="font-semibold text-gray-900">${sprint.name}</h3>
                         <span class="text-xs font-medium px-2 py-0.5 rounded ${statusColors[sprint.status] || 'bg-gray-100'}">
@@ -1097,29 +1138,58 @@ function createSprintElement(sprint, canStart = false) {
 
     taskContainer.addEventListener('drop', async (e) => {
         e.preventDefault();
-        const taskId = e.dataTransfer.getData('text/plain');
-        const sourceSprintId = e.dataTransfer.getData('source-sprint-id');
+
+        let taskIds = [];
+        let sourceSprintId = null;
+        const jsonData = e.dataTransfer.getData('application/json');
+
+        if (jsonData) {
+            try {
+                const data = JSON.parse(jsonData);
+                taskIds = data.taskIds || [];
+                sourceSprintId = data.sourceSprintId;
+            } catch (err) { console.error(err); }
+        }
+
+        if (taskIds.length === 0) {
+            const singleId = e.dataTransfer.getData('text/plain');
+            if (singleId) taskIds.push(singleId);
+            sourceSprintId = e.dataTransfer.getData('source-sprint-id');
+        }
+
         const targetSprintId = sprint.sprintId;
 
-        if (sourceSprintId == targetSprintId) return; // Same sprint, just reorder (not implemented backend yet)
+        if (sourceSprintId == targetSprintId) return;
 
         try {
-            // Add to new sprint (this handles move from backlog or other sprint)
-            const res = await authFetch(`/projects/${currentProjectId}/sprints/${targetSprintId}/tasks/${taskId}`, {
-                method: 'POST'
-            });
+            const promises = taskIds.map(tid =>
+                authFetch(`/projects/${currentProjectId}/sprints/${targetSprintId}/tasks/${tid}`, {
+                    method: 'POST'
+                })
+            );
 
-            if (res.ok) {
-                loadBacklogData(currentProjectId);
-            } else {
-                console.error('Failed to move task to sprint');
-                loadBacklogData(currentProjectId); // Revert
-            }
+            await Promise.all(promises);
+            loadBacklogData(currentProjectId);
         } catch (error) {
-            console.error('Error moving task to sprint:', error);
+            console.error('Error moving tasks to sprint:', error);
             loadBacklogData(currentProjectId);
         }
     });
+
+    // Collapse/Expand Sprint Logic
+    const toggleBtn = div.querySelector('.hid-print');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isHidden = taskContainer.classList.toggle('hidden');
+            const svg = toggleBtn.querySelector('svg');
+            if (svg) {
+                svg.style.transition = 'transform 0.2s ease';
+                svg.style.transform = isHidden ? 'rotate(-90deg)' : 'rotate(0deg)';
+            }
+        });
+    }
 
     return div;
 }
@@ -1199,6 +1269,46 @@ function renderProductBacklog(tasks) {
     });
 }
 
+
+function clearAllSelections() {
+    document.querySelectorAll('.backlog-task-item').forEach(el => {
+        el.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+        const cb = el.querySelector('.task-select-checkbox');
+        if (cb) cb.checked = false;
+    });
+    selectedTaskIds.clear();
+    lastSelectedTaskId = null;
+}
+
+function handleTaskSelection(element, taskId, event) {
+    if (event.ctrlKey || event.metaKey) {
+        if (selectedTaskIds.has(taskId)) {
+            selectedTaskIds.delete(taskId);
+            element.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            if (lastSelectedTaskId === taskId) lastSelectedTaskId = null;
+        } else {
+            selectedTaskIds.add(taskId);
+            element.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            lastSelectedTaskId = taskId;
+        }
+    } else if (event.shiftKey && lastSelectedTaskId) {
+        const allTasks = Array.from(document.querySelectorAll('.backlog-task-item'));
+        const lastIndex = allTasks.findIndex(el => el.dataset.taskId === lastSelectedTaskId);
+        const currentIndex = allTasks.findIndex(el => el.dataset.taskId === taskId);
+
+        if (lastIndex !== -1 && currentIndex !== -1) {
+            const start = Math.min(lastIndex, currentIndex);
+            const end = Math.max(lastIndex, currentIndex);
+            for (let i = start; i <= end; i++) {
+                const el = allTasks[i];
+                const tid = el.dataset.taskId;
+                selectedTaskIds.add(tid);
+                el.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            }
+        }
+    }
+}
+
 function createTaskElement(task, sprintId = null) {
     const div = document.createElement('div');
     div.className = 'group flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:border-blue-300 transition-all cursor-pointer backlog-task-item';
@@ -1207,6 +1317,19 @@ function createTaskElement(task, sprintId = null) {
     if (sprintId) div.dataset.sprintId = sprintId;
 
     div.addEventListener('dragstart', (e) => {
+        // If the current task is not in selection, clear and select it (standard drag behavior)
+        if (!selectedTaskIds.has(task.taskId)) {
+            clearAllSelections();
+            selectedTaskIds.add(task.taskId);
+            div.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+        }
+
+        const tasksToMove = Array.from(selectedTaskIds);
+        e.dataTransfer.setData('application/json', JSON.stringify({
+            taskIds: tasksToMove,
+            sourceSprintId: sprintId || ''
+        }));
+
         e.dataTransfer.setData('text/plain', task.taskId);
         e.dataTransfer.setData('source-sprint-id', sprintId || '');
 
@@ -1227,7 +1350,19 @@ function createTaskElement(task, sprintId = null) {
         div.style.opacity = '1';
     });
 
-    div.addEventListener('click', () => {
+    div.addEventListener('click', (e) => {
+        const isCheckbox = e.target.classList.contains('task-select-checkbox');
+
+        if (e.ctrlKey || e.metaKey || e.shiftKey || isCheckbox) {
+            // e.preventDefault(); // Don't prevent default for checkbox, otherwise it won't check
+            if (!isCheckbox) e.preventDefault();
+            e.stopPropagation();
+            handleTaskSelectionV2(div, task.taskId, e);
+            return;
+        }
+
+        clearAllSelections();
+
         if (currentProjectId && defaultBoardId && task.column && task.column.columnId) {
             openTaskDetailModal(task.taskId, currentProjectId, defaultBoardId, task.column.columnId);
         }
@@ -1259,8 +1394,8 @@ function createTaskElement(task, sprintId = null) {
 
     div.innerHTML = `
         <div class="flex items-center gap-3 overflow-hidden">
-            <div class="cursor-move text-gray-300 hover:text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+            <div class="mr-1 flex items-center" onmousedown="event.stopPropagation()">
+                <input type="checkbox" class="task-select-checkbox w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer" data-task-id="${task.taskId}">
             </div>
             <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2">
@@ -1472,4 +1607,54 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
             alert('Could not create the task. Please try again.');
         }
     });
+}
+
+function handleTaskSelectionV2(element, taskId, event) {
+    const checkbox = element.querySelector('.task-select-checkbox');
+    // Check if the event started on the checkbox or bubbled from it
+    const isCheckboxClick = event.target === checkbox || (event.target.classList && event.target.classList.contains('task-select-checkbox'));
+
+    if (isCheckboxClick) {
+        if (checkbox.checked) {
+            selectedTaskIds.add(taskId);
+            element.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            lastSelectedTaskId = taskId;
+        } else {
+            selectedTaskIds.delete(taskId);
+            element.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            if (lastSelectedTaskId === taskId) lastSelectedTaskId = null;
+        }
+        return;
+    }
+
+    if (event.ctrlKey || event.metaKey) {
+        if (selectedTaskIds.has(taskId)) {
+            selectedTaskIds.delete(taskId);
+            element.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            if (checkbox) checkbox.checked = false;
+            if (lastSelectedTaskId === taskId) lastSelectedTaskId = null;
+        } else {
+            selectedTaskIds.add(taskId);
+            element.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+            if (checkbox) checkbox.checked = true;
+            lastSelectedTaskId = taskId;
+        }
+    } else if (event.shiftKey && lastSelectedTaskId) {
+        const allTasks = Array.from(document.querySelectorAll('.backlog-task-item'));
+        const lastIndex = allTasks.findIndex(el => el.dataset.taskId === lastSelectedTaskId);
+        const currentIndex = allTasks.findIndex(el => el.dataset.taskId === taskId);
+
+        if (lastIndex !== -1 && currentIndex !== -1) {
+            const start = Math.min(lastIndex, currentIndex);
+            const end = Math.max(lastIndex, currentIndex);
+            for (let i = start; i <= end; i++) {
+                const el = allTasks[i];
+                const tid = el.dataset.taskId;
+                selectedTaskIds.add(tid);
+                el.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+                const cb = el.querySelector('.task-select-checkbox');
+                if (cb) cb.checked = true;
+            }
+        }
+    }
 }

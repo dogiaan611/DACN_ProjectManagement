@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const sidebarResponse = await fetch(`/components/sidebar.html?${cacheBuster}`, { cache: "no-store" });
       container.innerHTML = await sidebarResponse.text();
       updateNotificationBadge();
+
+      // Setup toggle cho Recent Project
+      const projectListBtn = document.getElementById('recent-list');
+      if (projectListBtn) {
+        projectListBtn.addEventListener('click', toggleProjectSidebar);
+      }
     }
 
 
@@ -256,4 +262,31 @@ function updateSidebarActiveState(path) {
       link.classList.remove("bg-gray-100");
     }
   });
+}
+
+function toggleProjectSidebar() {
+  const projectListBtn = document.getElementById('recent-list');
+  const projectList = document.getElementById('recent-project');
+
+  if (!projectListBtn || !projectList) return;
+
+  const isExpanded = projectListBtn.getAttribute('aria-expanded') === 'true';
+  const icon = projectListBtn.querySelector('.lucide-orbit');
+
+  // Toggle state
+  projectListBtn.setAttribute('aria-expanded', !isExpanded);
+
+  if (isExpanded) {
+    // Đang mở -> Đóng
+    projectList.classList.remove('block');
+    projectList.classList.add('hidden');
+    projectList.style.display = 'none';
+    if (icon) icon.style.transform = 'rotate(-360deg)';
+  } else {
+    // Đang đóng -> Mở
+    projectList.classList.remove('hidden');
+    projectList.classList.add('block');
+    projectList.style.display = 'block';
+    if (icon) icon.style.transform = 'rotate(0deg)';
+  }
 }

@@ -17,7 +17,7 @@ export async function loadUserList() {
     }
 }
 
-async function loadUserInfor(){
+async function loadUserInfor() {
     const userAvatar = document.getElementById('admin-user-avatar');
     const userName = document.getElementById('admin-name');
     const userEmail = document.getElementById('admin-email');
@@ -25,14 +25,14 @@ async function loadUserInfor(){
 
     try {
         const res = await authFetch('user/read');
-        if(!res.ok) throw new Error('Cannot load user data');
+        if (!res.ok) throw new Error('Cannot load user data');
         const user = await res.json();
         userAvatar.src = user.avatarUrl || '/images/default-avatar.png';
         userName.textContent = user.name;
         userEmail.textContent = user.email;
         userPhone.textContent = user.phoneNumber;
-    } catch(err) {
-        console.log("Cannot load user data",err);
+    } catch (err) {
+        console.log("Cannot load user data", err);
     }
 }
 
@@ -68,6 +68,14 @@ async function renderUserList(users) {
     `;
 
     userList.innerHTML = tableHtml;
+
+    // Attach event listeners for edit buttons
+    users.forEach(user => {
+        const editBtn = document.getElementById(`edit-user-${user.id}`);
+        if (editBtn) {
+            editBtn.addEventListener('click', () => openEditUserModal(user));
+        }
+    });
 }
 
 function createUserRow(user) {
@@ -88,11 +96,108 @@ function createUserRow(user) {
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${roleClasses}">${roleText}</span>
             </td>
             <td class="px-6 py-4 text-right">
-                <div role="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-blue-500 hover:bg-blue-700">
+                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
                     Edit
-                </div>
+                </button>
             </td>
         </tr>
     `;
+}
+
+// Global modal elements
+let modal, closeBtn, cancelBtn, form;
+
+function initEditModal() {
+    modal = document.getElementById('edit-user-modal');
+    closeBtn = document.getElementById('close-edit-user-modal');
+    cancelBtn = document.getElementById('cancel-edit-user');
+    form = document.getElementById('edit-user-form');
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeEditUserModal();
+        }
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeEditUserModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeEditUserModal);
+    if (form) form.addEventListener('submit', handleEditUserSubmit);
+}
+
+// Call init when script loads (or check if DOMContentLoaded is needed, but this is module context)
+document.addEventListener('DOMContentLoaded', initEditModal);
+
+function openEditUserModal(user) {
+    if (!modal) initEditModal();
+
+    const idInput = document.getElementById('edit-user-id');
+    const nameInput = document.getElementById('edit-user-name');
+    const emailInput = document.getElementById('edit-user-email');
+    const passInput = document.getElementById('edit-user-password');
+    const roleSelect = document.getElementById('edit-user-role');
+
+    if (!idInput || !nameInput || !emailInput || !passInput || !roleSelect) {
+        console.error("Edit User Modal elements not found in DOM.");
+        return;
+    }
+
+    idInput.value = user.id;
+    nameInput.value = user.name;
+    emailInput.value = user.email;
+    passInput.value = '';
+
+    // Set role
+    // user.systemRole: 0 = SystemAdmin, 1 = Member
+    roleSelect.value = user.systemRole === 0 ? 'SystemAdmin' : 'Member';
+
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+}
+
+function closeEditUserModal() {
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+
+async function handleEditUserSubmit(e) {
+    e.preventDefault();
+
+    const userId = document.getElementById('edit-user-id').value;
+    const password = document.getElementById('edit-user-password').value;
+    const role = document.getElementById('edit-user-role').value;
+
+    const updateData = {
+        role: role
+    };
+
+    if (password) {
+        updateData.password = password;
+    }
+
+    try {
+        const res = await authFetch(`/user/admin/update/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        if (res.ok) {
+            alert('User updated successfully!');
+            closeEditUserModal();
+            loadUserList(); // Refresh list to see proper role
+        } else {
+            const errData = await res.json();
+            alert('Failed to update user: ' + (errData.message || JSON.stringify(errData.errors)));
+        }
+    } catch (error) {
+        console.error('Error updating user:', error);
+        alert('An error occurred while updating user.');
+    }
 }

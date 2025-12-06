@@ -51,6 +51,7 @@ namespace ProjectManagement.Controllers
         public record SetRoleDto(string Role);
         public record ChangePasswordDto(string CurrentPassword, string NewPassword);
         public record ConfirmEmailDto(string Email);
+        public record AdminUpdateUserDto(string? Password, string? Role);
 
         // Đăng ký tài khoản mới
         [HttpPost("register")]
@@ -266,6 +267,53 @@ namespace ProjectManagement.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded) return BadRequest(result.Errors);
             return Ok(new { message = "Cập nhật hồ sơ thành công" });
+        }
+
+        // Admin cập nhật thông tin user khác (Password, Role)
+        [HttpPut("admin/update/{id}")]
+        [Authorize(Roles = "system_admin")]
+        public async Task<IActionResult> AdminUpdateUser(string id, [FromBody] AdminUpdateUserDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) return NotFound("User not found");
+
+            // Update Password if provided
+            if (!string.IsNullOrWhiteSpace(dto.Password))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, dto.Password);
+                if (!result.Succeeded) return BadRequest(result.Errors);
+            }
+
+            // Update Role if provided
+            if (!string.IsNullOrWhiteSpace(dto.Role))
+            {
+                var roleEnum = SystemRole.Member;
+                var raw = dto.Role.Trim();
+                if (Enum.TryParse<SystemRole>(raw, true, out var parsed))
+                {
+                    roleEnum = parsed;
+                }
+                else if (string.Equals(raw, "system_admin", StringComparison.OrdinalIgnoreCase) || string.Equals(raw, "system-admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    roleEnum = SystemRole.SystemAdmin;
+                }
+
+                var roleName = roleEnum == SystemRole.SystemAdmin ? "system_admin" : "member";
+                if (!await _roleManager.RoleExistsAsync(roleName))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                await _userManager.AddToRoleAsync(user, roleName);
+
+                user.SystemRole = roleEnum;
+                await _userManager.UpdateAsync(user);
+            }
+
+            return Ok(new { message = "User updated successfully" });
         }
 
         // Đổi mật khẩu

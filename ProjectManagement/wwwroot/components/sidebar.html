@@ -237,12 +237,24 @@
             </a>
         </aside>
     </div> <!-- End of non-scrolling top part -->
-    <div class="px-5 flex flex-col border-t flex-1 overflow-y-auto"> <!-- This div is now the main scrolling area -->
+    <div class="px-2 py-1 flex flex-col border-t flex-1 overflow-y-auto">
+        <!-- This div is now the main scrolling area -->
         <div role="button" tabindex="0" id="recent-list" aria-controls="recent-project" aria-expanded="true"
             class="select-none transition-colors duration-100 ease-in flex items-center justify-between rounded h-[30px] px-2 py-4 sticky top-0 z-10 bg-white">
-            <span
-                class="[text-transform:initial] hover:text-grey-500 text-sm leading-[1] text-gray-400 font-medium transition-colors duration-100 ease-out">Recent
-                Projects</span>
+            <div class="flex items-center justify-start gap-1 text-gray-400 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-orbit-icon lucide-orbit transition-transform duration-500 ease-in-out">
+                    <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" />
+                    <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" />
+                    <circle cx="12" cy="12" r="3" />
+                    <circle cx="19" cy="5" r="2" />
+                    <circle cx="5" cy="19" r="2" />
+                </svg>
+                <span
+                    class="[text-transform:initial] text-sm leading-[1] font-medium transition-colors duration-100 ease-out">Recent
+                    Projects</span>
+            </div>
             <div class="text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
@@ -253,7 +265,7 @@
                 </svg>
             </div>
         </div>
-        <div role="tree" id="recent-project" aria-labelledby="recent-list" style="display: block;">
+        <div role="tree" id="recent-project" class="px-3" aria-labelledby="recent-list" style="display: block;">
             <div class="flex flex-col gap-[1px]">
 
             </div>

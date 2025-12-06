@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <script type="module" src="/js/auth.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
+
 <body>
     <div class="flex h-screen items-stretch">
         <!-- Sidebar sẽ được load vào đây -->
@@ -19,7 +21,8 @@
             <header class="flex items-center justify-between p-4 px-6 mt-6">
                 <div class="flex flex-row items-center gap-4">
                     <div class="w-20 h-20 flex relative items-center justify-center border rounded-full">
-                        <img id="admin-user-avatar" src="" alt="admin-avatar" class="w-full h-full rounded-full object-cover">
+                        <img id="admin-user-avatar" src="" alt="admin-avatar"
+                            class="w-full h-full rounded-full object-cover">
                     </div>
                     <div class="flex flex-col gap-3">
                         <h2 id="admin-name" class="text-2xl font-medium">Name...</h2>
@@ -35,38 +38,126 @@
                         </div>
                     </div>
                 </div>
-                <div role="button" class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-black text-white transition-colors duration-200 hover:bg-gray-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-icon lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                <div role="button"
+                    class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-black text-white transition-colors duration-200 hover:bg-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user-plus-icon lucide-user-plus">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" x2="19" y1="8" y2="14" />
+                        <line x1="22" x2="16" y1="11" y2="11" />
+                    </svg>
                     Add User
                 </div>
             </header>
             <section class="flex flex-col">
                 <div class="flex flex-row items-center justify-between border px-6 py-2 bg-gray-50 mb-2">
                     <div class="relative px-2 py-1 border bg-white rounded-lg flex items-center justify-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-search-icon lucide-user-search"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
-                        <input id="search-user" type="text" placeholder="Search User" class="px-2 py-1 outline-none text-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-search-icon lucide-user-search">
+                            <circle cx="10" cy="7" r="4" />
+                            <path d="M10.3 15H7a4 4 0 0 0-4 4v2" />
+                            <circle cx="17" cy="17" r="3" />
+                            <path d="m21 21-1.9-1.9" />
+                        </svg>
+                        <input id="search-user" type="text" placeholder="Search User"
+                            class="px-2 py-1 outline-none text-gray-700">
                     </div>
                     <div class="flex flex-row gap-2 items-center">
-                        <div role="button" id="sort-user" class="flex items-center justify-center gap-1 border text-gray-600 rounded-md hover:bg-gray-100 px-2 py-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-down-icon lucide-arrow-up-down"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+                        <div role="button" id="sort-user"
+                            class="flex items-center justify-center gap-1 border text-gray-600 rounded-md hover:bg-gray-100 px-2 py-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-down-icon lucide-arrow-up-down">
+                                <path d="m21 16-4 4-4-4" />
+                                <path d="M17 20V4" />
+                                <path d="m3 8 4-4 4 4" />
+                                <path d="M7 4v16" />
+                            </svg>
                             Sort
                         </div>
-                        <div role="button" id="filter-user" class="flex items-center justify-center gap-1 border text-gray-600 rounded-md hover:bg-gray-100 px-2 py-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-filter-icon lucide-list-filter"><path d="M2 5h20"/><path d="M6 12h12"/><path d="M9 19h6"/></svg>
+                        <div role="button" id="filter-user"
+                            class="flex items-center justify-center gap-1 border text-gray-600 rounded-md hover:bg-gray-100 px-2 py-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-list-filter-icon lucide-list-filter">
+                                <path d="M2 5h20" />
+                                <path d="M6 12h12" />
+                                <path d="M9 19h6" />
+                            </svg>
                             Filter
                         </div>
                     </div>
                 </div>
-                <div id="user-list" class="px-6"">
+                <div id="user-list" class="px-6 mt-2">
                     <!-- Danh sách user sẽ được chèn vào đây -->
                 </div>
             </section>
         </main>
     </div>
+
+    <!-- Edit User Modal -->
+    <div id="edit-user-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg w-full max-w-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Edit User</h3>
+                <button id="close-edit-user-modal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-x">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="edit-user-form" class="flex flex-col gap-4">
+                <input type="hidden" id="edit-user-id">
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="edit-user-name" disabled
+                        class="bg-gray-100 border rounded px-3 py-2 text-gray-500 cursor-not-allowed">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="edit-user-email" disabled
+                        class="bg-gray-100 border rounded px-3 py-2 text-gray-500 cursor-not-allowed">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">New Password <span
+                            class="text-xs font-normal text-gray-500">(Leave blank to keep
+                            current)</span></label>
+                    <input type="password" id="edit-user-password" placeholder="Enter new password"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Role</label>
+                    <select id="edit-user-role"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="Member">Member</option>
+                        <option value="SystemAdmin">System Admin</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-4">
+                    <button type="button" id="cancel-edit-user"
+                        class="px-4 py-2 border rounded hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save
+                        Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script type="module" src="/js/sidebar.js"></script>
     <script type="module" src="/js/project-modal.js?v=2"></script>
     <script type="module" src="/js/settings-modal.js?v=2"></script>
     <script type="module" src="/js/user-settings-autosave.js?v=1"></script>
-    <script type="module" src="/js/admin-user-list.js?v=1"></script>
+    <script type="module" src="/js/admin-user-list.js?v=2"></script>
 </body>
+
 </html>

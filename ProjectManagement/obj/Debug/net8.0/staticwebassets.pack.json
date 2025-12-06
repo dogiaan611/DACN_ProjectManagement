@@ -193,6 +193,10 @@
       "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\SVG\\flow-svgrepo-com.svg"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\logoFlow.jpg",
+      "PackagePath": "staticwebassets\\icon\\0042-product-project-managers-illustrations\\DrawKit Vector Illustration Project Manager\\logoFlow.jpg"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
@@ -337,6 +341,10 @@
       "PackagePath": "staticwebassets\\js\\user-settings-autosave.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\landingPage.html",
+      "PackagePath": "staticwebassets\\landingPage.html"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\loginPage.html",
       "PackagePath": "staticwebassets\\loginPage.html"
     },
@@ -351,6 +359,26 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\registerPage.html",
       "PackagePath": "staticwebassets\\registerPage.html"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\src\\drag-drop-demo.jpg",
+      "PackagePath": "staticwebassets\\src\\drag-drop-demo.jpg"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\src\\kanban-board-demo.png",
+      "PackagePath": "staticwebassets\\src\\kanban-board-demo.png"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\src\\list-demo.png",
+      "PackagePath": "staticwebassets\\src\\list-demo.png"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\src\\sprint-demo-1.png",
+      "PackagePath": "staticwebassets\\src\\sprint-demo-1.png"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\src\\task-detail-demo.png",
+      "PackagePath": "staticwebassets\\src\\task-detail-demo.png"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\test.html",
@@ -405,6 +433,10 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\05ac3a567f4a46b7954e332dcc5a37ac_DAQLDACNTT_Nhom11.docx"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\062e0da06215438385af18378e4c2e94_drag-drop-demo.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\062e0da06215438385af18378e4c2e94_drag-drop-demo.jpg"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg"
     },
@@ -417,12 +449,20 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\6281b2a9d38f468c8228d8cc87614e5e_DAQLDACNTT_Nhom11.docx",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\6281b2a9d38f468c8228d8cc87614e5e_DAQLDACNTT_Nhom11.docx"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\6bf0dd9640a747dba4a7eb3a2ff7a44c_DAHP_LTMMT_NHOM03.pdf",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\6bf0dd9640a747dba4a7eb3a2ff7a44c_DAHP_LTMMT_NHOM03.pdf"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\75dd42639de245d7a73aad1ab461057c_kanban-board-demo.png",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\75dd42639de245d7a73aad1ab461057c_kanban-board-demo.png"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\77bc0fdc5f9a493d8a558cf5a2e3464f_DAHP_LTMMT_NHOM03.pdf",
