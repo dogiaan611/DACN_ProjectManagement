@@ -6,6 +6,7 @@ import { initProjectList } from './project-list.js';
 import { initProjectSpreadsheet } from './project-spreadsheet.js';
 import { initProjectBacklog } from './project-backlog.js';
 import { initProjectDashboard } from './project-dashboard.js';
+import { initProjectGantt } from './project-gantt.js';
 // Lưu trữ dữ liệu project hiện tại
 let currentProjectData = null;
 
@@ -72,6 +73,7 @@ async function viewSwitcher() {
     const spreadsheetBtn = document.getElementById('spreadsheet-view-btn');
     const backlogBtn = document.getElementById('backlog-view-btn');
     const dashboardBtn = document.getElementById('dashboard-view-btn');
+    const ganttBtn = document.getElementById('gantt-view-btn');
     if (!kanbanBtn || !listBtn || !spreadsheetBtn || !backlogBtn || !dashboardBtn) {
         console.log('View btn not found');
         initProjectBoard(currentProjectData?.type);
@@ -85,11 +87,14 @@ async function viewSwitcher() {
     spreadsheetBtn.dataset.listenerAdded = 'true';
     backlogBtn.dataset.listenerAdded = 'true';
     dashboardBtn.dataset.listenerAdded = 'true';
+    ganttBtn.dataset.listenerAdded = 'true';
 
     kanbanBtn.addEventListener('click', () => {
         kanbanBtn.classList.add('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.remove('active', 'text-blue-400');
+        dashboardBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.remove('active', 'text-blue-400');
         initProjectBoard(currentProjectData?.type);
     });
@@ -97,6 +102,8 @@ async function viewSwitcher() {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.add('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        dashboardBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.remove('active', 'text-blue-400');
         initProjectList();
     });
@@ -104,6 +111,8 @@ async function viewSwitcher() {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.add('active', 'text-blue-400');
+        dashboardBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.remove('active', 'text-blue-400');
         initProjectSpreadsheet();
     });
@@ -111,6 +120,8 @@ async function viewSwitcher() {
         kanbanBtn.classList.remove('active', 'text-blue-400');
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.remove('active', 'text-blue-400');
+        dashboardBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.add('active', 'text-blue-400');
         initProjectBacklog();
     });
@@ -119,9 +130,19 @@ async function viewSwitcher() {
         listBtn.classList.remove('active', 'text-blue-400');
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.remove('active', 'text-blue-400');
         dashboardBtn.classList.add('active', 'text-blue-400');
         initProjectDashboard();
     });
+    ganttBtn.addEventListener('click', () => {
+        kanbanBtn.classList.remove('active', 'text-blue-400');
+        listBtn.classList.remove('active', 'text-blue-400');
+        spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        backlogBtn.classList.remove('active', 'text-blue-400');
+        dashboardBtn.classList.remove('active', 'text-blue-400');
+        ganttBtn.classList.add('active', 'text-blue-400');
+        initProjectGantt();
+    })
     kanbanBtn.click();
 }
 

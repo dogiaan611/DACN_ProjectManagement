@@ -132,7 +132,7 @@ async function renderScrumBoard(projectId) {
             createTaskCardHtml(task, task.commentCount || 0, task.attachmentCount || 0)
         ).join('');
 
-        return createColumnHtml(column, tasksHtml, boardId, tasksInColumn.length);
+        return createColumnHtml(column, tasksHtml, boardId, tasksInColumn.length, false);
     });
 
     const columnsHtml = (await Promise.all(columnsHtmlPromises)).join('');

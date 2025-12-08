@@ -17,7 +17,7 @@ export function getColumnTitleColour(title) {
     }
 }
 
-export function createColumnHtml(column, tasksHtml, boardId, taskCount) {
+export function createColumnHtml(column, tasksHtml, boardId, taskCount, showAddTask = true) {
     return `
         <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible bg-gray-50" id="column-${column.columnId}" draggable="true">
             <div class="flex flex-row justify-between mb-4 py-2 px-1 rounded-md bg-white items-center transition-colors duration-100">
@@ -32,9 +32,11 @@ export function createColumnHtml(column, tasksHtml, boardId, taskCount) {
                     <div role="button" class="column-option-btn flex hover:bg-gray-100 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical-icon lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                     </div>
+                    ${showAddTask ? `
                     <div role="button" class="add-task-btn flex hover:bg-gray-100 border-none rounded cursor-pointer p-1" data-column-id="${column.columnId}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     </div>
+                    ` : ''}
                 </div>
             </div>
             <div class="tasks-container flex-grow min-h-[100px] flex flex-col gap-4" data-column-id="${column.columnId}" data-board-id="${boardId}">

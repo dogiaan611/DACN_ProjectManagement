@@ -1504,7 +1504,7 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
             } catch (error) {
                 console.error('Error fetching members:', error);
             }
-        });
+        }, 'top');
     });
 
     // Priority Dropdown
@@ -1521,7 +1521,7 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
                     closePortal();
                 });
             });
-        });
+        }, 'top');
     });
 
     // Calendar
@@ -1549,7 +1549,7 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
                 });
                 portal._picker = calendar;
             });
-        });
+        }, 'top');
     });
 
     form.addEventListener('submit', async (e) => {
