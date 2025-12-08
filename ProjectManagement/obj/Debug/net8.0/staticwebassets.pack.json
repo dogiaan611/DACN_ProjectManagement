@@ -269,6 +269,10 @@
       "PackagePath": "staticwebassets\\js\\project\\project-edit.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-gantt.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-gantt.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-list.js",
       "PackagePath": "staticwebassets\\js\\project\\project-list.js"
     },

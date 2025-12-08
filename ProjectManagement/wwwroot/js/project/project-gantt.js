@@ -1,4 +1,5 @@
 import { authFetch } from "../auth/auth.js";
+import { openTaskDetailModal } from "../task/taskDetail.js";
 
 const VIEW_MODES = {
     DAY: { dayWidth: 40, label: 'Day' },
@@ -54,11 +55,11 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
                 Add Task
             </button>
         </div>
-        <div class="flex gap-2 h-[500px]">
-            <div id="gantt-sidebar" class="flex flex-col w-1/3 border border-gray-200 rounded-lg relative bg-white">
+        <div class="flex gap-2 border rounded-lg h-[500px]">
+             <div id="gantt-sidebar" class="flex flex-col w-[40%] border-r border-gray-200 rounded-l-lg relative bg-white">
                 
             </div>
-            <div id="gantt-scroll-area" class="w-2/3 overflow-auto border border-gray-200 rounded-lg bg-white shadow-inner relative">
+            <div id="gantt-scroll-area" class="w-[60%] overflow-auto rounded-r-lg bg-gray-50 shadow-inner relative">
                 <svg id="gantt-svg" class="block"></svg>
             </div>
         </div>
@@ -103,17 +104,59 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
     const scrollArea = document.getElementById('gantt-scroll-area');
 
     let sidebarHtml = `
-        <div class="flex items-center border-b border-gray-200 bg-gray-50 font-bold text-gray-700" style="height: ${HEADER_HEIGHT}px; padding-left: 10px; flex-shrink: 0;">
-            Task Name
+        <div class="flex items-center border-b border-gray-200 bg-gray-100 font-semibold text-xs text-gray-500 uppercase tracking-wider" style="height: ${HEADER_HEIGHT}px;">
+            <div class="w-[40%] px-4 border-r border-gray-200 h-full flex items-center">Task Name</div>
+            <div class="w-[20%] px-2 border-r border-gray-200 h-full flex items-center justify-center">Date</div>
+            <div class="w-[20%] px-2 border-r border-gray-200 h-full flex items-center justify-center">Assignee</div>
+            <div class="w-[20%] px-2 h-full flex items-center justify-center">Priority</div>
         </div>
         <div id="gantt-sidebar-content" class="overflow-hidden flex-1 relative">
     `;
 
+    const getPriorityLabel = (p) => {
+        const map = { 0: 'Low', 1: 'Medium', 2: 'High', 3: 'Critical' };
+        const colorMap = {
+            0: 'bg-gray-100 text-gray-600',
+            1: 'bg-blue-100 text-blue-600',
+            2: 'bg-orange-100 text-orange-600',
+            3: 'bg-red-100 text-red-600'
+        };
+        const label = map[p] || 'Cmd';
+        const classes = colorMap[p] || 'bg-gray-100';
+        return `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${classes}">${label}</span>`;
+    };
+
     if (taskObjs.length > 0) {
         taskObjs.forEach(task => {
+            const dateStr = task.startDate.toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' });
+
+            // Assignee Avatar
+            let assigneeHtml = '<span class="text-gray-400 text-xs">-</span>';
+            if (task.assignee) {
+                if (task.assignee.avatarUrl) {
+                    assigneeHtml = `<img src="${task.assignee.avatarUrl}" title="${task.assignee.name}" class="w-6 h-6 rounded-full object-cover border border-white shadow-sm">`;
+                } else {
+                    const initial = task.assignee.name ? task.assignee.name.charAt(0).toUpperCase() : '?';
+                    assigneeHtml = `<div class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold border border-white shadow-sm" title="${task.assignee.name}">${initial}</div>`;
+                }
+            }
+
             sidebarHtml += `
-                <div class="flex items-center border-b border-gray-100 text-sm text-gray-700 hover:bg-gray-50 transition-colors" style="height: ${ROW_HEIGHT}px; padding-left: 10px;">
-                    <span class="truncate" title="${task.name}">${task.name}</span>
+                <div class="gantt-sidebar-row flex items-center border-b border-gray-100 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer group" 
+                     data-task-id="${task.realTaskId}" data-board-id="${task.boardId}" data-column-id="${task.columnId}"
+                     style="height: ${ROW_HEIGHT}px;">
+                    <div class="w-[40%] px-4 border-r border-gray-100 h-full flex items-center overflow-hidden">
+                        <span class="truncate group-hover:text-blue-600 transition-colors font-medium" title="${task.name}">${task.name}</span>
+                    </div>
+                    <div class="w-[20%] px-2 border-r border-gray-100 h-full flex items-center justify-center text-xs text-gray-500">
+                        ${dateStr}
+                    </div>
+                    <div class="w-[20%] px-2 border-r border-gray-100 h-full flex items-center justify-center">
+                        ${assigneeHtml}
+                    </div>
+                    <div class="w-[20%] px-2 h-full flex items-center justify-center">
+                        ${getPriorityLabel(task.priority)}
+                    </div>
                 </div>
             `;
         });
@@ -131,6 +174,20 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
     const sidebarContent = document.getElementById('gantt-sidebar-content');
     scrollArea.addEventListener('scroll', () => {
         sidebarContent.scrollTop = scrollArea.scrollTop;
+    });
+
+    // Row Click Handlers
+    document.querySelectorAll('.gantt-sidebar-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const tId = row.dataset.taskId;
+            const bId = row.dataset.boardId;
+            const cId = row.dataset.columnId;
+            if (tId && tId !== 'undefined' && bId && cId) {
+                openTaskDetailModal(tId, projectId, bId, cId);
+            } else {
+                console.warn("Task details missing for modal", { tId, bId, cId });
+            }
+        });
     });
 
     // --- 4. Drawing Helpers ---
@@ -247,20 +304,37 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
         title.textContent = `${task.name}\nStart: ${task.startDate.toLocaleDateString()}\nEnd: ${task.endDate.toLocaleDateString()}\nProgress: ${task.progress}%`;
         g.appendChild(title);
 
+
+        let fillColor = '#bfdbfe';   
+        let strokeColor = '#60a5fa'; 
+        let progressColor = '#3b82f6'; 
+
+        if (task.progress >= 100) {
+            // Done: Green Theme
+            fillColor = '#dcfce7';   
+            strokeColor = '#4ade80'; 
+            progressColor = '#bbf7d0'; 
+        } else if (task.progress > 0) {
+            // In Progress: Orange Theme
+            fillColor = '#ffedd5';  
+            strokeColor = '#fb923c'; 
+            progressColor = '#fed7aa'; 
+        }
+
         g.appendChild(createEl('rect', {
             x: xStart, y: y, width: width, height: barHeight,
-            fill: '#e0e7ff', rx: 4, ry: 4
+            fill: fillColor,
+            stroke: strokeColor,
+            'stroke-width': 1,
+            rx: 4, ry: 4
         }));
 
+        // Progress Bar (Overlay)
         const progressWidth = (width * task.progress) / 100;
         if (progressWidth > 0) {
-            let color = '#3b82f6';
-            if (task.progress >= 100) color = '#10b981';
-            else if (task.progress === 0) color = '#9ca3af';
-
             g.appendChild(createEl('rect', {
                 x: xStart, y: y, width: progressWidth, height: barHeight,
-                fill: color, rx: 4, ry: 4
+                fill: progressColor, rx: 3, ry: 3
             }));
         }
 
@@ -279,7 +353,6 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
         svg.appendChild(g);
     });
 
-    // --- 7. Event Listeners ---
     document.getElementById('gantt-add-btn').addEventListener('click', () => {
         openAddTaskModal(projectId, () => initProjectGantt());
     });

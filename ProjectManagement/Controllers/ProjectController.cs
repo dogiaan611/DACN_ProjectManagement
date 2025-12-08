@@ -428,16 +428,15 @@ namespace ProjectManagement.Controllers
             var tasks = await _db.PojectTasks
                 .Include(t => t.Column)
                 .ThenInclude(c => c.Board)
+                .Include(t => t.Assignee)
                 .Where(t => t.Column!.Board.ProjectId == projectId)
                 .ToListAsync();
 
-            // Lấy mapping status để tính progress
             var mappings = await _db.ColumnStatusMappings
                 .Include(m => m.Column)
                 .Where(m => m.Column.Board.ProjectId == projectId)
                 .ToListAsync();
 
-            // Helper để xác định status (copy từ GetDashboard hoặc tách ra shared service sau này)
             ColumnStatus GetStatus(ProjectTask t, List<ColumnStatusMapping> maps)
             {
                  var map = maps.FirstOrDefault(m => m.ColumnId == t.ColumnId);
@@ -456,7 +455,6 @@ namespace ProjectManagement.Controllers
                 if (status == ColumnStatus.Done) progress = 100;
                 if (progress == 0)
                 {
-                    // Check nếu cột là In Progress
                     var cName = t.Column?.Name?.ToLower() ?? "";
                     if (cName.Contains("progress") || cName.Contains("doing") || cName.Contains("working"))
                     {
@@ -466,16 +464,23 @@ namespace ProjectManagement.Controllers
                 var start = t.CreatedAt;
                 var end = t.DueDate ?? t.CreatedAt.AddDays(1);
 
-                // Đảm bảo End >= Start
                 if (end < start) end = start.AddDays(1);
 
                 return new
                 {
                     id = "t" + t.TaskId,
+                    realTaskId = t.TaskId,
                     name = t.Title,
                     start = start.ToString("yyyy-MM-dd"),
                     end = end.ToString("yyyy-MM-dd"),
                     progress = progress,
+                    columnId = t.ColumnId,
+                    boardId = t.Column?.BoardId,
+                    priority = (int)t.Priority,
+                    assignee = t.Assignee == null ? null : new {
+                        name = t.Assignee.Name ?? t.Assignee.UserName,
+                        avatarUrl = t.Assignee.AvatarUrl
+                    }
                 };
             }).ToList();
 
@@ -493,7 +498,6 @@ namespace ProjectManagement.Controllers
             var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
             if (!isMember) return Forbid();
 
-            // Find default board
             var board = await _db.Boards.FirstOrDefaultAsync(b => b.ProjectId == projectId);
             if (board == null) return BadRequest("Project hasn't been set up with a board yet.");
 
@@ -503,7 +507,7 @@ namespace ProjectManagement.Controllers
                 .ToListAsync();
 
             if (!columns.Any()) return BadRequest("No columns found.");
-            int targetColumnId = columns.First().ColumnId; // Default to first
+            int targetColumnId = columns.First().ColumnId;
 
             if (dto.Progress >= 100)
             {
@@ -512,7 +516,7 @@ namespace ProjectManagement.Controllers
                     c.Name.ToLower().Contains("finish") || 
                     c.Name.ToLower().Contains("complet"));
                 if (doneCol != null) targetColumnId = doneCol.ColumnId;
-                else targetColumnId = columns.Last().ColumnId; // Fallback to last
+                else targetColumnId = columns.Last().ColumnId;
             }
             else if (dto.Progress > 0)
             {
@@ -528,12 +532,12 @@ namespace ProjectManagement.Controllers
             var task = new ProjectTask
             {
                 Title = dto.Name,
-                Description = "", // Empty for now
+                Description = "", 
                 CreatedById = userId,
                 ColumnId = targetColumnId,
-                CreatedAt = dto.Start, // Map Start -> CreatedAt
+                CreatedAt = dto.Start,
                 UpdatedAt = DateTime.UtcNow,
-                DueDate = dto.End,     // Map End -> DueDate
+                DueDate = dto.End,     
                 Priority = TaskPriority.Medium,
                 IsLocked = false,
                 SortOrder = maxSort + 1
@@ -548,7 +552,12 @@ namespace ProjectManagement.Controllers
                 name = task.Title,
                 start = task.CreatedAt.ToString("yyyy-MM-dd"),
                 end = task.DueDate?.ToString("yyyy-MM-dd") ?? "",
-                progress = dto.Progress
+                progress = dto.Progress,
+                realTaskId = task.TaskId,
+                columnId = task.ColumnId,
+                boardId = board.BoardId,
+                priority = (int)task.Priority,
+                assignee = (object)null
             });
         }
 
