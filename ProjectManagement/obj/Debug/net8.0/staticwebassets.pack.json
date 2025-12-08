@@ -201,148 +201,148 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\admin-user-list.js",
-      "PackagePath": "staticwebassets\\js\\admin-user-list.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\admin\\admin-user-list.js",
+      "PackagePath": "staticwebassets\\js\\admin\\admin-user-list.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\attachment.js",
-      "PackagePath": "staticwebassets\\js\\attachment.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth\\auth.js",
+      "PackagePath": "staticwebassets\\js\\auth\\auth.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth.js",
-      "PackagePath": "staticwebassets\\js\\auth.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth\\login.js",
+      "PackagePath": "staticwebassets\\js\\auth\\login.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\column.js",
-      "PackagePath": "staticwebassets\\js\\column.js"
-    },
-    {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\comment.js",
-      "PackagePath": "staticwebassets\\js\\comment.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\auth\\register.js",
+      "PackagePath": "staticwebassets\\js\\auth\\register.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\components\\calendar.js",
       "PackagePath": "staticwebassets\\js\\components\\calendar.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\drag-drop.js",
-      "PackagePath": "staticwebassets\\js\\drag-drop.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\layout\\home.js",
+      "PackagePath": "staticwebassets\\js\\layout\\home.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\home.js",
-      "PackagePath": "staticwebassets\\js\\home.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\layout\\notification.js",
+      "PackagePath": "staticwebassets\\js\\layout\\notification.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\login.js",
-      "PackagePath": "staticwebassets\\js\\login.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\layout\\sidebar-dropdown.js",
+      "PackagePath": "staticwebassets\\js\\layout\\sidebar-dropdown.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\notification.js",
-      "PackagePath": "staticwebassets\\js\\notification.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\layout\\sidebar.js",
+      "PackagePath": "staticwebassets\\js\\layout\\sidebar.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-add-members.js",
-      "PackagePath": "staticwebassets\\js\\project-add-members.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\column.js",
+      "PackagePath": "staticwebassets\\js\\project\\column.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-backlog.js",
-      "PackagePath": "staticwebassets\\js\\project-backlog.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\drag-drop.js",
+      "PackagePath": "staticwebassets\\js\\project\\drag-drop.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-board.js",
-      "PackagePath": "staticwebassets\\js\\project-board.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-add-members.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-add-members.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-dashboard.js",
-      "PackagePath": "staticwebassets\\js\\project-dashboard.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-backlog.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-backlog.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
-      "PackagePath": "staticwebassets\\js\\project-detail.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-board.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-board.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-edit.js",
-      "PackagePath": "staticwebassets\\js\\project-edit.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-dashboard.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-dashboard.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-list.js",
-      "PackagePath": "staticwebassets\\js\\project-list.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-detail.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-detail.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-modal.js",
-      "PackagePath": "staticwebassets\\js\\project-modal.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-edit.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-edit.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-sidebar.js",
-      "PackagePath": "staticwebassets\\js\\project-sidebar.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-list.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-list.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-spreadsheet.js",
-      "PackagePath": "staticwebassets\\js\\project-spreadsheet.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-modal.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-modal.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\register.js",
-      "PackagePath": "staticwebassets\\js\\register.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-sidebar.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-sidebar.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-delete-account.js",
-      "PackagePath": "staticwebassets\\js\\settings-delete-account.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project\\project-spreadsheet.js",
+      "PackagePath": "staticwebassets\\js\\project\\project-spreadsheet.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-modal.js",
-      "PackagePath": "staticwebassets\\js\\settings-modal.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings\\settings-delete-account.js",
+      "PackagePath": "staticwebassets\\js\\settings\\settings-delete-account.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-password.js",
-      "PackagePath": "staticwebassets\\js\\settings-password.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings\\settings-modal.js",
+      "PackagePath": "staticwebassets\\js\\settings\\settings-modal.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings-profile.js",
-      "PackagePath": "staticwebassets\\js\\settings-profile.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings\\settings-password.js",
+      "PackagePath": "staticwebassets\\js\\settings\\settings-password.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar-dropdown.js",
-      "PackagePath": "staticwebassets\\js\\sidebar-dropdown.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings\\settings-profile.js",
+      "PackagePath": "staticwebassets\\js\\settings\\settings-profile.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\sidebar.js",
-      "PackagePath": "staticwebassets\\js\\sidebar.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\settings\\user-settings-autosave.js",
+      "PackagePath": "staticwebassets\\js\\settings\\user-settings-autosave.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\subtask.js",
-      "PackagePath": "staticwebassets\\js\\subtask.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\attachment.js",
+      "PackagePath": "staticwebassets\\js\\task\\attachment.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\tag.js",
-      "PackagePath": "staticwebassets\\js\\tag.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\comment.js",
+      "PackagePath": "staticwebassets\\js\\task\\comment.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task.js",
-      "PackagePath": "staticwebassets\\js\\task.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\subtask.js",
+      "PackagePath": "staticwebassets\\js\\task\\subtask.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskActivityLog.js",
-      "PackagePath": "staticwebassets\\js\\taskActivityLog.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\tag.js",
+      "PackagePath": "staticwebassets\\js\\task\\tag.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskDetail.js",
-      "PackagePath": "staticwebassets\\js\\taskDetail.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\task.js",
+      "PackagePath": "staticwebassets\\js\\task\\task.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskTag.js",
-      "PackagePath": "staticwebassets\\js\\taskTag.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskActivityLog.js",
+      "PackagePath": "staticwebassets\\js\\task\\taskActivityLog.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskUI.js",
-      "PackagePath": "staticwebassets\\js\\taskUI.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskDetail.js",
+      "PackagePath": "staticwebassets\\js\\task\\taskDetail.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\taskWatcher.js",
-      "PackagePath": "staticwebassets\\js\\taskWatcher.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskTag.js",
+      "PackagePath": "staticwebassets\\js\\task\\taskTag.js"
     },
     {
-      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\user-settings-autosave.js",
-      "PackagePath": "staticwebassets\\js\\user-settings-autosave.js"
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskUI.js",
+      "PackagePath": "staticwebassets\\js\\task\\taskUI.js"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskWatcher.js",
+      "PackagePath": "staticwebassets\\js\\task\\taskWatcher.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\landingPage.html",

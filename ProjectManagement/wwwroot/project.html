@@ -7,7 +7,7 @@
     <title>Project Details</title>
     <link rel="stylesheet" href="./css/site.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script type="module" src="/js/auth.js"></script>
+    <script type="module" src="/js/auth/auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -331,14 +331,13 @@
     </div>
     <!-- Tải các script cần thiết -->
 
-    <script type="module" src="/js/sidebar.js"></script>
-    <script type="module" src="/js/project-sidebar.js"></script>
-    <script type="module" src="/js/calendar-init.js"></script>
-    <script src="/js/auth.js"></script> <!-- Đảm bảo authFetch có sẵn -->
-    <script type="module" src="/js/project-add-members.js"></script>
+    <script type="module" src="/js/layout/sidebar.js"></script>
+    <script type="module" src="/js/project/project-sidebar.js"></script>
+    <script src="/js/auth/auth.js"></script> <!-- Đảm bảo authFetch có sẵn -->
+    <script type="module" src="/js/project/project-add-members.js"></script>
     <!-- Script chính cho trang này -->
-    <script type="module" src="/js/project-edit.js?v=1"></script>
-    <script type="module" src="/js/project-detail.js"></script>
+    <script type="module" src="/js/project/project-edit.js?v=1"></script>
+    <script type="module" src="/js/project/project-detail.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) {

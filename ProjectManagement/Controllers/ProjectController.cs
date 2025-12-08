@@ -415,6 +415,143 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // Lấy dữ liệu Gantt Chart cho project
+        [HttpGet("{projectId:int}/gantt-chart")]
+        public async Task<IActionResult> GetGanttChart([FromRoute] int projectId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
+            if (!isMember) return Forbid();
+
+            var tasks = await _db.PojectTasks
+                .Include(t => t.Column)
+                .ThenInclude(c => c.Board)
+                .Where(t => t.Column!.Board.ProjectId == projectId)
+                .ToListAsync();
+
+            // Lấy mapping status để tính progress
+            var mappings = await _db.ColumnStatusMappings
+                .Include(m => m.Column)
+                .Where(m => m.Column.Board.ProjectId == projectId)
+                .ToListAsync();
+
+            // Helper để xác định status (copy từ GetDashboard hoặc tách ra shared service sau này)
+            ColumnStatus GetStatus(ProjectTask t, List<ColumnStatusMapping> maps)
+            {
+                 var map = maps.FirstOrDefault(m => m.ColumnId == t.ColumnId);
+                 if (map != null) return map.Status;
+                 
+                 var colName = t.Column?.Name?.Trim().ToLower() ?? "";
+                 if (colName == "done" || colName == "completed" || colName == "finish" || colName == "finished")
+                     return ColumnStatus.Done;
+                 
+                 return ColumnStatus.ToDo;
+            }
+
+            var ganttData = tasks.Select(t => {
+                var status = GetStatus(t, mappings);
+                int progress = 0;
+                if (status == ColumnStatus.Done) progress = 100;
+                if (progress == 0)
+                {
+                    // Check nếu cột là In Progress
+                    var cName = t.Column?.Name?.ToLower() ?? "";
+                    if (cName.Contains("progress") || cName.Contains("doing") || cName.Contains("working"))
+                    {
+                        progress = 50;
+                    }
+                }
+                var start = t.CreatedAt;
+                var end = t.DueDate ?? t.CreatedAt.AddDays(1);
+
+                // Đảm bảo End >= Start
+                if (end < start) end = start.AddDays(1);
+
+                return new
+                {
+                    id = "t" + t.TaskId,
+                    name = t.Title,
+                    start = start.ToString("yyyy-MM-dd"),
+                    end = end.ToString("yyyy-MM-dd"),
+                    progress = progress,
+                };
+            }).ToList();
+
+            return Ok(ganttData);
+        }
+
+        public record CreateGanttTaskDto(string Name, DateTime Start, DateTime End, int Progress);
+
+        [HttpPost("{projectId:int}/gantt-chart/create")]
+        public async Task<IActionResult> CreateGanttTask([FromRoute] int projectId, [FromBody] CreateGanttTaskDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
+            if (!isMember) return Forbid();
+
+            // Find default board
+            var board = await _db.Boards.FirstOrDefaultAsync(b => b.ProjectId == projectId);
+            if (board == null) return BadRequest("Project hasn't been set up with a board yet.");
+
+            var columns = await _db.Columns
+                .Where(c => c.BoardId == board.BoardId)
+                .OrderBy(c => c.Position)
+                .ToListAsync();
+
+            if (!columns.Any()) return BadRequest("No columns found.");
+            int targetColumnId = columns.First().ColumnId; // Default to first
+
+            if (dto.Progress >= 100)
+            {
+                var doneCol = columns.FirstOrDefault(c => 
+                    c.Name.ToLower().Contains("done") || 
+                    c.Name.ToLower().Contains("finish") || 
+                    c.Name.ToLower().Contains("complet"));
+                if (doneCol != null) targetColumnId = doneCol.ColumnId;
+                else targetColumnId = columns.Last().ColumnId; // Fallback to last
+            }
+            else if (dto.Progress > 0)
+            {
+                var progressCol = columns.FirstOrDefault(c => 
+                    c.Name.ToLower().Contains("progress") || 
+                    c.Name.ToLower().Contains("doing") || 
+                    c.Name.ToLower().Contains("working"));
+                if (progressCol != null) targetColumnId = progressCol.ColumnId;
+            }
+
+            var maxSort = await _db.PojectTasks.Where(t => t.ColumnId == targetColumnId).MaxAsync(t => (int?)t.SortOrder) ?? -1;
+
+            var task = new ProjectTask
+            {
+                Title = dto.Name,
+                Description = "", // Empty for now
+                CreatedById = userId,
+                ColumnId = targetColumnId,
+                CreatedAt = dto.Start, // Map Start -> CreatedAt
+                UpdatedAt = DateTime.UtcNow,
+                DueDate = dto.End,     // Map End -> DueDate
+                Priority = TaskPriority.Medium,
+                IsLocked = false,
+                SortOrder = maxSort + 1
+            };
+
+            _db.PojectTasks.Add(task);
+            await _db.SaveChangesAsync();
+
+            return Ok(new
+            {
+                id = "t" + task.TaskId,
+                name = task.Title,
+                start = task.CreatedAt.ToString("yyyy-MM-dd"),
+                end = task.DueDate?.ToString("yyyy-MM-dd") ?? "",
+                progress = dto.Progress
+            });
+        }
+
         // Xóa project (chỉ owner).
         [HttpDelete("{projectId:int}/Delete")]
         public async Task<IActionResult> Delete([FromRoute] int projectId)
