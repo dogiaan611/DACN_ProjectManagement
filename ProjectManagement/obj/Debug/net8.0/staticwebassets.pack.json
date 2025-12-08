@@ -253,6 +253,10 @@
       "PackagePath": "staticwebassets\\js\\project-board.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-dashboard.js",
+      "PackagePath": "staticwebassets\\js\\project-dashboard.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\project-detail.js",
       "PackagePath": "staticwebassets\\js\\project-detail.js"
     },
@@ -447,6 +451,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\3cb714ba4cb7404fb156222bd6e61f82_sudent.png",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\3cb714ba4cb7404fb156222bd6e61f82_sudent.png"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png",

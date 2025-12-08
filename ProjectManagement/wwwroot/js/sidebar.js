@@ -37,13 +37,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json();
         const nameEl = document.querySelector('#us-name-sidebar');
         const avataEl = document.getElementById('us-avatar-sidebar');
-
+        const roleEl = document.getElementById('us-role-sidebar');
         if (nameEl && data) nameEl.textContent = data.name ?? data.Name ?? 'User';
         if (avataEl && data) {
           avataEl.src = data.avatarUrl;
           avataEl.alt = data.name ?? data.Name ?? 'User';
         }
-
+        const role = data.systemRole === 0 ? 'SystemAdmin' : 'User';
+        if (roleEl && data) roleEl.textContent = role;
         // Hiển thị link admin nếu người dùng có vai trò là SystemAdmin (SystemRole === 0)
         const adminLink = document.getElementById('admin-user-link');
         if (adminLink && data.systemRole === 0) {
@@ -209,6 +210,17 @@ export async function loadPage(url) {
         } else {
           // Nếu đã tồn tại, cập nhật nội dung nếu cần (giữ lại để tránh mất state)
           // Chỉ cập nhật nếu có thay đổi về structure
+        }
+      });
+    }
+
+    // Nếu là trang Admin User, đảm bảo modal được append vào body
+    if (pagePath.includes('adminUser.html')) {
+      const adminModals = doc.querySelectorAll('#edit-user-modal');
+      adminModals.forEach(modal => {
+        const existingModal = document.getElementById(modal.id);
+        if (!existingModal) {
+          document.body.appendChild(modal.cloneNode(true));
         }
       });
     }

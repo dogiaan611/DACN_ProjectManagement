@@ -5,6 +5,7 @@ import { initProjectBoard } from './project-board.js';
 import { initProjectList } from './project-list.js';
 import { initProjectSpreadsheet } from './project-spreadsheet.js';
 import { initProjectBacklog } from './project-backlog.js';
+import { initProjectDashboard } from './project-dashboard.js';
 // Lưu trữ dữ liệu project hiện tại
 let currentProjectData = null;
 
@@ -70,7 +71,8 @@ async function viewSwitcher() {
     const listBtn = document.getElementById('list-view-btn');
     const spreadsheetBtn = document.getElementById('spreadsheet-view-btn');
     const backlogBtn = document.getElementById('backlog-view-btn');
-    if (!kanbanBtn || !listBtn || !spreadsheetBtn || !backlogBtn) {
+    const dashboardBtn = document.getElementById('dashboard-view-btn');
+    if (!kanbanBtn || !listBtn || !spreadsheetBtn || !backlogBtn || !dashboardBtn) {
         console.log('View btn not found');
         initProjectBoard(currentProjectData?.type);
         return;
@@ -82,6 +84,7 @@ async function viewSwitcher() {
     listBtn.dataset.listenerAdded = 'true';
     spreadsheetBtn.dataset.listenerAdded = 'true';
     backlogBtn.dataset.listenerAdded = 'true';
+    dashboardBtn.dataset.listenerAdded = 'true';
 
     kanbanBtn.addEventListener('click', () => {
         kanbanBtn.classList.add('active', 'text-blue-400');
@@ -110,6 +113,14 @@ async function viewSwitcher() {
         spreadsheetBtn.classList.remove('active', 'text-blue-400');
         backlogBtn.classList.add('active', 'text-blue-400');
         initProjectBacklog();
+    });
+    dashboardBtn.addEventListener('click', () => {
+        kanbanBtn.classList.remove('active', 'text-blue-400');
+        listBtn.classList.remove('active', 'text-blue-400');
+        spreadsheetBtn.classList.remove('active', 'text-blue-400');
+        backlogBtn.classList.remove('active', 'text-blue-400');
+        dashboardBtn.classList.add('active', 'text-blue-400');
+        initProjectDashboard();
     });
     kanbanBtn.click();
 }

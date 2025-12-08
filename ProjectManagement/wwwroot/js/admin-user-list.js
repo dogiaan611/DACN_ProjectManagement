@@ -95,12 +95,21 @@ function createUserRow(user) {
             <td class="px-6 py-4">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${roleClasses}">${roleText}</span>
             </td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-6 py-4 text-right gap-1">
+                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-blue-400 hover:bg-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-contact-icon lucide-contact"><path d="M16 2v2"/><path d="M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M8 2v2"/><circle cx="12" cy="11" r="3"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+                    Detail
+                </button>
                 <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
                     Edit
                 </button>
+                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-red-500 hover:bg-red-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x-icon lucide-user-round-x"><path d="M2 21a8 8 0 0 1 11.873-7"/><circle cx="10" cy="8" r="5"/><path d="m17 17 5 5"/><path d="m22 17-5 5"/></svg>
+                    Delete
+                </button>
             </td>
+            
         </tr>
     `;
 }

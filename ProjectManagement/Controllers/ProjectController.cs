@@ -327,6 +327,94 @@ namespace ProjectManagement.Controllers
             return Ok(new { message = "Cập nhật project thành công" });
         }
 
+        // Lấy thống kê dashboard cho project
+        [HttpGet("{projectId:int}/dashboard")]
+        public async Task<IActionResult> GetDashboard([FromRoute] int projectId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var isMember = await _db.ProjectMembers.AnyAsync(pm => pm.ProjectId == projectId && pm.UserId == userId);
+            if (!isMember) return Forbid();
+
+            var project = await _db.Projects.FindAsync(projectId);
+            if (project == null) return NotFound();
+
+            var tasks = await _db.PojectTasks
+                .Include(t => t.Column)
+                .ThenInclude(c => c.Board)
+                .Include(t => t.Assignee)
+                .Where(t => t.Column!.Board.ProjectId == projectId)
+                .ToListAsync();
+
+            var mappings = await _db.ColumnStatusMappings
+                .Include(m => m.Column)
+                .Where(m => m.Column.Board.ProjectId == projectId)
+                .ToListAsync();
+
+            ColumnStatus GetStatus(ProjectTask t, List<ColumnStatusMapping> maps)
+            {
+                 var map = maps.FirstOrDefault(m => m.ColumnId == t.ColumnId);
+                 if (map != null) return map.Status;
+                 
+                 var colName = t.Column?.Name?.Trim().ToLower() ?? "";
+                 if (colName == "done" || colName == "completed" || colName == "finish" || colName == "finished")
+                     return ColumnStatus.Done;
+                 
+                 return ColumnStatus.ToDo;
+            }
+
+            var taskData = tasks.Select(t => new { Task = t, Status = GetStatus(t, mappings) }).ToList();
+
+            var totalTasks = taskData.Count;
+            var completedTasks = taskData.Count(x => x.Status == ColumnStatus.Done);
+            var incompleteTasks = totalTasks - completedTasks;
+            var overdueTasks = taskData.Count(x => x.Status != ColumnStatus.Done && x.Task.DueDate < DateTime.UtcNow);
+
+            var tasksByPriority = taskData
+                .GroupBy(x => x.Task.Priority)
+                .Select(g => new { Priority = g.Key, Count = g.Count() })
+                .ToDictionary(k => k.Priority, v => v.Count);
+
+            var tasksByAssignee = taskData
+                .Where(x => x.Task.AssigneeId != null)
+                .GroupBy(x => x.Task.Assignee!.Name)
+                .Select(g => new { Assignee = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count)
+                .ToList();
+            
+            var unassignedCount = taskData.Count(x => x.Task.AssigneeId == null);
+
+            var upcomingTasks = taskData
+                .Where(x => x.Status != ColumnStatus.Done && x.Task.DueDate.HasValue)
+                .OrderBy(x => x.Task.DueDate)
+                .Take(5)
+                .Select(x => new
+                {
+                    x.Task.TaskId,
+                    Name = x.Task.Title,
+                    x.Task.DueDate,
+                    x.Task.Priority,
+                    AssigneeName = x.Task.Assignee?.Name,
+                    AssigneeAvatar = x.Task.Assignee?.AvatarUrl
+                })
+                .ToList();
+
+            return Ok(new
+            {
+                ProjectId = projectId,
+                ProjectName = project.Name,
+                TotalTasks = totalTasks,
+                CompletedTasks = completedTasks,
+                IncompleteTasks = incompleteTasks,
+                OverdueTasks = overdueTasks,
+                TasksByPriority = tasksByPriority,
+                TasksByAssignee = tasksByAssignee,
+                UnassignedTasks = unassignedCount,
+                UpcomingTasks = upcomingTasks
+            });
+        }
+
         // Xóa project (chỉ owner).
         [HttpDelete("{projectId:int}/Delete")]
         public async Task<IActionResult> Delete([FromRoute] int projectId)
