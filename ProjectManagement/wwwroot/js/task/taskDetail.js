@@ -1,12 +1,12 @@
 import { authFetch } from '../auth/auth.js';
-import { createTaskDetailModalHtml, toggleDropdown, getPriorityChip } from "./taskUI.js";
+import { createTaskDetailModalHtml, createTaskDetailModalRectHtml, toggleDropdown, getPriorityChip } from "./taskUI.js";
 import { initComments } from "./comment.js";
 import { initTaskTags } from "./taskTag.js";
 import { initAttachments } from "./attachment.js";
 import { initSubtasks } from './subtask.js';
 import { initTaskWatcher } from './taskWatcher.js';
 import { initTaskActivityLog } from './taskActivityLog.js';
-export async function openTaskDetailModal(taskId, projectId, boardId, columnId) {
+export async function openTaskDetailModal(taskId, projectId, boardId, columnId, isMaximized = false) {
     await closeTaskDetailModal();
     try {
         const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`);
@@ -15,78 +15,103 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId) 
         }
         const task = await res.json();
 
-        // Tạo HTML cho modal và chèn vào body
-        const modalHtml = createTaskDetailModalHtml(task);
+        const modalHtml = isMaximized ? createTaskDetailModalRectHtml(task) : createTaskDetailModalHtml(task);
         document.body.insertAdjacentHTML('beforeend', modalHtml);
 
-        const modal = document.getElementById('task-detail-modal');
+        let modal;
+        if (isMaximized) {
+            const modalContainer = document.getElementById('task-detail-modal-container');
+            modal = modalContainer.querySelector('#task-detail-modal');
+        } else {
+            modal = document.getElementById('task-detail-modal');
+        }
+
+        if (!modal) throw new Error("Modal element could not be found in the DOM.");
+
         initComments(taskId, boardId, projectId, columnId, modal);
         initTaskTags(boardId, columnId, projectId, taskId);
         initAttachments(taskId, boardId, columnId, projectId, modal);
         initSubtasks(taskId, boardId, columnId, projectId, modal);
         initTaskWatcher(boardId, columnId, taskId, projectId, modal);
         initTaskActivityLog(boardId, columnId, taskId, modal);
-        const backdrop = document.getElementById('task-detail-modal-backdrop');
-        const closeBtn = document.getElementById('close-task-detail-modal-btn');
+        const closeBtn = modal.querySelector('#close-task-detail-modal-btn');
 
         // Hàm đóng modal
         const closeModalHandler = () => closeTaskDetailModal();
 
         // Gán sự kiện click để đóng modal
         closeBtn.addEventListener('click', closeModalHandler);
-        backdrop.addEventListener('click', closeModalHandler);
 
-        // Kích hoạt hiệu ứng trượt vào
-        requestAnimationFrame(() => {
-            backdrop.classList.remove('opacity-0');
-            modal.classList.remove('translate-x-full');
-        });
-
-        // --- TAB SWITCHING LOGIC ---
-        const tabCommentBtn = modal.querySelector('#tab-comment-btn');
-        const tabSubtaskBtn = modal.querySelector('#tab-subtask-btn');
-        const tabContentComment = modal.querySelector('#tab-content-comment');
-        const tabContentSubtask = modal.querySelector('#tab-content-subtask');
-        const tabContentActivity = modal.querySelector('#tab-content-activity');
-        const tabActivityBtn = modal.querySelector('#tab-activity-btn');
-
-        const setActiveTab = (tab) => {
-            // Ẩn tất cả các tab content và reset style của các button
-            [tabContentComment, tabContentSubtask, tabContentActivity].forEach(el => el.classList.add('hidden'));
-            [tabCommentBtn, tabSubtaskBtn, tabActivityBtn].forEach(btn => {
-                btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
-                btn.classList.add('text-gray-500', 'hover:text-gray-700');
+        if (isMaximized) {
+            const modalContainer = document.getElementById('task-detail-modal-container');
+            const minimizeBtn = modal.querySelector('#minimize-task-detail-btn');
+            modalContainer.addEventListener('click', (e) => {
+                if (e.target === modalContainer) closeModalHandler();
             });
+            if (minimizeBtn) minimizeBtn.addEventListener('click', () => openTaskDetailModal(taskId, projectId, boardId, columnId, false));
+            requestAnimationFrame(() => {
+                modalContainer.classList.remove('opacity-0');
+                modalContainer.querySelector('#task-detail-modal-content').classList.remove('opacity-0', 'scale-95');
+            });
+        } else {
+            const backdrop = document.getElementById('task-detail-modal-backdrop');
+            const maximizeBtn = modal.querySelector('#maximize-task-detail-btn');
+            if (backdrop) backdrop.addEventListener('click', closeModalHandler);
+            if (maximizeBtn) maximizeBtn.addEventListener('click', () => openTaskDetailModal(taskId, projectId, boardId, columnId, true));
 
-            switch (tab) {
-                case 'comment':
-                    tabContentComment.classList.remove('hidden');
-                    tabCommentBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-                    tabCommentBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
-                    break;
-                case 'subtask':
-                    tabContentSubtask.classList.remove('hidden');
-                    tabSubtaskBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-                    tabSubtaskBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
-                    break;
-                case 'activity':
-                    tabContentActivity.classList.remove('hidden');
-                    tabActivityBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-                    tabActivityBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
-                    break;
-                default:
-                    // Mặc định hiển thị tab comment nếu có lỗi
-                    tabContentComment.classList.remove('hidden');
-                    tabCommentBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
-                    tabCommentBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
-                    break;
-            }
-        };
+            requestAnimationFrame(() => {
+                backdrop.classList.remove('opacity-0');
+                modal.classList.remove('translate-x-full');
+            });
+        }
 
-        tabCommentBtn.addEventListener('click', () => setActiveTab('comment'));
-        tabSubtaskBtn.addEventListener('click', () => setActiveTab('subtask'));
-        tabActivityBtn.addEventListener('click', () => setActiveTab('activity'));
-        // --- END TAB SWITCHING LOGIC ---
+        if (!isMaximized) {
+            // --- TAB SWITCHING LOGIC ---
+            const tabCommentBtn = modal.querySelector('#tab-comment-btn');
+            const tabSubtaskBtn = modal.querySelector('#tab-subtask-btn');
+            const tabContentComment = modal.querySelector('#tab-content-comment');
+            const tabContentSubtask = modal.querySelector('#tab-content-subtask');
+            const tabContentActivity = modal.querySelector('#tab-content-activity');
+            const tabActivityBtn = modal.querySelector('#tab-activity-btn');
+
+            const setActiveTab = (tab) => {
+                // Ẩn tất cả các tab content và reset style của các button
+                [tabContentComment, tabContentSubtask, tabContentActivity].forEach(el => el.classList.add('hidden'));
+                [tabCommentBtn, tabSubtaskBtn, tabActivityBtn].forEach(btn => {
+                    btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                    btn.classList.add('text-gray-500', 'hover:text-gray-700');
+                });
+
+                switch (tab) {
+                    case 'comment':
+                        tabContentComment.classList.remove('hidden');
+                        tabCommentBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                        tabCommentBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+                        break;
+                    case 'subtask':
+                        tabContentSubtask.classList.remove('hidden');
+                        tabSubtaskBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                        tabSubtaskBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+                        break;
+                    case 'activity':
+                        tabContentActivity.classList.remove('hidden');
+                        tabActivityBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                        tabActivityBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+                        break;
+                    default:
+                        // Mặc định hiển thị tab comment nếu có lỗi
+                        tabContentComment.classList.remove('hidden');
+                        tabCommentBtn.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+                        tabCommentBtn.classList.remove('text-gray-500', 'hover:text-gray-700');
+                        break;
+                }
+            };
+
+            tabCommentBtn.addEventListener('click', () => setActiveTab('comment'));
+            tabSubtaskBtn.addEventListener('click', () => setActiveTab('subtask'));
+            tabActivityBtn.addEventListener('click', () => setActiveTab('activity'));
+            // --- END TAB SWITCHING LOGIC ---
+        }
 
         // --- BẮT ĐẦU: LOGIC CẬP NHẬT TIÊU ĐỀ ---
         const titleInput = modal.querySelector('#task-detail-title-input');
@@ -415,13 +440,23 @@ export function closeTaskDetailModal() {
     return new Promise((resolve) => {
         const modal = document.getElementById('task-detail-modal');
         const backdrop = document.getElementById('task-detail-modal-backdrop');
+        const modalContainer = document.getElementById('task-detail-modal-container'); // For centered modal
 
-        if (modal && backdrop) {
-            // Kích hoạt hiệu ứng trượt ra
+        if (modalContainer) { // Centered modal
+            const modalContent = modalContainer.querySelector('#task-detail-modal-content');
+            const rectBackdrop = document.getElementById('task-detail-modal-backdrop'); // Tìm backdrop của modal chữ nhật
+            modalContainer.classList.add('opacity-0');
+            if (modalContent) modalContent.classList.add('opacity-0', 'scale-95');
+            if (rectBackdrop) rectBackdrop.classList.add('opacity-0'); // Làm mờ backdrop
+
+            modalContainer.addEventListener('transitionend', () => {
+                modalContainer.remove();
+                if (rectBackdrop) rectBackdrop.remove(); // Xóa backdrop sau khi hiệu ứng kết thúc
+                resolve();
+            }, { once: true });
+        } else if (modal && backdrop) { // Slide-in modal
             backdrop.classList.add('opacity-0');
             modal.classList.add('translate-x-full');
-
-            // Xóa modal khỏi DOM sau khi hiệu ứng kết thúc
             modal.addEventListener('transitionend', () => {
                 modal.remove();
                 backdrop.remove();

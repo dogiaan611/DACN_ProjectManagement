@@ -293,12 +293,15 @@ export function createTaskDetailModalHtml(task) {
     return `
         <div id="task-detail-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out opacity-0"></div>
         <div id="task-detail-modal" data-task-id="${task.taskId}" class="fixed top-4 right-2 h-[95vh] w-[700px] max-w-3xl rounded-lg bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
-            <div class="flex flex-col overflow-y-auto h-full">
+            <div class="flex flex-col h-full">
                 <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
                     <div></div>
                     <div class="flex items-center justify-center gap-2">
                         <div id="task-detail-watcher-btn" tabindex='0' type="button" class="text-xs text-gray-400 hover:text-green-500 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div tabindex='0' type="button" id="maximize-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
                         </div>
                         <div tabindex='0' type="button" id="edit-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
@@ -509,6 +512,242 @@ export function createTaskDetailModalHtml(task) {
     `;
 }
 
+export function createTaskDetailModalRectHtml(task) {
+    const dueDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString('vi-VN', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    }) : 'No due date';
+
+    const assigneeAvatar = task.assigneeAvatarUrl
+        ? `<img src="${task.assigneeAvatarUrl}" alt="${task.assigneeName}" class="w-6 h-6 rounded-full border object-cover">`
+        : `<div class="w-6 h-6 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">${task.assigneeName ? task.assigneeName.charAt(0).toUpperCase() : '?'}</div>`;
+
+    return `
+        <div id="task-detail-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ease-in-out opacity-0"></div>
+        <div id="task-detail-modal-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 opacity-0 transition-opacity duration-300">
+            <div id="task-detail-modal-content" class="bg-white rounded-lg shadow-2xl w-full max-w-7xl h-[80vh] flex flex-col transform opacity-0 scale-95 transition-all duration-300 ease-out">
+                <div id="task-detail-modal" data-task-id="${task.taskId}" class="flex flex-col h-full">
+                <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
+                    <div></div>
+                    <div class="flex items-center justify-center gap-2">
+                        <div id="task-detail-watcher-btn" tabindex='0' type="button" class="text-xs text-gray-400 hover:text-green-500 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div tabindex='0' type="button" id="minimize-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shrink"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+                        </div>
+                        <div tabindex='0' type="button" id="edit-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+                        </div>
+                        <div tabindex='0' type="button" id="close-task-detail-modal-btn" class="text-sm text-gray-400 hover:text-red-500 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 h-full flex-grow overflow-y-auto">
+                    <div class="flex flex-row h-full gap-3 justify-start">
+                        <div class="w-2/3 flex flex-col justify-start gap-2 pr-2 border-r">
+
+                            <div id="rename-title-btn" type="button" class="flex items-center mb-3">
+                                <input id="task-detail-title-input" class="text-3xl text-gray-800 w-full outline-none hover:bg-gray-50 focus:bg-white border-none focus:border focus:cursor-text cursor-pointer rounded-md p-1" value="${task.title}">
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                                    Priority
+                                </div>
+                                <div id="task-detail-priority-btn" class="p-2 cursor-pointer rounded-md hover:bg-gray-100">${getPriorityChip(task.priority)}</div>
+                                <div id="task-detail-priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
+                                    <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
+                                        ${getPriorityChip(1)}
+                                    </div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">
+                                        ${getPriorityChip(2)}
+                                    </div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="3">
+                                        ${getPriorityChip(3)}
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                                    Due date
+                                </div>
+                                <div id="task-detail-calendar-btn" class="p-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-50 rounded-md">${dueDate}</div>
+                                <div id="task-detail-calendar-dropdown" class="absolute z-10 w-fit bg-white mt-1 hidden" >
+                                    <div id="calendar" class="p-2 bg-white"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                                    Tags
+                                </div>
+                                <div class="flex flex-wrap ml-2 gap-2 items-center relative">
+                                    <div id="task-tags-container" class="flex flex-wrap gap-2">
+                                        <!-- Tags will be rendered here -->
+                                    </div>
+                                    <button type="button" id="add-tag-btn" class="flex items-center justify-center w-6 h-6 rounded bg-gray-100 hover:bg-gray-200 text-gray-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                    </button>
+                                    
+                                    <!-- Dropdown chọn tag -->
+                                    <div id="tag-dropdown" class="absolute top-8 left-0 z-20 w-48 bg-white border rounded-md shadow-lg hidden">
+                                        <div class="p-2 border-b">
+                                            <input type="text" id="tag-search-input" class="w-full text-xs p-1 outline-none" placeholder="Search tags...">
+                                        </div>
+                                        <div id="tag-dropdown-list" class="max-h-40 overflow-y-auto p-1 flex flex-col gap-1">
+                                            <!-- Available tags will be listed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                                    Assignee
+                                </div>
+                                <div class="flex items-center gap-5 p-2">
+                                    <div id="task-detail-assignee-avt" class="flex gap-2 items-center justify-center">${assigneeAvatar}<span class="text-sm font-medium text-gray-600">${task.assigneeName || ''}</span></div>
+                                    <div type="button" tabindex='0' id="change-assignee" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+                                        Change
+                                    </div>
+                                </div>
+                                <div id="assignee-detail-dropdown" class="absolute z-10 w-fit border rounded-sm mt-1 hidden">
+                                    <div class="border-b py-1 px-2 flex items-center justify-start bg-white sticky top-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-search-icon lucide-user-search"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
+                                        <input type="text" id="assignee-search" class="outline-none p-2 w-full text-base text-gray-500" placeholder="Search assignee..." autocomplete="off">
+                                    </div>
+                                    <div id="assignee-detail-list" class="flex flex-col bg-white items-start justify-start p-1 max-h-48 overflow-y-auto">
+                                        <!-- Assignee list will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                                    Watcher
+                                </div>
+                                <div class="flex items-center gap-5 p-2">
+                                    <div id="task-detail-watcher-avt" class="flex items-center -space-x-3 gap-2 justify-center"></div>
+                                    <div type="button" tabindex='0' id="edit-watcher" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+                                        Change
+                                    </div>
+                                </div>
+                                <div id="watcher-detail-dropdown" class="absolute z-10 w-fit border rounded-sm mt-1 hidden">
+                                    <div class="border-b py-1 px-2 flex items-center justify-start bg-white sticky top-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-search-icon lucide-user-search"><circle cx="10" cy="7" r="4"/><path d="M10.3 15H7a4 4 0 0 0-4 4v2"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>
+                                        <input type="text" id="watcher-search" class="outline-none p-2 w-full text-base text-gray-500" placeholder="Search watcher..." autocomplete="off">
+                                    </div>
+                                    <div id="watcher-detail-list" class="flex flex-col bg-white items-start justify-start p-1 max-h-48 overflow-y-auto">
+                                        <!-- Watcher list will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                                    Description
+                                </div>
+                                
+                            </div>
+                            <textarea id="task-description" class="w-full p-2 border rounded-md outline-none text-sm bg-gray-50 text-gray-600 min-h-[70px]">${task.description || ''}</textarea>
+
+                            <div class="flex flex-col gap-2">
+                                <div class="flex justify-between">
+                                    <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                                        Attachments
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap items-center justify-start gap-2">
+                                    <div id="task-attachments-list" class="flex flex-wrap items-center justify-start gap-2">
+                                        <!-- Attachments will be rendered here -->
+                                    </div>
+                                    <div class="flex items-center justify-center p-2 border border-dashed rounded-lg hover:bg-gray-50 cursor-pointer text-gray-600" onclick="document.getElementById('task-upload-file').click()">
+                                        <input type="file" id="task-upload-file" accept="*" class="hidden" />
+                                        <button type="button" class="pointer-events-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <div class="flex justify-between">
+                                    <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-checks-icon lucide-list-checks"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></svg>
+                                        Subtasks
+                                    </div>
+                                </div>
+                                <div id="subtask-progress-container" class="mb-3 hidden">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-medium text-gray-500">Progress</span>
+                                        <span id="subtask-progress-text" class="text-xs font-medium text-gray-700">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                        <div id="subtask-progress-bar" class="bg-blue-600 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div id="task-subtasks-list" class="flex flex-col gap-2 max-h-80 overflow-y-auto">
+
+                                </div>
+                                <div class="flex justify-start items-center gap-2 mt-2">
+                                    <button id="add-subtask-btn" class="px-2 py-1 w-full text-sm flex items-center justify-start gap-4 text-gray-600 hover:bg-gray-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                            Add task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-1/3 flex flex-col gap-3">
+                            <div id="tab-content-comment" class="flex flex-col justify-between">
+                                <span class="mb-2 flex items-center justify-start gap-2 text-xl text-gray-700 font-bold"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-icon lucide-message-square"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg>Comments</span>
+                                <div id="task-comments-list" class="flex flex-col gap-2 mb-2 max-h-80 overflow-y-auto py-2">
+                                    <!-- Comments will be loaded here -->
+                                </div>
+                                <div class="flex flex-col border rounded-md p-3">
+                                    <div id="new-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
+                                    <div id="attachment-comment-review" class="flex flex-wrap items-center justify-start gap-2">
+
+                                    </div>
+                                    <div class="flex justify-end mt-2 gap-2">
+                                        <div class="flex items-center justify-center p-1 rounded-md cursor-pointer border hover:bg-gray-50" onclick="document.getElementById('comment-upload-file').click()">
+                                            <input type="file" id="comment-upload-file" accept="*" multiple class="hidden" />
+                                            <button type="button" class="pointer-events-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                                            </button>
+                                        </div>
+                                        <button id="add-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div id="tab-content-activity" class="flex">
+                                    <div id="task-activity-list" class="flex flex-col gap-2 mb-2 max-h-52 overflow-y-auto py-2">
+                                        <!-- Activity will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    `;
+}
+
 export function closeAllPortals() {
     const ids = ['assignee-dropdown-portal', 'calendar-dropdown-portal', 'priority-dropdown-portal'];
     ids.forEach(id => {
@@ -684,6 +923,146 @@ export function createTaskRowHtml(task) {
 
                 <div class="text-sm text-gray-500 text-right">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+export function createSubtaskDetailModalHtml(subtask) {
+    const dueDate = subtask.dueDate ? new Date(subtask.dueDate).toLocaleDateString('vi-VN', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    }) : 'No due date';
+
+    const assigneeAvatar = subtask.assignee
+        ? `<img src="${subtask.assignee.avatarUrl}" alt="${subtask.assignee.name}" class="w-6 h-6 rounded-full border object-cover">`
+        : `<div class="w-6 h-6 border flex items-center justify-center rounded-full bg-gray-200 text-gray-600 text-sm font-semibold">${subtask.assignee ? subtask.assignee.name.charAt(0).toUpperCase() : '?'}</div>`;
+
+    return `
+        <div id="subtask-detail-modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-[60] transition-opacity duration-300 ease-in-out opacity-0"></div>
+        <div id="subtask-detail-modal" data-subtask-id="${subtask.subtaskId}" class="fixed top-4 right-2 h-[95vh] w-[700px] max-w-3xl rounded-lg bg-white shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="p-3 border-b flex justify-between items-center flex-shrink-0">
+                    <div class="text-xs text-gray-500 flex items-center gap-1">
+                        <span class="bg-gray-100 rounded px-1">Subtask</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        <span class="truncate max-w-[200px]">${subtask.task ? subtask.task.title : 'Parent Task'}</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2">
+                        <div tabindex='0' type="button" id="close-subtask-detail-modal-btn" class="text-sm text-gray-400 hover:text-red-500 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 flex-grow overflow-y-auto">
+                    <div class="flex flex-col gap-3 justify-start">
+                        <div class="flex flex-col justify-start gap-2">
+
+                            <div id="subtask-rename-title-btn" type="button" class="flex items-center mb-3">
+                                <input id="subtask-detail-title-input" class="text-2xl text-gray-800 w-full outline-none hover:bg-gray-50 focus:bg-white border-none focus:border focus:cursor-text cursor-pointer rounded-md p-1" value="${subtask.title}">
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                                    Priority
+                                </div>
+                                <div id="subtask-detail-priority-btn" class="p-2 cursor-pointer rounded-md hover:bg-gray-100">${getPriorityChip(subtask.priority)}</div>
+                                <div id="subtask-detail-priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
+                                    <span class="p-1 mb-1 text-sm font-medium text-gray-700">Subtask Priority</span>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">${getPriorityChip(1)}</div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">${getPriorityChip(2)}</div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="3">${getPriorityChip(3)}</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                                    Due date
+                                </div>
+                                <div id="subtask-detail-calendar-btn" class="p-2 cursor-pointer text-sm text-gray-600 hover:bg-gray-50 rounded-md">${dueDate}</div>
+                                <div id="subtask-detail-calendar-dropdown" class="absolute z-10 w-fit bg-white mt-1 hidden" >
+                                    <div id="subtask-calendar" class="p-2 bg-white"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                                    Assignee
+                                </div>
+                                <div class="flex items-center gap-5 p-2">
+                                    <div id="subtask-detail-assignee-avt" class="flex gap-2 items-center justify-center">${assigneeAvatar}<span class="text-sm font-medium text-gray-600">${subtask.assignee ? subtask.assignee.name : ''}</span></div>
+                                    <div type="button" tabindex='0' id="change-subtask-assignee" class="text-sm px-2 py-1 rounded flex items-center justify-center border-dashed border text-gray-800 cursor-pointer gap-2 hover:bg-gray-50">
+                                        Change
+                                    </div>
+                                </div>
+                                <div id="subtask-assignee-detail-dropdown" class="absolute z-10 w-fit border rounded-sm mt-1 hidden">
+                                    <div class="border-b py-1 px-2 flex items-center justify-start bg-white sticky top-0">
+                                        <input type="text" id="subtask-assignee-search" class="outline-none p-2 w-full text-base text-gray-500" placeholder="Search assignee..." autocomplete="off">
+                                    </div>
+                                    <div id="subtask-assignee-detail-list" class="flex flex-col bg-white items-start justify-start p-1 max-h-48 overflow-y-auto"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                                    Description
+                                </div>
+                            </div>
+                            <textarea id="subtask-description" class="w-full p-2 border rounded-md outline-none text-sm bg-gray-50 text-gray-600 min-h-[70px]">${subtask.description || ''}</textarea>
+
+                            <div class="flex flex-col gap-2">
+                                <div class="flex justify-between">
+                                    <div class="w-40 flex items-center gap-2 text-sm text-gray-400 font-normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
+                                        Attachments
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap items-center justify-start gap-2">
+                                    <div id="subtask-attachments-list" class="flex flex-wrap items-center justify-start gap-2">
+                                        <!-- Attachments -->
+                                    </div>
+                                    <div class="flex items-center justify-center p-2 border border-dashed rounded-lg hover:bg-gray-50 cursor-pointer text-gray-600" onclick="document.getElementById('subtask-upload-file').click()">
+                                        <input type="file" id="subtask-upload-file" accept="*" class="hidden" />
+                                        <button type="button" class="pointer-events-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-3">
+                                <div class="flex items-center gap-4 border-b mb-2">
+                                    <button id="tab-subtask-comment-btn" class="px-3 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 focus:outline-none">Comments</button>
+                                    <button id="tab-subtask-activity-btn" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none">Activity</button>
+                                </div>
+
+                                <div id="tab-content-subtask-comment" class="block">
+                                    <div id="subtask-comments-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto py-2">
+                                        <!-- Comments -->
+                                    </div>
+                                    <div class="flex flex-col border rounded-md p-3">
+                                        <div id="new-subtask-comment-content" contenteditable="true" class="w-full text-sm text-gray-800 outline-none rounded-md p-2 min-h-[40px] empty:before:content-[attr(placeholder)] empty:before:text-gray-400" placeholder="Add a comment..."></div>
+                                        <div class="flex justify-end mt-2 gap-2">
+                                            <button id="add-subtask-comment-btn" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600">Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div id="tab-content-subtask-activity" class="hidden">
+                                     <div id="subtask-activity-list" class="flex flex-col gap-2 mb-2 max-h-60 overflow-y-auto py-2">
+                                         <!-- Activity will be loaded here -->
+                                     </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1092,8 +1092,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>5bxcrsxhzj</Fingerprint>
-      <Integrity>X5FWf9g9yq3Quxi81wMx8pztwVLsOGhBwVoqPPkRpzc=</Integrity>
+      <Fingerprint>6p1n209rg9</Fingerprint>
+      <Integrity>WvpfDjWyiBUhA628ShCRK5Cx0TpJz2xRuJZr2JHxNJ0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project\drag-drop.js'))</OriginalItemSpec>
@@ -1218,8 +1218,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>a12ras8y86</Fingerprint>
-      <Integrity>8oKVnYOccluTVDl+qTiZcmG1U4ZVa2yayc+UXfr0SUs=</Integrity>
+      <Fingerprint>p4rmd3q9rx</Fingerprint>
+      <Integrity>J9R7STbhkgGuhuzw/k/LtWhbOE0ieNIDnwrqYTaJPDU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\project\project-gantt.js'))</OriginalItemSpec>
@@ -1506,8 +1506,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>6e7cuf2eiv</Fingerprint>
-      <Integrity>bsr8ehijeL4XhwORvl4WL8Dko94t57QmL++du/+4p38=</Integrity>
+      <Fingerprint>hu4u6g6604</Fingerprint>
+      <Integrity>96UWYWfRiVX7758WfKNCebScWXKdzYxyTKpVvDYmzoE=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\task\taskDetail.js'))</OriginalItemSpec>
@@ -1542,8 +1542,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>66d4can7rh</Fingerprint>
-      <Integrity>UsBh3b7l6laq7jNzi1YhV4ZUzuEMyIXP2uTCEK+06wo=</Integrity>
+      <Fingerprint>gfla2tf7ww</Fingerprint>
+      <Integrity>BO+qtT133IeGsPxUyDno7vgPhA8EF7w7TABFp8TAPMQ=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\task\taskUI.js'))</OriginalItemSpec>
@@ -2016,6 +2016,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\234b80831b534257a014a5609e455a95_DAHP_LTMMT_NHOM03.pdf'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjectManagement</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjectManagement</BasePath>
+      <RelativePath>uploads/2025/12/234b80831b534257a014a5609e455a95_DAHP_LTMMT_NHOM03.pdf</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>4l1agjtaw2</Fingerprint>
+      <Integrity>iLL2LWQd3Qs0xT/yIi+7aL8QZH+EXUeDBbWFxXDWvv4=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\234b80831b534257a014a5609e455a95_DAHP_LTMMT_NHOM03.pdf'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\267d32b0fcd94d73afc312f163bdebde_BaoCaoQLDA_CNTT.pdf'))">
       <SourceType>Package</SourceType>
       <SourceId>ProjectManagement</SourceId>
@@ -2177,6 +2195,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\880d4b0504a64aa38d9712e7c7390cf8_DAQLDACNTT_Nhom11.docx'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\8f1511ed43d040a9b0aaaff9353f345c_Binz.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>ProjectManagement</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/ProjectManagement</BasePath>
+      <RelativePath>uploads/2025/12/8f1511ed43d040a9b0aaaff9353f345c_Binz.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>ui35orf5nq</Fingerprint>
+      <Integrity>FjUiD6o18/FvB3AzZ9pgfggo9/JJhFvKgxjSPP+vjms=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\8f1511ed43d040a9b0aaaff9353f345c_Binz.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\2025\12\a8883d0795bb4e17b2bf8872cd433192_Hoa.jpg'))">
       <SourceType>Package</SourceType>

@@ -545,3 +545,150 @@ export async function initComments(taskId, boardId, projectId, columnId, contain
     // Load initially
     loadComments();
 }
+
+export async function initSubtaskComments(subtaskId, taskId, boardId, columnId, projectId, container) {
+    const listContainer = container.querySelector('#subtask-comments-list');
+    const input = container.querySelector('#new-subtask-comment-content');
+    const addBtn = container.querySelector('#add-subtask-comment-btn');
+
+    let currentUser = null;
+    let members = [];
+
+    // Helper functions (duplicated/adapted from initComments) - or we should extract them if possible.
+    // For now, I'll inline simplified versions to avoid large refactoring.
+
+    async function fetchUserInfo() {
+        try {
+            const userRes = await authFetch('/user/read');
+            if (userRes.ok) currentUser = await userRes.json();
+            const memberRes = await authFetch(`/projects/${projectId}/readProject`);
+            if (memberRes.ok) {
+                const data = await memberRes.json();
+                members = data.members || [];
+            }
+        } catch (err) {
+            console.error("Failed to load user info", err);
+        }
+    }
+
+    async function loadComments() {
+        listContainer.innerHTML = '<div class="text-gray-500 text-sm p-2">Loading comments...</div>';
+        try {
+            const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}/subtasks/${subtaskId}/comments`);
+            if (!res.ok) throw new Error('Failed to load comments');
+            const comments = await res.json();
+            renderComments(comments);
+        } catch (err) {
+            console.error(err);
+            listContainer.innerHTML = '<div class="text-red-500 text-sm p-2">Error loading comments</div>';
+        }
+    }
+
+    function renderComments(comments) {
+        listContainer.innerHTML = '';
+        if (comments.length === 0) {
+            listContainer.innerHTML = `<div class="text-gray-400 text-sm p-2 flex items-center justify-center gap-2 text-center">No comments yet.</div>`;
+            return;
+        }
+
+        comments.forEach(comment => {
+            const isOwner = currentUser && (currentUser.id === comment.userId || (comment.user && currentUser.id === comment.user.id));
+            // Backend mismatch? SubtaskCommentController returns object with User property.
+            const userId = comment.user?.id || comment.userId;
+            const userName = comment.user?.name || comment.userName || 'Unknown';
+            const userAvatar = comment.user?.avatarUrl || comment.userAvatarUrl;
+
+            let contentHtml = escapeHtml(comment.content);
+            // Highlight mentions
+            if (members && members.length > 0) {
+                members.forEach(m => {
+                    if (m.name) {
+                        const escapedName = m.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(`@${escapedName}`, 'g');
+                        contentHtml = contentHtml.replace(regex, `<span class="text-blue-500 font-semibold">@${m.name}</span>`);
+                    }
+                });
+            }
+
+            const date = new Date(comment.createdAt).toLocaleString('vi-VN'); // Simple format
+
+            const initial = userName.charAt(0).toUpperCase();
+            const avatarHtml = userAvatar
+                ? `<img src="${userAvatar}" alt="${userName}" class="w-6 h-6 rounded-full object-cover">`
+                : `<div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600 flex-shrink-0">${initial}</div>`;
+
+            const el = document.createElement('div');
+            el.setAttribute('data-comment-id', comment.commentId);
+            el.className = 'flex items-start gap-3 group mb-2';
+            el.innerHTML = `
+                ${avatarHtml}
+                <div class="comment-body flex-grow bg-gray-50 p-2 rounded-md"> 
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-semibold text-gray-900">${userName}</span>
+                            <span class="text-xs text-gray-500">${date}</span>
+                        </div>
+                        ${isOwner ? `
+                        <button class="delete-comment-btn opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-opacity" title="Delete" data-comment-id="${comment.commentId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                        </button>
+                        ` : ''}
+                    </div>
+                    <div class="text-sm text-gray-700 whitespace-pre-wrap">${contentHtml}</div>
+                </div>
+            `;
+
+            if (isOwner) {
+                const deleteBtn = el.querySelector('.delete-comment-btn');
+                deleteBtn.addEventListener('click', (e) => handleDelete(e.currentTarget.dataset.commentId));
+            }
+            listContainer.appendChild(el);
+        });
+        listContainer.scrollTop = listContainer.scrollHeight;
+    }
+
+    async function handleAdd() {
+        const content = input.innerText.trim();
+        if (!content) return;
+
+        addBtn.disabled = true;
+        try {
+            const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}/subtasks/${subtaskId}/comments`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content })
+            });
+            if (!res.ok) throw new Error('Failed to post comment');
+            input.innerHTML = '';
+            await loadComments();
+        } catch (err) {
+            console.error(err);
+            alert('Failed to post comment');
+        } finally {
+            addBtn.disabled = false;
+        }
+    }
+
+    async function handleDelete(commentId) {
+        if (!confirm('Delete this comment?')) return;
+        try {
+            const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}/subtasks/${subtaskId}/comments/${commentId}`, {
+                method: 'DELETE'
+            });
+            if (!res.ok) throw new Error('Failed to delete comment');
+            await loadComments();
+        } catch (err) {
+            console.error(err);
+            alert('Failed to delete comment');
+        }
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    addBtn.addEventListener('click', handleAdd);
+    await fetchUserInfo();
+    await loadComments();
+}

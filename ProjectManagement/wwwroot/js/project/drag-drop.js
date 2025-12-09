@@ -1,16 +1,9 @@
-/**
- * Tìm phần tử phía sau vị trí con trỏ chuột để xác định nơi chèn phần tử đang kéo.
- * @param {HTMLElement} container - Vùng chứa các phần tử có thể kéo.
- * @param {number} clientX - Tọa độ X của chuột (cho cột).
- * @param {number} clientY - Tọa độ Y của chuột (cho task).
- * @returns {HTMLElement | null} - Phần tử đứng ngay sau vị trí thả, hoặc null nếu thả ở cuối.
- */
+
 export function getDragAfterElement(container, clientX, clientY) {
     const draggableElements = [...container.querySelectorAll('[draggable="true"]:not(.dragging)')];
 
     return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
-        // Kiểm tra hướng kéo-thả (ngang cho cột, dọc cho task)
         const isHorizontal = container.classList.contains('board-container');
         const offset = isHorizontal
             ? clientX - box.left - box.width / 2
@@ -24,26 +17,15 @@ export function getDragAfterElement(container, clientX, clientY) {
     }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-// Global dragover to ensure smooth movement (drag event on source can be choppy)
-// We need to track the currently dragging element
 document.addEventListener('dragover', e => {
     const dragging = document.querySelector('.dragging');
     if (dragging && dragging._dragPreview) {
-        e.preventDefault(); // Allow drop
-        // Update preview position
-        // Note: e.clientX/Y are available here
+        e.preventDefault();
         dragging._dragPreview.style.left = `${e.clientX - dragging._offsetX}px`;
         dragging._dragPreview.style.top = `${e.clientY - dragging._offsetY}px`;
     }
 });
 
-/**
- * Khởi tạo chức năng kéo và thả cho một tập hợp các phần tử.
- * @param {object} options - Các tùy chọn cấu hình.
- * @param {string} options.containerSelector - Selector cho vùng chứa các mục có thể kéo.
- * @param {string} options.draggableSelector - Selector cho các mục có thể kéo.
- * @param {function} options.onDrop - Hàm callback được thực thi khi một mục được thả.
- */
 export function initializeDragAndDrop({ containerSelector, draggableSelector, onDrop }) {
     const containers = document.querySelectorAll(containerSelector);
     const draggables = document.querySelectorAll(draggableSelector);

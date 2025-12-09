@@ -1,5 +1,7 @@
 import { authFetch } from "../auth/auth.js";
 import { toggleDropdown, getPriorityChip } from "./taskUI.js";
+import { openSubtaskDetailModal } from "./subtaskDetail.js";
+
 
 export function initSubtasks(taskId, boardId, columnId, projectId, container) {
     const subtaskListContainer = container.querySelector('#task-subtasks-list');
@@ -63,6 +65,12 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
         subtasks.forEach(subtask => {
             const subtaskItem = document.createElement('div');
             subtaskItem.className = 'flex items-center justify-between p-2 gap-1 hover:bg-gray-50 border rounded-md group';
+            // Add click listener to open detail modal (exclude checkbox and delete button)
+            subtaskItem.addEventListener('click', (e) => {
+                if (!e.target.closest('.subtask-checkbox') && !e.target.closest('.delete-subtask-btn')) {
+                    openSubtaskDetailModal(subtask.subtaskId, taskId, boardId, columnId, projectId);
+                }
+            });
 
             const isChecked = subtask.isDone ? 'checked' : '';
             const textClass = subtask.isDone ? 'text-gray-400 line-through' : 'text-gray-700';
@@ -74,7 +82,9 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
             subtaskItem.innerHTML = `
                 <div class="flex items-center gap-3 w-full">
                     <input type="checkbox" class="subtask-checkbox w-4 h-4 accent-black rounded focus:ring-0 cursor-pointer" data-id="${subtask.subtaskId}" ${isChecked}>
-                    <div class="subtask-title text-sm ${textClass} flex-grow focus:outline-none" data-id="${subtask.subtaskId}">${subtask.title}</div>
+                    <div class="subtask-title text-sm ${textClass} flex-grow focus:outline-none cursor-pointer" data-id="${subtask.subtaskId}">${subtask.title}</div>
+                    ${subtask.dueDate ? `<div class="text-xs text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>${new Date(subtask.dueDate).toLocaleDateString()}</div>` : ''}
+                    ${getPriorityChip(subtask.priority)}
                 </div>
                 <div class="flex items-center w-6 h-6 rounded-full object-cover">
                     ${avatarHtml}
@@ -140,26 +150,54 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
 
         // Create form HTML
         const addSubtaskFormHtml = `
-            <div id="subtask-form-container" class="mt-2 p-2 flex items-center gap-2 border rounded-md bg-white shadow-sm">
+            <div id="subtask-form-container" class="mt-2 p-2 flex flex-col gap-2 border rounded-md bg-white shadow-sm">
                 <input type="text" id="new-subtask-title" class="w-full p-2 text-sm rounded outline-none" placeholder="What needs to be done?" autocomplete="off">
-                <div class="flex items-center gap-1">
-                    <div class="relative">
-                        <button id="add-subtask-assignee" class=" w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-50 text-gray-500" title="Assignee">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
-                        </button>
-                        <div id="subtask-assignee-dropdown-template" class="hidden w-64 bg-white border rounded-md shadow-lg">
-                            <div class="p-2 border-b sticky top-0 bg-white z-10">
-                                <input type="text" id="subtask-assignee-search" class="w-full p-1 text-sm border rounded outline-none" placeholder="Search member...">
+                <div class="flex items-center justify-between p-1 bg-gray-50 rounded">
+                    <div class="flex items-center gap-2">
+                            <div class="relative">
+                                <button id="add-subtask-assignee" class="w-7 h-7 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500" title="Assignee">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                                </button>
+                                <div id="subtask-assignee-dropdown-template" class="hidden w-64 bg-white border rounded-md shadow-lg">
+                                    <div class="p-2 border-b sticky top-0 bg-white z-10">
+                                        <input type="text" id="subtask-assignee-search" class="w-full p-1 text-sm border rounded outline-none" placeholder="Search member...">
+                                    </div>
+                                    <div id="subtask-assignee-list" class="max-h-48 overflow-y-auto p-1 flex flex-col gap-1"></div>
+                                </div>
                             </div>
-                            <div id="subtask-assignee-list" class="max-h-48 overflow-y-auto p-1 flex flex-col gap-1"></div>
-                        </div>
+                            
+                            <div class="relative">
+                                <button id="add-subtask-priority" class="min-w-[1.75rem] h-7 px-1 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500" title="Priority">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+                                </button>
+                                <div id="subtask-priority-dropdown-template" class="hidden w-fit bg-white border rounded-md shadow-lg p-1">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="0">${getPriorityChip(0)}</div>
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="1">${getPriorityChip(1)}</div>
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="2">${getPriorityChip(2)}</div>
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="3">${getPriorityChip(3)}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative">
+                                <button id="add-subtask-date" class="w-7 h-7 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500" title="Due Date">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                                </button>
+                                <div id="subtask-date-dropdown-template" class="hidden w-fit bg-white border rounded-md shadow-lg p-1">
+                                     <div id="add-subtask-calendar-mount"></div>
+                                </div>
+                            </div>
+                            <span id="subtask-date-display" class="text-xs text-gray-500 ml-1"></span>
                     </div>
 
-                    <button id="confirm-add-subtask" class="px-3 py-1.5 bg-black text-white text-xs font-medium rounded flex items-center gap-2">
-                        Save
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-corner-down-left-icon lucide-corner-down-left"><path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/></svg>
-                    </button>
-                    <button id="cancel-add-subtask" class="px-3 py-1.5 text-gray-600 text-xs font-medium border hover:bg-gray-100 rounded">Cancel</button>
+                    <div class="flex items-center gap-2">
+                        <button id="cancel-add-subtask" class="px-3 py-1.5 text-gray-600 text-xs font-medium border hover:bg-gray-100 rounded">Cancel</button>
+                        <button id="confirm-add-subtask" class="px-3 py-1.5 bg-black text-white text-xs font-medium rounded flex items-center gap-2">
+                            Save
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-corner-down-left-icon lucide-corner-down-left"><path d="M20 4v7a4 4 0 0 1-4 4H4"/><path d="m9 10-5 5 5 5"/></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -230,6 +268,48 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
                 searchInput.addEventListener('input', () => {
                     const term = searchInput.value.toLowerCase();
                     renderMembers(members.filter(m => m.name.toLowerCase().includes(term)));
+                });
+            }, 'top');
+        });
+
+        // 2. Priority
+        const priorityBtn = addSubtaskFormContainer.querySelector('#add-subtask-priority');
+        const priorityDropdownTemplate = addSubtaskFormContainer.querySelector('#subtask-priority-dropdown-template');
+
+        priorityBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(priorityBtn, priorityDropdownTemplate, 'subtask-priority-portal', (portal, closePortal) => {
+                const items = portal.querySelectorAll('[data-priority]');
+                items.forEach(item => {
+                    item.onclick = () => {
+                        selectedPriority = parseInt(item.dataset.priority);
+                        priorityBtn.innerHTML = getPriorityChip(selectedPriority);
+                        closePortal();
+                    };
+                });
+            }, 'top');
+        });
+
+        // 3. Due Date
+        const dateBtn = addSubtaskFormContainer.querySelector('#add-subtask-date');
+        const dateDropdownTemplate = addSubtaskFormContainer.querySelector('#subtask-date-dropdown-template');
+        const dateDisplay = addSubtaskFormContainer.querySelector('#subtask-date-display');
+
+        dateBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(dateBtn, dateDropdownTemplate, 'subtask-date-portal', (portal, closePortal) => {
+                const calendarHost = portal.querySelector('#add-subtask-calendar-mount');
+                import('../components/calendar.js').then(({ default: Calendar }) => {
+                    new Calendar(calendarHost, {
+                        selectedDate: selectedDueDate,
+                        onChange: (date) => {
+                            const d = new Date(date);
+                            d.setHours(12, 0, 0, 0); // Normalize time
+                            selectedDueDate = d.toISOString();
+                            dateDisplay.textContent = d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+                            closePortal();
+                        }
+                    });
                 });
             }, 'top');
         });
