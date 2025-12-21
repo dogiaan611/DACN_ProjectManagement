@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\adminDashboard.html",
+      "PackagePath": "staticwebassets\\adminDashboard.html"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\adminUser.html",
       "PackagePath": "staticwebassets\\adminUser.html"
     },
@@ -199,6 +203,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\admin\\admin-dashboard.js",
+      "PackagePath": "staticwebassets\\js\\admin\\admin-dashboard.js"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\admin\\admin-user-list.js",

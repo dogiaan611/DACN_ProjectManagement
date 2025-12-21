@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div role="button"
+                <div role="button" id="btn-add-user"
                     class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-black text-white transition-colors duration-200 hover:bg-gray-800">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -102,6 +102,66 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Create User Modal -->
+    <div id="create-user-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 transition-opacity duration-300 opacity-0">
+        <div class="bg-white rounded-lg w-full max-w-md p-6 transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Add New User</h3>
+                <button id="close-create-user-modal" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-x">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="create-user-form" class="flex flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="create-user-name" required placeholder="Enter full name"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
+                    <input type="email" id="create-user-email" required placeholder="name@example.com"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Password <span
+                            class="text-red-500">*</span></label>
+                    <input type="password" id="create-user-password" required placeholder="Enter password"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="text" id="create-user-phone" placeholder="Enter phone number (optional)"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-sm font-medium text-gray-700">Role</label>
+                    <select id="create-user-role"
+                        class="border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="Member">Member</option>
+                        <option value="SystemAdmin">System Admin</option>
+                    </select>
+                </div>
+
+                <div class="flex justify-end gap-2 mt-4">
+                    <button type="button" id="cancel-create-user"
+                        class="px-4 py-2 border rounded hover:bg-gray-50">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800">Create
+                        User</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Edit User Modal -->
@@ -196,7 +256,7 @@
     <script type="module" src="/js/project/project-modal.js?v=2"></script>
     <script type="module" src="/js/settings/settings-modal.js?v=2"></script>
     <script type="module" src="/js/settings/user-settings-autosave.js?v=1"></script>
-    <script type="module" src="/js/admin/admin-user-list.js?v=6"></script>
+    <script type="module" src="/js/admin/admin-user-list.js?v=13"></script>
 </body>
 
 </html>

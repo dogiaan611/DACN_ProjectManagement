@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (data.systemRole === 0) {
           if (adminLink) adminLink.classList.remove('hidden');
           if (adminDashLink) adminDashLink.classList.remove('hidden');
+        } else {
+
         }
 
       }

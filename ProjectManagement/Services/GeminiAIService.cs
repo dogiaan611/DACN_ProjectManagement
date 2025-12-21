@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Data;
 using Microsoft.Extensions.Configuration; // Ensure config is available
 using Microsoft.Extensions.Logging; // Ensure logging is available
+namespace ProjectManagement.Services
 {
     public interface IAIService
     {

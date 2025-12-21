@@ -15,22 +15,30 @@ const state = {
 // Debounce helper for search
 function debounce(func, wait) {
     let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
+    return function (...args) {
+        const context = this;
         clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
     };
 }
 
 // Global modal elements
 let modal, closeBtn, cancelBtn, form;
 let deleteModal, cancelDeleteBtn, confirmDeleteBtn;
+let createModal, closeCreateBtn, cancelCreateBtn, createForm;
 let userToDeleteId = null;
 
 export async function loadUserList() {
+    console.log("loadUserList called with state:", state);
+
+    // Ensure controls are initialized (fix for SPA navigation/DOM replacement)
+    setupControls();
+    initEditModal();
+    initDeleteModal();
+    initCreateModal();
+
     const userList = document.getElementById('user-list');
     if (!userList) {
         console.error("User list container not found.");
@@ -189,9 +197,10 @@ function createUserRow(user) {
     return `
         <tr class="bg-white border-b hover:bg-gray-50 transition-colors">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                <img class="w-10 h-10 rounded-full object-cover border border-gray-200" 
-                     src="${user.avatarUrl || '/images/default-avatar.png'}" 
-                     alt="${user.name}">
+                ${user.avatarUrl
+            ? `<img class="w-10 h-10 rounded-full object-cover border border-gray-200" src="${user.avatarUrl}" alt="${user.name}">`
+            : `<div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold border border-gray-200 text-lg uppercase">${user.name.charAt(0)}</div>`
+        }
                 <div class="pl-3">
                     <div class="text-base font-semibold">${user.name}</div>
                     <div class="font-normal text-gray-500">${user.email}</div>
@@ -265,35 +274,39 @@ function loadingState(isLoading) {
     }
 }
 
-// ==================== INITIALIZATION & EVENT LISTENERS ====================
-
 function initApp() {
     console.log("Initializing Admin User List App...");
     initEditModal();
-    initDeleteModal(); // Ensure delete modal events are attached
+    initDeleteModal();
     setupControls();
     loadUserList();
 }
 
-// Check if DOM is already ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    // If we are already loaded (which happens often with module scripts), run immediately
     initApp();
 }
 
 function setupControls() {
-    // Search
     const searchInput = document.getElementById('search-user');
     if (searchInput) {
+        if (searchInput.dataset.initialized) return; // Prevent duplicate listeners
+        searchInput.dataset.initialized = "true";
+
         console.log("Search input found, attaching listener.");
-        searchInput.addEventListener('input', debounce((e) => {
-            console.log("Search input changed:", e.target.value);
-            state.search = e.target.value.trim();
-            state.page = 1; // Reset to first page on search
+        const handleSearch = debounce((searchValue) => {
+            console.log("Debounced search execution:", searchValue);
+            state.search = searchValue.trim();
+            state.page = 1;
             loadUserList();
-        }, 500));
+        }, 300);
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            console.log("Raw input event:", val);
+            handleSearch(val);
+        });
     } else {
         console.error("Search input element 'search-user' not found!");
     }
@@ -328,7 +341,6 @@ function setupControls() {
     if (filterBtn) {
         console.log("Filter button found, attaching listener.");
         filterBtn.addEventListener('click', () => {
-            // Cycle: All -> SystemAdmin -> Member -> All
             if (state.role === '') state.role = 'SystemAdmin';
             else if (state.role === 'SystemAdmin') state.role = 'Member';
             else state.role = '';
@@ -363,7 +375,6 @@ function updateFilterUI() {
 }
 
 function updateSortUI() {
-    // Optional: Visual feedback on the main sort button
     const sortBtn = document.getElementById('sort-user');
     if (!sortBtn) return;
 
@@ -376,11 +387,6 @@ function updateSortUI() {
         ${label}
     `;
 }
-
-// ==================== EDIT & DELETE FUNCTIONS ====================
-
-// Global modal elements
-// (Declared at top of file)
 
 function initEditModal() {
     modal = document.getElementById('edit-user-modal');
@@ -448,12 +454,11 @@ async function handleEditUserSubmit(e) {
         });
 
         if (res.ok) {
-            alert('User updated successfully!');
             closeEditUserModal();
             loadUserList();
         } else {
             const errData = await res.json();
-            alert('Failed to update: ' + (errData.message || 'Unknown error'));
+            console.log('Failed to update: ' + (errData.message || 'Unknown error'));
         }
     } catch (error) {
         console.error('Error updating user:', error);
@@ -461,7 +466,107 @@ async function handleEditUserSubmit(e) {
     }
 }
 
-// ==================== DELETE USER MODAL ====================
+function initCreateModal() {
+    createModal = document.getElementById('create-user-modal');
+    closeCreateBtn = document.getElementById('close-create-user-modal');
+    cancelCreateBtn = document.getElementById('cancel-create-user');
+    createForm = document.getElementById('create-user-form');
+    const openBtn = document.getElementById('btn-add-user');
+
+    if (openBtn) {
+        openBtn.onclick = openCreateUserModal;
+    }
+
+    if (closeCreateBtn) closeCreateBtn.onclick = closeCreateUserModal;
+    if (cancelCreateBtn) cancelCreateBtn.onclick = closeCreateUserModal;
+    if (createForm) createForm.onsubmit = handleCreateUserSubmit;
+}
+
+function openCreateUserModal() {
+    // Always re-fetch elements
+    if (!createModal) {
+        initCreateModal();
+    } else {
+        createForm = document.getElementById('create-user-form');
+    }
+
+    if (createModal) {
+        createModal.classList.remove('hidden');
+        createModal.classList.add('flex');
+
+        // Form reset
+        if (createForm) {
+            createForm.reset();
+        }
+
+        // Animation Entrance
+        const content = createModal.querySelector('div'); // The inner modal card
+        // Force reflow
+        void createModal.offsetWidth;
+
+        createModal.classList.remove('opacity-0');
+        if (content) {
+            content.classList.remove('opacity-0', 'scale-95');
+            content.classList.add('opacity-100', 'scale-100');
+        }
+    }
+}
+
+function closeCreateUserModal() {
+    if (createModal) {
+        // Animation Exit
+        createModal.classList.add('opacity-0');
+        const content = createModal.querySelector('div');
+        if (content) {
+            content.classList.remove('opacity-100', 'scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+        }
+
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+            createModal.classList.add('hidden');
+            createModal.classList.remove('flex');
+        }, 300);
+    }
+}
+
+async function handleCreateUserSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('create-user-name').value;
+    const email = document.getElementById('create-user-email').value;
+    const password = document.getElementById('create-user-password').value;
+    const phone = document.getElementById('create-user-phone').value;
+    const role = document.getElementById('create-user-role').value;
+
+    const newUser = {
+        name,
+        email,
+        password,
+        phoneNumber: phone,
+        role
+    };
+
+    try {
+        const res = await authFetch('/api/Admin/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser)
+        });
+
+        if (res.ok) {
+            closeCreateUserModal();
+            loadUserList();
+        } else {
+            const errData = await res.json();
+            alert('Failed to create user: ' + (errData.message || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Error creating user:', error);
+        alert('An error occurred while creating user.');
+    }
+}
+
 
 function initDeleteModal() {
     deleteModal = document.getElementById('delete-user-modal');
