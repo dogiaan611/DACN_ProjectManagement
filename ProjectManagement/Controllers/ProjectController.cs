@@ -568,15 +568,72 @@ namespace ProjectManagement.Controllers
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(currentUserId)) return Unauthorized();
 
-            var membership = await _db.ProjectMembers.FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
+            var membership = await _db.ProjectMembers
+                .FirstOrDefaultAsync(pm => pm.ProjectId == projectId && pm.UserId == currentUserId);
             if (membership == null || !membership.IsOwner) return Forbid();
 
-            var project = await _db.Projects.FirstOrDefaultAsync(p => p.ProjectId == projectId);
+            var project = await _db.Projects
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.Comments)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.Subtasks)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.Attachments)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.ActivityLogs)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.TaskTags)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.TaskUserTags)
+                .Include(p => p.Boards)
+                    .ThenInclude(b => b.Columns)
+                        .ThenInclude(c => c.ProjectTasks)
+                            .ThenInclude(t => t.Watchers)
+                .Include(p => p.Sprints)
+                .Include(p => p.Tags)
+                .Include(p => p.Members)
+                .FirstOrDefaultAsync(p => p.ProjectId == projectId);
+                
             if (project == null) return NotFound();
 
-            _db.Projects.Remove(project);
-            await _db.SaveChangesAsync();
-            return Ok(new { message = "Đã xóa project" });
+            try
+            {
+                // Manually delete all tasks in all columns to avoid cascade path conflicts
+                var allTasks = project.Boards
+                    .SelectMany(b => b.Columns)
+                    .SelectMany(c => c.ProjectTasks)
+                    .ToList();
+
+                if (allTasks.Any())
+                {
+                    _db.PojectTasks.RemoveRange(allTasks);
+                    await _db.SaveChangesAsync();
+                }
+
+                // Now delete the project (which will cascade delete boards, columns, sprints, tags, members)
+                _db.Projects.Remove(project);
+                await _db.SaveChangesAsync();
+                
+                _logger.LogInformation($"Project {projectId} '{project.Name}' deleted by user {currentUserId}");
+                return Ok(new { message = "Đã xóa project" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error deleting project {projectId}");
+                return StatusCode(500, new { message = "Lỗi khi xóa project", error = ex.Message });
+            }
         }
     }
 }
