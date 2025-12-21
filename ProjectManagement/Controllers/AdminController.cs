@@ -249,6 +249,212 @@ namespace ProjectManagement.Controllers
             });
         }
 
+        // DTOs for Create and Update
+        public class CreateUserDto
+        {
+            public string Email { get; set; }
+            public string Name { get; set; }
+            public string Password { get; set; }
+            public string? PhoneNumber { get; set; }
+            public string Role { get; set; } = "Member"; // SystemAdmin or Member
+        }
+
+        public class UpdateUserDto
+        {
+            public string? Name { get; set; }
+            public string? Email { get; set; }
+            public string? PhoneNumber { get; set; }
+            public string? Role { get; set; }
+            public string? Password { get; set; } // Optional: new password
+        }
+
+        /// <summary>
+        /// Tạo user mới (admin only)
+        /// </summary>
+        [HttpPost("users")]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
+        {
+            // Validate input
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Password))
+            {
+                return BadRequest(new { message = "Email, Name, and Password are required" });
+            }
+
+            // Check if email already exists
+            var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+            if (existingUser != null)
+            {
+                return BadRequest(new { message = "Email already exists" });
+            }
+
+            // Parse role
+            var roleEnum = SystemRole.Member;
+            if (!string.IsNullOrWhiteSpace(dto.Role))
+            {
+                if (Enum.TryParse<SystemRole>(dto.Role, true, out var parsed))
+                {
+                    roleEnum = parsed;
+                }
+                else if (string.Equals(dto.Role, "system_admin", StringComparison.OrdinalIgnoreCase) ||
+                         string.Equals(dto.Role, "system-admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    roleEnum = SystemRole.SystemAdmin;
+                }
+            }
+
+            // Create user
+            var newUser = new ApplicationUser
+            {
+                UserName = dto.Email,
+                Email = dto.Email,
+                Name = dto.Name,
+                PhoneNumber = dto.PhoneNumber,
+                SystemRole = roleEnum,
+                EmailConfirmed = true, // Auto-confirm for admin-created users
+                CreatedAt = DateTime.UtcNow
+            };
+
+            var result = await _userManager.CreateAsync(newUser, dto.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to create user", errors = result.Errors });
+            }
+
+            // Assign role
+            var roleName = roleEnum == SystemRole.SystemAdmin ? "system_admin" : "member";
+            var roleExists = await _db.Roles.AnyAsync(r => r.Name == roleName);
+            if (!roleExists)
+            {
+                await _db.Roles.AddAsync(new IdentityRole(roleName));
+                await _db.SaveChangesAsync();
+            }
+
+            await _userManager.AddToRoleAsync(newUser, roleName);
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _logger.LogInformation($"Admin {currentUserId} created new user {newUser.Email} with role {roleEnum}");
+
+            return Ok(new
+            {
+                message = "User created successfully",
+                user = new
+                {
+                    newUser.Id,
+                    newUser.Email,
+                    newUser.Name,
+                    newUser.PhoneNumber,
+                    newUser.SystemRole,
+                    newUser.CreatedAt
+                }
+            });
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin user (admin only)
+        /// </summary>
+        [HttpPut("users/{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UpdateUserDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return NotFound(new { message = "User not found" });
+
+            // Update Name
+            if (!string.IsNullOrWhiteSpace(dto.Name))
+            {
+                user.Name = dto.Name;
+            }
+
+            // Update Email
+            if (!string.IsNullOrWhiteSpace(dto.Email) && dto.Email != user.Email)
+            {
+                // Check if new email already exists
+                var existingUser = await _userManager.FindByEmailAsync(dto.Email);
+                if (existingUser != null && existingUser.Id != userId)
+                {
+                    return BadRequest(new { message = "Email already exists" });
+                }
+
+                user.Email = dto.Email;
+                user.UserName = dto.Email;
+            }
+
+            // Update PhoneNumber
+            if (dto.PhoneNumber != null) // Allow empty string to clear phone number
+            {
+                user.PhoneNumber = string.IsNullOrWhiteSpace(dto.PhoneNumber) ? null : dto.PhoneNumber;
+            }
+
+            // Update user basic info
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                return BadRequest(new { message = "Failed to update user", errors = updateResult.Errors });
+            }
+
+            // Update Password if provided
+            if (!string.IsNullOrWhiteSpace(dto.Password))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, token, dto.Password);
+                if (!passwordResult.Succeeded)
+                {
+                    return BadRequest(new { message = "Failed to update password", errors = passwordResult.Errors });
+                }
+            }
+
+            // Update Role if provided
+            if (!string.IsNullOrWhiteSpace(dto.Role))
+            {
+                var roleEnum = SystemRole.Member;
+                if (Enum.TryParse<SystemRole>(dto.Role, true, out var parsed))
+                {
+                    roleEnum = parsed;
+                }
+                else if (string.Equals(dto.Role, "system_admin", StringComparison.OrdinalIgnoreCase) ||
+                         string.Equals(dto.Role, "system-admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    roleEnum = SystemRole.SystemAdmin;
+                }
+
+                // Only update if role changed
+                if (user.SystemRole != roleEnum)
+                {
+                    user.SystemRole = roleEnum;
+                    await _userManager.UpdateAsync(user);
+
+                    // Update Identity roles
+                    var roleName = roleEnum == SystemRole.SystemAdmin ? "system_admin" : "member";
+                    var roleExists = await _db.Roles.AnyAsync(r => r.Name == roleName);
+                    if (!roleExists)
+                    {
+                        await _db.Roles.AddAsync(new IdentityRole(roleName));
+                        await _db.SaveChangesAsync();
+                    }
+
+                    var currentRoles = await _userManager.GetRolesAsync(user);
+                    await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                    await _userManager.AddToRoleAsync(user, roleName);
+                }
+            }
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            _logger.LogInformation($"Admin {currentUserId} updated user {user.Email} ({userId})");
+
+            return Ok(new
+            {
+                message = "User updated successfully",
+                user = new
+                {
+                    user.Id,
+                    user.Email,
+                    user.Name,
+                    user.PhoneNumber,
+                    user.SystemRole,
+                    user.CreatedAt
+                }
+            });
+        }
+
         /// <summary>
         /// Xóa user (admin only)
         /// </summary>

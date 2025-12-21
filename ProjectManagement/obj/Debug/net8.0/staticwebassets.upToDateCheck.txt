@@ -1,69 +1,69 @@
-wwwroot\js\auth\register.js
-wwwroot\uploads\2025\12\880d4b0504a64aa38d9712e7c7390cf8_DAQLDACNTT_Nhom11.docx
-wwwroot\js\layout\home.js
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (14).png
-wwwroot\uploads\2025\12\77bc0fdc5f9a493d8a558cf5a2e3464f_DAHP_LTMMT_NHOM03.pdf
-wwwroot\js\layout\sidebar-dropdown.js
-wwwroot\js\layout\sidebar.js
-wwwroot\js\project\column.js
-wwwroot\js\project\drag-drop.js
-wwwroot\js\project\project-add-members.js
-wwwroot\js\project\project-backlog.js
-wwwroot\js\project\project-board.js
-wwwroot\js\project\project-dashboard.js
-wwwroot\js\project\project-detail.js
-wwwroot\js\project\project-edit.js
-wwwroot\js\project\project-gantt.js
-wwwroot\js\project\project-list.js
-wwwroot\js\project\project-modal.js
-wwwroot\js\project\project-sidebar.js
-wwwroot\js\project\project-spreadsheet.js
-wwwroot\js\settings\settings-delete-account.js
-wwwroot\js\settings\settings-modal.js
-wwwroot\js\settings\settings-password.js
-wwwroot\js\settings\settings-profile.js
-wwwroot\js\settings\user-settings-autosave.js
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251027102936.jpg
 wwwroot\js\task\attachment.js
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024101752.jpg
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (14).png
 wwwroot\js\task\comment.js
-wwwroot\js\task\subtask.js
-wwwroot\js\task\subtaskDetail.js
-wwwroot\js\task\tag.js
-wwwroot\project.html
-wwwroot\notification.html
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (12).png
-wwwroot\src\kanban-board-demo.png
-wwwroot\uploads\2025\11\3b951c913a6c456dbecf8f5a67fa6da0_FULL READING-Test2.pdf
-wwwroot\uploads\2025\11\4b3bb9a77d7441e08862194e75c14712_Chuong-I.docx
-wwwroot\uploads\2025\11\63f18ea239c24cf1acf1879bca4b8536_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\11\6734015756844fd98102469987f59865_Mẫu 2.pdf
-wwwroot\uploads\2025\11\7aadfdcaba964bada991aabe1afe0cbd_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\11\7b2ddcf00e7248cb92afc12e672895a2_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\11\b8fd1383b25540f4a4b5e1f06e096876_Chuong-I.docx
-wwwroot\uploads\2025\11\d743844259cc4f45afb4aadf6983cdf8_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\11\e0b9611c7a994ac798af2df9d04a9a39_NHOM03-PHIEUTHUYETMINH.docx
-wwwroot\uploads\2025\12\05ac3a567f4a46b7954e332dcc5a37ac_DAQLDACNTT_Nhom11.docx
-wwwroot\uploads\2025\12\062e0da06215438385af18378e4c2e94_drag-drop-demo.jpg
-wwwroot\uploads\2025\12\0cc10c6946a64b72bcb2eeb6992ad55a_Bảng số liệu chuuowng 2.docx
-wwwroot\registerPage.html
-wwwroot\uploads\2025\12\234b80831b534257a014a5609e455a95_DAHP_LTMMT_NHOM03.pdf
-wwwroot\uploads\2025\12\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx
-wwwroot\uploads\2025\12\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png
-wwwroot\uploads\2025\12\6bf0dd9640a747dba4a7eb3a2ff7a44c_DAHP_LTMMT_NHOM03.pdf
-wwwroot\uploads\2025\12\75dd42639de245d7a73aad1ab461057c_kanban-board-demo.png
-wwwroot\uploads\2025\12\267d32b0fcd94d73afc312f163bdebde_BaoCaoQLDA_CNTT.pdf
-wwwroot\js\layout\notification.js
-wwwroot\uploads\2025\12\bf2592760efd4103a1650b24baa47a5b_DAQLDACNTT_Nhom11.docx
-wwwroot\uploads\2025\12\c300ad5e7f17469c937c3fc61449fb64_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\12\f0267340df1b4572a43271119f4884ab_BaoCaoQLDA_CNTT.pdf
-wwwroot\uploads\2025\12\fb33189fc6114a7885e56e2552746bac_Hoa.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024100611.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024095925.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024095917.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023173606.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023165241.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132225.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132207.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132158.jpg
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132027.jpg
+wwwroot\uploads\avatars\avatar_3ee4824c-429f-4b6e-942f-a1a6f4fda13f_20251107063212.jpg
+wwwroot\uploads\avatars\avatar_3bed22de-500c-4ed9-bfdf-1b26080456bf_20251116141313.jpeg
+wwwroot\uploads\avatars\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg
+wwwroot\uploads\avatars\avatar_231a3783-b4af-490d-a354-076ec12b3686_20251026055036.jpg
 wwwroot\uploads\avatars\.gitkeep
+wwwroot\uploads\2025\12\fb33189fc6114a7885e56e2552746bac_Hoa.jpg
+wwwroot\uploads\2025\12\f0267340df1b4572a43271119f4884ab_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\12\c300ad5e7f17469c937c3fc61449fb64_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\12\bf2592760efd4103a1650b24baa47a5b_DAQLDACNTT_Nhom11.docx
+wwwroot\uploads\2025\12\a8883d0795bb4e17b2bf8872cd433192_Hoa.jpg
+wwwroot\uploads\2025\12\8f1511ed43d040a9b0aaaff9353f345c_Binz.jpg
+wwwroot\uploads\2025\12\880d4b0504a64aa38d9712e7c7390cf8_DAQLDACNTT_Nhom11.docx
+wwwroot\uploads\2025\12\77bc0fdc5f9a493d8a558cf5a2e3464f_DAHP_LTMMT_NHOM03.pdf
+wwwroot\uploads\2025\12\75dd42639de245d7a73aad1ab461057c_kanban-board-demo.png
+wwwroot\uploads\2025\12\6bf0dd9640a747dba4a7eb3a2ff7a44c_DAHP_LTMMT_NHOM03.pdf
+wwwroot\uploads\2025\12\6281b2a9d38f468c8228d8cc87614e5e_DAQLDACNTT_Nhom11.docx
+wwwroot\uploads\2025\12\0cc10c6946a64b72bcb2eeb6992ad55a_Bảng số liệu chuuowng 2.docx
+wwwroot\uploads\2025\12\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (12).png
+wwwroot\uploads\2025\11\e0b9611c7a994ac798af2df9d04a9a39_NHOM03-PHIEUTHUYETMINH.docx
+wwwroot\uploads\2025\11\4b3bb9a77d7441e08862194e75c14712_Chuong-I.docx
+wwwroot\uploads\2025\11\3b951c913a6c456dbecf8f5a67fa6da0_FULL READING-Test2.pdf
+wwwroot\uploads\2025\11\3a4394f9cbd641bc9bd395211632fbeb_2909 Listening.pdf
+wwwroot\uploads\2025\11\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx
+wwwroot\test.html
+wwwroot\src\task-detail-demo.png
+wwwroot\src\sprint-demo-1.png
+wwwroot\src\list-demo.png
+wwwroot\src\kanban-board-demo.png
+wwwroot\src\drag-drop-demo.jpg
+wwwroot\registerPage.html
+wwwroot\project.html
+wwwroot\uploads\2025\12\062e0da06215438385af18378e4c2e94_drag-drop-demo.jpg
+wwwroot\loginPage.html
+wwwroot\js\task\taskWatcher.js
+wwwroot\js\task\taskDetail.js
+wwwroot\js\task\subtaskDetail.js
+wwwroot\js\task\subtask.js
+wwwroot\landingPage.html
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024101234.jpg
+wwwroot\js\settings\settings-password.js
+wwwroot\js\settings\settings-modal.js
+wwwroot\js\settings\settings-delete-account.js
+wwwroot\js\project\project-spreadsheet.js
+wwwroot\js\project\project-sidebar.js
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (9).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (8).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (7).svg
-wwwroot\js\components\calendar.js
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251027102913.jpg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (5).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (4).svg
-wwwroot\js\auth\login.js
+wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251029163934.jpg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (20).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (2).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (19).svg
@@ -91,65 +91,42 @@ wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustra
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (16).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (15).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (13).png
-wwwroot\uploads\2025\11\3a4394f9cbd641bc9bd395211632fbeb_2909 Listening.pdf
+wwwroot\uploads\2025\11\63f18ea239c24cf1acf1879bca4b8536_BaoCaoQLDA_CNTT.pdf
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (10).png
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (17).svg
-wwwroot\uploads\2025\12\8f1511ed43d040a9b0aaaff9353f345c_Binz.jpg
-wwwroot\uploads\2025\12\a8883d0795bb4e17b2bf8872cd433192_Hoa.jpg
+wwwroot\js\settings\user-settings-autosave.js
+wwwroot\js\settings\settings-profile.js
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (6).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\DrawKit Vector Illustration Project Manager (3).svg
 wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (11).png
-wwwroot\uploads\2025\12\6281b2a9d38f468c8228d8cc87614e5e_DAQLDACNTT_Nhom11.docx
-wwwroot\uploads\2025\12\5a51beac1df9482da1dbd832c3d4ffbd_DAHP_LTMMT_NHOM03.pdf
-wwwroot\uploads\2025\12\363e980630f24227a66f8d91a956783a_NHOM03-PHIEUTHUYETMINH.docx
-wwwroot\uploads\2025\12\3cb714ba4cb7404fb156222bd6e61f82_sudent.png
-wwwroot\uploads\2025\12\52aee1a634274693aa2ead1f41eb097b_2909 Listening.pdf
-wwwroot\uploads\2025\12\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg
-wwwroot\uploads\2025\11\1921303a0519497cb00c6316dfeee3da_DAHP_LTMMT_NHOM03.pptx
-wwwroot\test.html
-wwwroot\src\task-detail-demo.png
-wwwroot\src\sprint-demo-1.png
-wwwroot\src\list-demo.png
-wwwroot\src\drag-drop-demo.jpg
-wwwroot\loginPage.html
-wwwroot\landingPage.html
-wwwroot\js\task\taskWatcher.js
+wwwroot\js\task\tag.js
+wwwroot\js\task\task.js
 wwwroot\js\task\taskUI.js
 wwwroot\js\task\taskTag.js
-wwwroot\js\task\task.js
-wwwroot\js\task\taskDetail.js
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
-wwwroot\uploads\avatars\avatar_231a3783-b4af-490d-a354-076ec12b3686_20251026055036.jpg
-wwwroot\uploads\avatars\avatar_2d763273-ea6a-4702-bd29-c5e0cf720f68_20251026050930.jpg
-wwwroot\css\input.css
-wwwroot\uploads\avatars\avatar_3bed22de-500c-4ed9-bfdf-1b26080456bf_20251116141313.jpeg
-wwwroot\uploads\avatars\avatar_3ee4824c-429f-4b6e-942f-a1a6f4fda13f_20251107063212.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132027.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132158.jpg
 wwwroot\js\task\taskActivityLog.js
-wwwroot\js\auth\auth.js
-wwwroot\js\admin\admin-user-list.js
-wwwroot\index.html
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\flow-svgrepo-com.svg
-wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\logoFlow.jpg
-wwwroot\goodbye.html
-wwwroot\css\site.css
-wwwroot\components\user_settings.html
-wwwroot\components\sidebar.html
-wwwroot\components\settings_sidebar.html
-wwwroot\adminUser.html
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132207.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132225.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023165241.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023173606.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024095917.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024095925.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024100611.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024101234.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251024101752.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251027102913.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251027102936.jpg
-wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251029163934.jpg
+wwwroot\notification.html
+wwwroot\uploads\2025\11\6734015756844fd98102469987f59865_Mẫu 2.pdf
+wwwroot\uploads\2025\11\7aadfdcaba964bada991aabe1afe0cbd_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\11\7b2ddcf00e7248cb92afc12e672895a2_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\11\b8fd1383b25540f4a4b5e1f06e096876_Chuong-I.docx
+wwwroot\uploads\2025\11\d743844259cc4f45afb4aadf6983cdf8_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\12\05ac3a567f4a46b7954e332dcc5a37ac_DAQLDACNTT_Nhom11.docx
+wwwroot\uploads\2025\12\234b80831b534257a014a5609e455a95_DAHP_LTMMT_NHOM03.pdf
+wwwroot\uploads\2025\12\267d32b0fcd94d73afc312f163bdebde_BaoCaoQLDA_CNTT.pdf
+wwwroot\uploads\2025\12\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx
+wwwroot\uploads\2025\12\363e980630f24227a66f8d91a956783a_NHOM03-PHIEUTHUYETMINH.docx
+wwwroot\uploads\2025\12\3cb714ba4cb7404fb156222bd6e61f82_sudent.png
+wwwroot\uploads\2025\12\5a51beac1df9482da1dbd832c3d4ffbd_DAHP_LTMMT_NHOM03.pdf
+wwwroot\uploads\2025\12\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\PNG\DrawKit Vector Illustration Project Manager (1).png
+wwwroot\js\project\project-modal.js
+wwwroot\js\project\project-list.js
+wwwroot\css\input.css
+wwwroot\js\project\project-gantt.js
+wwwroot\js\project\project-edit.js
+wwwroot\js\project\project-detail.js
+wwwroot\js\project\project-dashboard.js
+wwwroot\uploads\2025\12\52aee1a634274693aa2ead1f41eb097b_2909 Listening.pdf
 wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251029164514.jpg
 wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134226.jpg
 wwwroot\uploads\avatars\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251106134232.jpg
@@ -161,3 +138,26 @@ wwwroot\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_202510301447
 wwwroot\uploads\avatars\avatar_f0ef47b0-91e5-4382-8496-a299b708252d_20251030152057.jpg
 wwwroot\uploads\avatars\avatar_faa7330c-4c1f-4089-ba44-cc824155bd3e_20251116155101.jpeg
 wwwroot\uploads\avatars\avatar_fb7f9712-10f8-47e9-acd7-6e29b84b0860_20251026174721.jpg
+wwwroot\js\project\project-board.js
+wwwroot\js\project\project-backlog.js
+wwwroot\js\project\project-add-members.js
+wwwroot\js\project\drag-drop.js
+wwwroot\js\project\column.js
+wwwroot\js\layout\sidebar.js
+wwwroot\js\layout\sidebar-dropdown.js
+wwwroot\js\layout\notification.js
+wwwroot\js\layout\home.js
+wwwroot\js\components\calendar.js
+wwwroot\js\auth\register.js
+wwwroot\js\auth\login.js
+wwwroot\js\auth\auth.js
+wwwroot\js\admin\admin-user-list.js
+wwwroot\index.html
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\SVG\flow-svgrepo-com.svg
+wwwroot\icon\0042-product-project-managers-illustrations\DrawKit Vector Illustration Project Manager\logoFlow.jpg
+wwwroot\goodbye.html
+wwwroot\css\site.css
+wwwroot\components\user_settings.html
+wwwroot\components\sidebar.html
+wwwroot\components\settings_sidebar.html
+wwwroot\adminUser.html

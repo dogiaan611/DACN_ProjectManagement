@@ -85,6 +85,16 @@ builder.Services.AddControllers();
 // SMTP & Notification
 builder.Services.Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
 builder.Services.AddScoped<INotificationService, NotificationService>();
+
+// AI Service
+builder.Services.AddHttpClient<IAIService, GeminiAIService>();
+
+// Sprint Planning Service
+builder.Services.AddScoped<ISprintPlanningService, SprintPlanningService>();
+
+// AI Chat Service
+builder.Services.AddScoped<IAIChatService, AIChatService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
