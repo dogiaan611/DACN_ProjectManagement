@@ -20,10 +20,26 @@
         <main class="flex-1 overflow-y-auto ml-64">
             <div class="p-6 flex flex-col items-center justify-center">
                 <div class="flex w-full flex-col gap-2 px-6 py-2 mb-2">
-                    <div class="flex justify-between items-center mb-2">
-                        <h1 class="text-3xl font-medium">Notification</h1>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-6">
+                            <h1 class="text-3xl font-medium">Notification</h1>
+
+                            <!-- Admin Tabs (Hidden by default) -->
+                            <div id="notification-tabs" class="hidden flex bg-gray-100 p-1 rounded-lg">
+                                <button id="tab-my-notif"
+                                    class="px-4 py-1.5 text-sm font-medium rounded-md bg-white shadow-sm text-gray-900 transition-all">
+                                    My Notifications
+                                </button>
+                                <button id="tab-system-notif"
+                                    class="px-4 py-1.5 text-sm font-medium rounded-md text-gray-500 hover:text-gray-900 transition-all">
+                                    System (Admin)
+                                </button>
+                            </div>
+                        </div>
+
                         <button id="mark-as-read-all"
-                            class="flex items-center justify-center hover:bg-gray-100 text-gray-600 hover:text-green-500 rounded-full p-2">
+                            class="flex items-center justify-center hover:bg-gray-100 text-gray-600 hover:text-green-500 rounded-full p-2"
+                            title="Mark all as read">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round" class="lucide lucide-check-check-icon lucide-check-check">
@@ -32,15 +48,97 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="notification-list" class="flex flex-col gap-2">
-                        <!-- Danh sách notification sẽ được chèn vào đây -->
+
+                    <!-- VIEW 1: My Notifications -->
+                    <div id="my-notifications-view" class="w-full">
+                        <div id="notification-list" class="flex flex-col gap-2">
+                            <!-- User list injected here -->
+                        </div>
+                    </div>
+
+                    <!-- VIEW 2: System Notifications (Admin) -->
+                    <div id="system-notifications-view" class="hidden w-full flex-col gap-6">
+
+                        <!-- Statistics Cards -->
+                        <div class="flex flex-row gap-4 w-full">
+                            <div class="bg-white p-4 rounded-xl border shadow-sm flex-1">
+                                <div class="text-gray-500 text-sm font-medium">Total Notifications</div>
+                                <div class="text-2xl font-bold mt-1" id="stat-total">0</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border shadow-sm flex-1">
+                                <div class="text-gray-500 text-sm font-medium">Unread</div>
+                                <div class="text-2xl font-bold mt-1 text-blue-600" id="stat-unread">0</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border shadow-sm flex-1">
+                                <div class="text-gray-500 text-sm font-medium">Read</div>
+                                <div class="text-2xl font-bold mt-1 text-gray-600" id="stat-read">0</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border shadow-sm flex-1">
+                                <div class="text-gray-500 text-sm font-medium">Last 24 Hours</div>
+                                <div class="text-2xl font-bold mt-1 text-green-600" id="stat-24h">0</div>
+                            </div>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border">
+                            <div class="flex gap-2">
+                                <select id="sys-filter-type"
+                                    class="cursor-pointer bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-black focus:border-black block px-3 py-2 hover:bg-gray-50 transition-colors">
+                                    <option value="">All Types</option>
+                                    <option value="Info">Info</option>
+                                    <option value="Warning">Warning</option>
+                                    <option value="Error">Error</option>
+                                    <option value="Success">Success</option>
+                                </select>
+                                <select id="sys-filter-status"
+                                    class="cursor-pointer bg-white border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-black focus:border-black block px-3 py-2 hover:bg-gray-50 transition-colors">
+                                    <option value="">All Status</option>
+                                    <option value="unread">Unread</option>
+                                    <option value="read">Read</option>
+                                </select>
+                            </div>
+                            <button id="sys-refresh-btn" class="p-2 hover:bg-white rounded-md transition-colors"
+                                title="Refresh">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-refresh-cw">
+                                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                                    <path d="M21 3v5h-5" />
+                                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                                    <path d="M8 16H3v5" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="bg-white border rounded-lg overflow-hidden shadow-sm">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-gray-50 text-gray-500 uppercase text-xs">
+                                    <tr>
+                                        <th class="px-6 py-3">Content</th>
+                                        <th class="px-6 py-3 w-32">Type</th>
+                                        <th class="px-6 py-3 w-40">User</th>
+                                        <th class="px-6 py-3 w-48">Date</th>
+                                        <th class="px-6 py-3 w-24">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sys-notification-list" class="divide-y divide-gray-200">
+                                    <!-- Rows injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div id="sys-pagination" class="flex justify-between items-center px-2">
+                            <!-- Pagination injected -->
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
     <script type="module" src="/js/layout/sidebar.js"></script>
-    <script type="module" src="/js/layout/notification.js?v=1"></script>
+    <script type="module" src="/js/layout/notification.js?v=2"></script>
     <script type="module" src="/js/project/project-modal.js?v=2"></script>
     <script type="module" src="/js/settings/settings-modal.js?v=2"></script>
     <script type="module" src="/js/settings/user-settings-autosave.js?v=1"></script>
