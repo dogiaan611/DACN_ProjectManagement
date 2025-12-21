@@ -1,19 +1,79 @@
 import { authFetch } from '../auth/auth.js';
 
+// State management
+const state = {
+    page: 1,
+    pageSize: 10,
+    search: '',
+    role: '', // 'SystemAdmin', 'Member', or empty for all
+    sortBy: 'email',
+    sortOrder: 'asc',
+    total: 0,
+    totalPages: 0
+};
+
+// Debounce helper for search
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Global modal elements
+let modal, closeBtn, cancelBtn, form;
+let deleteModal, cancelDeleteBtn, confirmDeleteBtn;
+let userToDeleteId = null;
+
 export async function loadUserList() {
     const userList = document.getElementById('user-list');
     if (!userList) {
-        console.error("User list container not found. Make sure an element with id 'user-list' exists.");
+        console.error("User list container not found.");
         return;
     }
+
     try {
-        const res = await authFetch('/user/read-all');
+        // Construct query parameters
+        const params = new URLSearchParams({
+            page: state.page,
+            pageSize: state.pageSize,
+            sortBy: state.sortBy,
+            sortOrder: state.sortOrder
+        });
+
+        if (state.search) params.append('search', state.search);
+        if (state.role) params.append('role', state.role);
+
+        const res = await authFetch(`/api/Admin/users?${params.toString()}`);
         if (!res.ok) throw new Error('Không thể tải danh sách người dùng');
-        const users = await res.json();
+
+        const data = await res.json();
+
+        // Update state with response metadata
+        state.total = data.total;
+        state.totalPages = data.totalPages;
+
+        // Ensure current page is valid
+        if (state.page > state.totalPages && state.totalPages > 0) {
+            state.page = state.totalPages;
+            return loadUserList(); // Retry with correct page
+        }
+
+        renderUserList(data.users);
+        renderPagination();
+        updateFilterUI();
+        updateSortUI();
+
+        // Load admin profile info only once or if needed
         loadUserInfor();
-        renderUserList(users);
     } catch (error) {
         console.error('Lỗi khi tải danh sách người dùng:', error);
+        userList.innerHTML = `<div class="text-center text-red-500 py-4">Error loading users: ${error.message}</div>`;
     }
 }
 
@@ -24,13 +84,20 @@ async function loadUserInfor() {
     const userPhone = document.getElementById('admin-phone');
 
     try {
-        const res = await authFetch('user/read');
+        // Keep using the user profile endpoint for the current logged-in admin
+        const res = await authFetch('/user/read');
         if (!res.ok) throw new Error('Cannot load user data');
         const user = await res.json();
-        userAvatar.src = user.avatarUrl || '/images/default-avatar.png';
-        userName.textContent = user.name;
-        userEmail.textContent = user.email;
-        userPhone.textContent = user.phoneNumber;
+
+        if (userAvatar) userAvatar.src = user.avatarUrl || '/images/default-avatar.png';
+        if (userName) userName.textContent = user.name;
+        if (userEmail) userEmail.textContent = user.email;
+        if (userPhone) userPhone.textContent = user.phoneNumber || 'N/A';
+
+        const roleEl = document.getElementById('admin-role');
+        if (roleEl) {
+            roleEl.textContent = user.systemRole === 0 ? 'System Admin' : 'Member';
+        }
     } catch (err) {
         console.log("Cannot load user data", err);
     }
@@ -54,10 +121,17 @@ async function renderUserList(users) {
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">Người dùng</th>
-                        <th scope="col" class="px-6 py-3">Số điện thoại</th>
-                        <th scope="col" class="px-6 py-3">Vai trò</th>
-                        <th scope="col" class="px-6 py-3"><span class="sr-only">Hành động</span></th>
+                        <th scope="col" class="px-6 py-3 cursor-pointer hover:bg-gray-100" data-sort="name">
+                            User <span class="sort-icon ml-1"></span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 cursor-pointer hover:bg-gray-100" data-sort="createdat">
+                            Joined <span class="sort-icon ml-1"></span>
+                        </th>
+                        <th scope="col" class="px-6 py-3">Phone</th>
+                        <th scope="col" class="px-6 py-3 cursor-pointer hover:bg-gray-100" data-sort="role">
+                            Role <span class="sort-icon ml-1"></span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,64 +139,255 @@ async function renderUserList(users) {
                 </tbody>
             </table>
         </div>
+        <div id="pagination-container" class="mt-4 flex justify-between items-center px-2"></div>
     `;
 
     userList.innerHTML = tableHtml;
 
-    // Attach event listeners for edit buttons
+    // Attach event listeners for table headers (sorting)
+    const headers = userList.querySelectorAll('th[data-sort]');
+    headers.forEach(th => {
+        th.addEventListener('click', () => {
+            const field = th.dataset.sort;
+            if (state.sortBy === field) {
+                state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                state.sortBy = field;
+                state.sortOrder = 'asc'; // Default to asc for new field
+            }
+            loadUserList();
+        });
+
+        // Add visual indicator
+        if (state.sortBy === th.dataset.sort) {
+            const icon = th.querySelector('.sort-icon');
+            if (icon) {
+                icon.innerHTML = state.sortOrder === 'asc' ? '↑' : '↓';
+                th.classList.add('bg-gray-100');
+            }
+        }
+    });
+
+    // Attach event listeners for buttons
     users.forEach(user => {
         const editBtn = document.getElementById(`edit-user-${user.id}`);
-        if (editBtn) {
-            editBtn.addEventListener('click', () => openEditUserModal(user));
-        }
+        const deleteBtn = document.getElementById(`delete-user-${user.id}`);
+        const viewBtn = document.getElementById(`view-user-${user.id}`);
+
+        if (editBtn) editBtn.addEventListener('click', () => openEditUserModal(user));
+        if (deleteBtn) deleteBtn.addEventListener('click', () => confirmDeleteUser(user.id, user.name));
+        if (viewBtn) viewBtn.addEventListener('click', () => alert(`View details feature for ${user.name} is coming soon!`));
     });
 }
 
 function createUserRow(user) {
-    const roleText = user.systemRole === 0 ? 'System Admin' : 'Member';
-    const roleClasses = user.systemRole === 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800';
+    const isAdmin = user.systemRole === 0 || user.systemRole === 'SystemAdmin';
+    const roleText = isAdmin ? 'System Admin' : 'Member';
+    const roleClasses = isAdmin ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800';
+    const dateStr = new Date(user.createdAt).toLocaleDateString();
 
     return `
-        <tr class="bg-white border-b hover:bg-gray-50">
+        <tr class="bg-white border-b hover:bg-gray-50 transition-colors">
             <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                <img class="w-10 h-10 rounded-full object-cover" src="${user.avatarUrl || '/images/default-avatar.png'}" alt="${user.name}">
+                <img class="w-10 h-10 rounded-full object-cover border border-gray-200" 
+                     src="${user.avatarUrl || '/images/default-avatar.png'}" 
+                     alt="${user.name}">
                 <div class="pl-3">
                     <div class="text-base font-semibold">${user.name}</div>
                     <div class="font-normal text-gray-500">${user.email}</div>
                 </div>
             </th>
-            <td class="px-6 py-4">${user.phoneNumber || 'N/A'}</td>
+            <td class="px-6 py-4">${dateStr}</td>
+            <td class="px-6 py-4">${user.phoneNumber || '<span class="text-gray-300">N/A</span>'}</td>
             <td class="px-6 py-4">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${roleClasses}">${roleText}</span>
+                <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${roleClasses}">${roleText}</span>
             </td>
-            <td class="px-6 py-4 text-right gap-1">
-                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-blue-400 hover:bg-blue-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-contact-icon lucide-contact"><path d="M16 2v2"/><path d="M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M8 2v2"/><circle cx="12" cy="11" r="3"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
-                    Detail
-                </button>
-                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg>
-                    Edit
-                </button>
-                <button type="button" id="edit-user-${user.id}" class="px-2 py-1 rounded-md inline-flex items-center justify-center gap-1 text-white bg-red-500 hover:bg-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x-icon lucide-user-round-x"><path d="M2 21a8 8 0 0 1 11.873-7"/><circle cx="10" cy="8" r="5"/><path d="m17 17 5 5"/><path d="m22 17-5 5"/></svg>
-                    Delete
-                </button>
+            <td class="px-6 py-4 text-right">
+                <div class="flex items-center justify-end gap-2">
+                    <button type="button" id="edit-user-${user.id}" class="p-1.5 rounded-md text-white bg-black hover:bg-gray-800 transition-colors" title="Edit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                    </button>
+                    <button type="button" id="delete-user-${user.id}" class="p-1.5 rounded-md text-white bg-red-500 hover:bg-red-600 transition-colors" title="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    </button>
+                </div>
             </td>
-            
         </tr>
     `;
 }
 
+function renderPagination() {
+    const container = document.getElementById('pagination-container');
+    if (!container) return;
+
+    if (state.totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+    }
+
+    const prevDisabled = state.page === 1 ? 'disabled class="opacity-50 cursor-not-allowed px-3 py-1 border rounded"' : 'class="px-3 py-1 border rounded hover:bg-gray-100"';
+    const nextDisabled = state.page === state.totalPages ? 'disabled class="opacity-50 cursor-not-allowed px-3 py-1 border rounded"' : 'class="px-3 py-1 border rounded hover:bg-gray-100"';
+
+    container.innerHTML = `
+        <div class="text-sm text-gray-700">
+            Page <span class="font-semibold">${state.page}</span> of <span class="font-semibold">${state.totalPages}</span> 
+            (Total: ${state.total})
+        </div>
+        <div class="flex gap-2">
+            <button id="prev-page" ${prevDisabled}>Previous</button>
+            <button id="next-page" ${nextDisabled}>Next</button>
+        </div>
+    `;
+
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+        if (state.page > 1) {
+            state.page--;
+            loadingState(true);
+            loadUserList().finally(() => loadingState(false));
+        }
+    });
+
+    document.getElementById('next-page')?.addEventListener('click', () => {
+        if (state.page < state.totalPages) {
+            state.page++;
+            loadingState(true);
+            loadUserList().finally(() => loadingState(false));
+        }
+    });
+}
+
+function loadingState(isLoading) {
+    const list = document.getElementById('user-list');
+    if (isLoading && list) {
+        list.classList.add('opacity-50', 'pointer-events-none');
+    } else if (list) {
+        list.classList.remove('opacity-50', 'pointer-events-none');
+    }
+}
+
+// ==================== INITIALIZATION & EVENT LISTENERS ====================
+
+function initApp() {
+    console.log("Initializing Admin User List App...");
+    initEditModal();
+    initDeleteModal(); // Ensure delete modal events are attached
+    setupControls();
+    loadUserList();
+}
+
+// Check if DOM is already ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    // If we are already loaded (which happens often with module scripts), run immediately
+    initApp();
+}
+
+function setupControls() {
+    // Search
+    const searchInput = document.getElementById('search-user');
+    if (searchInput) {
+        console.log("Search input found, attaching listener.");
+        searchInput.addEventListener('input', debounce((e) => {
+            console.log("Search input changed:", e.target.value);
+            state.search = e.target.value.trim();
+            state.page = 1; // Reset to first page on search
+            loadUserList();
+        }, 500));
+    } else {
+        console.error("Search input element 'search-user' not found!");
+    }
+
+    // Sort Button (Toggle logic via button)
+    const sortBtn = document.getElementById('sort-user');
+    if (sortBtn) {
+        sortBtn.addEventListener('click', () => {
+            // Cycle: Name ASC -> Name DESC -> CreatedAt DESC -> CreatedAt ASC
+            if (state.sortBy === 'name') {
+                if (state.sortOrder === 'asc') state.sortOrder = 'desc';
+                else {
+                    state.sortBy = 'createdat';
+                    state.sortOrder = 'desc'; // Newest first by default
+                }
+            } else if (state.sortBy === 'createdat') {
+                if (state.sortOrder === 'desc') state.sortOrder = 'asc';
+                else {
+                    state.sortBy = 'name';
+                    state.sortOrder = 'asc';
+                }
+            } else {
+                state.sortBy = 'name';
+                state.sortOrder = 'asc';
+            }
+            loadUserList();
+        });
+    }
+
+    // Filter Button (Cycle roles)
+    const filterBtn = document.getElementById('filter-user');
+    if (filterBtn) {
+        console.log("Filter button found, attaching listener.");
+        filterBtn.addEventListener('click', () => {
+            // Cycle: All -> SystemAdmin -> Member -> All
+            if (state.role === '') state.role = 'SystemAdmin';
+            else if (state.role === 'SystemAdmin') state.role = 'Member';
+            else state.role = '';
+
+            console.log("Filter changed to:", state.role);
+            state.page = 1;
+            loadUserList();
+        });
+    } else {
+        console.error("Filter button element 'filter-user' not found!");
+    }
+}
+
+function updateFilterUI() {
+    const filterBtn = document.getElementById('filter-user');
+    if (!filterBtn) return;
+
+    // Update button text/style based on current state
+    if (state.role) {
+        filterBtn.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200');
+        filterBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            ${state.role === 'SystemAdmin' ? 'Admins' : 'Members'}
+        `;
+    } else {
+        filterBtn.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200');
+        filterBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-filter"><path d="M2 5h20"/><path d="M6 12h12"/><path d="M9 19h6"/></svg>
+            Filter
+        `;
+    }
+}
+
+function updateSortUI() {
+    // Optional: Visual feedback on the main sort button
+    const sortBtn = document.getElementById('sort-user');
+    if (!sortBtn) return;
+
+    let label = 'Sort';
+    if (state.sortBy === 'name') label = `Name ${state.sortOrder === 'asc' ? 'A-Z' : 'Z-A'}`;
+    else if (state.sortBy === 'createdat') label = `Date ${state.sortOrder === 'desc' ? 'Newest' : 'Oldest'}`;
+
+    sortBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-down"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></svg>
+        ${label}
+    `;
+}
+
+// ==================== EDIT & DELETE FUNCTIONS ====================
+
 // Global modal elements
-let modal, closeBtn, cancelBtn, form;
+// (Declared at top of file)
 
 function initEditModal() {
     modal = document.getElementById('edit-user-modal');
     closeBtn = document.getElementById('close-edit-user-modal');
     cancelBtn = document.getElementById('cancel-edit-user');
     form = document.getElementById('edit-user-form');
-    // Close on Escape
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
             closeEditUserModal();
@@ -134,9 +399,6 @@ function initEditModal() {
     if (form) form.addEventListener('submit', handleEditUserSubmit);
 }
 
-// Call init when script loads (or check if DOMContentLoaded is needed, but this is module context)
-document.addEventListener('DOMContentLoaded', initEditModal);
-
 function openEditUserModal(user) {
     if (!modal) initEditModal();
 
@@ -146,19 +408,14 @@ function openEditUserModal(user) {
     const passInput = document.getElementById('edit-user-password');
     const roleSelect = document.getElementById('edit-user-role');
 
-    if (!idInput || !nameInput || !emailInput || !passInput || !roleSelect) {
-        console.error("Edit User Modal elements not found in DOM.");
-        return;
-    }
+    if (idInput) idInput.value = user.id;
+    if (nameInput) nameInput.value = user.name;
+    if (emailInput) emailInput.value = user.email;
+    if (passInput) passInput.value = '';
 
-    idInput.value = user.id;
-    nameInput.value = user.name;
-    emailInput.value = user.email;
-    passInput.value = '';
-
-    // Set role
-    // user.systemRole: 0 = SystemAdmin, 1 = Member
-    roleSelect.value = user.systemRole === 0 ? 'SystemAdmin' : 'Member';
+    // user.systemRole: 0 or "SystemAdmin" -> SystemAdmin
+    const isAdmin = user.systemRole === 0 || user.systemRole === 'SystemAdmin';
+    if (roleSelect) roleSelect.value = isAdmin ? 'SystemAdmin' : 'Member';
 
     if (modal) {
         modal.classList.remove('hidden');
@@ -180,33 +437,103 @@ async function handleEditUserSubmit(e) {
     const password = document.getElementById('edit-user-password').value;
     const role = document.getElementById('edit-user-role').value;
 
-    const updateData = {
-        role: role
-    };
-
-    if (password) {
-        updateData.password = password;
-    }
+    const updateData = { role: role };
+    if (password) updateData.password = password;
 
     try {
-        const res = await authFetch(`/user/admin/update/${userId}`, {
+        const res = await authFetch(`/api/Admin/users/${userId}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updateData)
         });
 
         if (res.ok) {
             alert('User updated successfully!');
             closeEditUserModal();
-            loadUserList(); // Refresh list to see proper role
+            loadUserList();
         } else {
             const errData = await res.json();
-            alert('Failed to update user: ' + (errData.message || JSON.stringify(errData.errors)));
+            alert('Failed to update: ' + (errData.message || 'Unknown error'));
         }
     } catch (error) {
         console.error('Error updating user:', error);
         alert('An error occurred while updating user.');
+    }
+}
+
+// ==================== DELETE USER MODAL ====================
+
+function initDeleteModal() {
+    deleteModal = document.getElementById('delete-user-modal');
+    cancelDeleteBtn = document.getElementById('cancel-delete-user');
+    confirmDeleteBtn = document.getElementById('confirm-delete-user');
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && deleteModal && !deleteModal.classList.contains('hidden')) {
+            closeDeleteModal();
+        }
+    });
+
+    if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+
+    if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (userToDeleteId) {
+                await executeDeleteUser(userToDeleteId);
+            }
+        });
+    }
+}
+
+function openDeleteModal(userId, userName) {
+    if (!deleteModal) initDeleteModal();
+
+    userToDeleteId = userId;
+    const nameSpan = document.getElementById('delete-user-name');
+    if (nameSpan) nameSpan.textContent = userName;
+
+    if (deleteModal) {
+        deleteModal.classList.remove('hidden');
+        deleteModal.classList.add('flex');
+    }
+}
+
+function closeDeleteModal() {
+    if (deleteModal) {
+        deleteModal.classList.add('hidden');
+        deleteModal.classList.remove('flex');
+    }
+    userToDeleteId = null;
+}
+
+function confirmDeleteUser(userId, userName) {
+    openDeleteModal(userId, userName);
+}
+
+async function executeDeleteUser(userId) {
+    try {
+        const res = await authFetch(`/api/Admin/users/${userId}`, {
+            method: 'DELETE'
+        });
+
+        if (res.ok) {
+            // Close modal first
+            closeDeleteModal();
+
+            // Handle pagination adjustment
+            if (state.total > 0 && state.total % state.pageSize === 1 && state.page > 1) {
+                state.page--;
+            }
+            loadUserList();
+        } else {
+            const errData = await res.json();
+            closeDeleteModal(); // Close modal to show alert
+            alert('Cannot delete user: ' + (errData.message || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Delete error:', error);
+        closeDeleteModal();
+        alert('Error deleting user.');
     }
 }

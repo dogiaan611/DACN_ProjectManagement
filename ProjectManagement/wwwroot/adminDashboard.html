@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <script type="module" src="/js/auth/auth.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="flex h-screen items-stretch bg-white">
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="h-full shrink-0"></div>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto ml-64 p-6 bg-gray-50">
+
+            <!-- Header -->
+            <header class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+                    <p class="text-gray-500 mt-1">Overview of system performance and statistics</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl border shadow-sm">
+                        <img id="admin-avatar" src="" alt="Admin" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <p id="admin-name" class="text-sm font-semibold text-gray-800">Loading...</p>
+                            <p id="admin-role"
+                                class="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded-full inline-block">System
+                                Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div id="admin-dashboard-container" class="space-y-6">
+                <!-- Loading State -->
+                <div class="flex justify-center items-center h-64">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/layout/sidebar.js"></script>
+    <script type="module" src="/js/project/project-modal.js"></script>
+    <script type="module" src="/js/settings/settings-modal.js"></script>
+    <script type="module" src="/js/admin/admin-dashboard.js?v=1"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                // Initialize lucide icons if needed directly
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+
+</html>

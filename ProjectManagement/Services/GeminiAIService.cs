@@ -1,7 +1,9 @@
 using System.Text;
 using System.Text.Json;
-
-namespace ProjectManagement.Services
+using Microsoft.EntityFrameworkCore;
+using ProjectManagement.Data;
+using Microsoft.Extensions.Configuration; // Ensure config is available
+using Microsoft.Extensions.Logging; // Ensure logging is available
 {
     public interface IAIService
     {
@@ -23,12 +25,14 @@ namespace ProjectManagement.Services
         private readonly IConfiguration _config;
         private readonly ILogger<GeminiAIService> _logger;
         private readonly string _apiKey;
+        private readonly PMDbContext _db;
 
-        public GeminiAIService(HttpClient httpClient, IConfiguration config, ILogger<GeminiAIService> logger)
+        public GeminiAIService(HttpClient httpClient, IConfiguration config, ILogger<GeminiAIService> logger, PMDbContext db)
         {
             _httpClient = httpClient;
             _config = config;
             _logger = logger;
+            _db = db;
             _apiKey = config["Gemini:ApiKey"] ?? "";
         }
 
@@ -142,9 +146,15 @@ Return ONLY the number (1, 2, 3, 5, 8, 13, or 21). No explanation.";
         {
             try
             {
-                // Get project members from database
-                var members = await _httpClient.GetFromJsonAsync<List<ProjectMemberDto>>(
-                    $"http://localhost:5000/api/Project/{projectId}/members");
+                // Get project members from database directly
+                var members = await _db.ProjectMembers
+                    .Where(pm => pm.ProjectId == projectId)
+                    .Select(pm => new ProjectMemberDto
+                    {
+                        Name = pm.User.Name,
+                        Role = pm.Role.ToString()
+                    })
+                    .ToListAsync();
 
                 if (members == null || !members.Any())
                 {

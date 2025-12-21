@@ -6,6 +6,7 @@ import { open as openDropdownModal } from './sidebar-dropdown.js';
 import { initHome } from './home.js';
 import { initProjectDetail } from '../project/project-detail.js';
 import { loadUserList } from '../admin/admin-user-list.js';
+import { initAdminDashboard } from '../admin/admin-dashboard.js';
 import { initNotification, updateNotificationBadge } from './notification.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -47,8 +48,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (roleEl && data) roleEl.textContent = role;
         // Hiển thị link admin nếu người dùng có vai trò là SystemAdmin (SystemRole === 0)
         const adminLink = document.getElementById('admin-user-link');
-        if (adminLink && data.systemRole === 0) {
-          adminLink.classList.remove('hidden');
+        const adminDashLink = document.getElementById('admin-dashboard-link');
+        if (data.systemRole === 0) {
+          if (adminLink) adminLink.classList.remove('hidden');
+          if (adminDashLink) adminDashLink.classList.remove('hidden');
         }
 
       }
@@ -104,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const sidebarContainer = document.getElementById('sidebar-container');
       if (!sidebarContainer) return;
 
-      const link = e.target.closest("a[id='sidebar-link'], a[id='admin-user-link']");
+      const link = e.target.closest("a[id='sidebar-link'], a[id='admin-user-link'], a[id='admin-dashboard-link']");
       if (!link || !sidebarContainer.contains(link)) return;
 
       const href = link.getAttribute("href");
@@ -238,6 +241,8 @@ export async function loadPage(url) {
         }, 50);
       } else if (pagePath.includes('adminUser.html')) {
         loadUserList().catch(err => console.error('Lỗi khi khởi tạo trang admin user:', err));
+      } else if (pagePath.includes('adminDashboard.html')) {
+        initAdminDashboard().catch(err => console.error('Lỗi khi khởi tạo trang admin dashboard:', err));
       } else if (pagePath.includes('notification.html')) {
         initNotification().catch(err => console.error('Lỗi khi khởi tạo trang notification:', err));
       }
@@ -253,7 +258,7 @@ export async function loadPage(url) {
 }
 
 function updateSidebarActiveState(path) {
-  const sidebarLinks = document.querySelectorAll("a[id='sidebar-link'], a[id='admin-user-link']");
+  const sidebarLinks = document.querySelectorAll("a[id='sidebar-link'], a[id='admin-user-link'], a[id='admin-dashboard-link']");
   const currentPath = new URL(path, window.location.origin).pathname;
 
   sidebarLinks.forEach(link => {

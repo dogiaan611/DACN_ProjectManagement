@@ -321,6 +321,10 @@
       "PackagePath": "staticwebassets\\js\\task\\subtask.js"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\subtaskDetail.js",
+      "PackagePath": "staticwebassets\\js\\task\\subtaskDetail.js"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\tag.js",
       "PackagePath": "staticwebassets\\js\\task\\tag.js"
     },
@@ -445,6 +449,10 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\062e0da06215438385af18378e4c2e94_drag-drop-demo.jpg"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\0cc10c6946a64b72bcb2eeb6992ad55a_Bảng số liệu chuuowng 2.docx",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\0cc10c6946a64b72bcb2eeb6992ad55a_Bảng số liệu chuuowng 2.docx"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\128ff6540ad744b2aaccb531e5e6f312_486382764_1612029549453473_5785810695061651592_n.jpg"
     },
@@ -461,12 +469,24 @@
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\32608531ca6b4a1da5fcfd6df2c16b04_Chuong-I.docx"
     },
     {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\363e980630f24227a66f8d91a956783a_NHOM03-PHIEUTHUYETMINH.docx",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\363e980630f24227a66f8d91a956783a_NHOM03-PHIEUTHUYETMINH.docx"
+    },
+    {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\3cb714ba4cb7404fb156222bd6e61f82_sudent.png",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\3cb714ba4cb7404fb156222bd6e61f82_sudent.png"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\4448c1c2d2dc47e99786f578993ff99d_sprint-demo-1.png"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\52aee1a634274693aa2ead1f41eb097b_2909 Listening.pdf",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\52aee1a634274693aa2ead1f41eb097b_2909 Listening.pdf"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\5a51beac1df9482da1dbd832c3d4ffbd_DAHP_LTMMT_NHOM03.pdf",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\5a51beac1df9482da1dbd832c3d4ffbd_DAHP_LTMMT_NHOM03.pdf"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\6281b2a9d38f468c8228d8cc87614e5e_DAQLDACNTT_Nhom11.docx",
@@ -507,6 +527,10 @@
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\f0267340df1b4572a43271119f4884ab_BaoCaoQLDA_CNTT.pdf",
       "PackagePath": "staticwebassets\\uploads\\2025\\12\\f0267340df1b4572a43271119f4884ab_BaoCaoQLDA_CNTT.pdf"
+    },
+    {
+      "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2025\\12\\fb33189fc6114a7885e56e2552746bac_Hoa.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2025\\12\\fb33189fc6114a7885e56e2552746bac_Hoa.jpg"
     },
     {
       "Id": "D:\\GITHUB\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\.gitkeep",
