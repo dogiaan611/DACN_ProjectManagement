@@ -273,12 +273,7 @@ function createStatCard(title, value, iconName, color) {
 }
 
 function renderProjectLegend(types) {
-    // Map backend enums to display names/colors
-    // Assuming backend returns integers or strings.
-    // Based on previous code: Type 0 = Kanban, 1 = Scrum (roughly)
-
-    // Let's deduce from data or use defaults
-    const palette = ['#8b5cf6', '#3b82f6', '#10b981']; // Purple, Blue, Green
+    const palette = ['#8b5cf6', '#3b82f6', '#10b981'];
 
     return types.map((t, index) => {
         const color = palette[index % palette.length];
@@ -403,7 +398,6 @@ function initProjectTypeChart(types) {
     });
 }
 
-// ================= ADMIN TABS LOGIC =================
 
 function setupTabs() {
     const tabOverview = document.getElementById('tab-overview');

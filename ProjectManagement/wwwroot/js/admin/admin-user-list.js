@@ -5,7 +5,7 @@ const state = {
     page: 1,
     pageSize: 10,
     search: '',
-    role: '', // 'SystemAdmin', 'Member', or empty for all
+    role: '',
     sortBy: 'email',
     sortOrder: 'asc',
     total: 0,
@@ -46,7 +46,6 @@ export async function loadUserList() {
     }
 
     try {
-        // Construct query parameters
         const params = new URLSearchParams({
             page: state.page,
             pageSize: state.pageSize,
@@ -62,22 +61,18 @@ export async function loadUserList() {
 
         const data = await res.json();
 
-        // Update state with response metadata
         state.total = data.total;
         state.totalPages = data.totalPages;
 
-        // Ensure current page is valid
         if (state.page > state.totalPages && state.totalPages > 0) {
             state.page = state.totalPages;
-            return loadUserList(); // Retry with correct page
+            return loadUserList();
         }
 
         renderUserList(data.users);
         renderPagination();
         updateFilterUI();
         updateSortUI();
-
-        // Load admin profile info only once or if needed
         loadUserInfor();
     } catch (error) {
         console.error('Lỗi khi tải danh sách người dùng:', error);
@@ -92,7 +87,6 @@ async function loadUserInfor() {
     const userPhone = document.getElementById('admin-phone');
 
     try {
-        // Keep using the user profile endpoint for the current logged-in admin
         const res = await authFetch('/user/read');
         if (!res.ok) throw new Error('Cannot load user data');
         const user = await res.json();
