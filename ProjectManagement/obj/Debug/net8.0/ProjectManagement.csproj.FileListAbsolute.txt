@@ -484,3 +484,4 @@ D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Grpc.Net.Com
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\System.Management.dll
 D:\GITHUB\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+D:\GITHUB\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
