@@ -4,7 +4,8 @@ module.exports = {
     './**/*.html',
     './**/*.razor',
     './**/*.cs',
-    './wwwroot/**/*.html'
+    './wwwroot/**/*.html',
+    './wwwroot/**/*.js' 
   ],
   theme: {
     extend: {},

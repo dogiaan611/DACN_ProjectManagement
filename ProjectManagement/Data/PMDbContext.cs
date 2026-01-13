@@ -1,21 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ProjectManagement.Domain.Identity;
 using ProjectManagement.Domain.Entities;
 
 namespace ProjectManagement.Data
 {
-    public class PMDbContext : DbContext
+    public class PMDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public PMDbContext(DbContextOptions<PMDbContext> options) : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectMember> ProjectMembers { get; set; }
         public DbSet<Board> Boards { get; set; }
         public DbSet<Column> Columns { get; set; }
+        public DbSet<ColumnStatusMapping> ColumnStatusMappings { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ProjectTask> PojectTasks { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<TaskTag> TaskTags { get; set; }
         public DbSet<TaskUserTag> TaskUserTags { get; set; }
@@ -23,15 +26,19 @@ namespace ProjectManagement.Data
         public DbSet<CommentMention> CommentMentions { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Subtask> Subtasks { get; set; }
+        public DbSet<SubtaskComment> SubtaskComments { get; set; }
+        public DbSet<SubtaskCommentMention> SubtaskCommentMentions { get; set; }
+        public DbSet<SubtaskActivityLog> SubtaskActivityLogs { get; set; }
         public DbSet<TaskWatcher> TaskWatchers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<RegistrationCode> RegistrationCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // ------------------ Composite Keys ------------------
+            // Keys
             modelBuilder.Entity<ProjectMember>()
                 .HasKey(pm => new { pm.ProjectId, pm.UserId });
 
@@ -47,12 +54,14 @@ namespace ProjectManagement.Data
             modelBuilder.Entity<TaskWatcher>()
                 .HasKey(tw => new { tw.TaskId, tw.UserId });
 
-            // ------------------ Relationships ------------------
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasKey(scm => new { scm.CommentId, scm.UserId });
 
+            // Relationships
             // User ↔ Project
             modelBuilder.Entity<Project>()
                 .HasOne(p => p.CreatedBy)
-                .WithMany(u => u.CreatedProjects)
+                .WithMany()
                 .HasForeignKey(p => p.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -65,7 +74,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<ProjectMember>()
                 .HasOne(pm => pm.User)
-                .WithMany(u => u.ProjectMemberships)
+                .WithMany()
                 .HasForeignKey(pm => pm.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -76,11 +85,25 @@ namespace ProjectManagement.Data
                 .HasForeignKey(b => b.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Board>()
+                .HasOne(b => b.ActiveSprint)
+                .WithMany()
+                .HasForeignKey(b => b.ActiveSprintId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
             // Column ↔ Board
             modelBuilder.Entity<Column>()
                 .HasOne(c => c.Board)
                 .WithMany(b => b.Columns)
                 .HasForeignKey(c => c.BoardId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ColumnStatusMapping ↔ Column
+            modelBuilder.Entity<ColumnStatusMapping>()
+                .HasOne(csm => csm.Column)
+                .WithMany()
+                .HasForeignKey(csm => csm.ColumnId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Sprint ↔ Project
@@ -90,31 +113,37 @@ namespace ProjectManagement.Data
                 .HasForeignKey(s => s.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Task ↔ Column
-            modelBuilder.Entity<Task>()
+            modelBuilder.Entity<Sprint>()
+                .HasOne(s => s.CreatedBy)
+                .WithMany()
+                .HasForeignKey(s => s.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // ProjectTask ↔ Column
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Column)
-                .WithMany(c => c.Tasks)
+                .WithMany(c => c.ProjectTasks)
                 .HasForeignKey(t => t.ColumnId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Task ↔ CreatedBy
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ CreatedBy
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.CreatedBy)
-                .WithMany(u => u.CreatedTasks)
+                .WithMany()
                 .HasForeignKey(t => t.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Task ↔ Assignee
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ Assignee
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Assignee)
-                .WithMany(u => u.AssignedTasks)
+                .WithMany()
                 .HasForeignKey(t => t.AssigneeId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            // Task ↔ Sprint
-            modelBuilder.Entity<Task>()
+            // ProjectTask ↔ Sprint
+            modelBuilder.Entity<ProjectTask>()
                 .HasOne(t => t.Sprint)
-                .WithMany(s => s.Tasks)
+                .WithMany(s => s.ProjectTasks)
                 .HasForeignKey(t => t.SprintId)
                 .OnDelete(DeleteBehavior.SetNull);
 
@@ -147,7 +176,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<TaskUserTag>()
                 .HasOne(tut => tut.User)
-                .WithMany(u => u.TaskUserTags)
+                .WithMany()
                 .HasForeignKey(tut => tut.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -166,7 +195,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.User)
-                .WithMany(u => u.Comments)
+                .WithMany()
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -192,7 +221,7 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<Attachment>()
                 .HasOne(a => a.UploadedBy)
-                .WithMany(u => u.UploadedAttachments)
+                .WithMany()
                 .HasForeignKey(a => a.UploadedById)
                 .OnDelete(DeleteBehavior.SetNull);
 
@@ -212,14 +241,14 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<TaskWatcher>()
                 .HasOne(tw => tw.User)
-                .WithMany(u => u.WatchedTasks)
+                .WithMany()
                 .HasForeignKey(tw => tw.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Notifications
             modelBuilder.Entity<Notification>()
                 .HasOne(n => n.User)
-                .WithMany(u => u.Notifications)
+                .WithMany()
                 .HasForeignKey(n => n.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -244,9 +273,72 @@ namespace ProjectManagement.Data
 
             modelBuilder.Entity<ActivityLog>()
                 .HasOne(a => a.User)
-                .WithMany(u => u.ActivityLogs)
+                .WithMany()
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            // Subtask relationships
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.Task)
+                .WithMany(t => t.Subtasks)
+                .HasForeignKey(s => s.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.Assignee)
+                .WithMany()
+                .HasForeignKey(s => s.AssigneeId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Subtask>()
+                .HasOne(s => s.CreatedBy)
+                .WithMany()
+                .HasForeignKey(s => s.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // SubtaskComment relationships
+            modelBuilder.Entity<SubtaskComment>()
+                .HasOne(sc => sc.Subtask)
+                .WithMany(s => s.Comments)
+                .HasForeignKey(sc => sc.SubtaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskComment>()
+                .HasOne(sc => sc.User)
+                .WithMany()
+                .HasForeignKey(sc => sc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // SubtaskCommentMention relationships
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasOne(scm => scm.Comment)
+                .WithMany(sc => sc.Mentions)
+                .HasForeignKey(scm => scm.CommentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskCommentMention>()
+                .HasOne(scm => scm.User)
+                .WithMany()
+                .HasForeignKey(scm => scm.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // SubtaskActivityLog relationships
+            modelBuilder.Entity<SubtaskActivityLog>()
+                .HasOne(sal => sal.Subtask)
+                .WithMany(s => s.ActivityLogs)
+                .HasForeignKey(sal => sal.SubtaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SubtaskActivityLog>()
+                .HasOne(sal => sal.User)
+                .WithMany()
+                .HasForeignKey(sal => sal.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+
+            // RegistrationCode
+            modelBuilder.Entity<RegistrationCode>()
+                .HasIndex(r => new { r.Email, r.IsUsed, r.ExpiresAtUtc });
         }
     }
 }

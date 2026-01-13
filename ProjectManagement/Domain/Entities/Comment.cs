@@ -1,24 +1,29 @@
-using ProjectManagement.Domain.Entities;
+using ProjectManagement.Domain.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Comment
+namespace ProjectManagement.Domain.Entities
 {
-    [Key]
-    public int CommentId { get; set; }
 
-    [ForeignKey("Task")]
-    public int TaskId { get; set; }
-    public Task Task { get; set; }
+    public class Comment
+    {
+        [Key]
+        public int CommentId { get; set; }
 
-    [ForeignKey("User")]
-    public int UserId { get; set; }
-    public User User { get; set; }
+        [ForeignKey("Task")]
+        public int TaskId { get; set; }
+        public ProjectTask Task { get; set; }
 
-    [Required]
-    public string Content { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [Required]
+        public string Content { get; set; }
 
-    public ICollection<CommentMention> Mentions { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public ICollection<CommentMention> Mentions { get; set; } = new List<CommentMention>();
+        public ICollection<Attachment> Attachments { get; set; } = new List<Attachment>();
+    }
 }

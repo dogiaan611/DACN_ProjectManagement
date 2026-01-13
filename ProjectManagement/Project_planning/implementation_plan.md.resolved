@@ -1,0 +1,35 @@
+# Display Subtasks on Task Card
+
+## Goal Description
+Display the number of completed subtasks vs total subtasks on the task card in the project board. This provides a quick overview of task progress without opening the detail modal.
+
+## User Review Required
+> [!NOTE]
+> This change involves modifying the backend API to return subtask counts and updating the frontend to render this information.
+
+## Proposed Changes
+
+### Backend
+#### [MODIFY] [TaskController.cs](file:///d:/GITHUB/DACN_ProjectManagement/ProjectManagement/Controllers/TaskController.cs)
+- Update [List](file:///d:/GITHUB/DACN_ProjectManagement/ProjectManagement/Controllers/TaskController.cs#142-178) method to include `SubTaskCount` and `CompletedSubTaskCount` in the returned JSON.
+- Update [Get](file:///d:/GITHUB/DACN_ProjectManagement/ProjectManagement/Controllers/TaskController.cs#179-218) method (optional but recommended) to include subtask counts for consistency.
+
+### Frontend
+#### [MODIFY] [taskUI.js](file:///d:/GITHUB/DACN_ProjectManagement/ProjectManagement/wwwroot/js/taskUI.js)
+- Update [createTaskCardHtml](file:///d:/GITHUB/DACN_ProjectManagement/ProjectManagement/wwwroot/js/taskUI.js#24-93) function to accept and render subtask progress.
+- Add an icon (e.g., check-square) and text (e.g., "1/3") to the task card footer, alongside comment and attachment counts.
+- Only display if `SubTaskCount > 0`.
+
+## Verification Plan
+
+### Automated Tests
+- None planned for this specific UI feature.
+
+### Manual Verification
+1.  **Backend**:
+    -   Use Swagger or Browser to call `/boards/{boardId}/columns/{columnId}/tasks` and verify the response contains `subTaskCount` and `completedSubTaskCount`.
+2.  **Frontend**:
+    -   Reload the project board.
+    -   Verify that tasks with subtasks show the progress indicator (e.g., "1/3").
+    -   Verify that tasks without subtasks do not show the indicator.
+    -   Add/Delete/Complete subtasks in the modal and verify the card updates (might need page reload or additional event handling if we want real-time updates without reload - for now, reload is acceptable, or we can update the DOM element if we have time).
