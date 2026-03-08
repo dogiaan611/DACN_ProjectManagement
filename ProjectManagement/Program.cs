@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PMDbContext>(options =>
 {
     var cs = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(cs);
+    options.UseMySql(cs, ServerVersion.AutoDetect(cs));
 });
 
 // Identity
