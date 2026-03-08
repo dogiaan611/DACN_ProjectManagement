@@ -27,4 +27,9 @@ RUN dotnet publish "./ProjectManagement.csproj" -c $BUILD_CONFIGURATION -o /app/
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+USER root
+RUN mkdir -p /app/wwwroot/uploads/avatars && chown -R $APP_UID:$APP_UID /app/wwwroot
+USER $APP_UID
+
 ENTRYPOINT ["dotnet", "ProjectManagement.dll"]
