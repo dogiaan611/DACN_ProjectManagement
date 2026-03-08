@@ -22,7 +22,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - web_uploads:/app/wwwroot
+      - web_uploads:/app/wwwroot/uploads
     environment:
       - ConnectionStrings__DefaultConnection=Server=mysql;Database=projectmanagementdb;Uid=root;Pwd=ProjectManagement!2024;
       - Jwt__Issuer=ProjectManagement
