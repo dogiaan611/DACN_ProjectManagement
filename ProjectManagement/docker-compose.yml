@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=ProjectManagement!2024
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  webapi:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: pm_web
+    depends_on:
+      - sqlserver
+    ports:
+      - "8080:8080"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ProjectManagementDB;User Id=sa;Password=ProjectManagement!2024;TrustServerCertificate=True;
+      - Jwt__Issuer=ProjectManagement
+      - Jwt__Audience=ProjectManagement
+      - Jwt__Key=ProjectManagement_SecretKey_Minimum_32_Characters_Long!!!
+      - ASPNETCORE_ENVIRONMENT=Production
+      # Un-comment the lines below to activate email/AI features when you have the keys
+      # - Smtp__User=YourEmail@gmail.com
+      # - Smtp__Password=YourAppPassword
+      # - Gemini__ApiKey=YourGeminiKeyHere
+      
+volumes:
+  sqlserver_data:

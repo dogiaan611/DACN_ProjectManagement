@@ -127,6 +127,16 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Auto Update Database Migrations
+using (var scope = app.Services.CreateScope())
+{
+    var _db = scope.ServiceProvider.GetRequiredService<PMDbContext>();
+    if (_db.Database.GetPendingMigrations().Any())
+    {
+        _db.Database.Migrate();
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
