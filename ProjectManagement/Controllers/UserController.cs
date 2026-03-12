@@ -59,13 +59,13 @@ namespace ProjectManagement.Controllers
         public async Task<IActionResult> RegisterRequestOtp([FromBody] RequestOtpDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Email))
-                return BadRequest("Email là bắt buộc");
+                return BadRequest(new { message = "Email là bắt buộc" });
 
             var normalizedEmail = dto.Email.Trim().ToLowerInvariant();
 
             // Kiểm tra email đã tồn tại chưa
             if (await _userManager.FindByEmailAsync(normalizedEmail) != null)
-                return BadRequest("Email đã tồn tại");
+                return BadRequest(new { message = "Email đã tồn tại" });
 
             // Kiểm tra đã có mã OTP còn hiệu lực không
             var now = DateTime.UtcNow;
@@ -97,7 +97,15 @@ namespace ProjectManagement.Controllers
             _db.RegistrationCodes.Add(reg);
             await _db.SaveChangesAsync();
 
-            await _notificationService.SendOtpAsync(normalizedEmail, code, ttlMinutes);
+            try
+            {
+                await _notificationService.SendOtpAsync(normalizedEmail, code, ttlMinutes);
+            }
+            catch (Exception ex)
+            {
+                // Log exception if possible, but return meaningful error
+                return StatusCode(500, new { message = "Không thể gửi email OTP. Vui lòng kiểm tra cấu hình SMTP trên máy chủ.", details = ex.Message });
+            }
 
             return Ok(new { message = "Đã gửi mã đăng ký qua email.", ttlMinutes });
         }
@@ -108,7 +116,7 @@ namespace ProjectManagement.Controllers
         public async Task<IActionResult> RegisterWithOtp([FromBody] RegisterOTPDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Otp) || string.IsNullOrWhiteSpace(dto.Name) || string.IsNullOrWhiteSpace(dto.Password))
-                return BadRequest("Mã OTP, tên và mật khẩu là bắt buộc");
+                return BadRequest(new { message = "Mã OTP, tên và mật khẩu là bắt buộc" });
 
             var otpNow = DateTime.UtcNow;
             var otpRecord = await _db.RegistrationCodes
@@ -117,13 +125,13 @@ namespace ProjectManagement.Controllers
                 .FirstOrDefaultAsync();
 
             if (otpRecord == null)
-                return BadRequest("Mã đăng ký không hợp lệ hoặc đã hết hạn");
+                return BadRequest(new { message = "Mã đăng ký không hợp lệ hoặc đã hết hạn" });
 
             // Kiểm tra email đã tồn tại chưa
             if (await _userManager.FindByEmailAsync(otpRecord.Email) != null)
-                return BadRequest("Email đã tồn tại");
+                return BadRequest(new { message = "Email đã tồn tại" });
             if (await _userManager.Users.AnyAsync(u => u.Name == dto.Name))
-                return BadRequest("Name đã tồn tại");
+                return BadRequest(new { message = "Name đã tồn tại" });
 
             var user = new ApplicationUser
             {
@@ -163,13 +171,13 @@ namespace ProjectManagement.Controllers
             var user = await _userManager.FindByEmailAsync(dto.Email);
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized(new { message = "Tài khoản không tồn tại" });
             }
 
             var check = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, lockoutOnFailure: true);
             if (!check.Succeeded)
             {
-                return Unauthorized();
+                return Unauthorized(new { message = "Email hoặc mật khẩu không chính xác" });
             }
 
             var roles = await _userManager.GetRolesAsync(user);

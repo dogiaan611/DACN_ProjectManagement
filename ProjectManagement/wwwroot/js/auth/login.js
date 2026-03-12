@@ -41,12 +41,18 @@ import { saveToken } from './auth.js';
                 const response = await fetch('/user/login', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({ Email: email, Password: password})
                 });
 
-                const data = await response.json();
+                let data = {};
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                }
 
                 if(response.ok){
                     // Save JWT

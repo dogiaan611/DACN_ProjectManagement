@@ -82,12 +82,18 @@
             const response = await fetch('/user/register', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ Email: email })
             });
 
-            const data = await response.json();
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (e) {
+                console.error('Error parsing JSON:', e);
+            }
 
             if (response.ok) {
                 messageDiv.textContent = data.message;
@@ -111,7 +117,7 @@
             }
         } catch (error) {
             console.error('Lỗi khi gửi yêu cầu mã OTP:', error);
-            messageDiv.textContent = 'Email đã được sử dụng. Vui lòng chọn email khác!'; // Khôi phục thông báo lỗi mạng
+            messageDiv.textContent = 'Đã xảy ra lỗi khi kết nối với máy chủ. Vui lòng thử lại sau.';
             messageDiv.classList.add('text-red-500');
 
             requestOtpButton.disabled = false;
@@ -140,12 +146,18 @@
             const response = await fetch('/user/register/otp', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ Otp: otp, Name: name, Password: password })
             });
 
-            const data = await response.json();
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (e) {
+                console.error('Error parsing JSON:', e);
+            }
 
             if (response.ok) {
                 const loadingModal = document.getElementById('loadingModal'); 
