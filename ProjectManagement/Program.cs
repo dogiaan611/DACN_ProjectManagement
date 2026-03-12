@@ -127,7 +127,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Auto Update Database Migrations
+// Auto Update Database Migrations & Seed Data
 using (var scope = app.Services.CreateScope())
 {
     var _db = scope.ServiceProvider.GetRequiredService<PMDbContext>();
@@ -135,6 +135,11 @@ using (var scope = app.Services.CreateScope())
     {
         _db.Database.Migrate();
     }
+
+    // Seed Data
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    await DataSeeder.SeedAsync(_db, userManager, roleManager);
 }
 
 // Configure the HTTP request pipeline.
