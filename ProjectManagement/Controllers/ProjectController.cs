@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -373,7 +373,7 @@ namespace ProjectManagement.Controllers
 
             var tasksByPriority = taskData
                 .GroupBy(x => x.Task.Priority)
-                .Select(g => new { Priority = g.Key, Count = g.Count() })
+                .Select(g => new { Priority = g.Key.ToString(), Count = g.Count() })
                 .ToDictionary(k => k.Priority, v => v.Count);
 
             var tasksByAssignee = taskData
@@ -394,7 +394,7 @@ namespace ProjectManagement.Controllers
                     x.Task.TaskId,
                     Name = x.Task.Title,
                     x.Task.DueDate,
-                    x.Task.Priority,
+                    Priority = (int)x.Task.Priority,
                     AssigneeName = x.Task.Assignee?.Name,
                     AssigneeAvatar = x.Task.Assignee?.AvatarUrl
                 })

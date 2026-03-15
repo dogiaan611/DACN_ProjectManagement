@@ -204,7 +204,6 @@ function renderDashboard(container, stats, userGrowth, projStats) {
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
                             <option value="High">High</option>
-                            <option value="Urgent">Urgent</option>
                         </select>
                     </div>
 
@@ -528,17 +527,16 @@ function renderTaskStats(stats) {
     `;
 
     // Calculate In Progress (approximation or mapping needed if API doesn't send explicit "In Progress")
-    let highUrgent = 0;
     if (stats.byPriority) {
         highUrgent = stats.byPriority.reduce((acc, curr) => {
-            return (curr.priority === 'High' || curr.priority === 'Urgent') ? acc + curr.count : acc;
+            return (curr.priority === 'High') ? acc + curr.count : acc;
         }, 0);
     }
 
     container.innerHTML = `
         ${card('Total Tasks', stats.total, 'text-gray-900')}
         ${card('Overdue Tasks', stats.overdue, 'text-red-600')}
-        ${card('High/Urgent Priority', highUrgent, 'text-orange-600')}
+        ${card('High Priority', highUrgent, 'text-orange-600')}
         ${card('Active Columns', stats.byColumn ? stats.byColumn.length : 0, 'text-blue-600')}
     `;
 }
@@ -553,10 +551,9 @@ function renderTaskList(tasks) {
     }
 
     const priorityColors = {
-        'Low': 'bg-gray-100 text-gray-600',
-        'Medium': 'bg-blue-100 text-blue-600',
-        'High': 'bg-orange-100 text-orange-600 bg-opacity-50',
-        'Urgent': 'bg-red-100 text-red-600'
+        'Low': 'bg-gray-100 text-gray-700',
+        'Medium': 'bg-blue-100 text-blue-700',
+        'High': 'bg-red-100 text-red-700'
     };
 
     tasks.forEach(t => {

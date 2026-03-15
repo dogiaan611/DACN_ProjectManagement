@@ -178,7 +178,7 @@ export function initProjectEdit() {
                     method: 'DELETE'
                 });
                 if (res.ok) {
-                    window.location.href = '/index.html'
+                    window.location.href = '/dashboard.html'
                 } else {
                     console.log('Xoa that bai');
                     alert('Lỗi khi xóa project. Vui lòng thử lại.');

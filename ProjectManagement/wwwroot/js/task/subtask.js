@@ -145,7 +145,7 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
         addSubtaskBtnContainer.classList.add('hidden');
 
         let selectedAssigneeId = null;
-        let selectedPriority = 2; // Medium
+        let selectedPriority = 1; // Medium
         let selectedDueDate = null;
 
         // Create form HTML
@@ -172,10 +172,9 @@ export function initSubtasks(taskId, boardId, columnId, projectId, container) {
                                 </button>
                                 <div id="subtask-priority-dropdown-template" class="hidden w-fit bg-white border rounded-md shadow-lg p-1">
                                     <div class="flex flex-col gap-1">
-                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="0">${getPriorityChip(0)}</div>
-                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="1">${getPriorityChip(1)}</div>
                                         <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="2">${getPriorityChip(2)}</div>
-                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="3">${getPriorityChip(3)}</div>
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="1">${getPriorityChip(1)}</div>
+                                        <div class="p-1 hover:bg-gray-100 rounded cursor-pointer" data-priority="0">${getPriorityChip(0)}</div>
                                     </div>
                                 </div>
                             </div>

@@ -114,12 +114,11 @@ function renderGanttChart(tasks, container, projectId, viewMode = 'DAY') {
     `;
 
     const getPriorityLabel = (p) => {
-        const map = { 0: 'Low', 1: 'Medium', 2: 'High', 3: 'Critical' };
+        const map = { 0: 'Low', 1: 'Medium', 2: 'High' };
         const colorMap = {
             0: 'bg-gray-100 text-gray-600',
             1: 'bg-blue-100 text-blue-600',
-            2: 'bg-orange-100 text-orange-600',
-            3: 'bg-red-100 text-red-600'
+            2: 'bg-orange-100 text-orange-600'
         };
         const label = map[p] || 'Cmd';
         const classes = colorMap[p] || 'bg-gray-100';

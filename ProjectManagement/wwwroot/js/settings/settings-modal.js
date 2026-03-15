@@ -12,12 +12,12 @@ async function fetchHtml(path) {
 function ensureContainers() {
     let backdrop = document.getElementById("settings-backdrop");
     let modal = document.getElementById("settings-modal");
-    if (backdrop && modal) return { backdrop, modal };
+    if (backdrop) backdrop.remove();
+    if (modal) modal.remove();
 
     const modalHtml = `<div id="settings-outer" style="width: 100%; display: flex; justify-content:center; padding: 14px;">
-      <div style="width:100%; max-width: 1150px; border-radius:10px; background-color: white;" class="shadow-2xl overflow-hidden" role="dialog" aria-modal="true">
+      <div style="width:100%; max-width: 900px; border-radius:10px; background-color: white;" class="shadow-2xl overflow-hidden" role="dialog" aria-modal="true">
         <div style="height:600px; display:flex;">
-          <div id="settings-sidebar-container" class="h-full shrink-0 w-64"></div>
           <div id="settings-content-container" class="flex-1 overflow-y-auto min-w-0"></div>
           </div>
         </div>
@@ -40,15 +40,8 @@ function ensureContainers() {
 export async function open() {
     const { backdrop, modal } = ensureContainers();
 
-    // Load main components
-    const [sidebarHtml, contentHtml] = await Promise.all([
-      fetchHtml('/components/settings_sidebar.html'),
-      fetchHtml('/components/user_settings.html')
-    ]);
-
-    const sidebar = modal.querySelector('#settings-sidebar-container');
+    const contentHtml = await fetchHtml('/components/user_settings.html');
     const content = modal.querySelector('#settings-content-container');
-    sidebar.innerHTML = sidebarHtml;
     content.innerHTML = contentHtml;
 
     // Close modal handler
@@ -73,13 +66,7 @@ export async function open() {
     const escHandler = e => { if (e.key === 'Escape' && !modal.classList.contains('hidden')) close(); };
     document.addEventListener('keydown', escHandler);
 
-    // Sidebar active state
-    sidebar.querySelectorAll('[data-settings-section]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            sidebar.querySelectorAll('[data-settings-section]').forEach(b => b.dataset.active = 'false');
-            btn.setAttribute('data-active', 'true');
-        });
-    });
+
 
     // Initialize sub-modules
     await initializeUserProfile(content);
@@ -112,8 +99,8 @@ export async function open() {
 
     // Trigger animation sau một tick
     setTimeout(() => {
-    backdrop.classList.add('opacity-100');
-    modal.classList.remove('opacity-0', 'scale-95');
-    modal.classList.add('opacity-100', 'scale-100');
+        backdrop.classList.add('opacity-100');
+        modal.classList.remove('opacity-0', 'scale-95');
+        modal.classList.add('opacity-100', 'scale-100');
     }, 10);
 }

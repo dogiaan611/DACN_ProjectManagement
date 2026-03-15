@@ -271,8 +271,9 @@ export function initTaskEventListeners(tasks, projectId, container, projectType)
                     portalOptions.forEach(option => {
                         option.addEventListener('click', () => {
                             const selectedPriority = option.dataset.priority;
+                            const priorityNames = { '0': 'Low', '1': 'Medium', '2': 'High' };
                             priorityInput.value = selectedPriority;
-                            priorityBtnText.textContent = `${selectedPriority} Priority`;
+                            priorityBtnText.textContent = `${priorityNames[selectedPriority] || 'Medium'} Priority`;
                             closePortal();
                         });
                     });
@@ -289,15 +290,7 @@ export function initTaskEventListeners(tasks, projectId, container, projectType)
                 const payload = {
                     title: title,
                     description: '', // Description can be added later
-                    priority: (() => {
-                        const priorityValue = formData.get('priority');
-                        switch (priorityValue) {
-                            case 'High': return 1;
-                            case 'Medium': return 2;
-                            case 'Low': return 3;
-                            default: return 2; // Mặc định là Medium
-                        }
-                    })(),
+                    priority: parseInt(formData.get('priority')),
                     assigneeId: formData.get('assigneeId') || null,
                     dueDate: formData.get('dueDate') || null
                 };

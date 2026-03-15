@@ -15,26 +15,43 @@ export async function initHome() {
 }
 
 function renderDashboard(data) {
-    if (data.user) {
-        document.getElementById('user-name-display').textContent = data.user.name;
-        document.getElementById('header-user-name').textContent = data.user.name;
-        document.getElementById('header-user-email').textContent = data.user.email;
-        if (data.user.avatarUrl) {
-            document.getElementById('user-avatar-display').src = data.user.avatarUrl;
-        }
-    }
-    document.getElementById('stat-total-tasks').textContent = data.totalTasks;
-    document.getElementById('stat-completed-tasks').textContent = data.completedTasks;
-    document.getElementById('stat-incomplete-tasks').textContent = data.incompleteTasks;
-    document.getElementById('stat-overdue-tasks').textContent = data.overdueTasks;
-    if (document.getElementById('stat-project-count')) {
-        document.getElementById('stat-project-count').textContent = data.projectCount;
-    }
-    renderActiveProjects(data.projects);
-    renderProjectTasksChart(data.tasksByProject);
-    renderCompletionStatusChart(data.completedTasks, data.incompleteTasks);
+    if (!data) return;
 
-    renderUpcomingTasks(data.upcomingTasks);
+    // Handle both camelCase and PascalCase from API
+    const user = data.user || data.User;
+    if (user) {
+        const name = user.name || user.Name || 'User';
+        const email = user.email || user.Email || '';
+        const avatarUrl = user.avatarUrl || user.AvatarUrl;
+
+        const nameDisplay = document.getElementById('user-name-display');
+        const headerName = document.getElementById('header-user-name');
+        const headerEmail = document.getElementById('header-user-email');
+        const avatarDisplay = document.getElementById('user-avatar-display');
+
+        if (nameDisplay) nameDisplay.textContent = name;
+        if (headerName) headerName.textContent = name;
+        if (headerEmail) headerEmail.textContent = email;
+        if (avatarDisplay && avatarUrl) avatarDisplay.src = avatarUrl;
+    }
+
+    const totalTasks = data.totalTasks ?? data.TotalTasks ?? 0;
+    const completedTasks = data.completedTasks ?? data.CompletedTasks ?? 0;
+    const incompleteTasks = data.incompleteTasks ?? data.IncompleteTasks ?? 0;
+    const overdueTasks = data.overdueTasks ?? data.OverdueTasks ?? 0;
+    const projectCount = data.projectCount ?? data.ProjectCount ?? 0;
+
+    if (document.getElementById('stat-total-tasks')) document.getElementById('stat-total-tasks').textContent = totalTasks;
+    if (document.getElementById('stat-completed-tasks')) document.getElementById('stat-completed-tasks').textContent = completedTasks;
+    if (document.getElementById('stat-incomplete-tasks')) document.getElementById('stat-incomplete-tasks').textContent = incompleteTasks;
+    if (document.getElementById('stat-overdue-tasks')) document.getElementById('stat-overdue-tasks').textContent = overdueTasks;
+    if (document.getElementById('stat-project-count')) document.getElementById('stat-project-count').textContent = projectCount;
+
+    renderActiveProjects(data.projects || data.Projects);
+    renderProjectTasksChart(data.tasksByProject || data.TasksByProject || []);
+    renderCompletionStatusChart(completedTasks, incompleteTasks);
+
+    renderUpcomingTasks(data.upcomingTasks || data.UpcomingTasks);
 }
 
 function renderActiveProjects(projects) {
@@ -183,9 +200,22 @@ function renderUpcomingTasks(tasks) {
         const dueDate = new Date(task.dueDate).toLocaleDateString();
 
         let priorityClass = 'text-gray-600 bg-gray-100';
-        if (task.priority === 'High') priorityClass = 'text-orange-700 bg-orange-100';
-        if (task.priority === 'Critical') priorityClass = 'text-red-700 bg-red-100';
-        if (task.priority === 'Medium') priorityClass = 'text-blue-700 bg-blue-100';
+        let priorityName = 'Low';
+        
+        switch (task.priority) {
+            case 2:
+                priorityClass = 'text-red-700 bg-red-100'; // High
+                priorityName = 'High';
+                break;
+            case 1:
+                priorityClass = 'text-orange-700 bg-orange-100'; // Medium
+                priorityName = 'Medium';
+                break;
+            default:
+                priorityClass = 'text-blue-700 bg-blue-100'; // Low
+                priorityName = 'Low';
+                break;
+        }
 
         const row = `
             <tr class="border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors">
@@ -196,7 +226,7 @@ function renderUpcomingTasks(tasks) {
                 <td class="py-3 text-sm text-gray-600">${dueDate}</td>
                 <td class="py-3">
                     <span class="px-2 py-1 rounded-full text-xs font-medium ${priorityClass}">
-                        ${task.priority}
+                        ${priorityName}
                     </span>
                 </td>
                 <td class="py-3">

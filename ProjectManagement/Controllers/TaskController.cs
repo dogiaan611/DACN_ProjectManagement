@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -121,8 +121,8 @@ namespace ProjectManagement.Controllers
                 await _db.NotifyTaskCreatedAsync(task, currentUserName);
             }
 
-            // Enhanced Feature 1: Notify team leads if priority is Highest
-            if (task.Priority == TaskPriority.Critical)
+            // Enhanced Feature 1: Notify team leads if priority is High
+            if (task.Priority == TaskPriority.High)
             {
                 await _db.NotifyTeamLeadHighestPriorityAsync(task, userId, currentUserName, projectId);
             }
@@ -325,8 +325,8 @@ namespace ProjectManagement.Controllers
                 var changesStr = string.Join(", ", changed);
                 await _db.NotifyTaskUpdatedAsync(task, userId, currentUserName, changesStr);
 
-                // Enhanced Feature 1: Notify team leads if priority changed to Highest
-                if (oldPriority != task.Priority && task.Priority == TaskPriority.Critical)
+                // Enhanced Feature 1: Notify team leads if priority changed to High
+                if (oldPriority != task.Priority && task.Priority == TaskPriority.High)
                 {
                     await _db.NotifyTeamLeadHighestPriorityAsync(task, userId, currentUserName, projectId);
                 }

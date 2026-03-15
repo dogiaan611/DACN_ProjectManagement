@@ -36,15 +36,15 @@ function renderDashboard(data, projectData, container) {
     // Helper for Priority Colors
     const getPriorityColor = (p) => {
         switch (p) {
-            case 1: return 'text-red-600 bg-red-50'; // Critical
-            case 2: return 'text-orange-600 bg-orange-50'; // High
+            case 2: return 'text-red-600 bg-red-50'; // High (was 2)
+            case 1: return 'text-orange-600 bg-orange-50'; // Medium (was 1)
             default: return 'text-blue-600 bg-blue-50'; // Low (0)
         }
     };
     const tasksPriority = (p) => {
         switch (p) {
-            case 1: return 'High';
-            case 2: return 'Medium';
+            case 2: return 'High';
+            case 1: return 'Medium';
             default: return 'Low';
         }
     }
@@ -221,17 +221,16 @@ function renderPriorityChart(priorityData) {
     const totalCountElement = document.getElementById('totalTasksCount');
 
     // Default values if keys are missing
-    const critical = priorityData['Critical'] || 0;
     const high = priorityData['High'] || 0;
     const medium = priorityData['Medium'] || 0;
     const low = priorityData['Low'] || 0;
 
-    const total = critical + high + medium + low;
+    const total = high + medium + low;
     if (totalCountElement) totalCountElement.innerText = total;
 
-    const dataValues = [critical, high, medium, low];
-    const labels = ['Critical', 'High', 'Medium', 'Low'];
-    const backgroundColors = ['#2563eb', '#60a5fa', '#93c5fd', '#e5e7eb'];
+    const dataValues = [high, medium, low];
+    const labels = ['High', 'Medium', 'Low'];
+    const backgroundColors = ['#ef4444', '#f97316', '#3b82f6'];
 
     const chart = new Chart(ctx, {
         type: 'doughnut',

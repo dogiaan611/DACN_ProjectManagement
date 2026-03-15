@@ -355,15 +355,13 @@ export async function openTaskDetailModal(taskId, projectId, boardId, columnId, 
                                 // We need to reconstruct the span with correct classes for backlog view
                                 const priorityColors = {
                                     0: 'bg-gray-200 text-gray-700', // Low
-                                    1: 'bg-red-100 text-red-700', // Medium
-                                    2: 'bg-orange-100 text-orange-700', // High
-                                    3: 'bg-blue-100 text-blue-700' // Urgent
+                                    1: 'bg-yellow-100 text-yellow-700', // Medium
+                                    2: 'bg-red-100 text-red-700' // High
                                 };
                                 const priorityText = {
                                     0: 'Low',
-                                    1: 'High',
-                                    2: 'Medium',
-                                    3: 'Low'
+                                    1: 'Medium',
+                                    2: 'High'
                                 };
                                 backlogPriority.className = `task-priority text-[10px] px-1.5 py-0.5 rounded-full ${priorityColors[newPriority] || 'bg-gray-100'}`;
                                 backlogPriority.textContent = priorityText[newPriority] || 'Normal';

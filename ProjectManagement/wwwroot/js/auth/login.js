@@ -67,7 +67,7 @@ import { saveToken } from './auth.js';
                     setTimeout(()=>{
                         loadingModal.classList.remove('flex');
                         loadingModal.classList.add('hidden');
-                        window.location.href='/index.html';
+                        window.location.href='/dashboard.html';
                     },2000)
                 }else{
                     //xu ly loi

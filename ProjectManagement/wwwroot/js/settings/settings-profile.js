@@ -24,21 +24,27 @@ async function uploadAvatar(file) {
 }
 
 function updateAvatarUI(avatarUrl) {
-    const elements = { // Query globally for these as they are in different containers
-        preview: document.querySelector('#settings-content-container #us-avatar-preview'),
-        initial: document.querySelector('#settings-content-container #us-avatar-initial'),
-        sidebarAvatar: document.querySelector('#us-avatar'), // Main sidebar avatar
-        sidebarIcon: document.querySelector('#us-user-icon') // Main sidebar icon
-    };
+    const preview = document.querySelector('#settings-content-container #us-avatar-preview');
+    const initial = document.querySelector('#settings-content-container #us-avatar-initial');
+    const sidebarAvatar = document.querySelector('#us-avatar'); // These were in settings-sidebar.html
+    const sidebarIcon = document.querySelector('#us-user-icon');
 
     if (avatarUrl) {
-        elements.preview.src = avatarUrl;
-        elements.preview.classList.remove('hidden');
-        elements.initial.classList.add('hidden');
+        if (preview) {
+            preview.src = avatarUrl;
+            preview.classList.remove('hidden');
+        }
+        if (initial) {
+            initial.classList.add('hidden');
+        }
 
-        elements.sidebarAvatar.src = avatarUrl;
-        elements.sidebarAvatar.classList.remove('hidden');
-        elements.sidebarIcon.classList.add('hidden');
+        if (sidebarAvatar) {
+            sidebarAvatar.src = avatarUrl;
+            sidebarAvatar.classList.remove('hidden');
+        }
+        if (sidebarIcon) {
+            sidebarIcon.classList.add('hidden');
+        }
     }
 }
 
@@ -59,9 +65,9 @@ export async function initializeUserProfile(contentContainer) {
         get('#us-user-id').textContent = data.id ?? data.UserId ?? '';
         get('#current-email').placeholder = data.email ?? data.Email ?? '';
 
-        // Populate user name in the main sidebar as well
-        document.querySelector('#us-name-sidebar').value = data.name ?? data.Name ?? 'User';
-        document.querySelector('#us-name').textContent = data.name ?? data.Name ?? 'User';
+        // Populate user name in the main sidebar if exists
+        const sidebarName = document.querySelector('#us-name-sidebar');
+        if (sidebarName) sidebarName.textContent = data.name ?? data.Name ?? 'User';
 
         updateAvatarUI(data.avatarUrl);
 

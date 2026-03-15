@@ -144,7 +144,7 @@ namespace ProjectManagement.Data
                         Title = "Cài đặt Docker và CI/CD Pipeline",
                         Description = "Viết Dockerfile và cấu hình GitHub Actions để tự động deploy dự án lên máy chủ Amazon EC2.",
                         CreatedById = adminUser.Id,
-                        Priority = TaskPriority.Critical,
+                        Priority = TaskPriority.High,
                         StoryPoints = 8,
                         SprintId = sprint.SprintId,
                         CreatedAt = DateTime.Now

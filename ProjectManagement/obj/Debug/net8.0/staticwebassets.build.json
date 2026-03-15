@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MR7UE3tYjImcVi/F/KLqP0NNt06VnHj2B2TSPQ+cfk4=",
+  "Hash": "oWRel3QtTUvTLHYLbYYTMl0tNcq4sOlXq6CfXRh2M20=",
   "Source": "ProjectManagement",
   "BasePath": "_content/ProjectManagement",
   "Mode": "Default",
@@ -2601,6 +2601,25 @@
       "OriginalItemSpec": "wwwroot\\uploads\\2025\\12\\fb33189fc6114a7885e56e2552746bac_Hoa.jpg"
     },
     {
+      "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\2026\\03\\e6bd35fd7f054fbbb5ac6764a8753609_e328a51eacd34cbbb3b9046886f1bee9~tplv-photomode-image.jpeg",
+      "SourceId": "ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/ProjectManagement",
+      "RelativePath": "uploads/2026/03/e6bd35fd7f054fbbb5ac6764a8753609_e328a51eacd34cbbb3b9046886f1bee9~tplv-photomode-image.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\2026\\03\\e6bd35fd7f054fbbb5ac6764a8753609_e328a51eacd34cbbb3b9046886f1bee9~tplv-photomode-image.jpeg"
+    },
+    {
       "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\.gitkeep",
       "SourceId": "ProjectManagement",
       "SourceType": "Discovered",
@@ -2694,6 +2713,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\avatars\\avatar_3ee4824c-429f-4b6e-942f-a1a6f4fda13f_20251107063212.jpg"
+    },
+    {
+      "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_5625eb6b-57ae-4fdd-a2eb-4c97cb574083_20260315060905.jpeg",
+      "SourceId": "ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/ProjectManagement",
+      "RelativePath": "uploads/avatars/avatar_5625eb6b-57ae-4fdd-a2eb-4c97cb574083_20260315060905.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\avatars\\avatar_5625eb6b-57ae-4fdd-a2eb-4c97cb574083_20260315060905.jpeg"
     },
     {
       "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\uploads\\avatars\\avatar_a7c4f59f-9651-4e96-ba61-3d2ce66ce62b_20251023132027.jpg",

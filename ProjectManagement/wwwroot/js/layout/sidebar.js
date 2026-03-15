@@ -138,8 +138,8 @@ export async function loadPage(url) {
     let pagePath = urlObj.pathname;
 
     // Xử lý trường hợp trang chủ
-    if (pagePath === '/' || pagePath === '/index.html') {
-      pagePath = '/index.html';
+    if (pagePath === '/' || pagePath === '/index.html' || pagePath === '/dashboard.html') {
+      pagePath = pagePath === '/dashboard.html' ? '/dashboard.html' : '/index.html';
     } else if (!pagePath.endsWith('.html')) {
       pagePath = `${pagePath}.html`;
     }
@@ -233,7 +233,7 @@ export async function loadPage(url) {
     // Gọi hàm init tương ứng dựa trên route
     // Sử dụng requestAnimationFrame để đảm bảo DOM đã được render
     requestAnimationFrame(() => {
-      if (pagePath === '/index.html' || pagePath === '/') {
+      if (pagePath === '/index.html' || pagePath === '/' || pagePath === '/dashboard.html') {
         // Gọi initHome
         initHome().catch(err => console.error('Lỗi khi khởi tạo trang home:', err));
       } else if (pagePath.includes('project.html')) {
@@ -270,8 +270,8 @@ function updateSidebarActiveState(path) {
     const linkPath = new URL(href, window.location.origin).pathname;
 
     // Handle root path normalization
-    const isRootCurrent = currentPath === '/' || currentPath === '/index.html';
-    const isRootLink = linkPath === '/' || linkPath === '/index.html';
+    const isRootCurrent = currentPath === '/' || currentPath === '/index.html' || currentPath === '/dashboard.html';
+    const isRootLink = linkPath === '/' || linkPath === '/index.html' || linkPath === '/dashboard.html';
 
     if (isRootCurrent && isRootLink) {
       link.classList.add("bg-gray-100");

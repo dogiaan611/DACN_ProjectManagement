@@ -1,17 +1,17 @@
 
 export function getPriorityChip(priority) {
     switch (priority) {
-        case 1:
+        case 2:
             return `<div class="flex gap-1 items-center justify-start">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-red-700 lucide lucide-chevrons-up-icon lucide-chevrons-up"><path d="m17 11-5-5-5 5"/><path d="m17 18-5-5-5 5"/></svg>
                         <span class="text-xs font-semibold leading-none text-red-700">High Priority</span>
                     </div>`;
-        case 2:
+        case 1:
             return `<div class="flex gap-1 items-center justify-start">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-600 lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
                         <span class="text-xs font-semibold leading-none text-yellow-600">Medium Priority</span>
                     </div>`;
-        case 3:
+        case 0:
             return `<div class="flex gap-1 items-center justify-start">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                         <span class="text-xs font-semibold leading-none text-blue-600">Low Priority</span>
@@ -107,7 +107,7 @@ export function createTaskRowFormHtml() {
                         </button>
                     </div>
                     <input type="hidden" name="assigneeId" value="">
-                    <input type="hidden" name="priority" value="Medium">
+                    <input type="hidden" name="priority" value="1">
                     <input type="hidden" name="dueDate" value="">
                     <div class="relative">
                         <div type="button" id="assignee-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
@@ -138,14 +138,14 @@ export function createTaskRowFormHtml() {
                         </button>
                         <div id="priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                             <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
-                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="High">
-                                ${getPriorityChip(1)}
-                            </div>
-                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">
                                 ${getPriorityChip(2)}
                             </div>
-                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Low">
-                                ${getPriorityChip(3)}
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
+                                ${getPriorityChip(1)}
+                            </div>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="0">
+                                ${getPriorityChip(0)}
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ export function createTaskFormHtml() {
                         </button>
                     </div>
                     <input type="hidden" name="assigneeId" value="">
-                    <input type="hidden" name="priority" value="Medium">
+                    <input type="hidden" name="priority" value="1">
                     <input type="hidden" name="dueDate" value="">
                     <div class="relative w-full">
                         <div type="button" id="assignee-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
@@ -202,13 +202,13 @@ export function createTaskFormHtml() {
                         <div id="priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                             <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
                             <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="High">
-                                ${getPriorityChip(1)}
-                            </div>
-                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
                                 ${getPriorityChip(2)}
                             </div>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
+                                ${getPriorityChip(1)}
+                            </div>
                             <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Low">
-                                ${getPriorityChip(3)}
+                                ${getPriorityChip(0)}
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@ export function createTaskScrumHtml() {
                         </button>
                     </div>
                     <input type="hidden" name="assigneeId" value="">
-                    <input type="hidden" name="priority" value="Medium">
+                    <input type="hidden" name="priority" value="1">
                     <input type="hidden" name="dueDate" value="">
                     <div class="relative">
                         <div type="button" id="assignee-btn" class="w-full flex items-center justify-start px-2 py-1 gap-2 text-sm cursor-pointer text-gray-600 hover:bg-gray-100 rounded-md">
@@ -263,13 +263,13 @@ export function createTaskScrumHtml() {
                         <div id="priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                             <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
                             <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="High">
-                                ${getPriorityChip(1)}
-                            </div>
-                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
                                 ${getPriorityChip(2)}
                             </div>
+                            <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Medium">
+                                ${getPriorityChip(1)}
+                            </div>
                             <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="Low">
-                                ${getPriorityChip(3)}
+                                ${getPriorityChip(0)}
                             </div>
                         </div>
                     </div>
@@ -327,14 +327,15 @@ export function createTaskDetailModalHtml(task) {
                                 <div id="task-detail-priority-btn" class="p-2 cursor-pointer rounded-md hover:bg-gray-100">${getPriorityChip(task.priority)}</div>
                                 <div id="task-detail-priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                                     <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
-                                        ${getPriorityChip(1)}
-                                    </div>
                                     <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">
                                         ${getPriorityChip(2)}
                                     </div>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="3">
-                                        ${getPriorityChip(3)}
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
+                                        ${getPriorityChip(1)}
+                                    </div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="0">
+                                        ${getPriorityChip(0)}
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -561,14 +562,15 @@ export function createTaskDetailModalRectHtml(task) {
                                 <div id="task-detail-priority-btn" class="p-2 cursor-pointer rounded-md hover:bg-gray-100">${getPriorityChip(task.priority)}</div>
                                 <div id="task-detail-priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                                     <span class="p-1 mb-1 text-sm font-medium text-gray-700">Task Priority</span>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
-                                        ${getPriorityChip(1)}
-                                    </div>
                                     <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">
                                         ${getPriorityChip(2)}
                                     </div>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="3">
-                                        ${getPriorityChip(3)}
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">
+                                        ${getPriorityChip(1)}
+                                    </div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="0">
+                                        ${getPriorityChip(0)}
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -972,9 +974,9 @@ export function createSubtaskDetailModalHtml(subtask) {
                                 <div id="subtask-detail-priority-btn" class="p-2 cursor-pointer rounded-md hover:bg-gray-100">${getPriorityChip(subtask.priority)}</div>
                                 <div id="subtask-detail-priority-dropdown" class="absolute z-10 p-2 w-fit bg-white border rounded-md shadow-lg mt-1 hidden">
                                     <span class="p-1 mb-1 text-sm font-medium text-gray-700">Subtask Priority</span>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">${getPriorityChip(1)}</div>
                                     <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="2">${getPriorityChip(2)}</div>
-                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="3">${getPriorityChip(3)}</div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="1">${getPriorityChip(1)}</div>
+                                    <div class="p-1 priority-option cursor-pointer hover:bg-gray-100" data-priority="0">${getPriorityChip(0)}</div>
                                 </div>
                             </div>
 

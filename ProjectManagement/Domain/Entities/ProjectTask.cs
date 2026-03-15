@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net.Mail;
 
-public enum TaskPriority { Low, Medium, High, Critical }
+public enum TaskPriority { Low, Medium, High }
 
 namespace ProjectManagement.Domain.Entities
 {

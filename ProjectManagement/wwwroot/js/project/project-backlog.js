@@ -1369,17 +1369,15 @@ function createTaskElement(task, sprintId = null) {
     });
 
     const priorityColors = {
-        0: 'bg-gray-200 text-gray-700', // Low
-        1: 'bg-red-100 text-red-700', // Medium
-        2: 'bg-orange-100 text-orange-700', // High
-        3: 'bg-blue-100 text-blue-700' // Urgent
+        0: 'bg-gray-100 text-gray-700', // Low
+        1: 'bg-orange-100 text-orange-700', // Medium
+        2: 'bg-red-100 text-red-700', // High
     };
 
     const priorityText = {
         0: 'Low',
-        1: 'High',
-        2: 'Medium',
-        3: 'Low'
+        1: 'Medium',
+        2: 'High'
     };
     const due = new Date(task.dueDate);
     const dateFormat = due.toLocaleDateString('vi-VN', {
@@ -1514,12 +1512,13 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
             const priorityBtnText = priorityBtn.querySelector('#priority-btn-text');
             const portalOptions = portal.querySelectorAll('.priority-option');
             portalOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const selectedPriority = option.dataset.priority;
-                    priorityInput.value = selectedPriority;
-                    priorityBtnText.textContent = `${selectedPriority} Priority`;
-                    closePortal();
-                });
+                    option.addEventListener('click', () => {
+                        const selectedPriority = option.dataset.priority;
+                        const priorityNames = { '0': 'Low', '1': 'Medium', '2': 'High' };
+                        priorityInput.value = selectedPriority;
+                        priorityBtnText.textContent = `${priorityNames[selectedPriority] || 'Medium'} Priority`;
+                        closePortal();
+                    });
             });
         }, 'top');
     });
@@ -1566,15 +1565,7 @@ function setupCreateTaskForm(formContainer, sprintId, onSuccess, onCancel) {
         const payload = {
             title: title,
             description: '',
-            priority: (() => {
-                const priorityValue = formData.get('priority');
-                switch (priorityValue) {
-                    case 'High': return 1;
-                    case 'Medium': return 2;
-                    case 'Low': return 3;
-                    default: return 2;
-                }
-            })(),
+            priority: parseInt(formData.get('priority')),
             assigneeId: formData.get('assigneeId') || null,
             dueDate: formData.get('dueDate') || null
         };
