@@ -19,7 +19,7 @@ export function getColumnTitleColour(title) {
 
 export function createColumnHtml(column, tasksHtml, boardId, taskCount, showAddTask = true) {
     return `
-        <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible bg-gray-50" id="column-${column.columnId}" draggable="true">
+        <div class="group flex-1 min-w-[250px] max-w-[280px] rounded-lg p-3 flex flex-col mb-3 overflow-visible bg-gray-50" id="column-${column.columnId}" draggable="false">
             <div class="flex flex-row justify-between mb-4 py-2 px-1 rounded-md bg-white items-center transition-colors duration-100">
                 <div class="px-2 flex gap-1 items-center justify-start">
                     <div class="${getColumnTitleColour(column.name)}"></div>
@@ -191,16 +191,6 @@ export function initColumnEventListeners(projectId) {
             <div role="button" id="delete-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 Delete
-            </div>
-
-            <div role="button" id="set-limit-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-stacked-icon lucide-chart-column-stacked"><path d="M11 13H7"/><path d="M19 9h-4"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="15" y="5" width="4" height="12" rx="1"/><rect x="7" y="8" width="4" height="9" rx="1"/></svg>
-                Set WIP limit
-            </div>
-
-            <div role="button" id="move-col-btn" class="w-full hover:bg-gray-100 rounded-md flex items-center justify-start px-2 py-1 gap-2 text-gray-600 font-normal text-sm cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical-icon lucide-grip-vertical"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
-                Move Column
             </div>
         </div>`;
 
@@ -387,36 +377,4 @@ export function initColumnEventListeners(projectId) {
         })
     })
 
-    // Khởi tạo kéo-thả cho cột
-    initializeDragAndDrop({
-        containerSelector: '.board-container, .list-view-container', // Selector cho board hoặc list container
-        draggableSelector: '[draggable="true"][id^="column-"]', // Selector cho các cột (có id bắt đầu bằng column-)
-        onDrop: async (e) => {
-            const draggingColumn = e.currentTarget.querySelector('.dragging');
-            if (!draggingColumn) return;
-
-            const columnId = draggingColumn.id.replace('column-', '');
-            const boardContainer = e.currentTarget;
-            const allColumns = [...boardContainer.querySelectorAll('[draggable="true"][id^="column-"]')];
-            const newPosition = allColumns.findIndex(c => c.id === draggingColumn.id);
-
-            try {
-                const boardsResponse = await authFetch(`/projects/${projectId}/boards`);
-                const boards = await boardsResponse.json();
-                const boardId = boards[0]?.boardId;
-
-                if (boardId) {
-                    await moveColumnApi(boardId, columnId, newPosition);
-                    // Tải lại board để đảm bảo thứ tự là chính xác từ server
-                    initProjectBoard();
-                } else {
-                    throw new Error("Board ID not found for moving column.");
-                }
-            } catch (error) {
-                alert(`Error moving column: ${error.message}`);
-                // Nếu lỗi, tải lại board để khôi phục vị trí cũ
-                initProjectBoard();
-            }
-        }
-    });
 }

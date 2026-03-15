@@ -2,17 +2,17 @@
 export function getPriorityChip(priority) {
     switch (priority) {
         case 2:
-            return `<div class="flex gap-1 items-center justify-start">
+            return `<div class="flex gap-1 items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-red-700 lucide lucide-chevrons-up-icon lucide-chevrons-up"><path d="m17 11-5-5-5 5"/><path d="m17 18-5-5-5 5"/></svg>
                         <span class="text-xs font-semibold leading-none text-red-700">High Priority</span>
                     </div>`;
         case 1:
-            return `<div class="flex gap-1 items-center justify-start">
+            return `<div class="flex gap-1 items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-600 lucide lucide-chevron-up-icon lucide-chevron-up"><path d="m18 15-6-6-6 6"/></svg>
                         <span class="text-xs font-semibold leading-none text-yellow-600">Medium Priority</span>
                     </div>`;
         case 0:
-            return `<div class="flex gap-1 items-center justify-start">
+            return `<div class="flex gap-1 items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                         <span class="text-xs font-semibold leading-none text-blue-600">Low Priority</span>
                     </div>`;
@@ -42,36 +42,12 @@ export function createTaskCardHtml(task, commentCount, attachmentCount) {
                     <div type="button" class="task-detail-btn border rounded-l-md hover:bg-gray-50 flex items-center justify-center p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                     </div>
-                    <div type="button" class="task-dropdown-btn rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-icon lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    <div type="button" class="delete-task-btn rounded-r-md border-y border-r hover:bg-gray-50 flex items-center justify-center p-1 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2-icon lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                     </div>
                 </div>
             </div>
-            <div class="task-dropdown-menu hidden absolute z-10 w-48 bg-white border rounded-md shadow-lg py-2 px-1">
-                <div class="flex flex-col gap-1">
-                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-                        Add to favourite
-                    </div>
-                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarm-clock-icon lucide-alarm-clock"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
-                        Remind me
-                    </div>
-                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
-                        Move to
-                    </div>
-                    <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                        Copy link
-                    </div>
-                    <div class="border-t border-gray-200"></div>
-                    <div type="button" class="delete-task-btn w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md hover:text-red-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                        Delete
-                    </div>
-                </div>
-            </div>
+
             <div class="flex justify-between items-start mb-2">
                 <div class="flex items-center gap-2 cursor-text">
                     <span class="font-semibold text-gray-800">${task.title}</span>
@@ -302,9 +278,6 @@ export function createTaskDetailModalHtml(task) {
                         </div>
                         <div tabindex='0' type="button" id="maximize-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
-                        </div>
-                        <div tabindex='0' type="button" id="edit-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                         </div>
                         <div tabindex='0' type="button" id="close-task-detail-modal-btn" class="text-sm text-gray-400 hover:text-red-500 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -537,9 +510,6 @@ export function createTaskDetailModalRectHtml(task) {
                         </div>
                         <div tabindex='0' type="button" id="minimize-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shrink"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
-                        </div>
-                        <div tabindex='0' type="button" id="edit-task-detail-btn" class="text-sm text-gray-400 hover:text-gray-600 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
                         </div>
                         <div tabindex='0' type="button" id="close-task-detail-modal-btn" class="text-sm text-gray-400 hover:text-red-500 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -873,59 +843,26 @@ export function createTaskRowHtml(task) {
                 <div class="flex-shrink-0 cursor-pointer task-detail-btn hover:text-blue-600">
                     <span class="font-medium text-gray-800 truncate block">${task.title}</span>
                 </div>
-                <div class="relative">
-                    <div type="button" class="task-dropdown-btn p-1 rounded-md hover:bg-gray-200 cursor-pointer text-gray-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                    </div>
-                    <div class="task-dropdown-menu hidden absolute right-0 top-8 z-10 w-48 bg-white border rounded-md shadow-lg py-2 px-1">
-                        <div class="flex flex-col gap-1">
-                            <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
-                                Add to favourite
-                            </div>
-                            <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarm-clock-icon lucide-alarm-clock"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
-                                Remind me
-                            </div>
-                            <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right-icon lucide-arrow-left-right"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
-                                Move to
-                            </div>
-                            <div type="button" class="w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-icon lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                                Copy link
-                            </div>
-                            <div class="border-t border-gray-200"></div>
-                            <div type="button" class="delete-task-btn w-full flex items-center justify-start gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-md hover:text-red-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                Delete
-                            </div>
-                        </div>
-                    </div>
+                <div class="delete-task-btn p-1 rounded-md hover:bg-red-50 cursor-pointer text-gray-500 hover:text-red-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
                 </div>
+
             </div>
             
             <div class="flex items-center gap-6 flex-shrink-0">
-                <div class="w-32 flex justify-start">
+                <div class="w-32 flex justify-center">
                     ${getPriorityChip(task.priority)}
                 </div>
                 
-                <div class="w-32 flex items-center gap-2 text-sm text-gray-600">
+                <div class="w-32 flex items-center justify-center gap-2 text-sm text-gray-600">
                      ${assigneeAvatar}
                      <span class="truncate max-w-[100px]">${assigneeName || 'Unassigned'}</span>
                 </div>
 
-                <div class="w-32 text-sm text-gray-500 text-right">
+                <div class="w-32 text-sm text-gray-500 text-center">
                     ${dueDate}
                 </div>
 
-                <div class="text-sm text-gray-500 text-right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-more-icon lucide-message-square-more"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M12 11h.01"/><path d="M16 11h.01"/><path d="M8 11h.01"/></svg>
-                </div>
-
-                <div class="text-sm text-gray-500 text-right">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paperclip-icon lucide-paperclip"><path d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/></svg>
-                </div>
             </div>
         </div>
     `;

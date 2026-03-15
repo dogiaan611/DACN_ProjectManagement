@@ -155,9 +155,9 @@ function createListGroupHtml(column, tasksHtml, boardId, taskCount) {
         <div class="flex items-center px-3 py-2 bg-gray-50 border-b text-xs font-semibold text-gray-500 uppercase tracking-wider">
             <div class="w-[40%] min-w-[300px] pl-2">Task Name</div>
             <div class="flex items-center gap-6">
-                <div class="w-32">Priority</div>
-                <div class="w-32">Assignee</div>
-                <div class="w-32 text-right">Due Date</div>
+                <div class="w-32 text-center">Priority</div>
+                <div class="w-32 text-center">Assignee</div>
+                <div class="w-32 text-center">Due Date</div>
                 <div class="w-5"></div>
                 <div class="w-5"></div>
                 <div class="w-4"></div>

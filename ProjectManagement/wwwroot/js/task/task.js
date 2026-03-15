@@ -8,111 +8,102 @@ import { openTaskDetailModal } from "./taskDetail.js";
 export function initTaskEventListeners(tasks, projectId, container, projectType) {
     const addTaskBtns = document.querySelectorAll('.add-task-btn');
 
-    // Task dropdowns (3 dots)
-    const taskDropdownBtns = document.querySelectorAll('.task-dropdown-btn');
+    // Task deletion direct button
+    const deleteTaskBtns = document.querySelectorAll('.delete-task-btn');
 
-    taskDropdownBtns.forEach(btn => {
+    deleteTaskBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const taskCard = btn.closest('[data-task-id]');
             if (!taskCard) return;
 
             const taskId = taskCard.dataset.taskId;
-            const dropdownMenu = taskCard.querySelector('.task-dropdown-menu');
 
-            toggleDropdown(btn, dropdownMenu, `task-dropdown-portal-${taskId}`, (portal, closePortal) => {
-                const deleteBtn = portal.querySelector('.delete-task-btn');
-                if (deleteBtn) {
-                    deleteBtn.addEventListener('click', () => {
-                        closePortal(); // Đóng dropdown menu trước
-
-                        // Tạo HTML cho modal xác nhận xóa task nếu chưa tồn tại
-                        if (!document.getElementById('del-task-modal')) {
-                            const delConfirmHtml = `
-                                <div id="del-task-backdrop" class="fixed inset-0 z-50 hidden bg-black/40 opacity-0 transition-opacity duration-300"></div>
-                                <div id="del-task-modal" class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto">
-                                    <div id="del-task-outer" class="min-h-full w-full p-4 flex items-center justify-center">
-                                        <div class="mx-auto w-full max-w-md rounded-2xl bg-white shadow-2xl transform scale-95 opacity-0 transition-all duration-300 ease-out" role="dialog" aria-modal="true">
-                                            <div class="px-6 py-8">
-                                                <div class="flex flex-col items-center justify-center px-4 gap-3">
-                                                    <div class="flex rounded-full p-4 bg-red-100">
-                                                        <div class="flex items-center justify-center bg-red-500 rounded-full p-3">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert text-white text-xl"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-2xl font-bold text-center">Delete this task?</div>
-                                                    <div class="text-sm text-gray-500 text-center">Are you sure you want to delete this task? This action cannot be undone.</div>
-                                                    <div class="flex flex-row w-full items-center justify-center gap-2 mt-4">
-                                                        <button id="confirm-delete-task-btn" class="flex items-center justify-center w-full px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-700 transition-colors duration-150 ease-in">Delete</button>
-                                                        <button id="cancel-delete-task-btn" class="flex items-center justify-center w-full px-5 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-150 ease-in border-2 font-medium">Cancel</button>
-                                                    </div>
-                                                </div>
+            // Tạo HTML cho modal xác nhận xóa task nếu chưa tồn tại
+            if (!document.getElementById('del-task-modal')) {
+                const delConfirmHtml = `
+                    <div id="del-task-backdrop" class="fixed inset-0 z-50 hidden bg-black/40 opacity-0 transition-opacity duration-300"></div>
+                    <div id="del-task-modal" class="fixed inset-0 z-50 hidden items-center justify-center overflow-y-auto">
+                        <div id="del-task-outer" class="min-h-full w-full p-4 flex items-center justify-center">
+                            <div class="mx-auto w-full max-w-md rounded-2xl bg-white shadow-2xl transform scale-95 opacity-0 transition-all duration-300 ease-out" role="dialog" aria-modal="true">
+                                <div class="px-6 py-8">
+                                    <div class="flex flex-col items-center justify-center px-4 gap-3">
+                                        <div class="flex rounded-full p-4 bg-red-100">
+                                            <div class="flex items-center justify-center bg-red-500 rounded-full p-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert text-white text-xl"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg>
                                             </div>
                                         </div>
+                                        <div class="text-2xl font-bold text-center">Delete this task?</div>
+                                        <div class="text-sm text-gray-500 text-center">Are you sure you want to delete this task? This action cannot be undone.</div>
+                                        <div class="flex flex-row w-full items-center justify-center gap-2 mt-4">
+                                            <button id="confirm-delete-task-btn" class="flex items-center justify-center w-full px-5 py-2 rounded-lg bg-red-500 text-white font-medium hover:bg-red-700 transition-colors duration-150 ease-in">Delete</button>
+                                            <button id="cancel-delete-task-btn" class="flex items-center justify-center w-full px-5 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-150 ease-in border-2 font-medium">Cancel</button>
+                                        </div>
                                     </div>
-                                </div>`;
-                            document.body.insertAdjacentHTML('beforeend', delConfirmHtml);
-                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                document.body.insertAdjacentHTML('beforeend', delConfirmHtml);
+            }
 
-                        const backdrop = document.getElementById('del-task-backdrop');
-                        const modal = document.getElementById('del-task-modal');
-                        const modalContent = modal.querySelector('[role="dialog"]');
-                        const cancelBtn = document.getElementById('cancel-delete-task-btn');
-                        const confirmBtn = document.getElementById('confirm-delete-task-btn');
+            const backdrop = document.getElementById('del-task-backdrop');
+            const modal = document.getElementById('del-task-modal');
+            const modalContent = modal.querySelector('[role="dialog"]');
+            const cancelBtn = document.getElementById('cancel-delete-task-btn');
+            const confirmBtn = document.getElementById('confirm-delete-task-btn');
 
-                        const openModal = () => {
-                            modal.classList.remove('hidden');
-                            modal.classList.add('flex');
-                            setTimeout(() => {
-                                backdrop.classList.add('opacity-100');
-                                modalContent.classList.remove('scale-95', 'opacity-0');
-                                modalContent.classList.add('scale-100', 'opacity-100');
-                            }, 10);
-                        };
+            const openModal = () => {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    backdrop.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            };
 
-                        const closeModal = () => {
-                            modalContent.classList.add('scale-95', 'opacity-0');
-                            backdrop.classList.remove('opacity-100');
-                            setTimeout(() => {
-                                modal.classList.add('hidden');
-                                modal.classList.remove('flex');
-                            }, 200);
-                        };
+            const closeModal = () => {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                backdrop.classList.remove('opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 200);
+            };
 
-                        openModal();
+            openModal();
 
-                        backdrop.onclick = closeModal;
-                        cancelBtn.onclick = closeModal;
-                        modal.onclick = (e) => { if (e.target.id === 'del-task-outer') closeModal(); };
+            backdrop.onclick = closeModal;
+            cancelBtn.onclick = closeModal;
+            modal.onclick = (e) => { if (e.target.id === 'del-task-outer') closeModal(); };
 
-                        confirmBtn.onclick = async () => {
-                            const tasksContainer = taskCard.closest('.tasks-container');
-                            const columnId = tasksContainer.dataset.columnId;
-                            const boardId = tasksContainer.dataset.boardId;
-                            const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`, { method: 'DELETE' });
-                            if (res.ok) {
-                                taskCard.remove();
-                                // Cập nhật lại số lượng task trong cột
-                                const columnElement = document.getElementById(`column-${columnId}`);
-                                if (columnElement) {
-                                    const taskCountSpan = columnElement.querySelector('h3 + span');
-                                    if (taskCountSpan) {
-                                        const currentCount = parseInt(taskCountSpan.textContent, 10);
-                                        if (!isNaN(currentCount)) {
-                                            taskCountSpan.textContent = currentCount - 1;
-                                        }
-                                    }
-                                }
-                            } else {
-                                alert('Failed to delete task');
+            confirmBtn.onclick = async () => {
+                const tasksContainer = taskCard.closest('.tasks-container');
+                const columnId = tasksContainer.dataset.columnId;
+                const boardId = tasksContainer.dataset.boardId;
+                const res = await authFetch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`, { method: 'DELETE' });
+                if (res.ok) {
+                    taskCard.remove();
+                    // Cập nhật lại số lượng task trong cột
+                    const columnElement = document.getElementById(`column-${columnId}`);
+                    if (columnElement) {
+                        const taskCountSpan = columnElement.querySelector('h3 + span');
+                        if (taskCountSpan) {
+                            const currentCount = parseInt(taskCountSpan.textContent, 10);
+                            if (!isNaN(currentCount)) {
+                                taskCountSpan.textContent = currentCount - 1;
                             }
-                            closeModal();
                         }
-                    });
+                    }
+                } else {
+                    alert('Failed to delete task');
                 }
-            });
+                closeModal();
+            }
         });
     });
+
 
     addTaskBtns.forEach(btn => {
         btn.addEventListener('click', () => {

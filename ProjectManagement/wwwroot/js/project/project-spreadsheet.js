@@ -105,15 +105,15 @@ function createSpreadsheetTable(tasks, projectId, boardId) {
                                 </button>
                             </div>
                         </th>
-                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-40">
-                            <div class="flex items-center gap-2">
-                                Priority
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-40">
+                            <div class="flex items-center justify-center gap-1">
                                 <button class="sort-btn hover:text-blue-500" data-sort="priority">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="m7 15 5 5 5-5"/>
                                         <path d="m7 9 5-5 5 5"/>
                                     </svg>
                                 </button>
+                                Priority
                             </div>
                         </th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-40">
@@ -129,16 +129,6 @@ function createSpreadsheetTable(tasks, projectId, boardId) {
                                     </svg>
                                 </button>
                             </div>
-                        </th>
-                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-20">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                            </svg>
-                        </th>
-                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider w-20">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
-                            </svg>
                         </th>
                     </tr>
                 </thead>
@@ -175,34 +165,16 @@ function createSpreadsheetRow(task) {
             <td class="px-4 py-3">
                 ${statusBadge}
             </td>
-            <td class="px-4 py-3">
-                ${priorityBadge}
+            <td class="px-4 py-3 text-center">
+                <div class="flex justify-center">
+                    ${priorityBadge}
+                </div>
             </td>
             <td class="px-4 py-3">
                 ${assigneeHtml}
             </td>
             <td class="px-4 py-3">
                 ${dueDateHtml}
-            </td>
-            <td class="px-4 py-3 text-center">
-                <div class="flex items-center justify-center gap-1 text-gray-500">
-                    ${attachmentCount > 0 ? `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                        </svg>
-                        <span class="text-xs">${attachmentCount}</span>
-                    ` : '-'}
-                </div>
-            </td>
-            <td class="px-4 py-3 text-center">
-                <div class="flex items-center justify-center gap-1 text-gray-500">
-                    ${commentCount > 0 ? `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
-                        </svg>
-                        <span class="text-xs">${commentCount}</span>
-                    ` : '-'}
-                </div>
             </td>
         </tr>
     `;
