@@ -8,6 +8,9 @@ using System.Text;
 using ProjectManagement.Options;
 using ProjectManagement.Services;
 
+// Load environment variables from .env file
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Db

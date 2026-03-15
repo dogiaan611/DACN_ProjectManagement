@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Project Management</title>
+    <link rel="stylesheet" href="./css/site.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/js/auth/auth.js"></script>
+</head>
+
+<body class="bg-white">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="shrink-0 h-full"></div>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto ml-64 p-8">
+            <header class="mb-8 flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500 text-xl mt-1">Welcome back, <span id="user-name-display"
+                            class="font-medium text-gray-900">User</span> 👋</p>
+                </div>
+                <div class="flex items-center gap-3 bg-white p-2 rounded-xl shadow-sm border border-gray-200">
+                    <img id="user-avatar-display" src="https://ui-avatars.com/api/?name=User" alt="Profile"
+                        class="w-10 h-10 rounded-full object-cover">
+                    <div class="text-right hidden sm:block">
+                        <div id="header-user-name" class="text-sm font-medium text-gray-900">Loading...</div>
+                        <div id="header-user-email" class="text-xs text-gray-500">loading@example.com</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="flex flex-row items-center justify-center gap-6 mb-8">
+                <!-- Total Tasks -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border w-[300px] border-gray-200 transition-transform hover:scale-[1.02]">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total Tasks</p>
+                            <h3 id="stat-total-tasks" class="text-3xl font-bold text-gray-900 mt-2">0</h3>
+                        </div>
+                        <div class="p-2 bg-orange-50 rounded-lg text-orange-600">
+                            <i data-lucide="layers" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-gray-400">Assigned to you</span>
+                    </div>
+                </div>
+
+                <!-- Completed Tasks -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border w-[300px] border-gray-200 transition-transform hover:scale-[1.02]">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Completed</p>
+                            <h3 id="stat-completed-tasks" class="text-3xl font-bold text-gray-900 mt-2">0</h3>
+                        </div>
+                        <div class="p-2 bg-green-50 rounded-lg text-green-600">
+                            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-gray-400">Tasks finished</span>
+                    </div>
+                </div>
+
+                <!-- Incomplete Tasks -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border w-[300px] border-gray-200 transition-transform hover:scale-[1.02]">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Incomplete</p>
+                            <h3 id="stat-incomplete-tasks" class="text-3xl font-bold text-gray-900 mt-2">0</h3>
+                        </div>
+                        <div class="p-2 bg-purple-50 rounded-lg text-purple-600">
+                            <i data-lucide="clock" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-gray-400">Pending tasks</span>
+                    </div>
+                </div>
+
+                <!-- Overdue Tasks -->
+                <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border w-[300px] border-gray-200 transition-transform hover:scale-[1.02]">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Overdue</p>
+                            <h3 id="stat-overdue-tasks" class="text-3xl font-bold text-gray-900 mt-2">0</h3>
+                        </div>
+                        <div class="p-2 bg-red-50 rounded-lg text-red-600">
+                            <i data-lucide="alert-circle" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center text-sm">
+                        <span class="text-red-500 font-medium">Action Needed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+                <!-- Incomplete tasks by Project -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-6">Incomplete Tasks by Project</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="chart-project-tasks"></canvas>
+                    </div>
+                </div>
+
+                <!-- Completion Status -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-6">Task Completion Status</h3>
+                    <div class="relative h-64 w-full flex justify-center">
+                        <canvas id="chart-completion-status"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Tasks List -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                        Upcoming Deadlines
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-gray-400 text-sm border-b border-gray-200">
+                                    <th class="py-3 font-medium">Task</th>
+                                    <th class="py-3 font-medium">Due Date</th>
+                                    <th class="py-3 font-medium">Priority</th>
+                                    <th class="py-3 font-medium">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="upcoming-tasks-list">
+                                <!-- Tasks injected here -->
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-gray-500">No upcoming tasks</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Active Projects List -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold text-gray-900">Active Projects</h3>
+                        <span class="text-xs font-bold bg-orange-100 text-orange-700 px-2 py-1 rounded-full"
+                            id="stat-project-count">0</span>
+                    </div>
+                    <div id="active-projects-list" class="space-y-3 flex-1 overflow-y-auto h-fit">
+                        <!-- Projects injected here -->
+                        <div class="text-center text-gray-400 text-sm py-4">Loading projects...</div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/layout/sidebar.js"></script>
+    <script type="module" src="/js/layout/home.js"></script>
+
+    <!-- Retained scripts from previous index.html -->
+    <script type="module" src="/js/project/project-sidebar.js?v=2"></script>
+    <script type="module" src="/js/project/project-modal.js?v=2"></script>
+    <script type="module" src="/js/settings/settings-modal.js?v=2"></script>
+    <script type="module" src="/js/settings/user-settings-autosave.js?v=1"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MJU3MdOgYIdvRdFvW3SNeG3BiSj7HzR1gNLr/WO+GLc=",
+  "Hash": "MR7UE3tYjImcVi/F/KLqP0NNt06VnHj2B2TSPQ+cfk4=",
   "Source": "ProjectManagement",
   "BasePath": "_content/ProjectManagement",
   "Mode": "Default",
@@ -148,6 +148,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\dashboard.html",
+      "SourceId": "ProjectManagement",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\",
+      "BasePath": "_content/ProjectManagement",
+      "RelativePath": "dashboard.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dashboard.html"
     },
     {
       "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\goodbye.html",
@@ -1725,25 +1744,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\task\\taskWatcher.js"
-    },
-    {
-      "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\landingPage.html",
-      "SourceId": "ProjectManagement",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\",
-      "BasePath": "_content/ProjectManagement",
-      "RelativePath": "landingPage.html",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\landingPage.html"
     },
     {
       "Identity": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\loginPage.html",

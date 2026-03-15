@@ -457,3 +457,5 @@ D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\refint\Proj
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.pdb
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ProjectManagement.genruntimeconfig.cache
 D:\Project\DACN_ProjectManagement\ProjectManagement\obj\Debug\net8.0\ref\ProjectManagement.dll
+D:\Project\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\DotNetEnv.dll
+D:\Project\DACN_ProjectManagement\ProjectManagement\bin\Debug\net8.0\Sprache.dll

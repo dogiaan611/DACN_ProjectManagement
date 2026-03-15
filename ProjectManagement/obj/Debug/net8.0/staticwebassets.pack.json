@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\dashboard.html",
+      "PackagePath": "staticwebassets\\dashboard.html"
+    },
+    {
       "Id": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\goodbye.html",
       "PackagePath": "staticwebassets\\goodbye.html"
     },
@@ -359,10 +363,6 @@
     {
       "Id": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\js\\task\\taskWatcher.js",
       "PackagePath": "staticwebassets\\js\\task\\taskWatcher.js"
-    },
-    {
-      "Id": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\landingPage.html",
-      "PackagePath": "staticwebassets\\landingPage.html"
     },
     {
       "Id": "D:\\Project\\DACN_ProjectManagement\\ProjectManagement\\wwwroot\\loginPage.html",
